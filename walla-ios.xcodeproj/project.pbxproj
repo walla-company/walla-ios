@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB0E8BB81E008B0A00BC293C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BB71E008B0A00BC293C /* main.m */; };
+		EB0E8BBB1E008B0A00BC293C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */; };
+		EB0E8BBE1E008B0A00BC293C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BBD1E008B0A00BC293C /* FirstViewController.m */; };
+		EB0E8BC11E008B0A00BC293C /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BC01E008B0A00BC293C /* SecondViewController.m */; };
+		EB0E8BC41E008B0A00BC293C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0E8BC21E008B0A00BC293C /* Main.storyboard */; };
+		EB0E8BC61E008B0A00BC293C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB0E8BC51E008B0A00BC293C /* Assets.xcassets */; };
+		EB0E8BC91E008B0A00BC293C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0E8BC71E008B0A00BC293C /* LaunchScreen.storyboard */; };
+		EB0E8BD41E008B0B00BC293C /* walla_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BD31E008B0B00BC293C /* walla_iosTests.m */; };
+		EB0E8BDF1E008B0B00BC293C /* walla_iosUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0E8BDE1E008B0B00BC293C /* walla_iosUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB0E8BD01E008B0B00BC293C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB0E8BAB1E008B0A00BC293C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB0E8BB21E008B0A00BC293C;
+			remoteInfo = "walla-ios";
+		};
+		EB0E8BDB1E008B0B00BC293C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB0E8BAB1E008B0A00BC293C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB0E8BB21E008B0A00BC293C;
+			remoteInfo = "walla-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EB0E8BB31E008B0A00BC293C /* walla-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "walla-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0E8BB71E008B0A00BC293C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EB0E8BB91E008B0A00BC293C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EB0E8BBC1E008B0A00BC293C /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		EB0E8BBD1E008B0A00BC293C /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		EB0E8BBF1E008B0A00BC293C /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		EB0E8BC01E008B0A00BC293C /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		EB0E8BC31E008B0A00BC293C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EB0E8BC51E008B0A00BC293C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB0E8BC81E008B0A00BC293C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EB0E8BCA1E008B0A00BC293C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB0E8BCF1E008B0B00BC293C /* walla-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "walla-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0E8BD31E008B0B00BC293C /* walla_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walla_iosTests.m; sourceTree = "<group>"; };
+		EB0E8BD51E008B0B00BC293C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB0E8BDA1E008B0B00BC293C /* walla-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "walla-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0E8BDE1E008B0B00BC293C /* walla_iosUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walla_iosUITests.m; sourceTree = "<group>"; };
+		EB0E8BE01E008B0B00BC293C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB0E8BB01E008B0A00BC293C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BCC1E008B0B00BC293C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BD71E008B0B00BC293C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB0E8BAA1E008B0A00BC293C = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BB51E008B0A00BC293C /* walla-ios */,
+				EB0E8BD21E008B0B00BC293C /* walla-iosTests */,
+				EB0E8BDD1E008B0B00BC293C /* walla-iosUITests */,
+				EB0E8BB41E008B0A00BC293C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB0E8BB41E008B0A00BC293C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BB31E008B0A00BC293C /* walla-ios.app */,
+				EB0E8BCF1E008B0B00BC293C /* walla-iosTests.xctest */,
+				EB0E8BDA1E008B0B00BC293C /* walla-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB0E8BB51E008B0A00BC293C /* walla-ios */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BB91E008B0A00BC293C /* AppDelegate.h */,
+				EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */,
+				EB0E8BBC1E008B0A00BC293C /* FirstViewController.h */,
+				EB0E8BBD1E008B0A00BC293C /* FirstViewController.m */,
+				EB0E8BBF1E008B0A00BC293C /* SecondViewController.h */,
+				EB0E8BC01E008B0A00BC293C /* SecondViewController.m */,
+				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
+				EB0E8BC51E008B0A00BC293C /* Assets.xcassets */,
+				EB0E8BC71E008B0A00BC293C /* LaunchScreen.storyboard */,
+				EB0E8BCA1E008B0A00BC293C /* Info.plist */,
+				EB0E8BB61E008B0A00BC293C /* Supporting Files */,
+			);
+			path = "walla-ios";
+			sourceTree = "<group>";
+		};
+		EB0E8BB61E008B0A00BC293C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BB71E008B0A00BC293C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB0E8BD21E008B0B00BC293C /* walla-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BD31E008B0B00BC293C /* walla_iosTests.m */,
+				EB0E8BD51E008B0B00BC293C /* Info.plist */,
+			);
+			path = "walla-iosTests";
+			sourceTree = "<group>";
+		};
+		EB0E8BDD1E008B0B00BC293C /* walla-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BDE1E008B0B00BC293C /* walla_iosUITests.m */,
+				EB0E8BE01E008B0B00BC293C /* Info.plist */,
+			);
+			path = "walla-iosUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB0E8BB21E008B0A00BC293C /* walla-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB0E8BE31E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-ios" */;
+			buildPhases = (
+				EB0E8BAF1E008B0A00BC293C /* Sources */,
+				EB0E8BB01E008B0A00BC293C /* Frameworks */,
+				EB0E8BB11E008B0A00BC293C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "walla-ios";
+			productName = "walla-ios";
+			productReference = EB0E8BB31E008B0A00BC293C /* walla-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB0E8BCE1E008B0B00BC293C /* walla-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB0E8BE61E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-iosTests" */;
+			buildPhases = (
+				EB0E8BCB1E008B0B00BC293C /* Sources */,
+				EB0E8BCC1E008B0B00BC293C /* Frameworks */,
+				EB0E8BCD1E008B0B00BC293C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB0E8BD11E008B0B00BC293C /* PBXTargetDependency */,
+			);
+			name = "walla-iosTests";
+			productName = "walla-iosTests";
+			productReference = EB0E8BCF1E008B0B00BC293C /* walla-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EB0E8BD91E008B0B00BC293C /* walla-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB0E8BE91E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-iosUITests" */;
+			buildPhases = (
+				EB0E8BD61E008B0B00BC293C /* Sources */,
+				EB0E8BD71E008B0B00BC293C /* Frameworks */,
+				EB0E8BD81E008B0B00BC293C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB0E8BDC1E008B0B00BC293C /* PBXTargetDependency */,
+			);
+			name = "walla-iosUITests";
+			productName = "walla-iosUITests";
+			productReference = EB0E8BDA1E008B0B00BC293C /* walla-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB0E8BAB1E008B0A00BC293C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "GenieUS, Inc";
+				TargetAttributes = {
+					EB0E8BB21E008B0A00BC293C = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = QVHGQ6VPG8;
+						ProvisioningStyle = Automatic;
+					};
+					EB0E8BCE1E008B0B00BC293C = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = QVHGQ6VPG8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EB0E8BB21E008B0A00BC293C;
+					};
+					EB0E8BD91E008B0B00BC293C = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = QVHGQ6VPG8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EB0E8BB21E008B0A00BC293C;
+					};
+				};
+			};
+			buildConfigurationList = EB0E8BAE1E008B0A00BC293C /* Build configuration list for PBXProject "walla-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB0E8BAA1E008B0A00BC293C;
+			productRefGroup = EB0E8BB41E008B0A00BC293C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB0E8BB21E008B0A00BC293C /* walla-ios */,
+				EB0E8BCE1E008B0B00BC293C /* walla-iosTests */,
+				EB0E8BD91E008B0B00BC293C /* walla-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB0E8BB11E008B0A00BC293C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB0E8BC91E008B0A00BC293C /* LaunchScreen.storyboard in Resources */,
+				EB0E8BC61E008B0A00BC293C /* Assets.xcassets in Resources */,
+				EB0E8BC41E008B0A00BC293C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BCD1E008B0B00BC293C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BD81E008B0B00BC293C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB0E8BAF1E008B0A00BC293C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB0E8BC11E008B0A00BC293C /* SecondViewController.m in Sources */,
+				EB0E8BBB1E008B0A00BC293C /* AppDelegate.m in Sources */,
+				EB0E8BBE1E008B0A00BC293C /* FirstViewController.m in Sources */,
+				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BCB1E008B0B00BC293C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB0E8BD41E008B0B00BC293C /* walla_iosTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB0E8BD61E008B0B00BC293C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB0E8BDF1E008B0B00BC293C /* walla_iosUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB0E8BD11E008B0B00BC293C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB0E8BB21E008B0A00BC293C /* walla-ios */;
+			targetProxy = EB0E8BD01E008B0B00BC293C /* PBXContainerItemProxy */;
+		};
+		EB0E8BDC1E008B0B00BC293C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB0E8BB21E008B0A00BC293C /* walla-ios */;
+			targetProxy = EB0E8BDB1E008B0B00BC293C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EB0E8BC21E008B0A00BC293C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB0E8BC31E008B0A00BC293C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EB0E8BC71E008B0A00BC293C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB0E8BC81E008B0A00BC293C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EB0E8BE11E008B0B00BC293C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EB0E8BE21E008B0B00BC293C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB0E8BE41E008B0B00BC293C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EB0E8BE51E008B0B00BC293C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EB0E8BE71E008B0B00BC293C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walla-ios.app/walla-ios";
+			};
+			name = Debug;
+		};
+		EB0E8BE81E008B0B00BC293C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walla-ios.app/walla-ios";
+			};
+			name = Release;
+		};
+		EB0E8BEA1E008B0B00BC293C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "walla-ios";
+			};
+			name = Debug;
+		};
+		EB0E8BEB1E008B0B00BC293C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = QVHGQ6VPG8;
+				INFOPLIST_FILE = "walla-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "walla-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB0E8BAE1E008B0A00BC293C /* Build configuration list for PBXProject "walla-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB0E8BE11E008B0B00BC293C /* Debug */,
+				EB0E8BE21E008B0B00BC293C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB0E8BE31E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB0E8BE41E008B0B00BC293C /* Debug */,
+				EB0E8BE51E008B0B00BC293C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EB0E8BE61E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB0E8BE71E008B0B00BC293C /* Debug */,
+				EB0E8BE81E008B0B00BC293C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EB0E8BE91E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB0E8BEA1E008B0B00BC293C /* Debug */,
+				EB0E8BEB1E008B0B00BC293C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB0E8BAB1E008B0A00BC293C /* Project object */;
+}
