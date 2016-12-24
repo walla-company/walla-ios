@@ -10,4 +10,8 @@
 
 @interface WACreateActivityAudienceTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIButton *publicButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *privateButton;
+
 @end

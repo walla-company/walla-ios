@@ -10,4 +10,12 @@
 
 @interface WACreateActivityExtraTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UITextField *interestsTextField;
+
+@property (strong, nonatomic) IBOutlet UITextField *groupsTextField;
+
+@property (strong, nonatomic) IBOutlet UITextField *friendsTextField;
+
+@property (strong, nonatomic) IBOutlet UIButton *postButton;
+
 @end

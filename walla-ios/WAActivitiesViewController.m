@@ -8,7 +8,7 @@
 
 #import "WAActivitiesViewController.h"
 
-@interface WAActivitiesViewController () <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, WAActivityTabDelegate>
+@interface WAActivitiesViewController ()
 
 @end
 
@@ -125,7 +125,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.currentFilterIndex = (int) indexPath.row;
     
-    
+    [collectionView reloadData];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

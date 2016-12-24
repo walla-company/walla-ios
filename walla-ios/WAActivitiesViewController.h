@@ -12,7 +12,7 @@
 
 #import "WAFilterCollectionViewCell.h"
 
-@interface WAActivitiesViewController : UIViewController
+@interface WAActivitiesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, WAActivityTabDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *activitiesTableView;
 

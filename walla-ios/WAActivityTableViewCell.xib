@@ -40,7 +40,7 @@ to 8:00</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CS 201 Study Session" lineBreakMode="tailTruncation" numberOfLines="1000" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-xt-ZEU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CS 201 Study Session" lineBreakMode="tailTruncation" numberOfLines="1000" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-xt-ZEU">
                                 <rect key="frame" x="103" y="8" width="327" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
@@ -156,7 +156,14 @@ to 8:00</string>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="audienceImageView" destination="4y4-yb-Fqe" id="3nf-Zz-dDZ"/>
+                <outlet property="dateLabel" destination="KxV-R5-cRi" id="4AJ-x5-pQ8"/>
+                <outlet property="goinNamesLabel" destination="eIP-5J-rpD" id="1i6-p5-e2f"/>
+                <outlet property="goingCountLabel" destination="ZUf-hz-vZK" id="iy9-mo-Xll"/>
                 <outlet property="headerView" destination="N6Q-dl-mhY" id="y9r-CM-NYn"/>
+                <outlet property="interestedCountLabel" destination="aKA-zA-3ps" id="oJ8-4j-a4y"/>
+                <outlet property="timeLabel" destination="VIx-3r-GkG" id="0KI-TR-DYC"/>
+                <outlet property="titleLabel" destination="vKD-xt-ZEU" id="rsd-Y4-HPP"/>
             </connections>
             <point key="canvasLocation" x="65.5" y="124"/>
         </tableViewCell>

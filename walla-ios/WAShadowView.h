@@ -22,4 +22,10 @@ IB_DESIGNABLE
 
 @property UIRectCorner corners;
 
+- (id)init;
+
+- (id)initWithFrame:(CGRect)frame;
+
+- (id)initWithCoder:(NSCoder *)aDecoder;
+
 @end
