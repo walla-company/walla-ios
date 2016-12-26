@@ -48,6 +48,8 @@
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
+    self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    
     // Initialize default values
     
     self.notSelectedColor = [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
@@ -109,6 +111,7 @@
         WACreateActivityAudienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"audienceCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         if (self.activityPublic == true) {
             [cell.publicButton setImage:[UIImage imageNamed:@"PublicButtonPressed"] forState:UIControlStateNormal];
@@ -129,6 +132,7 @@
         WACreateActivityTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"titleCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         cell.activityTitleTextField.tag = 1;
         cell.activityTitleTextField.delegate = self;
@@ -140,6 +144,7 @@
         WACreateActivityTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         [cell.startTimeButton addTarget:self action:@selector(selectTimeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [cell.endTimeButton addTarget:self action:@selector(selectTimeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -172,6 +177,7 @@
         WACreateActivityLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         cell.locationMapView.userInteractionEnabled = false;
         
@@ -184,6 +190,7 @@
         WACreateActivityInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interestsCell"];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         return cell;
     }
@@ -192,6 +199,7 @@
         WACreateActivityDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         cell.detailsTextView.tag = 1;
         cell.detailsTextView.scrollEnabled = false;
@@ -209,6 +217,7 @@
         WACreateActivityHostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hostCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         cell.chooseHostGroupButton.tag = 1;
         
@@ -223,6 +232,7 @@
         WACreateActivityInviteGroupsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inviteGroupsCell"];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         cell.groupsButton.tag = 2;
         
@@ -237,6 +247,7 @@
         WACreateActivityInviteFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inviteFriendsCell"];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         [cell.friendsButton addTarget:self action:@selector(inviteFriendsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -249,6 +260,7 @@
         WACreateActivityCanInviteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"canInviteCell"];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
         return cell;
     }
@@ -256,6 +268,7 @@
     WACreateActivityPostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell"];
     
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     
     [cell.postButton addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     

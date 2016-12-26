@@ -159,7 +159,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filterCell" id="SCJ-63-jKM" customClass="WAFilterCollectionViewCell">
-                                        <rect key="frame" x="15" y="7.5" width="50" height="60"/>
+                                        <rect key="frame" x="15" y="8" width="50" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
@@ -227,30 +227,45 @@
                         <outlet property="activitiesTableView" destination="JpZ-Xc-6f3" id="xXg-Zu-DgO"/>
                         <outlet property="filtersCollectionView" destination="D20-To-bqj" id="aQY-xd-Eck"/>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="bW0-lF-GSs"/>
-                        <segue destination="1cE-Wi-J0z" kind="show" identifier="openActivityDetails" id="FdQ-d3-eTW"/>
+                        <segue destination="V5u-vA-Koq" kind="show" identifier="openActivityDetails" id="VPJ-sK-MWW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxY-tV-er1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2052" y="-1201.3493253373315"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="MkK-cU-pw2">
+        <!--View Activity View Controller-->
+        <scene sceneID="6kp-vg-ZkT">
             <objects>
-                <tableViewController id="1cE-Wi-J0z" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nv1-NA-698">
+                <viewController id="V5u-vA-Koq" customClass="WAViewActivityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HAH-o0-B22"/>
+                        <viewControllerLayoutGuide type="bottom" id="VGm-mE-DHg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iwv-LI-buS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QI7-9N-fzH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="1cE-Wi-J0z" id="ERm-su-rSz"/>
-                            <outlet property="delegate" destination="1cE-Wi-J0z" id="EJm-li-1QM"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bie-in-yEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="QI7-9N-fzH" firstAttribute="top" secondItem="iwv-LI-buS" secondAttribute="top" id="XJD-IM-c24"/>
+                            <constraint firstAttribute="trailing" secondItem="QI7-9N-fzH" secondAttribute="trailing" id="pPz-AG-0qn"/>
+                            <constraint firstItem="QI7-9N-fzH" firstAttribute="leading" secondItem="iwv-LI-buS" secondAttribute="leading" id="tPI-ij-mrH"/>
+                            <constraint firstItem="VGm-mE-DHg" firstAttribute="top" secondItem="QI7-9N-fzH" secondAttribute="bottom" id="u6l-90-fP8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewActivityTableView" destination="QI7-9N-fzH" id="Ba9-oc-lea"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RxZ-e1-pES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3004" y="-1201"/>
+            <point key="canvasLocation" x="2884" y="-1201.3493253373315"/>
         </scene>
         <!--Create Activity-->
         <scene sceneID="Egb-bw-Jzr">

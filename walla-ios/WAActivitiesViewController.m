@@ -17,9 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set up activities table view
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
+    
+    // Set up activities table view
     
     self.activitiesTableView.delegate = self;
     self.activitiesTableView.dataSource = self;
@@ -42,6 +42,7 @@
     self.currentFilterIndex = 0;
     
     // Set up colors
+    
     self.tabColorLightGray = [[UIColor alloc] initWithRed:97.0/255.0 green:97.0/255.0 blue:97.0/255.0 alpha:1.0];
     self.tabColorOffwhite = [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
     self.tabColorOrange = [[UIColor alloc] initWithRed:244.0/255.0 green:201.0/255.0 blue:146.0/255.0 alpha:1.0];
@@ -102,7 +103,7 @@
     
 }
 
-#pragma mark - Header view
+#pragma mark - Tab header view delegate
 
 - (void)activityTabButtonPressed:(NSString *)groupID {
     
