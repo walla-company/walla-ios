@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="119" id="KGk-i7-Jjw" customClass="WACreateActivityInviteGroupsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoi-Jt-1eZ" customClass="WAShadowView">
+                        <rect key="frame" x="15" y="5" width="290" height="84.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite group(s) (optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8UF-hI-2P6">
+                                <rect key="frame" x="15" y="15" width="159" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83Y-j6-CFs" customClass="WARoundedView">
+                                <rect key="frame" x="15" y="40" width="260" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkT-o7-Tc2">
+                                        <rect key="frame" x="10" y="0.0" width="240" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRd-hn-RTO">
+                                        <rect key="frame" x="10" y="0.0" width="240" height="30"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jkT-o7-Tc2" secondAttribute="trailing" constant="10" id="8GV-22-eLy"/>
+                                    <constraint firstItem="xRd-hn-RTO" firstAttribute="leading" secondItem="83Y-j6-CFs" secondAttribute="leading" constant="10" id="I82-Z9-po6"/>
+                                    <constraint firstAttribute="height" constant="30" id="KHx-92-GfY"/>
+                                    <constraint firstAttribute="bottom" secondItem="xRd-hn-RTO" secondAttribute="bottom" id="Yy4-ub-brU"/>
+                                    <constraint firstAttribute="trailing" secondItem="xRd-hn-RTO" secondAttribute="trailing" constant="10" id="cSN-di-u5N"/>
+                                    <constraint firstAttribute="bottom" secondItem="jkT-o7-Tc2" secondAttribute="bottom" id="ji2-Rr-biu"/>
+                                    <constraint firstItem="jkT-o7-Tc2" firstAttribute="leading" secondItem="83Y-j6-CFs" secondAttribute="leading" constant="10" id="qG3-ay-uxj"/>
+                                    <constraint firstItem="jkT-o7-Tc2" firstAttribute="top" secondItem="83Y-j6-CFs" secondAttribute="top" id="rft-ZI-phY"/>
+                                    <constraint firstItem="xRd-hn-RTO" firstAttribute="top" secondItem="83Y-j6-CFs" secondAttribute="top" id="y7S-KR-Rx5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="83Y-j6-CFs" secondAttribute="bottom" constant="15" id="3xm-hi-cHe"/>
+                            <constraint firstItem="8UF-hI-2P6" firstAttribute="top" secondItem="zoi-Jt-1eZ" secondAttribute="top" constant="15" id="E3E-jb-IHC"/>
+                            <constraint firstItem="8UF-hI-2P6" firstAttribute="leading" secondItem="zoi-Jt-1eZ" secondAttribute="leading" constant="15" id="TLO-Bt-g3U"/>
+                            <constraint firstAttribute="trailing" secondItem="83Y-j6-CFs" secondAttribute="trailing" constant="15" id="W8E-5n-iD0"/>
+                            <constraint firstItem="83Y-j6-CFs" firstAttribute="top" secondItem="8UF-hI-2P6" secondAttribute="bottom" constant="8" id="f8J-Mt-cp6"/>
+                            <constraint firstItem="83Y-j6-CFs" firstAttribute="leading" secondItem="zoi-Jt-1eZ" secondAttribute="leading" constant="15" id="v7w-PY-Qrd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="zoi-Jt-1eZ" secondAttribute="bottom" constant="5" id="G03-qu-RFc"/>
+                    <constraint firstItem="zoi-Jt-1eZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NOf-Eg-0hU"/>
+                    <constraint firstAttribute="trailing" secondItem="zoi-Jt-1eZ" secondAttribute="trailing" constant="15" id="YOo-jn-N9e"/>
+                    <constraint firstItem="zoi-Jt-1eZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="oBG-bh-Ztx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="groupsButton" destination="xRd-hn-RTO" id="CrU-cT-ecx"/>
+                <outlet property="groupsLabel" destination="jkT-o7-Tc2" id="2m3-aM-nXK"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="91.5"/>
+        </tableViewCell>
+    </objects>
+</document>

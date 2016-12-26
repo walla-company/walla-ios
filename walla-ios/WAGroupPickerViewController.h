@@ -16,7 +16,7 @@
 
 @end
 
-@interface WAGroupPickerViewController : UIViewController <WAGroupPickerViewDelegate>
+@interface WAGroupPickerViewController : UIViewController <WAGroupPickerViewDelegate, UIGestureRecognizerDelegate>
 
 @property WAGroupPickerView *groupPicker;
 
@@ -25,13 +25,8 @@
 @property NSString *groupPickerTitle;
 @property NSArray *selectedGroups;
 @property NSArray *allGroups;
+@property BOOL canSelectMultipleGourps;
 
-- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups;
-
-- (void)setTitle:(NSString *)title;
-
-- (void)setSelectedGroupsArray:(NSArray *)groups;
-
-- (void)setCanSelectMultipleGroups:(BOOL)canSelectMultipleGroups;
+- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups canSelectMultipleGourps:(BOOL)canSelectMultipleGourps;
 
 @end

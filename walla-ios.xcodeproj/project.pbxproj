@@ -34,14 +34,28 @@
 		EB4EA7A41E039604000F4834 /* WAFilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA7A31E039604000F4834 /* WAFilterCollectionViewCell.m */; };
 		EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */; };
 		EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */; };
+		EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */; };
+		EBCB56351E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56331E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m */; };
+		EBCB56361E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56341E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib */; };
+		EBCB563B1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56391E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m */; };
+		EBCB563C1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB563A1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib */; };
+		EBCB56401E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB563E1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m */; };
+		EBCB56411E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB563F1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib */; };
+		EBCB56451E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56431E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m */; };
+		EBCB56461E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56441E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.xib */; };
+		EBCB564A1E0F434B000530F6 /* WACreateActivityPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56481E0F434B000530F6 /* WACreateActivityPostTableViewCell.m */; };
+		EBCB564B1E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56491E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib */; };
+		EBCB56511E10861F000530F6 /* WAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56501E10861F000530F6 /* WAUser.m */; };
+		EBCB56551E108774000530F6 /* WAUserPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56541E108774000530F6 /* WAUserPickerViewController.m */; };
+		EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56571E108784000530F6 /* WAUserPickerView.m */; };
+		EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB565A1E108D12000530F6 /* WAUserTableViewCell.m */; };
+		EBCB565D1E108D12000530F6 /* WAUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB565B1E108D12000530F6 /* WAUserTableViewCell.xib */; };
 		EBDA5C2C1E05B16000B61AED /* WADiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C2B1E05B16000B61AED /* WADiscoverTableViewController.m */; };
 		EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */; };
 		EBDA5C321E05B17B00B61AED /* WAMyProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C311E05B17B00B61AED /* WAMyProfileTableViewController.m */; };
 		EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C351E05B31200B61AED /* WACreateActivityTableViewController.m */; };
 		EBDA5C3B1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C391E05B70400B61AED /* WACreateActivityAudienceTableViewCell.m */; };
 		EBDA5C3C1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDA5C3A1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.xib */; };
-		EBDA5C451E05B72300B61AED /* WACreateActivityExtraTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C431E05B72300B61AED /* WACreateActivityExtraTableViewCell.m */; };
-		EBDA5C461E05B72300B61AED /* WACreateActivityExtraTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDA5C441E05B72300B61AED /* WACreateActivityExtraTableViewCell.xib */; };
 		EBDA5C4B1E05B90A00B61AED /* WAMyProfileMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C491E05B90A00B61AED /* WAMyProfileMainTableViewCell.m */; };
 		EBDA5C4C1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDA5C4A1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib */; };
 		EBDA5C501E05B91C00B61AED /* WAMyProfileTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C4E1E05B91C00B61AED /* WAMyProfileTextTableViewCell.m */; };
@@ -51,7 +65,6 @@
 		EBDA5C691E071AD100B61AED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA5C681E071AD100B61AED /* MapKit.framework */; };
 		EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6B1E071BD400B61AED /* WARoundedView.m */; };
 		EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */; };
-		EBDA5C881E074E8100B61AED /* WADatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C871E074E8100B61AED /* WADatePickerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +132,32 @@
 		EB8B8E4E1E0EFB8700FB7389 /* WAGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAGroupTableViewCell.h; sourceTree = "<group>"; };
 		EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAGroupTableViewCell.m; sourceTree = "<group>"; };
 		EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAGroupTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB562A1E0F0C92000530F6 /* WADatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerViewController.h; sourceTree = "<group>"; };
+		EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerViewController.m; sourceTree = "<group>"; };
+		EBCB56321E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityInterestsTableViewCell.h; sourceTree = "<group>"; };
+		EBCB56331E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityInterestsTableViewCell.m; sourceTree = "<group>"; };
+		EBCB56341E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityInterestsTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB56381E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityInviteGroupsTableViewCell.h; sourceTree = "<group>"; };
+		EBCB56391E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityInviteGroupsTableViewCell.m; sourceTree = "<group>"; };
+		EBCB563A1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityInviteGroupsTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB563D1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityInviteFriendsTableViewCell.h; sourceTree = "<group>"; };
+		EBCB563E1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityInviteFriendsTableViewCell.m; sourceTree = "<group>"; };
+		EBCB563F1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityInviteFriendsTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB56421E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityCanInviteTableViewCell.h; sourceTree = "<group>"; };
+		EBCB56431E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityCanInviteTableViewCell.m; sourceTree = "<group>"; };
+		EBCB56441E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityCanInviteTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB56471E0F434B000530F6 /* WACreateActivityPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityPostTableViewCell.h; sourceTree = "<group>"; };
+		EBCB56481E0F434B000530F6 /* WACreateActivityPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityPostTableViewCell.m; sourceTree = "<group>"; };
+		EBCB56491E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityPostTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB564F1E10861F000530F6 /* WAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUser.h; sourceTree = "<group>"; };
+		EBCB56501E10861F000530F6 /* WAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUser.m; sourceTree = "<group>"; };
+		EBCB56531E108774000530F6 /* WAUserPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUserPickerViewController.h; sourceTree = "<group>"; };
+		EBCB56541E108774000530F6 /* WAUserPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUserPickerViewController.m; sourceTree = "<group>"; };
+		EBCB56561E108784000530F6 /* WAUserPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUserPickerView.h; sourceTree = "<group>"; };
+		EBCB56571E108784000530F6 /* WAUserPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUserPickerView.m; sourceTree = "<group>"; };
+		EBCB56591E108D12000530F6 /* WAUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUserTableViewCell.h; sourceTree = "<group>"; };
+		EBCB565A1E108D12000530F6 /* WAUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUserTableViewCell.m; sourceTree = "<group>"; };
+		EBCB565B1E108D12000530F6 /* WAUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAUserTableViewCell.xib; sourceTree = "<group>"; };
 		EBDA5C2A1E05B16000B61AED /* WADiscoverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADiscoverTableViewController.h; sourceTree = "<group>"; };
 		EBDA5C2B1E05B16000B61AED /* WADiscoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADiscoverTableViewController.m; sourceTree = "<group>"; };
 		EBDA5C2D1E05B16D00B61AED /* WANotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANotificationsTableViewController.h; sourceTree = "<group>"; };
@@ -130,10 +169,6 @@
 		EBDA5C381E05B70400B61AED /* WACreateActivityAudienceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityAudienceTableViewCell.h; sourceTree = "<group>"; };
 		EBDA5C391E05B70400B61AED /* WACreateActivityAudienceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityAudienceTableViewCell.m; sourceTree = "<group>"; };
 		EBDA5C3A1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityAudienceTableViewCell.xib; sourceTree = "<group>"; };
-		EBDA5C3D1E05B71400B61AED /* WACreateActivityInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityInfoTableViewCell.h; sourceTree = "<group>"; };
-		EBDA5C421E05B72300B61AED /* WACreateActivityExtraTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityExtraTableViewCell.h; sourceTree = "<group>"; };
-		EBDA5C431E05B72300B61AED /* WACreateActivityExtraTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityExtraTableViewCell.m; sourceTree = "<group>"; };
-		EBDA5C441E05B72300B61AED /* WACreateActivityExtraTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityExtraTableViewCell.xib; sourceTree = "<group>"; };
 		EBDA5C481E05B90A00B61AED /* WAMyProfileMainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileMainTableViewCell.h; sourceTree = "<group>"; };
 		EBDA5C491E05B90A00B61AED /* WAMyProfileMainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMyProfileMainTableViewCell.m; sourceTree = "<group>"; };
 		EBDA5C4A1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAMyProfileMainTableViewCell.xib; sourceTree = "<group>"; };
@@ -149,8 +184,6 @@
 		EBDA5C6B1E071BD400B61AED /* WARoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARoundedView.m; sourceTree = "<group>"; };
 		EBDA5C6D1E072C7100B61AED /* WADatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerView.h; sourceTree = "<group>"; };
 		EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerView.m; sourceTree = "<group>"; };
-		EBDA5C861E074E8100B61AED /* WADatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerViewController.h; sourceTree = "<group>"; };
-		EBDA5C871E074E8100B61AED /* WADatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,8 +244,8 @@
 		EB033A2C1E0E33BF00621C35 /* WADatePickerViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EBDA5C861E074E8100B61AED /* WADatePickerViewController.h */,
-				EBDA5C871E074E8100B61AED /* WADatePickerViewController.m */,
+				EBCB562A1E0F0C92000530F6 /* WADatePickerViewController.h */,
+				EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */,
 				EBDA5C6D1E072C7100B61AED /* WADatePickerView.h */,
 				EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */,
 			);
@@ -226,8 +259,6 @@
 				EB033A2F1E0E33F400621C35 /* WAGroupPickerViewController.m */,
 				EB033A311E0E340E00621C35 /* WAGroupPickerView.h */,
 				EB033A321E0E340E00621C35 /* WAGroupPickerView.m */,
-				EB033A341E0E370700621C35 /* WAGroup.h */,
-				EB033A351E0E370700621C35 /* WAGroup.m */,
 			);
 			name = WAGroupPickerViewController;
 			sourceTree = "<group>";
@@ -238,6 +269,9 @@
 				EB8B8E4E1E0EFB8700FB7389 /* WAGroupTableViewCell.h */,
 				EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */,
 				EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */,
+				EBCB56591E108D12000530F6 /* WAUserTableViewCell.h */,
+				EBCB565A1E108D12000530F6 /* WAUserTableViewCell.m */,
+				EBCB565B1E108D12000530F6 /* WAUserTableViewCell.xib */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -273,7 +307,9 @@
 				EBDA5C281E05B12D00B61AED /* WANotificationsTableViewController */,
 				EBDA5C291E05B13900B61AED /* WAMyProfileTableViewController */,
 				EBDA5C331E05B2F400B61AED /* WACreateActivityTableViewController */,
+				EBCB565E1E10EF3A000530F6 /* WAViewActivityTableViewController */,
 				EB033A371E0E3B1200621C35 /* Table View Cells */,
+				EBCB564C1E1085D9000530F6 /* Custom Objects */,
 				EBBF5AC81E05ACFD0066F7E1 /* Custom Views */,
 				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
 				EB0E8BC51E008B0A00BC293C /* Assets.xcassets */,
@@ -340,8 +376,54 @@
 				EB033A2B1E0E33B200621C35 /* WAActivityTabsHeaderView */,
 				EB033A2C1E0E33BF00621C35 /* WADatePickerViewController */,
 				EB033A2D1E0E33CF00621C35 /* WAGroupPickerViewController */,
+				EBCB56521E1086AE000530F6 /* WAUserPickerViewController */,
 			);
 			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		EBCB564C1E1085D9000530F6 /* Custom Objects */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB564D1E1085E9000530F6 /* WAGroup */,
+				EBCB564E1E1085F5000530F6 /* WAUser */,
+			);
+			name = "Custom Objects";
+			sourceTree = "<group>";
+		};
+		EBCB564D1E1085E9000530F6 /* WAGroup */ = {
+			isa = PBXGroup;
+			children = (
+				EB033A341E0E370700621C35 /* WAGroup.h */,
+				EB033A351E0E370700621C35 /* WAGroup.m */,
+			);
+			name = WAGroup;
+			sourceTree = "<group>";
+		};
+		EBCB564E1E1085F5000530F6 /* WAUser */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB564F1E10861F000530F6 /* WAUser.h */,
+				EBCB56501E10861F000530F6 /* WAUser.m */,
+			);
+			name = WAUser;
+			sourceTree = "<group>";
+		};
+		EBCB56521E1086AE000530F6 /* WAUserPickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB56531E108774000530F6 /* WAUserPickerViewController.h */,
+				EBCB56541E108774000530F6 /* WAUserPickerViewController.m */,
+				EBCB56561E108784000530F6 /* WAUserPickerView.h */,
+				EBCB56571E108784000530F6 /* WAUserPickerView.m */,
+			);
+			name = WAUserPickerViewController;
+			sourceTree = "<group>";
+		};
+		EBCB565E1E10EF3A000530F6 /* WAViewActivityTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WAViewActivityTableViewController;
 			sourceTree = "<group>";
 		};
 		EBDA5C271E05B11C00B61AED /* WADiscoverTableViewController */ = {
@@ -401,16 +483,27 @@
 				EB033A141E0D924800621C35 /* WACreateActivityLocationTableViewCell.h */,
 				EB033A151E0D924800621C35 /* WACreateActivityLocationTableViewCell.m */,
 				EB033A161E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib */,
+				EBCB56321E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.h */,
+				EBCB56331E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m */,
+				EBCB56341E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib */,
 				EB033A191E0D926100621C35 /* WACreateActivityDetailsTableViewCell.h */,
 				EB033A1A1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.m */,
 				EB033A1B1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.xib */,
 				EB033A1E1E0D927300621C35 /* WACreateActivityHostTableViewCell.h */,
 				EB033A1F1E0D927300621C35 /* WACreateActivityHostTableViewCell.m */,
 				EB033A201E0D927300621C35 /* WACreateActivityHostTableViewCell.xib */,
-				EBDA5C3D1E05B71400B61AED /* WACreateActivityInfoTableViewCell.h */,
-				EBDA5C421E05B72300B61AED /* WACreateActivityExtraTableViewCell.h */,
-				EBDA5C431E05B72300B61AED /* WACreateActivityExtraTableViewCell.m */,
-				EBDA5C441E05B72300B61AED /* WACreateActivityExtraTableViewCell.xib */,
+				EBCB56381E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.h */,
+				EBCB56391E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m */,
+				EBCB563A1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib */,
+				EBCB563D1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.h */,
+				EBCB563E1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m */,
+				EBCB563F1E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib */,
+				EBCB56421E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.h */,
+				EBCB56431E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m */,
+				EBCB56441E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.xib */,
+				EBCB56471E0F434B000530F6 /* WACreateActivityPostTableViewCell.h */,
+				EBCB56481E0F434B000530F6 /* WACreateActivityPostTableViewCell.m */,
+				EBCB56491E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -575,14 +668,19 @@
 			files = (
 				EBDA5C4C1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib in Resources */,
 				EB4EA7991E0344A5000F4834 /* WAActivityTableViewCell.xib in Resources */,
+				EBCB56461E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.xib in Resources */,
 				EB0E8BC91E008B0A00BC293C /* LaunchScreen.storyboard in Resources */,
+				EBCB56411E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib in Resources */,
 				EB033A181E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib in Resources */,
-				EBDA5C461E05B72300B61AED /* WACreateActivityExtraTableViewCell.xib in Resources */,
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
+				EBCB56361E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib in Resources */,
+				EBCB565D1E108D12000530F6 /* WAUserTableViewCell.xib in Resources */,
 				EB033A221E0D927300621C35 /* WACreateActivityHostTableViewCell.xib in Resources */,
 				EB0E8BC61E008B0A00BC293C /* Assets.xcassets in Resources */,
+				EBCB563C1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib in Resources */,
 				EBDA5C3C1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.xib in Resources */,
 				EB033A131E0D920900621C35 /* WACreateActivityTimeTableViewCell.xib in Resources */,
+				EBCB564B1E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib in Resources */,
 				EB033A0B1E0D91E600621C35 /* WACreateActivityTitleTableViewCell.xib in Resources */,
 				EB0E8BC41E008B0A00BC293C /* Main.storyboard in Resources */,
 				EB033A1D1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.xib in Resources */,
@@ -611,6 +709,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBCB564A1E0F434B000530F6 /* WACreateActivityPostTableViewCell.m in Sources */,
+				EBCB56451E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m in Sources */,
 				EB033A331E0E340E00621C35 /* WAGroupPickerView.m in Sources */,
 				EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */,
 				EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */,
@@ -619,22 +719,28 @@
 				EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */,
 				EBDA5C3B1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.m in Sources */,
 				EBDA5C321E05B17B00B61AED /* WAMyProfileTableViewController.m in Sources */,
+				EBCB56401E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m in Sources */,
+				EBCB56351E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m in Sources */,
+				EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */,
 				EB033A301E0E33F400621C35 /* WAGroupPickerViewController.m in Sources */,
+				EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */,
 				EB4EA7981E0344A5000F4834 /* WAActivityTableViewCell.m in Sources */,
 				EB033A211E0D927300621C35 /* WACreateActivityHostTableViewCell.m in Sources */,
 				EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */,
+				EBCB56511E10861F000530F6 /* WAUser.m in Sources */,
 				EB033A121E0D920900621C35 /* WACreateActivityTimeTableViewCell.m in Sources */,
 				EB0E8BBB1E008B0A00BC293C /* AppDelegate.m in Sources */,
 				EB4EA7A41E039604000F4834 /* WAFilterCollectionViewCell.m in Sources */,
 				EB033A1C1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.m in Sources */,
-				EBDA5C881E074E8100B61AED /* WADatePickerViewController.m in Sources */,
 				EB033A361E0E370700621C35 /* WAGroup.m in Sources */,
 				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
+				EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */,
 				EB033A171E0D924800621C35 /* WACreateActivityLocationTableViewCell.m in Sources */,
 				EBDA5C2C1E05B16000B61AED /* WADiscoverTableViewController.m in Sources */,
 				EB4EA79E1E036CD2000F4834 /* WAActivitiesViewController.m in Sources */,
 				EBDA5C4B1E05B90A00B61AED /* WAMyProfileMainTableViewCell.m in Sources */,
-				EBDA5C451E05B72300B61AED /* WACreateActivityExtraTableViewCell.m in Sources */,
+				EBCB563B1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m in Sources */,
+				EBCB56551E108774000530F6 /* WAUserPickerViewController.m in Sources */,
 				EBDA5C501E05B91C00B61AED /* WAMyProfileTextTableViewCell.m in Sources */,
 				EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */,
 				EB033A0A1E0D91E600621C35 /* WACreateActivityTitleTableViewCell.m in Sources */,

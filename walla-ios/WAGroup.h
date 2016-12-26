@@ -13,11 +13,12 @@
 @interface WAGroup : NSObject
 
 @property NSString *name;
+@property NSString *shortName;
 @property NSString *groupID;
 @property UIColor *groupColor;
 
 - (id)init;
 
-- (id)initWithName:(NSString *)name groupID:(NSString *)groupID color:(UIColor *)groupColor;
+- (id)initWithName:(NSString *)name shortName:(NSString *)shortName groupID:(NSString *)groupID color:(UIColor *)groupColor;
 
 @end

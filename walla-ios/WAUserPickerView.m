@@ -1,14 +1,14 @@
 //
-//  WAGroupPickerView.m
+//  WAUserPickerView.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/23/16.
+//  Created by Joseph DeChicchis on 12/25/16.
 //  Copyright © 2016 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAGroupPickerView.h"
+#import "WAUserPickerView.h"
 
-@implementation WAGroupPickerView
+@implementation WAUserPickerView
 
 static CGFloat VIEW_HEIGHT = 360.0; // 300 for primary
 static CGFloat PRIMARY_VIEW_HEIGHT = 300.0; //VIEW_HEIGHT - secondary view height
@@ -17,9 +17,6 @@ static CGFloat VIEW_WIDTH = 320.0;
 # pragma mark - Initialization
 
 - (void)initialize:(NSString *)title {
-    
-    //self.layer.cornerRadius = 15.0;
-    //self.backgroundColor = [UIColor whiteColor];
     
     self.backgroundColor = [UIColor clearColor];
     
@@ -40,19 +37,19 @@ static CGFloat VIEW_WIDTH = 320.0;
     UIView *separaterView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, VIEW_WIDTH, 0.5)];
     separaterView.backgroundColor = [UIColor lightGrayColor];
     
-    self.groupsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, VIEW_WIDTH, PRIMARY_VIEW_HEIGHT-60) style:UITableViewStylePlain];
+    self.usersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, VIEW_WIDTH, PRIMARY_VIEW_HEIGHT-60) style:UITableViewStylePlain];
     
-    self.groupsTableView.showsVerticalScrollIndicator = false;
+    self.usersTableView.showsVerticalScrollIndicator = false;
     
-    self.groupsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.groupsTableView registerNib:[UINib nibWithNibName:@"WAGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupCell"];
+    [self.usersTableView registerNib:[UINib nibWithNibName:@"WAUserTableViewCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
     
-    self.groupsTableView.rowHeight = UITableViewAutomaticDimension;
-    self.groupsTableView.estimatedRowHeight = 44.0;
+    self.usersTableView.rowHeight = UITableViewAutomaticDimension;
+    self.usersTableView.estimatedRowHeight = 44.0;
     
-    self.groupsTableView.delegate = self;
-    self.groupsTableView.dataSource = self;
+    self.usersTableView.delegate = self;
+    self.usersTableView.dataSource = self;
     
     self.doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.doneButton.frame = CGRectMake(0.0, 10.0, VIEW_WIDTH, 20.0);
@@ -65,27 +62,25 @@ static CGFloat VIEW_WIDTH = 320.0;
     
     [self.primaryView addSubview:self.titleLabel];
     [self.primaryView addSubview:separaterView];
-    [self.primaryView addSubview:self.groupsTableView];
+    [self.primaryView addSubview:self.usersTableView];
     [self.primaryView addSubview:self.doneButton];
     
     [self.secondaryView addSubview:self.doneButton];
     
 }
 
-- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray*) allGroups canSelectMultipleGroups:(BOOL)canSelectMultipleGroups {
+- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers {
     
     self = [super initWithFrame:CGRectMake((frame.size.width-VIEW_WIDTH)/2, frame.size.height, VIEW_WIDTH, VIEW_HEIGHT)];
     
-    self.selectedGroups = [[NSMutableArray alloc] initWithArray:selectedGroups];
-    self.allGroups = allGroups;
-    self.canSelectMultipleGroups = canSelectMultipleGroups;
+    self.selectedUsers = [[NSMutableArray alloc] initWithArray:selectedUsers];
+    self.allUsers = allUsers;
     
     if (self) {
         [self initialize:title];
     }
     
     return self;
-    
 }
 
 - (void)animateUp:(CGRect)frame {
@@ -129,25 +124,24 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.allGroups count];
+    return [self.allUsers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    WAGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
+    WAUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
     
-    WAGroup *group = [self.allGroups objectAtIndex:indexPath.row];
+    WAUser *user = [self.allUsers objectAtIndex:indexPath.row];
     
-    cell.groupTagView.backgroundColor = group.groupColor;
-    cell.groupTagView.layer.cornerRadius = 8.0;
-    cell.groupTagView.clipsToBounds = false;
-    cell.groupTagViewLabel.text = group.shortName;
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     
-    cell.groupNameLabel.text = group.name;
+    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.classYear, user.major];
+    
+    cell.profileImageView.image = user.profileImage;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if ([self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]) {
+    if ([self.selectedUsers containsObject:[self.allUsers objectAtIndex:indexPath.row]]) {
         cell.backgroundColor = [[UIColor alloc] initWithRed:255.0/255.0 green:243.0/255.0 blue:229.0/255.0 alpha:1.0];
     }
     else {
@@ -159,27 +153,16 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.canSelectMultipleGroups) {
-        if (![self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]){
-            [self.selectedGroups addObject:[self.allGroups objectAtIndex:indexPath.row]];
-        }
-        else {
-            [self.selectedGroups removeObject:[self.allGroups objectAtIndex:indexPath.row]];
-        }
+    if (![self.selectedUsers containsObject:[self.allUsers objectAtIndex:indexPath.row]]){
+        [self.selectedUsers addObject:[self.allUsers objectAtIndex:indexPath.row]];
     }
     else {
-        if ([self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]){
-            [self.selectedGroups removeAllObjects];
-        }
-        else {
-            [self.selectedGroups removeAllObjects];
-            [self.selectedGroups addObject:[self.allGroups objectAtIndex:indexPath.row]];
-        }
+        [self.selectedUsers removeObject:[self.allUsers objectAtIndex:indexPath.row]];
     }
     
-    [self.groupsTableView reloadData];
+    [self.usersTableView reloadData];
     
-    [self.delegate groupsChanged:self.selectedGroups];
+    [self.delegate usersChanges:self.selectedUsers];
 }
 
 # pragma mark - Delgate

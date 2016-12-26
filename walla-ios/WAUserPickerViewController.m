@@ -1,37 +1,37 @@
 //
-//  WAGroupPickerViewController.m
+//  WAUserPickerViewController.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/23/16.
+//  Created by Joseph DeChicchis on 12/25/16.
 //  Copyright © 2016 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAGroupPickerViewController.h"
+#import "WAUserPickerViewController.h"
 
-@interface WAGroupPickerViewController ()
+@interface WAUserPickerViewController ()
 
 @end
 
-@implementation WAGroupPickerViewController
+@implementation WAUserPickerViewController
 
-- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups canSelectMultipleGourps:(BOOL)canSelectMultipleGourps {
+- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers {
     
     self = [super init];
     
     if (self) {
-        self.groupPickerTitle = title;
-        self.selectedGroups = selectedGroups;
-        self.allGroups = allGroups;
-        self.canSelectMultipleGourps = canSelectMultipleGourps;
+        self.userPickerTitle = title;
+        self.selectedUsers = selectedUsers;
+        self.allUsers = allUsers;
     }
     
     return self;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Add the group picker view
+    // Add the user picker view
     
     UIView *tapView = [[UIView alloc] initWithFrame:self.view.frame];
     
@@ -43,18 +43,19 @@
     singleFingerTap.delegate = self;
     [self.view addGestureRecognizer:singleFingerTap];
     
-    self.groupPicker = [[WAGroupPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.groupPickerTitle selectedGroups:self.selectedGroups allGroups:self.allGroups canSelectMultipleGroups:self.canSelectMultipleGourps];
+    self.userPicker = [[WAUserPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.userPickerTitle selectedUsers:self.selectedUsers allUsers:self.allUsers];
     
-    self.groupPicker.delegate = self;
+    self.userPicker.delegate = self;
     
-    [self.view addSubview:self.groupPicker];
+    [self.view addSubview:self.userPicker];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
     
-    [self.groupPicker animateUp:self.view.frame];
+    [self.userPicker animateUp:self.view.frame];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,18 +86,18 @@
     }
 }
 
-# pragma mark - Group picker delegate
+# pragma mark - User picker delegate
 
 - (void)doneButtonPressed {
     
-    [self.groupPicker animateDown:self.view.frame completion:^{
+    [self.userPicker animateDown:self.view.frame completion:^{
         [self dismissViewControllerAnimated:false completion:nil];
     }];
 }
 
-- (void)groupsChanged:(NSArray *)groups {
+- (void)usersChanges:(NSArray *)users {
     
-    [self.delegate groupPickerViewGroupSelected:groups tag:self.view.tag];
+    [self.delegate userPickerViewUserSelected:users tag:self.view.tag];
 }
 
 @end

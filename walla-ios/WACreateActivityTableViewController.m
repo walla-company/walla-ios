@@ -33,7 +33,11 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityHostTableViewCell" bundle:nil] forCellReuseIdentifier:@"hostCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityExtraTableViewCell" bundle:nil] forCellReuseIdentifier:@"extraCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityInterestsTableViewCell" bundle:nil] forCellReuseIdentifier:@"interestsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityInviteGroupsTableViewCell" bundle:nil] forCellReuseIdentifier:@"inviteGroupsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityInviteFriendsTableViewCell" bundle:nil] forCellReuseIdentifier:@"inviteFriendsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityCanInviteTableViewCell" bundle:nil] forCellReuseIdentifier:@"canInviteCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityPostTableViewCell" bundle:nil] forCellReuseIdentifier:@"postCell"];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100.0;
@@ -45,13 +49,27 @@
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     // Initialize default values
-    self.activityPublic = true;
     
     self.notSelectedColor = [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
     self.selectedColor = [[UIColor alloc] initWithRed:143.0/255.0 green:142.0/255.0 blue:148.0/255.0 alpha:1.0];
     
+    // Required
+    
+    self.activityPublic = true;
     self.activityTitle = @"";
+    self.activityStartTime = nil;
+    self.activityEndTime = nil;
+    self.activityLocationString = @"";
+    self.activityInterests = [[NSArray alloc] init];
+    self.guestsCanInviteOthers = true;
+    
+    // Optional
+    
     self.activityDetails = @"";
+    self.activityHostGroup = [[NSArray alloc] init];
+    self.activityInvitedGroups = [[NSArray alloc] init];
+    self.activityInvitedFriends = [[NSArray alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +98,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 7;
+    if (self.activityPublic == true) return 10;
+    
+    return 11;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -161,6 +181,14 @@
     }
     
     if (indexPath.row == 4) {
+        WACreateActivityInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interestsCell"];
+        
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 5) {
         WACreateActivityDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
@@ -177,7 +205,7 @@
         return cell;
     }
     
-    if (indexPath.row == 5) {
+    if (indexPath.row == 6) {
         WACreateActivityHostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hostCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
@@ -186,12 +214,52 @@
         
         [cell.chooseHostGroupButton addTarget:self action:@selector(chooseGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        [self setGroupsLabelTitle:self.activityHostGroup label:cell.hostGroupLabel onlyOne:true];
+        
         return cell;
     }
     
-    WACreateActivityExtraTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"extraCell" forIndexPath:indexPath];
+    if (indexPath.row == 7) {
+        WACreateActivityInviteGroupsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inviteGroupsCell"];
+        
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        
+        cell.groupsButton.tag = 2;
+        
+        [cell.groupsButton addTarget:self action:@selector(chooseGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self setGroupsLabelTitle:self.activityInvitedGroups label:cell.groupsLabel onlyOne:false];
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 8) {
+        WACreateActivityInviteFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inviteFriendsCell"];
+        
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        
+        [cell.friendsButton addTarget:self action:@selector(inviteFriendsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self setUsersLabel:self.activityInvitedFriends label:cell.friendsLabel];
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 9 && self.activityPublic == false) {
+        WACreateActivityCanInviteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"canInviteCell"];
+        
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+        
+        return cell;
+    }
+    
+    WACreateActivityPostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell"];
     
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+    
+    [cell.postButton addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.postView.layer.cornerRadius = 8.0;
     
     return cell;
 }
@@ -202,21 +270,21 @@
     
     self.activityPublic = true;
     
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
 }
 
 - (void)activityPrivateButtonPressed:(UIButton *)button {
     
     self.activityPublic = false;
     
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
 }
 
 - (void)selectTimeButtonPressed:(UIButton *)button {
     
-    WADatePickerViewController *datePicker;// = [[WADatePickerViewController alloc] init];
+    WADatePickerViewController *datePicker;
     
-    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kTimeCellRow inSection:0]];
     
     if (button.tag == 1) {
         if (self.activityStartTime == nil && self.activityEndTime == nil) {
@@ -262,36 +330,58 @@
     [self presentViewController:datePicker animated:false completion:nil];
 }
 
-- (void)setTimeTitle:(NSDate *)date label:(UILabel *)label {
+- (void)chooseInterestsButtonPressed:(UIButton *)button {
     
-    if (date != nil) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateFormatterShortStyle;
-        
-        label.text = [dateFormatter stringFromDate:date];
-        
-        label.textColor = self.selectedColor;
-    }
 }
 
 - (void)chooseGroupButtonPressed:(UIButton *) button {
     
-    if (button.tag == 1) {
-        
-        WAGroupPickerViewController *groupPicker = [[WAGroupPickerViewController alloc] initWithTitle:@"Choose Host Group" selectedGroups:@[] allGroups:@[]];
-        
-        groupPicker.view.tag = 1;
-        
-        groupPicker.delegate = self;
-        
-        self.definesPresentationContext = true;
-        groupPicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
-        groupPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        
-        [self presentViewController:groupPicker animated:false completion:nil];
-        
-    }
+    WAGroup *group1 = [[WAGroup alloc] initWithName:@"Something Borrowed Something Blue" shortName:@"SBSB" groupID:@"1" color:[UIColor orangeColor]];
+    WAGroup *group2 = [[WAGroup alloc] initWithName:@"Mechanical Engineers" shortName:@"MechEng" groupID:@"2" color:[UIColor purpleColor]];
+    WAGroup *group3 = [[WAGroup alloc] initWithName:@"Residential Assisstants" shortName:@"RA" groupID:@"3" color:[UIColor greenColor]];
+    
+    WAGroupPickerViewController *groupPicker = [[WAGroupPickerViewController alloc] initWithTitle:((button.tag == 1) ? @"Choose Host Group" : @"Invite Group(s)") selectedGroups:((button.tag == 1) ? self.activityHostGroup : self.activityInvitedGroups) allGroups:@[group1, group2, group3] canSelectMultipleGourps:(button.tag == 2)];
+    
+    groupPicker.view.tag = button.tag;
+    
+    groupPicker.delegate = self;
+    
+    self.definesPresentationContext = true;
+    groupPicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
+    groupPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    [self presentViewController:groupPicker animated:false completion:nil];
+    
+}
+
+- (void)inviteFriendsButtonPressed:(UIButton *)button {
+    
+    WAUser *user1 = [[WAUser alloc] initWithFirstName:@"Ben" lastName:@"Yang" userID:@"1" classYear:@"Freshman" major:@"Computer Science" image:nil];
+    WAUser *user2 = [[WAUser alloc] initWithFirstName:@"Alexis" lastName:@"Angel" userID:@"2" classYear:@"Freshman" major:@"Economics" image:nil];
+    WAUser *user3 = [[WAUser alloc] initWithFirstName:@"Mia" lastName:@"Carlson" userID:@"3" classYear:@"Freshman" major:@"Pre-med" image:nil];
+    
+    WAUserPickerViewController *userPicker = [[WAUserPickerViewController alloc] initWithTitle:@"Invite Friends" selectedUsers:self.activityInvitedFriends allUsers:@[user1, user2, user3]];
+    
+    userPicker.view.tag = button.tag;
+    
+    userPicker.delegate = self;
+    
+    self.definesPresentationContext = true;
+    userPicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
+    userPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    [self presentViewController:userPicker animated:false completion:nil];
+}
+
+- (void)guestsCanInviteOthersButtonPressed:(UIButton *)button {
+    
+}
+
+- (void)guestsCannotInviteOthersButtonPressed:(UIButton *)button {
+    
+}
+
+- (void)postButtonPressed:(UIButton *)button {
     
 }
 
@@ -314,16 +404,115 @@
         }
     }
     
-    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kTimeCellRow inSection:0]];
     [self setTimeTitle:self.activityStartTime label:cell.startTimeLabel];
     [self setTimeTitle:self.activityEndTime label:cell.endTimeLabel];
     
+}
+
+- (void)setTimeTitle:(NSDate *)date label:(UILabel *)label {
+    
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        
+        label.text = [dateFormatter stringFromDate:date];
+        
+        label.textColor = self.selectedColor;
+    }
 }
 
 #pragma mark - Group picker delegate
 
 - (void)groupPickerViewGroupSelected:(NSArray *)groups tag:(NSInteger)tag {
     
+    if (tag == 1) {
+        self.activityHostGroup = groups;
+        
+        WACreateActivityHostTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kHostCellRow inSection:0]];
+        [self setGroupsLabelTitle:self.activityHostGroup label:cell.hostGroupLabel onlyOne:true];
+    }
+    else if (tag == 2) {
+        self.activityInvitedGroups = groups;
+        
+        WACreateActivityInviteGroupsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kInviteGroupsCellRow inSection:0]];
+        [self setGroupsLabelTitle:self.activityInvitedGroups label:cell.groupsLabel onlyOne:false];
+    }
+}
+
+- (void)setGroupsLabelTitle:(NSArray *)groups label:(UILabel *)label onlyOne:(BOOL)onlyOne {
+    
+    NSString *groupsString = @"";
+    
+    if ([groups count] > 0) {
+        
+        int count = 0;
+        for (WAGroup *group in groups) {
+            
+            groupsString = [groupsString stringByAppendingString:group.shortName];
+            
+            if (count != [groups count]-1) {
+                groupsString = [groupsString stringByAppendingString:@", "];
+            }
+            
+            count++;
+        }
+        
+        label.textColor = self.selectedColor;
+    }
+    else {
+        if (onlyOne) {
+            groupsString = @"Group";
+        }
+        else {
+            groupsString = @"Group(s)";
+        }
+        
+        label.textColor = self.notSelectedColor;
+    }
+    
+    label.text = groupsString;
+}
+
+#pragma mark - User picker delegate
+
+- (void)userPickerViewUserSelected:(NSArray *)users tag:(NSInteger)tag {
+    
+    self.activityInvitedFriends = users;
+    
+    WACreateActivityInviteFriendsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kInviteFriendsCellRow inSection:0]];
+    [self setUsersLabel:self.activityInvitedFriends label:cell.friendsLabel];
+}
+
+- (void)setUsersLabel:(NSArray *)users label:(UILabel *)label {
+    
+    NSString *usersString = @"";
+    
+    if ([users count] > 0) {
+        
+        int count = 0;
+        for (WAUser *user in users) {
+            
+            usersString = [usersString stringByAppendingString:user.firstName];
+            
+            if (count != [users count]-1) {
+                usersString = [usersString stringByAppendingString:@", "];
+            }
+            
+            count++;
+        }
+        
+        label.textColor = self.selectedColor;
+    }
+    else {
+        
+        usersString = @"Friend(s)";
+        
+        label.textColor = self.notSelectedColor;
+    }
+    
+    label.text = usersString;
 }
 
 #pragma mark - Text field delegate
@@ -353,7 +542,6 @@
             textView.text = @"";
         }
     }
-    
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {

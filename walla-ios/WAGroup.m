@@ -16,16 +16,27 @@
     return self;
 }
 
-- (id)initWithName:(NSString *)name groupID:(NSString *)groupID color:(UIColor *)groupColor {
+- (id)initWithName:(NSString *)name shortName:(NSString *)shortName groupID:(NSString *)groupID color:(UIColor *)groupColor {
     self = [super init];
     
     if (self) {
         self.name = name;
+        self.shortName = shortName;
         self.groupID = groupID;
         self.groupColor = groupColor;
     }
     
     return self;
+}
+
+- (BOOL)isEqual:(WAGroup *)other {
+    if (other == self)
+        return true;
+    if (!other || ![other isKindOfClass:[self class]])
+        return false;
+    if (self.groupID != other.groupID)
+        return false;
+    return true;
 }
 
 @end

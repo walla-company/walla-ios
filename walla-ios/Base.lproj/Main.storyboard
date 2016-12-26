@@ -67,7 +67,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEF-SN-aE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="262"/>
+            <point key="canvasLocation" x="2053" y="289"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="51Z-7X-nlO">
@@ -89,7 +89,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vrq-2b-zS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2054" y="963"/>
+            <point key="canvasLocation" x="2053" y="1051"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="K8n-B3-UPJ">
@@ -106,7 +106,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="i5k-vJ-Llt">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="i5k-vJ-Llt">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -123,7 +123,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXg-vU-9Bw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2825" y="963"/>
+            <point key="canvasLocation" x="2824" y="1051"/>
         </scene>
         <!--Activities-->
         <scene sceneID="lka-od-JWi">
@@ -159,7 +159,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filterCell" id="SCJ-63-jKM" customClass="WAFilterCollectionViewCell">
-                                        <rect key="frame" x="15" y="8" width="50" height="60"/>
+                                        <rect key="frame" x="15" y="7.5" width="50" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
@@ -338,7 +338,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT3-RB-JAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1114" y="963"/>
+            <point key="canvasLocation" x="1113" y="1051"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="a1s-d9-ub8">
@@ -361,7 +361,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhE-W2-Ioq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="262"/>
+            <point key="canvasLocation" x="1114" y="289"/>
         </scene>
         <!--Discover-->
         <scene sceneID="1YD-mk-dtS">
