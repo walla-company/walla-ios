@@ -123,11 +123,52 @@
                     <connections>
                         <segue destination="aRx-Jz-4pS" kind="show" identifier="openMyInterests" id="9iK-Wn-WIJ"/>
                         <segue destination="1V4-6e-dEZ" kind="show" identifier="openMyGroups" id="sts-Bl-iHY"/>
+                        <segue destination="ick-ff-rdm" kind="show" identifier="openMyFriends" id="gJS-Vt-BWd"/>
+                        <segue destination="6gZ-kw-0Na" kind="show" identifier="openEditProfile" id="Tes-VW-5tX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vrq-2b-zS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2053" y="1051"/>
+        </scene>
+        <!--My Profile Friends Table View Controller-->
+        <scene sceneID="0yp-tm-LXW">
+            <objects>
+                <tableViewController id="ick-ff-rdm" customClass="WAMyProfileFriendsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FLJ-7a-fyC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="ick-ff-rdm" id="DZd-k5-9Uu"/>
+                            <outlet property="delegate" destination="ick-ff-rdm" id="Idq-1T-SHQ"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="jxy-vr-bZk" kind="show" identifier="openViewUser" id="YAk-6U-ikM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TK2-nb-urO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2852" y="1752"/>
+        </scene>
+        <!--Profile Edit Profile Table View Controller-->
+        <scene sceneID="Vt8-rA-gMj">
+            <objects>
+                <tableViewController id="6gZ-kw-0Na" customClass="WAProfileEditProfileTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="09A-aJ-1wa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="6gZ-kw-0Na" id="ufU-rO-V2x"/>
+                            <outlet property="delegate" destination="6gZ-kw-0Na" id="lmS-qN-iEZ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-lw-d8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2852" y="1050"/>
         </scene>
         <!--My Profile Groups Table View Controller-->
         <scene sceneID="5Nr-M5-PbV">
@@ -148,7 +189,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rPY-03-fA0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2914" y="768"/>
+            <point key="canvasLocation" x="2852" y="2462"/>
         </scene>
         <!--My Profile Interests Collection View Controller-->
         <scene sceneID="K8n-B3-UPJ">
@@ -182,7 +223,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXg-vU-9Bw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2911" y="1468"/>
+            <point key="canvasLocation" x="2849" y="3161"/>
         </scene>
         <!--Activities-->
         <scene sceneID="lka-od-JWi">
@@ -326,7 +367,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RxZ-e1-pES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2964" y="-1508.095952023988"/>
+            <point key="canvasLocation" x="4150" y="-1201"/>
         </scene>
         <!--View Group Table View Controller-->
         <scene sceneID="8M2-w0-PJI">
@@ -344,7 +385,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpI-7U-T4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2964" y="-800"/>
+            <point key="canvasLocation" x="4151" y="-457"/>
         </scene>
         <!--View User Table View Controller-->
         <scene sceneID="8nT-O3-bCc">
@@ -362,7 +403,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xy-kp-l5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3721" y="-457"/>
+            <point key="canvasLocation" x="4151" y="288"/>
         </scene>
         <!--Create Activity-->
         <scene sceneID="Egb-bw-Jzr">
@@ -381,7 +422,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmS-EY-VlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3798" y="-2216"/>
+            <point key="canvasLocation" x="4150" y="-1949"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uc0-Nt-q4W">
@@ -402,7 +443,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61T-bu-Fpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2849" y="-2216"/>
+            <point key="canvasLocation" x="3241" y="-1949"/>
         </scene>
         <!--Activities-->
         <scene sceneID="27b-kk-0R9">
@@ -507,6 +548,7 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MDM-Il-pRj"/>
+        <segue reference="Uew-Um-iw4"/>
+        <segue reference="YAk-6U-ikM"/>
     </inferredMetricsTieBreakers>
 </document>

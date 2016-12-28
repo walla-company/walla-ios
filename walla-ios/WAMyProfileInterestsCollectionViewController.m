@@ -55,12 +55,16 @@
     
     WAInterestCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"interestCell" forIndexPath:indexPath];
     
-    if ([self.selectedInterestsArray containsObject:self.interestsArray[indexPath.row][0]]) {
+    if ([self.selectedInterestsArray containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
         [cell.shadowView changeFillColor:[WAValues selectedCellColor]];
     }
     else {
         [cell.shadowView changeFillColor:[UIColor whiteColor]];
     }
+    
+    cell.interestLabel.text = [self.interestsArray objectAtIndex:indexPath.row][0];
+    
+    cell.interestImageView.image = [UIImage imageNamed:[self.interestsArray objectAtIndex:indexPath.row][1]];
     
     return cell;
 }
@@ -72,11 +76,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([self.selectedInterestsArray containsObject:self.interestsArray[indexPath.row][0]]) {
-        [self.selectedInterestsArray removeObject:self.interestsArray[indexPath.row][0]];
+    if ([self.selectedInterestsArray containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+        [self.selectedInterestsArray removeObject:[NSNumber numberWithInteger:indexPath.row]];
     }
     else {
-        [self.selectedInterestsArray addObject:self.interestsArray[indexPath.row][0]];
+        [self.selectedInterestsArray addObject:[NSNumber numberWithInteger:indexPath.row]];
     }
     
     [collectionView reloadData];

@@ -1,32 +1,32 @@
 //
-//  WAMyProfileGroupsTableViewController.m
+//  WAMyProfileFriendsTableViewController.m
 //  walla-ios
 //
 //  Created by Joseph DeChicchis on 12/27/16.
 //  Copyright © 2016 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAMyProfileGroupsTableViewController.h"
+#import "WAMyProfileFriendsTableViewController.h"
 
 #import "WAValues.h"
-#import "WAGroup.h"
+#import "WAUser.h"
 
-@interface WAMyProfileGroupsTableViewController ()
+@interface WAMyProfileFriendsTableViewController ()
 
 @end
 
-@implementation WAMyProfileGroupsTableViewController
+@implementation WAMyProfileFriendsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"My Groups";
+    self.title = @"My Friends";
     
     // Set up table view
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"WAGroupShadowTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAUserShadowTableViewCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -37,15 +37,14 @@
     
     self.tableView.showsVerticalScrollIndicator = false;
     
-    // Initialize values
+    // Initialize default values
     
-    WAGroup *group1 = [[WAGroup alloc] initWithName:@"Something Borrowed Something Blue" shortName:@"SBSB" groupID:@"1" color:[UIColor orangeColor]];
-    WAGroup *group2 = [[WAGroup alloc] initWithName:@"Mechanical Engineers" shortName:@"MechEng" groupID:@"2" color:[UIColor purpleColor]];
-    WAGroup *group3 = [[WAGroup alloc] initWithName:@"Residential Assisstants" shortName:@"RA" groupID:@"3" color:[UIColor greenColor]];
-    WAGroup *group4 = [[WAGroup alloc] initWithName:@"Group 1" shortName:@"G1" groupID:@"4" color:[UIColor magentaColor]];
-    WAGroup *group5 = [[WAGroup alloc] initWithName:@"Group 2" shortName:@"G2" groupID:@"3" color:[UIColor blueColor]];
+    WAUser *user1 = [[WAUser alloc] initWithFirstName:@"Ben" lastName:@"Yang" userID:@"1" classYear:@"Freshman" major:@"Computer Science" image:nil];
+    WAUser *user2 = [[WAUser alloc] initWithFirstName:@"Alexis" lastName:@"Angel" userID:@"2" classYear:@"Freshman" major:@"Economics" image:nil];
+    WAUser *user3 = [[WAUser alloc] initWithFirstName:@"Mia" lastName:@"Carlson" userID:@"3" classYear:@"Freshman" major:@"Pre-med" image:nil];
     
-    self.groups = @[group1, group2, group3, group4, group5];
+    self.users = @[user1, user2, user3];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,31 +61,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.groups count];
+    return [self.users count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    WAGroupShadowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
+    WAUserShadowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    WAGroup *group = [self.groups objectAtIndex:indexPath.row];
+    WAUser *user = [self.users objectAtIndex:indexPath.row];
     
-    cell.groupNameLabel.text = group.name;
-    cell.groupTagViewLabel.text = group.shortName;
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     
-    cell.groupTagView.backgroundColor = group.groupColor;
+    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.classYear, user.major];
     
-    cell.groupTagView.layer.cornerRadius = 8.0;
+    cell.profileImageView.image = user.profileImage;
     
     return cell;
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"openViewGroup" sender:self];
+    [self performSegueWithIdentifier:@"openViewUser" sender:self];
 }
 
 /*

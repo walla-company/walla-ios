@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "WAValues.h"
-
 #import "WAGroupShadowTableViewCell.h"
 
 @interface WAMyProfileGroupsTableViewController : UITableViewController

@@ -26,10 +26,10 @@
 
 + (NSArray *)interestsArray {
     
-    return @[@[@"Movies"], @[@"Free Food"], @[@"Academic"],
-             @[@"Study"], @[@"Sports"], @[@"Rides"],
-             @[@"Exhibition"], @[@"Music"], @[@"Games"],
-             @[@"Dance"], @[@"Socialize"], @[@"Volunteer"]];
+    return @[@[@"Movies", @"InterestIcon_Movies"], @[@"Free Food", @"InterestIcon_FreeFood"], @[@"Academic", @"InterestIcon_Academic"],
+             @[@"Study", @"InterestIcon_Study"], @[@"Sports", @"InterestIcon_Sports"], @[@"Rides", @"InterestIcon_Rides"],
+             @[@"Exhibition", @"InterestIcon_Exhibition"], @[@"Music", @"InterestIcon_Music"], @[@"Games", @"InterestIcon_Games"],
+             @[@"Dance", @"InterestIcon_Dance"], @[@"Socialize", @"InterestIcon_Socialize"], @[@"Volunteer", @"InterestIcon_Volunteer"]];
 }
 
 @end

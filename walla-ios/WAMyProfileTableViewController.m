@@ -91,12 +91,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (indexPath.row) {
+            
+        case 1:
+            [self performSegueWithIdentifier:@"openEditProfile" sender:self];
+            break;
+            
+        case 2:
+            [self performSegueWithIdentifier:@"openMyFriends" sender:self];
+            break;
+            
         case 3:
             [self performSegueWithIdentifier:@"openMyGroups" sender:self];
             break;
             
         case 4:
             [self performSegueWithIdentifier:@"openMyInterests" sender:self];
+            break;
+            
+        case 5:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.wallasquad.com/"] options:@{} completionHandler:nil];
             break;
             
         default:

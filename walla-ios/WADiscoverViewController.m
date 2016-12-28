@@ -52,6 +52,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (!(tableView == self.discoverTableView)) return 0;
+    
     if (section == 0) return 1;
     
     return 3;

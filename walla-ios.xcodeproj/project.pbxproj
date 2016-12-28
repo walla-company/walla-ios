@@ -94,6 +94,8 @@
 		EBCB57011E134671000530F6 /* WAGroupShadowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56FF1E134671000530F6 /* WAGroupShadowTableViewCell.xib */; };
 		EBCB57061E1349D6000530F6 /* WAUserShadowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57041E1349D6000530F6 /* WAUserShadowTableViewCell.m */; };
 		EBCB57071E1349D6000530F6 /* WAUserShadowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57051E1349D6000530F6 /* WAUserShadowTableViewCell.xib */; };
+		EBCB570B1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB570A1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m */; };
+		EBCB570E1E136E57000530F6 /* WAProfileEditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */; };
 		EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */; };
 		EBDA5C321E05B17B00B61AED /* WAMyProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C311E05B17B00B61AED /* WAMyProfileTableViewController.m */; };
 		EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C351E05B31200B61AED /* WACreateActivityTableViewController.m */; };
@@ -271,6 +273,10 @@
 		EBCB57031E1349D6000530F6 /* WAUserShadowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUserShadowTableViewCell.h; sourceTree = "<group>"; };
 		EBCB57041E1349D6000530F6 /* WAUserShadowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUserShadowTableViewCell.m; sourceTree = "<group>"; };
 		EBCB57051E1349D6000530F6 /* WAUserShadowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAUserShadowTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB57091E136A55000530F6 /* WAMyProfileFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileFriendsTableViewController.h; sourceTree = "<group>"; };
+		EBCB570A1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMyProfileFriendsTableViewController.m; sourceTree = "<group>"; };
+		EBCB570C1E136E57000530F6 /* WAProfileEditProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileTableViewController.h; sourceTree = "<group>"; };
+		EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileTableViewController.m; sourceTree = "<group>"; };
 		EBDA5C2D1E05B16D00B61AED /* WANotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANotificationsTableViewController.h; sourceTree = "<group>"; };
 		EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WANotificationsTableViewController.m; sourceTree = "<group>"; };
 		EBDA5C301E05B17B00B61AED /* WAMyProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileTableViewController.h; sourceTree = "<group>"; };
@@ -970,6 +976,13 @@
 			name = WAUserShadowTableViewCell;
 			sourceTree = "<group>";
 		};
+		EBCB570F1E136F55000530F6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		EBDA5C271E05B11C00B61AED /* WADiscoverTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,7 +1007,7 @@
 			children = (
 				EBDA5C301E05B17B00B61AED /* WAMyProfileTableViewController.h */,
 				EBDA5C311E05B17B00B61AED /* WAMyProfileTableViewController.m */,
-				EBDA5C551E05CCCE00B61AED /* WAProfileEditTableViewController */,
+				EBDA5C551E05CCCE00B61AED /* WAProfileEditProfileTableViewController */,
 				EBDA5C541E05CCC300B61AED /* WAMyProfileFriendsTableViewController */,
 				EBDA5C531E05CCB100B61AED /* WAMyProfileGroupsTableViewController */,
 				EBDA5C521E05CCA900B61AED /* WAMyInterestsCollectionViewController */,
@@ -1061,15 +1074,20 @@
 		EBDA5C541E05CCC300B61AED /* WAMyProfileFriendsTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EBCB57091E136A55000530F6 /* WAMyProfileFriendsTableViewController.h */,
+				EBCB570A1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m */,
 			);
 			name = WAMyProfileFriendsTableViewController;
 			sourceTree = "<group>";
 		};
-		EBDA5C551E05CCCE00B61AED /* WAProfileEditTableViewController */ = {
+		EBDA5C551E05CCCE00B61AED /* WAProfileEditProfileTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EBCB570C1E136E57000530F6 /* WAProfileEditProfileTableViewController.h */,
+				EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */,
+				EBCB570F1E136F55000530F6 /* Cells */,
 			);
-			name = WAProfileEditTableViewController;
+			name = WAProfileEditProfileTableViewController;
 			sourceTree = "<group>";
 		};
 		EBDA5C671E071AD100B61AED /* Frameworks */ = {
@@ -1281,6 +1299,8 @@
 				EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */,
 				EBCB56691E10F366000530F6 /* WAViewActivityInfoTableViewCell.m in Sources */,
 				EBCB56741E10F3A2000530F6 /* WAViewActivityAttendeesTableViewCell.m in Sources */,
+				EBCB570B1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m in Sources */,
+				EBCB570E1E136E57000530F6 /* WAProfileEditProfileTableViewController.m in Sources */,
 				EB4EA7981E0344A5000F4834 /* WAActivityTableViewCell.m in Sources */,
 				EB033A211E0D927300621C35 /* WACreateActivityHostTableViewCell.m in Sources */,
 				EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */,
