@@ -68,4 +68,11 @@
     [roundedPath fill];
 }
 
+- (void)changeFillColor:(UIColor *)color {
+    
+    self.fillColor = color;
+    
+    [self setNeedsDisplay];
+}
+
 @end

@@ -147,6 +147,7 @@
     
     NSLog(@"Tab pressed: %@", groupID);
     
+    [self performSegueWithIdentifier:@"openViewGroup" sender:self];
 }
 
 /*

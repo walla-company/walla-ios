@@ -34,6 +34,9 @@
     
     self.activitiesTableView.showsVerticalScrollIndicator = false;
     
+    self.activitiesTableView.rowHeight = UITableViewAutomaticDimension;
+    self.activitiesTableView.estimatedRowHeight = 170.0;
+    
     // Set up filters colleciton view
     
     self.filtersCollectionView.delegate = self;
@@ -77,6 +80,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WAActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activityCell" forIndexPath:indexPath];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
     [cell.headerView setTabs:@[@[@"Interest", [UIColor whiteColor], self.tabColorLightGray, @false], @[@"Interest", self.tabColorOffwhite, self.tabColorLightGray, @false], @[@"Group", self.tabColorOrange, [UIColor whiteColor], @true]]];
@@ -85,14 +89,7 @@
     
     cell.headerView.groupID = @"GROUPID";
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 170.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,6 +106,7 @@
     
     NSLog(@"Tab pressed: %@", groupID);
     
+    [self performSegueWithIdentifier:@"openViewGroup" sender:self];
 }
 
 #pragma mark - Collections view

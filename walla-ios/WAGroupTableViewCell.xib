@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osL-R6-OGb">
-                        <rect key="frame" x="15" y="11" width="70" height="20"/>
+                        <rect key="frame" x="15" y="12" width="70" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SC9-Ga-fZm">
                                 <rect key="frame" x="5" y="0.0" width="60" height="20"/>
@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.67887931030000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SC9-Ga-fZm" secondAttribute="trailing" constant="5" id="QRm-G6-ye9"/>
                             <constraint firstAttribute="bottom" secondItem="SC9-Ga-fZm" secondAttribute="bottom" id="fJ0-a4-AQ8"/>

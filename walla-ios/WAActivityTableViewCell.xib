@@ -121,6 +121,7 @@ to 8:00</string>
                             <constraint firstAttribute="bottom" secondItem="aKA-zA-3ps" secondAttribute="bottom" constant="10" id="3k8-jX-VJ1"/>
                             <constraint firstItem="VIx-3r-GkG" firstAttribute="leading" secondItem="CTF-C2-clq" secondAttribute="leading" constant="15" id="80e-9Y-fAV"/>
                             <constraint firstItem="ZUf-hz-vZK" firstAttribute="leading" secondItem="2Bq-Vl-UmC" secondAttribute="trailing" constant="-5" id="9bO-sE-VC0"/>
+                            <constraint firstAttribute="height" constant="120" id="BSo-C6-N38"/>
                             <constraint firstItem="2Bq-Vl-UmC" firstAttribute="top" secondItem="qHk-aF-5hI" secondAttribute="bottom" constant="8" id="CUO-OZ-3Jj"/>
                             <constraint firstItem="2Bq-Vl-UmC" firstAttribute="leading" secondItem="OGX-d1-6Sw" secondAttribute="trailing" constant="15" id="ECU-H0-erJ"/>
                             <constraint firstItem="VIx-3r-GkG" firstAttribute="top" secondItem="CTF-C2-clq" secondAttribute="top" constant="8" id="EMj-x8-BRE"/>

@@ -28,4 +28,6 @@ IB_DESIGNABLE
 
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
+- (void)changeFillColor:(UIColor *)color;
+
 @end
