@@ -38,20 +38,20 @@ static CGFloat VIEW_WIDTH = 320.0;
     
     UIView *separaterView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, VIEW_WIDTH, 0.5)];
     separaterView.backgroundColor = [UIColor lightGrayColor];
-    /*
-    self.usersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, VIEW_WIDTH, PRIMARY_VIEW_HEIGHT-60) style:UITableViewStylePlain];
     
-    self.usersTableView.showsVerticalScrollIndicator = false;
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    [layout setSectionInset:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
     
-    self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.interestsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 50, VIEW_WIDTH, PRIMARY_VIEW_HEIGHT-60)  collectionViewLayout:layout];
     
-    [self.usersTableView registerNib:[UINib nibWithNibName:@"WAUserTableViewCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
+    self.interestsCollectionView.showsVerticalScrollIndicator = false;
     
-    self.usersTableView.rowHeight = UITableViewAutomaticDimension;
-    self.usersTableView.estimatedRowHeight = 44.0;
+    [self.interestsCollectionView registerNib:[UINib nibWithNibName:@"WAInterestCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"interestCell"];
     
-    self.usersTableView.delegate = self;
-    self.usersTableView.dataSource = self;*/
+    self.interestsCollectionView.backgroundColor = [UIColor whiteColor];
+    
+    self.interestsCollectionView.delegate = self;
+    self.interestsCollectionView.dataSource = self;
     
     self.doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.doneButton.frame = CGRectMake(0.0, 10.0, VIEW_WIDTH, 20.0);
@@ -64,7 +64,7 @@ static CGFloat VIEW_WIDTH = 320.0;
     
     [self.primaryView addSubview:self.titleLabel];
     [self.primaryView addSubview:separaterView];
-    //[self.primaryView addSubview:self.usersTableView];
+    [self.primaryView addSubview:self.interestsCollectionView];
     [self.primaryView addSubview:self.doneButton];
     
     [self.secondaryView addSubview:self.doneButton];
@@ -117,6 +117,60 @@ static CGFloat VIEW_WIDTH = 320.0;
                      completion:^(BOOL finished){
                          completionBlock();
                      }];
+}
+
+#pragma mark - Collection view
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return [self.allInterests count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    WAInterestCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"interestCell" forIndexPath:indexPath];
+    
+    if ([self.selectedInterests containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+        [cell.shadowView changeFillColor:[WAValues selectedCellColor]];
+    }
+    else {
+        [cell.shadowView changeFillColor:[UIColor whiteColor]];
+    }
+    
+    cell.interestLabel.text = [self.allInterests objectAtIndex:indexPath.row][0];
+    
+    cell.interestImageView.image = [UIImage imageNamed:[self.allInterests objectAtIndex:indexPath.row][1]];
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return CGSizeMake((self.frame.size.width - 40.0)/3.0, ((self.frame.size.width - 40.0)/3.0)*1.1);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.selectedInterests containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+        [self.selectedInterests removeObject:[NSNumber numberWithInteger:indexPath.row]];
+    }
+    else {
+        [self.selectedInterests addObject:[NSNumber numberWithInteger:indexPath.row]];
+    }
+    
+    if ([self.selectedInterests count] > 2) {
+        [self.selectedInterests removeObjectAtIndex:0];
+    }
+    
+    [collectionView reloadData];
+    
+    [self.delegate interestsChanged:self.selectedInterests];
 }
 
 # pragma mark - Delgate

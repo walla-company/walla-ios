@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@import GoogleMaps;
+@import GooglePlaces;
+
+#import <MapKit/MapKit.h>
+
 #import "WACreateActivityAudienceTableViewCell.h"
 #import "WACreateActivityTitleTableViewCell.h"
 #import "WACreateActivityTimeTableViewCell.h"
@@ -28,15 +33,17 @@
 #import "WAGroup.h"
 #import "WAUser.h"
 
-@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, WAInterestPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, WAInterestPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
 
+@property CLLocation *userLocation;
+@property BOOL firstUserLocationUpdate;
 
 // Required
 @property BOOL activityPublic;
 @property NSString *activityTitle;
 @property NSDate *activityStartTime;
 @property NSDate *activityEndTime;
-@property NSString *activityLocationString;
+@property GMSPlace *activityLocation;
 @property NSArray *activityInterests;
 @property BOOL guestsCanInviteOthers;
 

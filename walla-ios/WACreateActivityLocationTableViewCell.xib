@@ -37,34 +37,42 @@
                                         <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-uI-5RZ">
+                                        <rect key="frame" x="10" y="0.0" width="240" height="30"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="sg0-pL-du4" firstAttribute="top" secondItem="Bzv-L3-lVz" secondAttribute="top" id="6Q0-46-BaW"/>
                                     <constraint firstAttribute="height" constant="30" id="Bss-Hi-Df5"/>
                                     <constraint firstAttribute="bottom" secondItem="sg0-pL-du4" secondAttribute="bottom" id="J7x-zl-dKF"/>
+                                    <constraint firstItem="Udr-uI-5RZ" firstAttribute="top" secondItem="Bzv-L3-lVz" secondAttribute="top" id="JEr-nV-phI"/>
+                                    <constraint firstAttribute="bottom" secondItem="Udr-uI-5RZ" secondAttribute="bottom" id="Tt3-2i-J2d"/>
                                     <constraint firstItem="sg0-pL-du4" firstAttribute="leading" secondItem="Bzv-L3-lVz" secondAttribute="leading" constant="10" id="jRI-D1-0Vt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Udr-uI-5RZ" secondAttribute="trailing" constant="10" id="jgV-Mx-o0Y"/>
                                     <constraint firstAttribute="trailing" secondItem="sg0-pL-du4" secondAttribute="trailing" constant="10" id="x6k-aK-seD"/>
+                                    <constraint firstItem="Udr-uI-5RZ" firstAttribute="leading" secondItem="Bzv-L3-lVz" secondAttribute="leading" constant="10" id="yvU-je-BSg"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9ok-KQ-aia">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjW-68-OhK" customClass="GMSMapView">
                                 <rect key="frame" x="15" y="78" width="260" height="260"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="9ok-KQ-aia" secondAttribute="height" multiplier="1:1" id="Q82-Qn-lId"/>
+                                    <constraint firstAttribute="width" secondItem="SjW-68-OhK" secondAttribute="height" multiplier="1:1" id="VRi-1T-yAm"/>
                                 </constraints>
-                            </mapView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="9ok-KQ-aia" firstAttribute="leading" secondItem="fS5-TW-ea4" secondAttribute="leading" constant="15" id="6b0-Gb-V2G"/>
                             <constraint firstAttribute="trailing" secondItem="Bzv-L3-lVz" secondAttribute="trailing" constant="15" id="8YB-0l-Puf"/>
                             <constraint firstItem="Bzv-L3-lVz" firstAttribute="leading" secondItem="fS5-TW-ea4" secondAttribute="leading" constant="15" id="G12-D7-bnt"/>
-                            <constraint firstAttribute="bottom" secondItem="9ok-KQ-aia" secondAttribute="bottom" constant="15" id="HMG-db-IFn"/>
                             <constraint firstItem="Bzv-L3-lVz" firstAttribute="top" secondItem="ZrS-34-O4N" secondAttribute="bottom" constant="8" id="OLj-20-llk"/>
-                            <constraint firstItem="9ok-KQ-aia" firstAttribute="width" secondItem="9ok-KQ-aia" secondAttribute="height" multiplier="1:1" id="RU6-qI-zOi"/>
-                            <constraint firstAttribute="trailing" secondItem="9ok-KQ-aia" secondAttribute="trailing" constant="15" id="RkE-hb-U42"/>
-                            <constraint firstItem="9ok-KQ-aia" firstAttribute="top" secondItem="Bzv-L3-lVz" secondAttribute="bottom" constant="8" id="VgZ-Ol-H8d"/>
                             <constraint firstItem="ZrS-34-O4N" firstAttribute="leading" secondItem="fS5-TW-ea4" secondAttribute="leading" constant="15" id="aq0-uu-uZq"/>
+                            <constraint firstItem="SjW-68-OhK" firstAttribute="leading" secondItem="fS5-TW-ea4" secondAttribute="leading" constant="15" id="bDu-Ub-OKE"/>
+                            <constraint firstAttribute="bottom" secondItem="SjW-68-OhK" secondAttribute="bottom" constant="15" id="bLs-pb-cxe"/>
+                            <constraint firstItem="SjW-68-OhK" firstAttribute="centerX" secondItem="fS5-TW-ea4" secondAttribute="centerX" id="fvo-zQ-Gsf"/>
+                            <constraint firstItem="SjW-68-OhK" firstAttribute="top" secondItem="Bzv-L3-lVz" secondAttribute="bottom" constant="8" id="i08-LI-PfN"/>
+                            <constraint firstAttribute="trailing" secondItem="SjW-68-OhK" secondAttribute="trailing" constant="15" id="sQW-wc-AL9"/>
                             <constraint firstItem="ZrS-34-O4N" firstAttribute="top" secondItem="fS5-TW-ea4" secondAttribute="top" constant="15" id="wul-n6-Kr0"/>
                         </constraints>
                     </view>
@@ -77,8 +85,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="locationButton" destination="Udr-uI-5RZ" id="5J7-uk-d1b"/>
                 <outlet property="locationLabel" destination="sg0-pL-du4" id="DwC-A9-TRc"/>
-                <outlet property="locationMapView" destination="9ok-KQ-aia" id="02m-wM-iHd"/>
+                <outlet property="locationMap" destination="SjW-68-OhK" id="0A9-A7-LS7"/>
             </connections>
             <point key="canvasLocation" x="34" y="215"/>
         </tableViewCell>

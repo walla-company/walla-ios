@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+@import GoogleMaps;
+@import GooglePlaces;
+
 @interface AppDelegate ()
 
 @end
@@ -19,6 +22,9 @@
     // Override point for customization after application launch.
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    [GMSServices provideAPIKey:@"AIzaSyD_fZgsJ97lWBCg-IaljG8xU9fU8ywJ0yk"];
+    [GMSPlacesClient provideAPIKey:@"AIzaSyD_fZgsJ97lWBCg-IaljG8xU9fU8ywJ0yk"];
     
     return YES;
 }

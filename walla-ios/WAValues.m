@@ -12,6 +12,11 @@
 
 #pragma mark - Colors
 
++ (UIColor *)wallaOrangeColor {
+    
+    return [[UIColor alloc] initWithRed:255.0/255.0 green:162.0/255.0 blue:71.0/255.0 alpha:1.0];
+}
+
 + (UIColor *)defaultTableViewBackgroundColor {
     
     return [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];

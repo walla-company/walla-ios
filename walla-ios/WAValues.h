@@ -14,6 +14,8 @@
 
 // Colors
 
++ (UIColor *)wallaOrangeColor;
+
 + (UIColor *)defaultTableViewBackgroundColor;
 
 + (UIColor *)selectedCellColor;

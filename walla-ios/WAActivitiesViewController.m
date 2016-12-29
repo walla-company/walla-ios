@@ -139,15 +139,16 @@
     cell.circleView.layer.cornerRadius = 20.0;
     
     if (indexPath.row == self.currentFilterIndex) {
-        cell.circleView.backgroundColor = [[UIColor alloc] initWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
+        cell.circleView.backgroundColor = [WAValues wallaOrangeColor];
     }
     else {
-        cell.circleView.backgroundColor = [[UIColor alloc] initWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
+        cell.circleView.backgroundColor = [[UIColor alloc] initWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     }
     
     if (indexPath.row == 0) {
         cell.filterLabel.text = @"All";
-        cell.filterImageView.image = [[UIImage alloc] init];
+        cell.filterImageView.image = [[UIImage imageNamed:@"InterestIcon_All"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.filterImageView setTintColor:[UIColor whiteColor]];
     }
     else {
         cell.filterLabel.text = self.interestsArray[indexPath.row-1][0];

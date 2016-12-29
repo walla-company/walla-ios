@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WAInterestCollectionViewCell.h"
+
 typedef void(^animationCompletion)(void);
 
 @protocol WAInterestPickerViewDelegate <NSObject>
@@ -18,7 +20,7 @@ typedef void(^animationCompletion)(void);
 
 @end
 
-@interface WAInterestPickerView : UIView
+@interface WAInterestPickerView : UIView <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property UILabel *titleLabel;
 

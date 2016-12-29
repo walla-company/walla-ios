@@ -10,10 +10,14 @@
 
 #import <MapKit/MapKit.h>
 
+@import GoogleMaps;
+
 @interface WACreateActivityLocationTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet GMSMapView *locationMap;
 
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
-@property (strong, nonatomic) IBOutlet MKMapView *locationMapView;
+@property (strong, nonatomic) IBOutlet UIButton *locationButton;
 
 @end

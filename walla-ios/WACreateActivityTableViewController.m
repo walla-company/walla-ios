@@ -57,13 +57,14 @@
     self.notSelectedColor = [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
     self.selectedColor = [[UIColor alloc] initWithRed:143.0/255.0 green:142.0/255.0 blue:148.0/255.0 alpha:1.0];
     
+    self.firstUserLocationUpdate = true;
+    
     // Required
     
     self.activityPublic = true;
     self.activityTitle = @"";
     self.activityStartTime = nil;
     self.activityEndTime = nil;
-    self.activityLocationString = @"";
     self.activityInterests = [[NSArray alloc] init];
     self.guestsCanInviteOthers = true;
     
@@ -181,9 +182,38 @@
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
-        cell.locationMapView.userInteractionEnabled = false;
+        cell.locationMap.userInteractionEnabled = false;
+        cell.locationMap.layer.cornerRadius = 8.0;
+        cell.locationMap.myLocationEnabled = true;
         
-        cell.locationMapView.layer.cornerRadius = 8.0;
+        [cell.locationMap addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context:nil];
+        
+        [cell.locationButton addTarget:self action:@selector(searchLocationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (self.activityLocation) {
+            cell.locationLabel.text = self.activityLocation.name;
+            cell.locationLabel.textColor = [WAValues selectedTextColor];
+            
+            GMSMarker *marker = [GMSMarker markerWithPosition:self.activityLocation.coordinate];
+            marker.title = self.activityLocation.name;
+            marker.map = cell.locationMap;
+            
+            GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.activityLocation.coordinate zoom:16];
+            [cell.locationMap setCamera:camera];
+        }
+        else {
+            cell.locationLabel.text = @"Location";
+            cell.locationLabel.textColor = [WAValues notSelectedTextColor];
+            
+            if (self.userLocation) {
+                GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.userLocation.coordinate zoom:16];
+                [cell.locationMap setCamera:camera];
+            }
+            else {
+                GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:39.8282 longitude:-98.5795 zoom:2.5];
+                [cell.locationMap setCamera:camera];
+            }
+        }
         
         return cell;
     }
@@ -195,6 +225,8 @@
         cell.backgroundColor = [UIColor clearColor];
         
         [cell.interestsButton addTarget:self action:@selector(chooseInterestsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self setInterestsLabel:self.activityInterests label:cell.interestsLabel];
         
         return cell;
     }
@@ -351,6 +383,15 @@
     [self presentViewController:datePicker animated:false completion:nil];
 }
 
+- (void)searchLocationButtonPressed:(UIButton *)button {
+    
+    GMSAutocompleteViewController *autocompleteView = [[GMSAutocompleteViewController alloc] init];
+    autocompleteView.delegate = self;
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    autocompleteView.autocompleteFilter = filter;
+    [self presentViewController:autocompleteView animated:YES completion:nil];
+}
+
 - (void)chooseInterestsButtonPressed:(UIButton *)button {
     
     WAInterestPickerViewController *interestsPicker = [[WAInterestPickerViewController alloc] initWithTitle:@"Choose Interests" selectedInterests:self.activityInterests maxInterests:2];
@@ -454,6 +495,33 @@
     }
 }
 
+#pragma mark - Places autocomplete view delegate
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didAutocompleteWithPlace:(GMSPlace *)place {
+    
+    self.activityLocation = place;
+    
+    NSLog(@"Place name %@", place.name);
+    NSLog(@"Place address %@", place.formattedAddress);
+    NSLog(@"Place coordinates %f, %f", place.coordinate.latitude, place.coordinate.longitude);
+    
+    [self.tableView reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didFailAutocompleteWithError:(NSError *)error {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Group picker delegate
 
 - (void)groupPickerViewGroupSelected:(NSArray *)groups tag:(NSInteger)tag {
@@ -551,6 +619,9 @@
 - (void)intersPickerViewUserSelected:(NSArray *)interests tag:(NSInteger)tag {
     
     self.activityInterests = interests;
+    
+    WACreateActivityInterestsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kInterestsCellRow inSection:0]];
+    [self setInterestsLabel:self.activityInterests label:cell.interestsLabel];
 }
 
 - (void)setInterestsLabel:(NSArray *)interests label:(UILabel *)label {
@@ -628,6 +699,19 @@
     
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
+}
+
+#pragma mark - KVO updates
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if (self.firstUserLocationUpdate) {
+        self.firstUserLocationUpdate = false;
+        
+        self.userLocation = [change objectForKey:NSKeyValueChangeNewKey];
+        
+        [self.tableView reloadData];
+    }
 }
 
 @end

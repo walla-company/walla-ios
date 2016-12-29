@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0D43A5A712F6EC8AA8F25D7 /* libPods-walla-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */; };
 		EB033A0A1E0D91E600621C35 /* WACreateActivityTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB033A081E0D91E600621C35 /* WACreateActivityTitleTableViewCell.m */; };
 		EB033A0B1E0D91E600621C35 /* WACreateActivityTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB033A091E0D91E600621C35 /* WACreateActivityTitleTableViewCell.xib */; };
 		EB033A121E0D920900621C35 /* WACreateActivityTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB033A101E0D920900621C35 /* WACreateActivityTimeTableViewCell.m */; };
@@ -110,6 +111,7 @@
 		EBCB572D1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB572B1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib */; };
 		EBCB57381E14741F000530F6 /* WAInterestPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57371E14741F000530F6 /* WAInterestPickerViewController.m */; };
 		EBCB573B1E147432000530F6 /* WAInterestPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB573A1E147432000530F6 /* WAInterestPickerView.m */; };
+		EBCB573E1E14CDA5000530F6 /* WAServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB573D1E14CDA5000530F6 /* WAServer.m */; };
 		EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */; };
 		EBDA5C321E05B17B00B61AED /* WAMyProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C311E05B17B00B61AED /* WAMyProfileTableViewController.m */; };
 		EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C351E05B31200B61AED /* WACreateActivityTableViewController.m */; };
@@ -144,6 +146,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.release.xcconfig"; sourceTree = "<group>"; };
+		DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		EB033A071E0D91E600621C35 /* WACreateActivityTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACreateActivityTitleTableViewCell.h; sourceTree = "<group>"; };
 		EB033A081E0D91E600621C35 /* WACreateActivityTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACreateActivityTitleTableViewCell.m; sourceTree = "<group>"; };
 		EB033A091E0D91E600621C35 /* WACreateActivityTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACreateActivityTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 		EBCB57371E14741F000530F6 /* WAInterestPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAInterestPickerViewController.m; sourceTree = "<group>"; };
 		EBCB57391E147432000530F6 /* WAInterestPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAInterestPickerView.h; sourceTree = "<group>"; };
 		EBCB573A1E147432000530F6 /* WAInterestPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAInterestPickerView.m; sourceTree = "<group>"; };
+		EBCB573C1E14CDA5000530F6 /* WAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAServer.h; sourceTree = "<group>"; };
+		EBCB573D1E14CDA5000530F6 /* WAServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAServer.m; sourceTree = "<group>"; };
 		EBDA5C2D1E05B16D00B61AED /* WANotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANotificationsTableViewController.h; sourceTree = "<group>"; };
 		EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WANotificationsTableViewController.m; sourceTree = "<group>"; };
 		EBDA5C301E05B17B00B61AED /* WAMyProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileTableViewController.h; sourceTree = "<group>"; };
@@ -337,6 +343,7 @@
 		EBDA5C6B1E071BD400B61AED /* WARoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARoundedView.m; sourceTree = "<group>"; };
 		EBDA5C6D1E072C7100B61AED /* WADatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerView.h; sourceTree = "<group>"; };
 		EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerView.m; sourceTree = "<group>"; };
+		EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-walla-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBDA5C691E071AD100B61AED /* MapKit.framework in Frameworks */,
+				E0D43A5A712F6EC8AA8F25D7 /* libPods-walla-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +373,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		115A8519AE6AB28CDD53701F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */,
+				9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB033A291E0E338D00621C35 /* WAShadowView */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +454,7 @@
 				EB0E8BDD1E008B0B00BC293C /* walla-iosUITests */,
 				EB0E8BB41E008B0A00BC293C /* Products */,
 				EBDA5C671E071AD100B61AED /* Frameworks */,
+				115A8519AE6AB28CDD53701F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -989,6 +1007,8 @@
 			children = (
 				EBCB56F61E133BB7000530F6 /* WAValues.h */,
 				EBCB56F71E133BB7000530F6 /* WAValues.m */,
+				EBCB573C1E14CDA5000530F6 /* WAServer.h */,
+				EBCB573D1E14CDA5000530F6 /* WAServer.m */,
 			);
 			name = "Walla API";
 			sourceTree = "<group>";
@@ -1208,6 +1228,7 @@
 			isa = PBXGroup;
 			children = (
 				EBDA5C681E071AD100B61AED /* MapKit.framework */,
+				EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1219,10 +1240,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB0E8BE31E008B0B00BC293C /* Build configuration list for PBXNativeTarget "walla-ios" */;
 			buildPhases = (
+				C8266BEB273973E70B8554D0 /* [CP] Check Pods Manifest.lock */,
 				EB0E8BAF1E008B0A00BC293C /* Sources */,
 				EB0E8BB01E008B0A00BC293C /* Frameworks */,
 				EB0E8BB11E008B0A00BC293C /* Resources */,
 				EBCB57341E1456E1000530F6 /* ShellScript */,
+				4E16929FF643CEA83F8AE286 /* [CP] Embed Pods Frameworks */,
+				DFC97DA6142D2D099540C7E5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1385,6 +1409,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4E16929FF643CEA83F8AE286 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8266BEB273973E70B8554D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DFC97DA6142D2D099540C7E5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EBCB57341E1456E1000530F6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1449,6 +1518,7 @@
 				EBCB56831E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.m in Sources */,
 				EBCB57221E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m in Sources */,
 				EB033A121E0D920900621C35 /* WACreateActivityTimeTableViewCell.m in Sources */,
+				EBCB573E1E14CDA5000530F6 /* WAServer.m in Sources */,
 				EB0E8BBB1E008B0A00BC293C /* AppDelegate.m in Sources */,
 				EBCB56D51E130DD2000530F6 /* WAViewUserProfileTableViewCell.m in Sources */,
 				EBCB56CB1E12F21B000530F6 /* WASuggestedUserCollectionViewCell.m in Sources */,
@@ -1624,6 +1694,7 @@
 		};
 		EB0E8BE41E008B0B00BC293C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TYWMER5399;
@@ -1636,6 +1707,7 @@
 		};
 		EB0E8BE51E008B0B00BC293C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TYWMER5399;
