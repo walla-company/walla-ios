@@ -195,7 +195,7 @@
         <scene sceneID="K8n-B3-UPJ">
             <objects>
                 <collectionViewController id="aRx-Jz-4pS" customClass="WAMyProfileInterestsCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -337,7 +337,7 @@
         <!--View Activity View Controller-->
         <scene sceneID="6kp-vg-ZkT">
             <objects>
-                <viewController id="V5u-vA-Koq" customClass="WAViewActivityViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WAViewActivityViewController" id="V5u-vA-Koq" customClass="WAViewActivityViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HAH-o0-B22"/>
                         <viewControllerLayoutGuide type="bottom" id="VGm-mE-DHg"/>
@@ -361,7 +361,6 @@
                     </view>
                     <connections>
                         <outlet property="viewActivityTableView" destination="QI7-9N-fzH" id="Ba9-oc-lea"/>
-                        <segue destination="SCV-YU-bQb" kind="show" identifier="openViewGroup" id="Uew-Um-iw4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RxZ-e1-pES" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -371,7 +370,7 @@
         <!--View Group Table View Controller-->
         <scene sceneID="8M2-w0-PJI">
             <objects>
-                <tableViewController id="SCV-YU-bQb" customClass="WAViewGroupTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WAViewGroupTableViewController" id="SCV-YU-bQb" customClass="WAViewGroupTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wu8-BO-61L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -427,7 +426,7 @@
         <scene sceneID="Uc0-Nt-q4W">
             <objects>
                 <navigationController id="7y8-Se-XhZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GbL-Eo-hgW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GbL-Eo-hgW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -450,7 +449,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yV4-aP-dxA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="TabbarIcon1" id="bJK-S7-tQq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vm9-uJ-i4N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vm9-uJ-i4N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -474,7 +473,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdQ-EN-hEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Profile" image="TabbarIcon5" id="J9U-f5-Ee8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kr4-DY-Dct">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kr4-DY-Dct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -498,7 +497,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gd1-JI-yaw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="TabbarIcon4" id="YR8-b0-Oen"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ptP-od-nTd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ptP-od-nTd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -521,7 +520,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GhL-ns-gYU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="TabbarIcon3" id="mJo-pl-TYf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xHd-th-JXV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xHd-th-JXV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -547,7 +546,7 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dno-9f-m5g"/>
         <segue reference="YAk-6U-ikM"/>
+        <segue reference="Dno-9f-m5g"/>
     </inferredMetricsTieBreakers>
 </document>

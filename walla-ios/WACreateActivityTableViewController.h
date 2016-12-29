@@ -35,6 +35,8 @@
 
 @interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, WAInterestPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
 
+@property NSMutableArray *mapViews;
+
 @property CLLocation *userLocation;
 @property BOOL firstUserLocationUpdate;
 

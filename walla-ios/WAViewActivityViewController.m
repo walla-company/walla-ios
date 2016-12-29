@@ -8,6 +8,8 @@
 
 #import "WAViewActivityViewController.h"
 
+#import "WAViewGroupTableViewController.h"
+
 @interface WAViewActivityViewController ()
 
 @end
@@ -147,7 +149,8 @@
     
     NSLog(@"Tab pressed: %@", groupID);
     
-    [self performSegueWithIdentifier:@"openViewGroup" sender:self];
+    WAViewGroupTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewGroupTableViewController"];
+    [self.navigationController pushViewController:destinationController animated:YES];
 }
 
 /*

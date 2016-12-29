@@ -59,6 +59,8 @@
     
     self.firstUserLocationUpdate = true;
     
+    self.mapViews = [[NSMutableArray alloc] init];
+    
     // Required
     
     self.activityPublic = true;
@@ -75,6 +77,21 @@
     self.activityInvitedGroups = [[NSArray alloc] init];
     self.activityInvitedFriends = [[NSArray alloc] init];
     
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    for (GMSMapView *mapView in self.mapViews) {
+        
+        @try {
+            [mapView removeObserver:self forKeyPath:@"myLocation"];
+        } @catch (NSException *exception) {
+            NSLog(@"Removing observer exception");
+        }
+        
+    }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,6 +204,8 @@
         cell.locationMap.myLocationEnabled = true;
         
         [cell.locationMap addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context:nil];
+        
+        [self.mapViews addObject:cell.locationMap];
         
         [cell.locationButton addTarget:self action:@selector(searchLocationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -387,8 +406,6 @@
     
     GMSAutocompleteViewController *autocompleteView = [[GMSAutocompleteViewController alloc] init];
     autocompleteView.delegate = self;
-    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    autocompleteView.autocompleteFilter = filter;
     [self presentViewController:autocompleteView animated:YES completion:nil];
 }
 
@@ -701,7 +718,18 @@ didFailAutocompleteWithError:(NSError *)error {
     [self.tableView endUpdates];
 }
 
-#pragma mark - KVO updates
+#pragma mark - Location manager delegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
+    
+    if (self.firstUserLocationUpdate) {
+        self.firstUserLocationUpdate = false;
+        
+        self.userLocation = locations[0];
+        
+        [self.tableView reloadData];
+    }
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     
