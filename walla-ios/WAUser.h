@@ -21,6 +21,10 @@
 
 @property UIImage *profileImage;
 
+@property NSString *details;
+
+@property NSString *location;
+
 - (id)init;
 
 - (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName userID:(NSString *)userID classYear:(NSString *)classYear major:(NSString *)major image:(UIImage *)image;

@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WAProfileEditProfileTableViewController : UITableViewController
+#import "WAProfileEditProfilePictureTableViewCell.h"
+#import "WAProfileEditProfileNameTableViewCell.h"
+#import "WAProfileEditProfileYearTableViewCell.h"
+#import "WAProfileEditProfileMajorTableViewCell.h"
+#import "WAProfileEditProfileLocationTableViewCell.h"
+#import "WAProfileEditProfileDetailsTableViewCell.h"
+
+#import "WAUser.h"
+
+@interface WAProfileEditProfileTableViewController : UITableViewController <UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property WAUser *user;
 
 @end

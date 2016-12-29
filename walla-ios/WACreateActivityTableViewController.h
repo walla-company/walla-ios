@@ -23,11 +23,12 @@
 #import "WADatePickerViewController.h"
 #import "WAGroupPickerViewController.h"
 #import "WAUserPickerViewController.h"
+#import "WAInterestPickerViewController.h"
 
 #import "WAGroup.h"
 #import "WAUser.h"
 
-@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, WAInterestPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 
 // Required

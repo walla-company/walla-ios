@@ -1,27 +1,27 @@
 //
-//  WAUserPickerViewController.m
+//  WAInterestPickerViewController.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/25/16.
+//  Created by Joseph DeChicchis on 12/28/16.
 //  Copyright © 2016 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAUserPickerViewController.h"
+#import "WAInterestPickerViewController.h"
 
-@interface WAUserPickerViewController ()
+@interface WAInterestPickerViewController ()
 
 @end
 
-@implementation WAUserPickerViewController
+@implementation WAInterestPickerViewController
 
-- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers {
+- (id)initWithTitle:(NSString *)title selectedInterests:(NSArray *)selectedInterests maxInterests:(NSInteger)maxInterests {
     
     self = [super init];
     
     if (self) {
-        self.userPickerTitle = title;
-        self.selectedUsers = selectedUsers;
-        self.allUsers = allUsers;
+        self.interestPickerTitle = title;
+        self.selectedInterests = selectedInterests;
+        self.maxInterests = maxInterests;
     }
     
     return self;
@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Add the user picker view
+    // Add the interests picker view
     
     UIView *tapView = [[UIView alloc] initWithFrame:self.view.frame];
     
@@ -42,18 +42,18 @@
     singleFingerTap.delegate = self;
     [self.view addGestureRecognizer:singleFingerTap];
     
-    self.userPicker = [[WAUserPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.userPickerTitle selectedUsers:self.selectedUsers allUsers:self.allUsers];
+    self.interestPicker = [[WAInterestPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.interestPickerTitle selectedInterests:self.selectedInterests maxInterests:self.maxInterests];
     
-    self.userPicker.delegate = self;
+    self.interestPicker.delegate = self;
     
-    [self.view addSubview:self.userPicker];
+    [self.view addSubview:self.interestPicker];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
     
-    [self.userPicker animateUp:self.view.frame];
+    [self.interestPicker animateUp:self.view.frame];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,14 +88,14 @@
 
 - (void)doneButtonPressed {
     
-    [self.userPicker animateDown:self.view.frame completion:^{
+    [self.interestPicker animateDown:self.view.frame completion:^{
         [self dismissViewControllerAnimated:false completion:nil];
     }];
 }
 
-- (void)usersChanges:(NSArray *)users {
+- (void)interestsChanged:(NSArray *)interests {
     
-    [self.delegate userPickerViewUserSelected:users tag:self.view.tag];
+    [self.delegate intersPickerViewUserSelected:interests tag:self.view.tag];
 }
 
 @end

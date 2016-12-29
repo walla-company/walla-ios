@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *filtersCollectionView;
 
 @property int currentFilterIndex;
+@property NSArray *interestsArray;
 
 @property UIColor *tabColorLightGray;
 @property UIColor *tabColorOrange;

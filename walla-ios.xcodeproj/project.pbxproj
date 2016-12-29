@@ -96,6 +96,20 @@
 		EBCB57071E1349D6000530F6 /* WAUserShadowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57051E1349D6000530F6 /* WAUserShadowTableViewCell.xib */; };
 		EBCB570B1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB570A1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m */; };
 		EBCB570E1E136E57000530F6 /* WAProfileEditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */; };
+		EBCB57131E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57111E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.m */; };
+		EBCB57141E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57121E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib */; };
+		EBCB57181E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57161E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m */; };
+		EBCB57191E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57171E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.xib */; };
+		EBCB571D1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB571B1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.m */; };
+		EBCB571E1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB571C1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib */; };
+		EBCB57221E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57201E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m */; };
+		EBCB57231E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57211E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib */; };
+		EBCB57271E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57251E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m */; };
+		EBCB57281E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB57261E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.xib */; };
+		EBCB572C1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB572A1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m */; };
+		EBCB572D1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB572B1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib */; };
+		EBCB57381E14741F000530F6 /* WAInterestPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB57371E14741F000530F6 /* WAInterestPickerViewController.m */; };
+		EBCB573B1E147432000530F6 /* WAInterestPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB573A1E147432000530F6 /* WAInterestPickerView.m */; };
 		EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */; };
 		EBDA5C321E05B17B00B61AED /* WAMyProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C311E05B17B00B61AED /* WAMyProfileTableViewController.m */; };
 		EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C351E05B31200B61AED /* WACreateActivityTableViewController.m */; };
@@ -277,6 +291,28 @@
 		EBCB570A1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMyProfileFriendsTableViewController.m; sourceTree = "<group>"; };
 		EBCB570C1E136E57000530F6 /* WAProfileEditProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileTableViewController.h; sourceTree = "<group>"; };
 		EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileTableViewController.m; sourceTree = "<group>"; };
+		EBCB57101E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfilePictureTableViewCell.h; sourceTree = "<group>"; };
+		EBCB57111E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfilePictureTableViewCell.m; sourceTree = "<group>"; };
+		EBCB57121E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfilePictureTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB57151E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileNameTableViewCell.h; sourceTree = "<group>"; };
+		EBCB57161E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileNameTableViewCell.m; sourceTree = "<group>"; };
+		EBCB57171E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileNameTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB571A1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileYearTableViewCell.h; sourceTree = "<group>"; };
+		EBCB571B1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileYearTableViewCell.m; sourceTree = "<group>"; };
+		EBCB571C1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileYearTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB571F1E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileMajorTableViewCell.h; sourceTree = "<group>"; };
+		EBCB57201E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileMajorTableViewCell.m; sourceTree = "<group>"; };
+		EBCB57211E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileMajorTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB57241E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileLocationTableViewCell.h; sourceTree = "<group>"; };
+		EBCB57251E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileLocationTableViewCell.m; sourceTree = "<group>"; };
+		EBCB57261E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileLocationTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB57291E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileDetailsTableViewCell.h; sourceTree = "<group>"; };
+		EBCB572A1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileDetailsTableViewCell.m; sourceTree = "<group>"; };
+		EBCB572B1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		EBCB57361E14741F000530F6 /* WAInterestPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAInterestPickerViewController.h; sourceTree = "<group>"; };
+		EBCB57371E14741F000530F6 /* WAInterestPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAInterestPickerViewController.m; sourceTree = "<group>"; };
+		EBCB57391E147432000530F6 /* WAInterestPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAInterestPickerView.h; sourceTree = "<group>"; };
+		EBCB573A1E147432000530F6 /* WAInterestPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAInterestPickerView.m; sourceTree = "<group>"; };
 		EBDA5C2D1E05B16D00B61AED /* WANotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANotificationsTableViewController.h; sourceTree = "<group>"; };
 		EBDA5C2E1E05B16D00B61AED /* WANotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WANotificationsTableViewController.m; sourceTree = "<group>"; };
 		EBDA5C301E05B17B00B61AED /* WAMyProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileTableViewController.h; sourceTree = "<group>"; };
@@ -494,6 +530,7 @@
 				EB033A2C1E0E33BF00621C35 /* WADatePickerViewController */,
 				EB033A2D1E0E33CF00621C35 /* WAGroupPickerViewController */,
 				EBCB56521E1086AE000530F6 /* WAUserPickerViewController */,
+				EBCB57351E1473D1000530F6 /* WAInterestPickerViewController */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -979,8 +1016,85 @@
 		EBCB570F1E136F55000530F6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				EBCB572E1E144717000530F6 /* WAProfileEditProfilePictureTableViewCell */,
+				EBCB572F1E14471C000530F6 /* WAProfileEditProfileNameTableViewCell */,
+				EBCB57301E144722000530F6 /* WAProfileEditProfileYearTableViewCell */,
+				EBCB57311E144728000530F6 /* WAProfileEditProfileMajorTableViewCell */,
+				EBCB57321E14472D000530F6 /* WAProfileEditProfileLocationTableViewCell */,
+				EBCB57331E144734000530F6 /* WAProfileEditProfileDetailsTableViewCell */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		EBCB572E1E144717000530F6 /* WAProfileEditProfilePictureTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB57101E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.h */,
+				EBCB57111E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.m */,
+				EBCB57121E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib */,
+			);
+			name = WAProfileEditProfilePictureTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB572F1E14471C000530F6 /* WAProfileEditProfileNameTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB57151E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.h */,
+				EBCB57161E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m */,
+				EBCB57171E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.xib */,
+			);
+			name = WAProfileEditProfileNameTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB57301E144722000530F6 /* WAProfileEditProfileYearTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB571A1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.h */,
+				EBCB571B1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.m */,
+				EBCB571C1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib */,
+			);
+			name = WAProfileEditProfileYearTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB57311E144728000530F6 /* WAProfileEditProfileMajorTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB571F1E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.h */,
+				EBCB57201E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m */,
+				EBCB57211E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib */,
+			);
+			name = WAProfileEditProfileMajorTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB57321E14472D000530F6 /* WAProfileEditProfileLocationTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB57241E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.h */,
+				EBCB57251E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m */,
+				EBCB57261E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.xib */,
+			);
+			name = WAProfileEditProfileLocationTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB57331E144734000530F6 /* WAProfileEditProfileDetailsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB57291E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.h */,
+				EBCB572A1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m */,
+				EBCB572B1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib */,
+			);
+			name = WAProfileEditProfileDetailsTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBCB57351E1473D1000530F6 /* WAInterestPickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EBCB57361E14741F000530F6 /* WAInterestPickerViewController.h */,
+				EBCB57371E14741F000530F6 /* WAInterestPickerViewController.m */,
+				EBCB57391E147432000530F6 /* WAInterestPickerView.h */,
+				EBCB573A1E147432000530F6 /* WAInterestPickerView.m */,
+			);
+			name = WAInterestPickerViewController;
 			sourceTree = "<group>";
 		};
 		EBDA5C271E05B11C00B61AED /* WADiscoverTableViewController */ = {
@@ -1108,6 +1222,7 @@
 				EB0E8BAF1E008B0A00BC293C /* Sources */,
 				EB0E8BB01E008B0A00BC293C /* Frameworks */,
 				EB0E8BB11E008B0A00BC293C /* Resources */,
+				EBCB57341E1456E1000530F6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1217,14 +1332,17 @@
 				EBCB566A1E10F366000530F6 /* WAViewActivityInfoTableViewCell.xib in Resources */,
 				EB0E8BC91E008B0A00BC293C /* LaunchScreen.storyboard in Resources */,
 				EBCB56DD1E130DED000530F6 /* WAViewUserDetailsTableViewCell.xib in Resources */,
+				EBCB57191E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.xib in Resources */,
 				EBCB56411E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.xib in Resources */,
 				EBCB566F1E10F379000530F6 /* WAViewActivityLocationTableViewCell.xib in Resources */,
 				EBCB569B1E12E0A9000530F6 /* WAViewGroupDetailsTableViewCell.xib in Resources */,
+				EBCB57231E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib in Resources */,
 				EB033A181E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib in Resources */,
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
 				EBCB56961E12E094000530F6 /* WAViewGroupInfoTableViewCell.xib in Resources */,
 				EBCB56361E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.xib in Resources */,
 				EBCB565D1E108D12000530F6 /* WAUserTableViewCell.xib in Resources */,
+				EBCB57141E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib in Resources */,
 				EBCB56D61E130DD2000530F6 /* WAViewUserProfileTableViewCell.xib in Resources */,
 				EBCB56C21E12EE25000530F6 /* WADiscoverSuggestedGroupTableViewCell.xib in Resources */,
 				EB033A221E0D927300621C35 /* WACreateActivityHostTableViewCell.xib in Resources */,
@@ -1234,6 +1352,7 @@
 				EBCB567A1E10F3D9000530F6 /* WAViewActivityButtonsTableViewCell.xib in Resources */,
 				EBCB563C1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.xib in Resources */,
 				EBDA5C3C1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.xib in Resources */,
+				EBCB572D1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.xib in Resources */,
 				EB033A131E0D920900621C35 /* WACreateActivityTimeTableViewCell.xib in Resources */,
 				EBCB564B1E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib in Resources */,
 				EB033A0B1E0D91E600621C35 /* WACreateActivityTitleTableViewCell.xib in Resources */,
@@ -1242,7 +1361,9 @@
 				EBCB57071E1349D6000530F6 /* WAUserShadowTableViewCell.xib in Resources */,
 				EBCB56751E10F3A2000530F6 /* WAViewActivityAttendeesTableViewCell.xib in Resources */,
 				EB033A1D1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.xib in Resources */,
+				EBCB57281E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.xib in Resources */,
 				EBCB56BC1E12EE00000530F6 /* WADiscoverFriendSuggestionsTableViewCell.xib in Resources */,
+				EBCB571E1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib in Resources */,
 				EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1263,6 +1384,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		EBCB57341E1456E1000530F6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EB0E8BAF1E008B0A00BC293C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1280,6 +1417,7 @@
 				EBCB56951E12E094000530F6 /* WAViewGroupInfoTableViewCell.m in Sources */,
 				EBDA5C641E05DE5A00B61AED /* WAActivityTab.m in Sources */,
 				EBDA5C611E05DB9000B61AED /* WAActivityTabsHeaderView.m in Sources */,
+				EBCB57381E14741F000530F6 /* WAInterestPickerViewController.m in Sources */,
 				EBCB56C11E12EE25000530F6 /* WADiscoverSuggestedGroupTableViewCell.m in Sources */,
 				EBCB56F81E133BB7000530F6 /* WAValues.m in Sources */,
 				EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */,
@@ -1292,6 +1430,7 @@
 				EBCB56E91E13132F000530F6 /* WAViewUserGroupMoreLessTableViewCell.m in Sources */,
 				EBCB56401E0F431B000530F6 /* WACreateActivityInviteFriendsTableViewCell.m in Sources */,
 				EBCB56351E0F42C0000530F6 /* WACreateActivityInterestsTableViewCell.m in Sources */,
+				EBCB57181E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m in Sources */,
 				EBCB56D01E12F888000530F6 /* WAViewUserTableViewController.m in Sources */,
 				EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */,
 				EBCB568B1E11B0AB000530F6 /* WAActivity.m in Sources */,
@@ -1304,9 +1443,11 @@
 				EB4EA7981E0344A5000F4834 /* WAActivityTableViewCell.m in Sources */,
 				EB033A211E0D927300621C35 /* WACreateActivityHostTableViewCell.m in Sources */,
 				EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */,
+				EBCB57131E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.m in Sources */,
 				EBCB57001E134671000530F6 /* WAGroupShadowTableViewCell.m in Sources */,
 				EBCB56511E10861F000530F6 /* WAUser.m in Sources */,
 				EBCB56831E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.m in Sources */,
+				EBCB57221E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.m in Sources */,
 				EB033A121E0D920900621C35 /* WACreateActivityTimeTableViewCell.m in Sources */,
 				EB0E8BBB1E008B0A00BC293C /* AppDelegate.m in Sources */,
 				EBCB56D51E130DD2000530F6 /* WAViewUserProfileTableViewCell.m in Sources */,
@@ -1315,13 +1456,17 @@
 				EB033A1C1E0D926100621C35 /* WACreateActivityDetailsTableViewCell.m in Sources */,
 				EB033A361E0E370700621C35 /* WAGroup.m in Sources */,
 				EBCB56DC1E130DED000530F6 /* WAViewUserDetailsTableViewCell.m in Sources */,
+				EBCB57271E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m in Sources */,
 				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
 				EBCB567E1E10F410000530F6 /* WAViewActivityHostTableViewCell.m in Sources */,
+				EBCB572C1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m in Sources */,
 				EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */,
 				EBCB56EE1E133890000530F6 /* WAMyProfileInterestsCollectionViewController.m in Sources */,
 				EB033A171E0D924800621C35 /* WACreateActivityLocationTableViewCell.m in Sources */,
+				EBCB573B1E147432000530F6 /* WAInterestPickerView.m in Sources */,
 				EB4EA79E1E036CD2000F4834 /* WAActivitiesViewController.m in Sources */,
 				EBDA5C4B1E05B90A00B61AED /* WAMyProfileMainTableViewCell.m in Sources */,
+				EBCB571D1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.m in Sources */,
 				EBCB563B1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m in Sources */,
 				EBCB56E31E131315000530F6 /* WAViewUserGroupTableViewCell.m in Sources */,
 				EBCB56551E108774000530F6 /* WAUserPickerViewController.m in Sources */,
@@ -1484,7 +1629,7 @@
 				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1496,7 +1641,7 @@
 				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wallasquad.wallaapp.walla-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

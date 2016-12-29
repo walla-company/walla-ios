@@ -22,6 +22,16 @@
     return [[UIColor alloc] initWithRed:255.0/255.0 green:243.0/255.0 blue:229.0/255.0 alpha:1.0];
 }
 
++ (UIColor *)selectedTextColor {
+    
+    return [[UIColor alloc] initWithRed:143.0/255.0 green:142.0/255.0 blue:148.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)notSelectedTextColor {
+
+    return [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
+}
+
 #pragma  mark - Other
 
 + (NSArray *)interestsArray {

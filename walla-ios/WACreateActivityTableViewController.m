@@ -8,6 +8,8 @@
 
 #import "WACreateActivityTableViewController.h"
 
+#import "WAValues.h"
+
 @interface WACreateActivityTableViewController ()
 
 @end
@@ -192,6 +194,8 @@
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
+        [cell.interestsButton addTarget:self action:@selector(chooseInterestsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         return cell;
     }
     
@@ -208,6 +212,10 @@
         if ([self.activityDetails isEqual: @""]) {
             cell.detailsTextView.textColor = self.notSelectedColor;
             cell.detailsTextView.text = @"Details";
+        }
+        else {
+            cell.detailsTextView.textColor = self.selectedColor;
+            cell.detailsTextView.text = self.activityDetails;
         }
         
         return cell;
@@ -345,6 +353,17 @@
 
 - (void)chooseInterestsButtonPressed:(UIButton *)button {
     
+    WAInterestPickerViewController *interestsPicker = [[WAInterestPickerViewController alloc] initWithTitle:@"Choose Interests" selectedInterests:self.activityInterests maxInterests:2];
+    
+    interestsPicker.view.tag = button.tag;
+    
+    interestsPicker.delegate = self;
+    
+    self.definesPresentationContext = true;
+    interestsPicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
+    interestsPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    [self presentViewController:interestsPicker animated:false completion:nil];
 }
 
 - (void)chooseGroupButtonPressed:(UIButton *) button {
@@ -364,7 +383,6 @@
     groupPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     [self presentViewController:groupPicker animated:false completion:nil];
-    
 }
 
 - (void)inviteFriendsButtonPressed:(UIButton *)button {
@@ -528,6 +546,43 @@
     label.text = usersString;
 }
 
+#pragma mark - Interests picker delegate
+
+- (void)intersPickerViewUserSelected:(NSArray *)interests tag:(NSInteger)tag {
+    
+    self.activityInterests = interests;
+}
+
+- (void)setInterestsLabel:(NSArray *)interests label:(UILabel *)label {
+    
+    NSString *interestsString = @"";
+    
+    if ([interests count] > 0) {
+        
+        int count = 0;
+        for (NSNumber *index in interests) {
+            
+            interestsString = [interestsString stringByAppendingString:[WAValues interestsArray][index.integerValue][0]];
+            
+            if (count != [interests count]-1) {
+                interestsString = [interestsString stringByAppendingString:@", "];
+            }
+            
+            count++;
+        }
+        
+        label.textColor = [WAValues selectedTextColor];
+    }
+    else {
+        
+        interestsString = @"Interest(s)";
+        
+        label.textColor = [WAValues notSelectedTextColor];
+    }
+    
+    label.text = interestsString;
+}
+
 #pragma mark - Text field delegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
@@ -561,7 +616,7 @@
     
     if (textView.tag == 1) {
         self.activityDetails = textView.text;
-        NSLog(@"self.activityDetails: %@", self.activityDetails);
+        
         if ([self.activityDetails isEqualToString:@""]) {
             textView.textColor = self.notSelectedColor;
             textView.text = @"Details";

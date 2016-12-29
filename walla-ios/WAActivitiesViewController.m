@@ -8,6 +8,8 @@
 
 #import "WAActivitiesViewController.h"
 
+#import "WAValues.h"
+
 @interface WAActivitiesViewController ()
 
 @end
@@ -43,6 +45,8 @@
     self.filtersCollectionView.dataSource = self;
     
     self.currentFilterIndex = 0;
+    
+    self.interestsArray = [WAValues interestsArray];
     
     // Set up colors
     
@@ -118,7 +122,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 10;
+    return [self.interestsArray count] + 1;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -139,6 +143,16 @@
     }
     else {
         cell.circleView.backgroundColor = [[UIColor alloc] initWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
+    }
+    
+    if (indexPath.row == 0) {
+        cell.filterLabel.text = @"All";
+        cell.filterImageView.image = [[UIImage alloc] init];
+    }
+    else {
+        cell.filterLabel.text = self.interestsArray[indexPath.row-1][0];
+        cell.filterImageView.image = [[UIImage imageNamed:self.interestsArray[indexPath.row-1][1]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.filterImageView setTintColor:[UIColor whiteColor]];
     }
     
     return cell;

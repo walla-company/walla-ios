@@ -18,6 +18,10 @@
 
 + (UIColor *)selectedCellColor;
 
++ (UIColor *)selectedTextColor;
+
++ (UIColor *)notSelectedTextColor;
+
 // Others
 
 + (NSArray *)interestsArray;
