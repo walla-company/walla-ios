@@ -52,6 +52,9 @@
                     <constraint firstItem="0It-Yg-2tc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="hrk-uY-95r"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="detailsTextLabel" destination="Q92-JA-4ms" id="eKw-9S-8WD"/>
+            </connections>
             <point key="canvasLocation" x="34" y="72.5"/>
         </tableViewCell>
     </objects>

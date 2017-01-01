@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
+    
     // Set up table view
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -116,6 +118,13 @@
             break;
     }
     
+}
+
+#pragma mark - Navigation
+
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
 
 /*

@@ -72,6 +72,7 @@
                         <outlet property="searchDisplayController" destination="kdC-H5-YaZ" id="UJz-Sg-bNP"/>
                         <segue destination="SCV-YU-bQb" kind="show" identifier="openViewGroup" id="RU4-NS-liN"/>
                         <segue destination="jxy-vr-bZk" kind="show" identifier="openViewUser" id="Fbb-hK-71o"/>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="NXK-eG-CAf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUm-fH-cVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -101,6 +102,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="hCu-0V-lFG"/>
+                    <connections>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="hyR-wN-DlP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEF-SN-aE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -125,6 +129,7 @@
                         <segue destination="1V4-6e-dEZ" kind="show" identifier="openMyGroups" id="sts-Bl-iHY"/>
                         <segue destination="ick-ff-rdm" kind="show" identifier="openMyFriends" id="gJS-Vt-BWd"/>
                         <segue destination="6gZ-kw-0Na" kind="show" identifier="openEditProfile" id="Tes-VW-5tX"/>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="lpc-gH-RLT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vrq-2b-zS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -283,7 +288,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Miw-hM-QdK">
-                                                    <rect key="frame" x="0.0" y="43.5" width="50" height="13.5"/>
+                                                    <rect key="frame" x="0.0" y="43" width="50" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -361,11 +366,31 @@
                     </view>
                     <connections>
                         <outlet property="viewActivityTableView" destination="QI7-9N-fzH" id="Ba9-oc-lea"/>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="Jie-Mb-Ble"/>
+                        <segue destination="yge-hd-rZi" kind="show" identifier="openShowMap" id="Rve-YC-9jv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RxZ-e1-pES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4150" y="-1201"/>
+        </scene>
+        <!--Show Map View Controller-->
+        <scene sceneID="dKM-7I-o4R">
+            <objects>
+                <viewController id="yge-hd-rZi" customClass="WAShowMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SAR-vV-dnB"/>
+                        <viewControllerLayoutGuide type="bottom" id="e9s-w8-SXq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HGn-dg-lzN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgc-3m-pGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4911" y="-1201"/>
         </scene>
         <!--View Group Table View Controller-->
         <scene sceneID="8M2-w0-PJI">
@@ -380,6 +405,9 @@
                             <outlet property="delegate" destination="SCV-YU-bQb" id="zM7-UL-VCW"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="fMY-NY-i6F"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpI-7U-T4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -388,7 +416,7 @@
         <!--View User Table View Controller-->
         <scene sceneID="8nT-O3-bCc">
             <objects>
-                <tableViewController id="jxy-vr-bZk" customClass="WAViewUserTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WAViewUserTableViewController" id="jxy-vr-bZk" customClass="WAViewUserTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MQr-aO-avJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,6 +426,9 @@
                             <outlet property="delegate" destination="jxy-vr-bZk" id="uFZ-yw-DnR"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="Pti-62-06u"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xy-kp-l5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -500,6 +531,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ptP-od-nTd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -546,7 +578,8 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YAk-6U-ikM"/>
-        <segue reference="Dno-9f-m5g"/>
+        <segue reference="Fbb-hK-71o"/>
+        <segue reference="RU4-NS-liN"/>
+        <segue reference="Jie-Mb-Ble"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,9 @@
 
 #import "WADiscoverViewController.h"
 
+#import "WAViewUserTableViewController.h"
+#import "WAViewGroupTableViewController.h"
+
 @interface WADiscoverViewController ()
 
 @end
@@ -16,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
     
     // Set up table view
     
@@ -112,6 +117,8 @@
     
     if (indexPath.section == 1) {
         
+        self.openGroupID = @"GROUPID";
+        
         [self performSegueWithIdentifier:@"openViewGroup" sender:self];
     }
     
@@ -123,17 +130,29 @@
     
     NSLog(@"SELECTED: %@", userID);
     
+    self.openUserID = @"USERID";
+    
     [self performSegueWithIdentifier:@"openViewUser" sender:self];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"openViewUser"]) {
+        
+        WAViewUserTableViewController *destinationController = (WAViewUserTableViewController *) [segue destinationViewController];
+        destinationController.viewingUserID = self.openUserID;
+    }
+    else if ([segue.identifier isEqualToString:@"openViewGroup"]) {
+        WAViewGroupTableViewController *destinationController = (WAViewGroupTableViewController *) [segue destinationViewController];
+        destinationController.viewingGroupID = self.openGroupID;
+    }
+}
 
 @end

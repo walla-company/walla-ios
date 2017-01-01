@@ -21,8 +21,9 @@
 @property int currentFilterIndex;
 @property NSArray *interestsArray;
 
-@property UIColor *tabColorLightGray;
-@property UIColor *tabColorOrange;
-@property UIColor *tabColorOffwhite;
+@property NSString *openGroupID;
+@property NSString *openActivityID;
+
+@property NSArray *activitiesArray;
 
 @end

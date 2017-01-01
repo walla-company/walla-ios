@@ -8,7 +8,12 @@
 
 #import "WAActivitiesViewController.h"
 
+#import "WAViewGroupTableViewController.h"
+#import "WAViewActivityViewController.h"
+
 #import "WAValues.h"
+
+#import "WAServer.h"
 
 @interface WAActivitiesViewController ()
 
@@ -48,24 +53,20 @@
     
     self.interestsArray = [WAValues interestsArray];
     
-    // Set up colors
-    
-    self.tabColorLightGray = [[UIColor alloc] initWithRed:97.0/255.0 green:97.0/255.0 blue:97.0/255.0 alpha:1.0];
-    self.tabColorOffwhite = [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
-    self.tabColorOrange = [[UIColor alloc] initWithRed:244.0/255.0 green:201.0/255.0 blue:146.0/255.0 alpha:1.0];
-    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        [WAServer getActivitisFromLastHours:72.0 completion:^(NSArray *activities){
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                self.activitiesArray = activities;
+                [self.activitiesTableView reloadData];
+            });
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Navigation
-
-- (void)openCreateActivity {
-    
-    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
 
 #pragma mark - Table view
@@ -77,7 +78,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    return [self.activitiesArray count];;
 }
 
 
@@ -87,11 +88,50 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    [cell.headerView setTabs:@[@[@"Interest", [UIColor whiteColor], self.tabColorLightGray, @false], @[@"Interest", self.tabColorOffwhite, self.tabColorLightGray, @false], @[@"Group", self.tabColorOrange, [UIColor whiteColor], @true]]];
+    WAActivity *activity = self.activitiesArray[indexPath.row];
+    
+    NSMutableArray *headerTabs = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<[activity.interests count]; i++) {
+        NSString *interest = [activity.interests objectAtIndex:i];
+        
+        switch (i) {
+            case 0:
+                [headerTabs addObject:@[interest, [UIColor whiteColor], [WAValues tabTextColorLightGray], @false]];
+                break;
+            case 1:
+                [headerTabs addObject:@[interest, [WAValues tabColorOffWhite], [WAValues tabTextColorLightGray], @false]];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    if ([activity.hostGroupID length] > 0) {
+        [headerTabs addObject:@[activity.hostGroupShortName, [WAValues tabColorOrange], [UIColor whiteColor], @true]];
+        cell.headerView.groupID = activity.hostGroupID;
+    }
+    
+    [cell.headerView setTabs:headerTabs];
     
     cell.headerView.delegate = self;
     
-    cell.headerView.groupID = @"GROUPID";
+    cell.titleLabel.text = activity.title;
+    
+    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+    [formatter1 setDateFormat:@"HH:mm aa"];
+    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+    [formatter2 setDateFormat:@"HH:mm"];
+    NSDateFormatter *formatter3 = [[NSDateFormatter alloc] init];
+    [formatter3 setDateFormat:@"MM/dd"];
+    
+    NSString *startTimeString = [formatter1 stringFromDate:activity.startTime];
+    NSString *endTimeString = [formatter2 stringFromDate:activity.endTime];
+    
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@\nto %@", startTimeString, endTimeString];
+    
+    cell.dateLabel.text = [formatter3 stringFromDate:activity.startTime];
     
     return cell;
 }
@@ -99,6 +139,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSLog(@"SELECTED");
+    
+    self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
     
     [self performSegueWithIdentifier:@"openActivityDetails" sender:self];
     
@@ -109,6 +151,8 @@
 - (void)activityTabButtonPressed:(NSString *)groupID {
     
     NSLog(@"Tab pressed: %@", groupID);
+    
+    self.openGroupID = groupID;
     
     [self performSegueWithIdentifier:@"openViewGroup" sender:self];
 }
@@ -159,14 +203,25 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"openViewGroup"]) {
+        
+        WAViewGroupTableViewController *destinationController = (WAViewGroupTableViewController *) [segue destinationViewController];
+        destinationController.viewingGroupID = self.openGroupID;
+    }
+    else if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
+        
+        WAViewActivityViewController *destinationController = (WAViewActivityViewController *) [segue destinationViewController];
+        destinationController.viewingActivityID = self.openActivityID;
+    }
+}
 
 @end

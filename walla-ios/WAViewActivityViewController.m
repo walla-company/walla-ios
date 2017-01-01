@@ -10,6 +10,14 @@
 
 #import "WAViewGroupTableViewController.h"
 
+#import "WAViewUserTableViewController.h"
+
+#import "WAShowMapViewController.h"
+
+#import "WAServer.h"
+
+#import "WAValues.h"
+
 @interface WAViewActivityViewController ()
 
 @end
@@ -18,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"ACTIVITYID: %@", self.viewingActivityID);
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
     
     // Set up view activity table view
     
@@ -42,11 +54,17 @@
     self.viewActivityTableView.rowHeight = UITableViewAutomaticDimension;
     self.viewActivityTableView.estimatedRowHeight = 150.0;
     
-    // Set up colors
-    
-    self.tabColorLightGray = [[UIColor alloc] initWithRed:97.0/255.0 green:97.0/255.0 blue:97.0/255.0 alpha:1.0];
-    self.tabColorOffwhite = [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
-    self.tabColorOrange = [[UIColor alloc] initWithRed:244.0/255.0 green:201.0/255.0 blue:146.0/255.0 alpha:1.0];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        [WAServer getActivityWithID:self.viewingActivityID completion:^(WAActivity *activity){
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                self.viewingActivity = activity;
+                if (self.viewingActivity.activityPublic) self.title = @"Public";
+                else self.title = @"Private";
+                [self.viewActivityTableView reloadData];
+            });
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,7 +81,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6;
+    if (self.viewingActivity) return 6;
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,11 +95,48 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
-        [cell.activityHeaderView setTabs:@[@[@"Interest", [UIColor whiteColor], self.tabColorLightGray, @false], @[@"Interest", self.tabColorOffwhite, self.tabColorLightGray, @false], @[@"Group", self.tabColorOrange, [UIColor whiteColor], @true]]];
+        NSMutableArray *headerTabs = [[NSMutableArray alloc] init];
+        
+        for (int i=0; i<[self.viewingActivity.interests count]; i++) {
+            NSString *interest = [self.viewingActivity.interests objectAtIndex:i];
+            
+            switch (i) {
+                case 0:
+                    [headerTabs addObject:@[interest, [UIColor whiteColor], [WAValues tabTextColorLightGray], @false]];
+                    break;
+                case 1:
+                    [headerTabs addObject:@[interest, [WAValues tabColorOffWhite], [WAValues tabTextColorLightGray], @false]];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+        if ([self.viewingActivity.hostGroupID length] > 0) {
+            [headerTabs addObject:@[self.viewingActivity.hostGroupShortName, [WAValues tabColorOrange], [UIColor whiteColor], @true]];
+            cell.activityHeaderView.groupID = self.viewingActivity.hostGroupID;
+        }
+        
+        [cell.activityHeaderView setTabs:headerTabs];
         
         cell.activityHeaderView.delegate = self;
         
-        cell.activityHeaderView.groupID = @"GROUPID";
+        cell.titleLabel.text = self.viewingActivity.title;
+        
+        NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+        [formatter1 setDateFormat:@"HH:mm aa"];
+        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+        [formatter2 setDateFormat:@"HH:mm"];
+        NSDateFormatter *formatter3 = [[NSDateFormatter alloc] init];
+        [formatter3 setDateFormat:@"MM/dd"];
+        
+        NSString *startTimeString = [formatter1 stringFromDate:self.viewingActivity.startTime];
+        NSString *endTimeString = [formatter2 stringFromDate:self.viewingActivity.endTime];
+        
+        cell.timeLabel.text = [NSString stringWithFormat:@"%@\nto %@", startTimeString, endTimeString];
+        
+        cell.dateLabel.text = [formatter3 stringFromDate:self.viewingActivity.startTime];
         
         return cell;
     }
@@ -90,6 +147,10 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
+        
+        cell.locationLabel.text = self.viewingActivity.locationName;
+        
+        [cell.showMapButton addTarget:self action:@selector(showMapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     }
@@ -139,8 +200,27 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
+    cell.detailsTextLabel.text = self.viewingActivity.details;
+    
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 4) {
+        WAViewUserTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewUserTableViewController"];
+        destinationController.viewingUserID = @"USERID";
+        [self.navigationController pushViewController:destinationController animated:YES];
+    }
+    
+}
+
+# pragma mark - Button targets
+
+- (void)showMapButtonPressed:(UIButton *)button {
+    
+    [self performSegueWithIdentifier:@"openShowMap" sender:self];
 }
 
 #pragma mark - Tab header view delegate
@@ -150,17 +230,26 @@
     NSLog(@"Tab pressed: %@", groupID);
     
     WAViewGroupTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewGroupTableViewController"];
+    destinationController.viewingGroupID = groupID;
     [self.navigationController pushViewController:destinationController animated:YES];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"openShowMap"]) {
+        
+        WAShowMapViewController *destinationController = (WAShowMapViewController *) [segue destinationViewController];
+        destinationController.location = self.viewingActivity.location;
+        destinationController.locationName = self.viewingActivity.locationName;
+        destinationController.locationAddress = self.viewingActivity.locationAddress;
+    }
+}
 
 @end

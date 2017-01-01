@@ -17,12 +17,14 @@
 
 #import "WAActivityTabsHeaderView.h"
 
+#import "WAActivity.h"
+
 @interface WAViewActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WAActivityTabDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *viewActivityTableView;
 
-@property UIColor *tabColorLightGray;
-@property UIColor *tabColorOrange;
-@property UIColor *tabColorOffwhite;
+@property NSString *viewingActivityID;
+
+@property WAActivity *viewingActivity;
 
 @end

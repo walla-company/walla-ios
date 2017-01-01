@@ -97,8 +97,8 @@
                                     <constraint firstItem="rsV-mp-PqK" firstAttribute="centerY" secondItem="ixV-he-mvj" secondAttribute="centerY" id="nXH-sq-KPe"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited friends ()" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2M-lv-Cqc">
-                                <rect key="frame" x="15" y="88" width="106" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited people ()" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2M-lv-Cqc">
+                                <rect key="frame" x="15" y="88" width="105" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -141,9 +141,15 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="goingView" destination="OpS-3P-WYb" id="kqa-1T-jhP"/>
+                <outlet property="goingButton" destination="68u-7M-xaI" id="pcM-FY-ZFa"/>
+                <outlet property="goingView" destination="OpS-3P-WYb" id="FxR-IU-Bkg"/>
+                <outlet property="interestedButton" destination="YZm-Uh-SRJ" id="sbb-b4-F1d"/>
                 <outlet property="interestedView" destination="wcB-6h-vhR" id="uat-Rv-dRN"/>
+                <outlet property="inviteButton" destination="qwf-ua-FEJ" id="4xf-ES-VG0"/>
                 <outlet property="inviteView" destination="odO-hm-zWQ" id="A8d-Nl-QoB"/>
+                <outlet property="invitedPeopleHeaderLabel" destination="c2M-lv-Cqc" id="eQB-Nk-gO5"/>
+                <outlet property="invitedPeopleLabel" destination="mvB-vD-8tp" id="udy-fv-hoa"/>
+                <outlet property="shareButton" destination="rsV-mp-PqK" id="HLS-T1-Hxw"/>
                 <outlet property="shareView" destination="ixV-he-mvj" id="XL7-PU-P8L"/>
             </connections>
             <point key="canvasLocation" x="34" y="104.5"/>

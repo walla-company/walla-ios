@@ -10,4 +10,6 @@
 
 @interface WAViewActivityDetailsTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *detailsTextLabel;
+
 @end

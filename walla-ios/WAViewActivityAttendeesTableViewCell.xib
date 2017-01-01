@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bun-hh-bKa" customClass="WAShadowView">
@@ -103,6 +103,12 @@
                     <constraint firstAttribute="trailing" secondItem="bun-hh-bKa" secondAttribute="trailing" constant="15" id="xXX-wp-uak"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="goingCount" destination="ex7-aJ-vCB" id="3aq-ha-91T"/>
+                <outlet property="goingLabel" destination="a6j-ez-mrz" id="7F8-fJ-zgM"/>
+                <outlet property="interestedCount" destination="X3v-cA-qLI" id="5Df-k1-TMq"/>
+                <outlet property="interestedLabel" destination="eRk-lb-K4h" id="IO4-vN-HOA"/>
+            </connections>
             <point key="canvasLocation" x="34" y="86.5"/>
         </tableViewCell>
     </objects>

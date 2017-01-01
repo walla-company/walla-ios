@@ -10,4 +10,8 @@
 
 @interface WAViewActivityLocationTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *showMapButton;
+
 @end

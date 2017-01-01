@@ -21,8 +21,11 @@
 + (UIColor *)selectedCellColor;
 
 + (UIColor *)selectedTextColor;
-
 + (UIColor *)notSelectedTextColor;
+
++ (UIColor *)tabTextColorLightGray;
++ (UIColor *)tabColorOrange;
++ (UIColor *)tabColorOffWhite;
 
 // Others
 

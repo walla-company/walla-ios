@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="499" height="117"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rBa-FK-VTk" id="P7t-Wa-mIt">
-                <rect key="frame" x="0.0" y="0.0" width="499" height="116"/>
+                <rect key="frame" x="0.0" y="0.0" width="499" height="116.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5C-ea-P3V" customClass="WAActivityTabsHeaderView">
@@ -41,7 +41,7 @@ to 8:00</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CS 201 Study Session" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oDt-Rk-Ept">
-                                <rect key="frame" x="103" y="8" width="159" height="55"/>
+                                <rect key="frame" x="103" y="8" width="351" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,6 +61,7 @@ to 8:00</string>
                         <constraints>
                             <constraint firstAttribute="height" constant="72" id="0Sp-Q9-vbw"/>
                             <constraint firstItem="oDt-Rk-Ept" firstAttribute="top" secondItem="pFO-Gb-A4J" secondAttribute="top" constant="8" id="INU-e2-Pyr"/>
+                            <constraint firstAttribute="trailing" secondItem="oDt-Rk-Ept" secondAttribute="trailing" constant="15" id="TvT-M3-P5v"/>
                             <constraint firstItem="Qse-RA-z7e" firstAttribute="leading" secondItem="pFO-Gb-A4J" secondAttribute="leading" constant="15" id="UO2-UY-t9E"/>
                             <constraint firstItem="oDt-Rk-Ept" firstAttribute="leading" secondItem="Qse-RA-z7e" secondAttribute="trailing" constant="8" id="dJ2-f3-rn1"/>
                             <constraint firstItem="Qse-RA-z7e" firstAttribute="top" secondItem="pFO-Gb-A4J" secondAttribute="top" constant="8" id="dnj-Ua-Vgz"/>
@@ -83,8 +84,11 @@ to 8:00</string>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="activityHeaderView" destination="o5C-ea-P3V" id="gTJ-oc-jAJ"/>
+                <outlet property="dateLabel" destination="7zn-AN-27r" id="vaH-yC-N9t"/>
+                <outlet property="timeLabel" destination="Qse-RA-z7e" id="2jV-kF-dEn"/>
+                <outlet property="titleLabel" destination="oDt-Rk-Ept" id="cnH-to-hKp"/>
             </connections>
-            <point key="canvasLocation" x="177.5" y="106"/>
+            <point key="canvasLocation" x="177.5" y="105.5"/>
         </tableViewCell>
     </objects>
 </document>

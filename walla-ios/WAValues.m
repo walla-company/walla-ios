@@ -37,6 +37,21 @@
     return [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
 }
 
++ (UIColor *)tabTextColorLightGray {
+    
+    return [[UIColor alloc] initWithRed:97.0/255.0 green:97.0/255.0 blue:97.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)tabColorOrange {
+    
+    return [[UIColor alloc] initWithRed:244.0/255.0 green:201.0/255.0 blue:146.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)tabColorOffWhite {
+    
+    return [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
+}
+
 #pragma  mark - Other
 
 + (NSArray *)interestsArray {

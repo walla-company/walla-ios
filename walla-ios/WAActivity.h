@@ -10,6 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "WAGroup.h"
 #import "WAUser.h"
 
@@ -17,19 +19,37 @@
 
 @property NSString *activityID;
 
-@property WAUser *host;
-
-@property NSString *title;
 @property NSDate *startTime;
 @property NSDate *endTime;
 
+@property NSString *title;
+@property NSString *details;
+
 @property BOOL activityPublic;
+
+@property NSArray *interests;
+
+@property NSString *locationName;
+@property NSString *locationAddress;
+@property CLLocation *location;
+
+@property WAUser *host;
+@property NSString *hostGroupID;
+@property NSString *hostGroupName;
+@property NSString *hostGroupShortName;
+
+@property BOOL canOthersInvite;
+
+@property NSDictionary *repliesDictionary;
+
+@property NSMutableArray *interestedUsers;
+@property NSMutableArray *goingUsers;
 
 @property NSInteger numberInterested;
 @property NSInteger numberGoing;
 
-@property WAGroup *hostGroup;
+- (id)init;
 
-@property NSArray *interests;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

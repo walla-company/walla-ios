@@ -8,6 +8,10 @@
 
 #import "WAViewGroupTableViewController.h"
 
+#import "WAViewActivityViewController.h"
+
+#import "WAValues.h"
+
 @interface WAViewGroupTableViewController ()
 
 @end
@@ -17,7 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"GROUPID: %@", self.viewingGroupID);
+    
     self.title = @"Group";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
     
     // Set up table view
     
@@ -35,12 +43,6 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 150.0;
-    
-    // Set up colors
-    
-    self.tabColorLightGray = [[UIColor alloc] initWithRed:97.0/255.0 green:97.0/255.0 blue:97.0/255.0 alpha:1.0];
-    self.tabColorOffwhite = [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
-    self.tabColorOrange = [[UIColor alloc] initWithRed:244.0/255.0 green:201.0/255.0 blue:146.0/255.0 alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,7 +92,7 @@
     
     cell.backgroundColor = [UIColor clearColor];
     
-    [cell.headerView setTabs:@[@[@"Interest", [UIColor whiteColor], self.tabColorLightGray, @false], @[@"Interest", self.tabColorOffwhite, self.tabColorLightGray, @false], @[@"Group", self.tabColorOrange, [UIColor whiteColor], @true]]];
+    [cell.headerView setTabs:@[@[@"Interest", [UIColor whiteColor], [WAValues tabTextColorLightGray], @false], @[@"Interest", [WAValues tabColorOffWhite], [WAValues tabTextColorLightGray], @false], @[@"Group", [WAValues tabColorOrange], [UIColor whiteColor], @true]]];
     
     cell.headerView.delegate = self;
     
@@ -136,23 +138,32 @@
     return 20;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 1) {
+        WAViewActivityViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewActivityViewController"];
+        destinationController.viewingActivityID = @"ACTIVITYID";
+        [self.navigationController pushViewController:destinationController animated:YES];
+    }
+    
+}
+
 #pragma mark - Tab header view delegate
 
 - (void)activityTabButtonPressed:(NSString *)groupID {
     
     NSLog(@"Tab pressed: %@", groupID);
     
-    
+    WAViewGroupTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewGroupTableViewController"];
+    destinationController.viewingGroupID = groupID;
+    [self.navigationController pushViewController:destinationController animated:YES];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
-*/
 
 @end

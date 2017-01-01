@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 
+#import "WAServer.h"
+
 @import GoogleMaps;
 @import GooglePlaces;
+
+@import Firebase;
 
 @interface AppDelegate ()
 
@@ -26,9 +30,18 @@
     [GMSServices provideAPIKey:@"AIzaSyD_fZgsJ97lWBCg-IaljG8xU9fU8ywJ0yk"];
     [GMSPlacesClient provideAPIKey:@"AIzaSyD_fZgsJ97lWBCg-IaljG8xU9fU8ywJ0yk"];
     
+    [FIRApp configure];
+    
+    [WAServer loadAllowedDomains];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        [WAServer loadAllowedDomains];
+    });
+
+    
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

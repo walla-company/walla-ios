@@ -14,5 +14,11 @@
 
 @property (strong, nonatomic) IBOutlet WAActivityTabsHeaderView *activityHeaderView;
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+
 
 @end

@@ -13,6 +13,9 @@
 
 @interface WADiscoverViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WADiscoverFriendSuggestionsTableViewCellDelegate>
 
+@property NSString *openUserID;
+@property NSString *openGroupID;
+
 @property (strong, nonatomic) IBOutlet UITableView *discoverTableView;
 
 @end

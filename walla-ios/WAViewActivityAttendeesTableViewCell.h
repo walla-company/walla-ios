@@ -10,4 +10,12 @@
 
 @interface WAViewActivityAttendeesTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *interestedCount;
+
+@property (strong, nonatomic) IBOutlet UILabel *interestedLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *goingCount;
+
+@property (strong, nonatomic) IBOutlet UILabel *goingLabel;
+
 @end

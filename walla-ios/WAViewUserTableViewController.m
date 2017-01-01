@@ -8,6 +8,9 @@
 
 #import "WAViewUserTableViewController.h"
 
+#import "WAViewActivityViewController.h"
+#import "WAViewGroupTableViewController.h"
+
 @interface WAViewUserTableViewController ()
 
 @end
@@ -17,7 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"USERID: %@", self.viewingUserID);
+    
     self.title = @"Profile";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
     
     // Set up table view
     
@@ -134,11 +141,25 @@
     return 20;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 1) {
+        WAViewActivityViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewActivityViewController"];
+        destinationController.viewingActivityID = @"ACTIVITYID";
+        [self.navigationController pushViewController:destinationController animated:YES];
+    }
+    
+}
+
 #pragma mark - Tab header view delegate
 
 - (void)activityTabButtonPressed:(NSString *)groupID {
     
     NSLog(@"Tab pressed: %@", groupID);
+    
+    WAViewGroupTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewGroupTableViewController"];
+    destinationController.viewingGroupID = groupID;
+    [self.navigationController pushViewController:destinationController animated:YES];
 }
 
 #pragma mark - User profile cell delegate
@@ -154,16 +175,17 @@
 - (void)userGroupSelected:(NSString *)groupID {
     
     NSLog(@"Group selected: %@", groupID);
+    
+    WAViewGroupTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewGroupTableViewController"];
+    destinationController.viewingGroupID = groupID;
+    [self.navigationController pushViewController:destinationController animated:YES];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)openCreateActivity {
+    
+    [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
-*/
 
 @end

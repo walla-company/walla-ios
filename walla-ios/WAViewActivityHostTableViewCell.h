@@ -10,4 +10,10 @@
 
 @interface WAViewActivityHostTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *hostProfileImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *hostNameLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *hostInfoLabel;
+
 @end

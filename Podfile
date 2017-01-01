@@ -8,4 +8,10 @@ target 'walla-ios' do
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
 
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/DynamicLinks'
+  pod 'Firebase/Messaging'
+
 end

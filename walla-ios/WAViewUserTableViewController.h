@@ -16,6 +16,8 @@
 
 @interface WAViewUserTableViewController : UITableViewController <WAActivityTabDelegate, WAViewUserProfileTableViewCellDelegate>
 
+@property NSString *viewingUserID;
+
 @property UIColor *tabColorLightGray;
 @property UIColor *tabColorOrange;
 @property UIColor *tabColorOffwhite;

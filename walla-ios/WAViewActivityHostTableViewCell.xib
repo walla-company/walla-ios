@@ -76,6 +76,11 @@
                     <constraint firstAttribute="trailing" secondItem="YOn-J7-LvE" secondAttribute="trailing" constant="15" id="pqM-13-AUF"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="hostInfoLabel" destination="Tlk-Qa-cNd" id="Hkg-aa-sVG"/>
+                <outlet property="hostNameLabel" destination="9Wl-Tg-Tof" id="Z21-aO-ldh"/>
+                <outlet property="hostProfileImageView" destination="gWi-KK-gjQ" id="Wbq-3c-m2t"/>
+            </connections>
             <point key="canvasLocation" x="34" y="80.5"/>
         </tableViewCell>
     </objects>

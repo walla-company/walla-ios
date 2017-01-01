@@ -16,8 +16,6 @@
 
 @interface WAViewGroupTableViewController : UITableViewController <WAActivityTabDelegate>
 
-@property UIColor *tabColorLightGray;
-@property UIColor *tabColorOrange;
-@property UIColor *tabColorOffwhite;
+@property NSString *viewingGroupID;
 
 @end
