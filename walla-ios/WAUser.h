@@ -12,21 +12,35 @@
 
 @interface WAUser : NSObject
 
-@property NSString *firstName;
-@property NSString *lastName;
 @property NSString *userID;
 
-@property NSString *classYear;
+@property NSString *firstName;
+@property NSString *lastName;
+
+@property NSString *academicLevel;
+
+@property NSString *graduationYear;
 @property NSString *major;
 
 @property UIImage *profileImage;
+@property NSString *profileImageURL;
 
 @property NSString *details;
+@property NSString *hometown;
 
-@property NSString *location;
+@property NSArray *friends;
+@property NSArray *groups;
+@property NSArray *interests;
+@property NSArray *activities;
+
+@property NSArray *calendar;
+
+@property NSDictionary *pendingFriendRequests;
 
 - (id)init;
 
 - (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName userID:(NSString *)userID classYear:(NSString *)classYear major:(NSString *)major image:(UIImage *)image;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

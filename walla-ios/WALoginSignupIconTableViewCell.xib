@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="213" id="KGk-i7-Jjw" customClass="WALoginSignupIconTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEt-oz-0Am" customClass="WAShadowView">
+                        <rect key="frame" x="20" y="20" width="280" height="174.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Floating_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="w0u-6D-Ufw">
+                                <rect key="frame" x="75" y="22" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="INg-Dv-N9X"/>
+                                    <constraint firstAttribute="width" constant="130" id="KhG-hu-3DB"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="w0u-6D-Ufw" firstAttribute="centerX" secondItem="GEt-oz-0Am" secondAttribute="centerX" id="L0S-4r-FVB"/>
+                            <constraint firstAttribute="bottom" secondItem="w0u-6D-Ufw" secondAttribute="bottom" constant="22" id="s0e-Bn-BNb"/>
+                            <constraint firstItem="w0u-6D-Ufw" firstAttribute="top" secondItem="GEt-oz-0Am" secondAttribute="top" constant="22" id="yAB-bH-huX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GEt-oz-0Am" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="2dU-6F-pf3"/>
+                    <constraint firstItem="GEt-oz-0Am" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="CNc-dF-D21"/>
+                    <constraint firstAttribute="trailing" secondItem="GEt-oz-0Am" secondAttribute="trailing" constant="20" id="GoA-BA-QYX"/>
+                    <constraint firstAttribute="bottom" secondItem="GEt-oz-0Am" secondAttribute="bottom" constant="5" id="gsD-NU-GfP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="shadowView" destination="GEt-oz-0Am" id="dtd-Ug-1rB"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="138.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Floating_Icon" width="130" height="130"/>
+    </resources>
+</document>

@@ -38,9 +38,81 @@
         
         [WAServer loadAllowedDomains];
     });
-
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    NSLog(@"delegate tabbarController: %@", tabBarController);
+    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+    
+    self.window.rootViewController = tabBarController;
+    [self.window makeKeyAndVisible];
+    
+    self.userSignedIn = true;
+    
+    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        BOOL inSignup = [[NSUserDefaults standardUserDefaults] boolForKey:@"inSignup"];
+        
+        if (user && !inSignup) {
+            NSLog(@"delegate signed in");
+            if (!self.userSignedIn) {
+                
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                    
+                    [WAServer updateUserLastLogon];
+                });
+                
+                UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+                NSLog(@"delegate tabbarController: %@", tabBarController);
+                [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+                
+                self.window.rootViewController = tabBarController;
+            }
+            self.userSignedIn = true;
+        }
+        else {
+            NSLog(@"delegate not signed in");
+            if (self.userSignedIn) {
+                UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+                NSLog(@"delegate navigationController: %@", navigationController);
+                [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+                
+                self.window.rootViewController = navigationController;
+            }
+            self.userSignedIn = false;
+        }
+        
+     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
     return YES;
+}
+
+- (void)signupComplete {
+    
+    NSLog(@"signupComplete");
+    
+    if ([FIRAuth auth].currentUser && !self.userSignedIn) {
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserLastLogon];
+        });
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+        NSLog(@"delegate tabbarController: %@", tabBarController);
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+        
+        self.window.rootViewController = tabBarController;
+    }
+    self.userSignedIn = true;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

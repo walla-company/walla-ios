@@ -75,7 +75,7 @@
     
     cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     
-    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.classYear, user.major];
+    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.graduationYear, user.major];
     
     cell.profileImageView.image = user.profileImage;
     

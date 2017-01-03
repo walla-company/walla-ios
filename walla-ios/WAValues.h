@@ -17,6 +17,9 @@
 + (UIColor *)wallaOrangeColor;
 
 + (UIColor *)defaultTableViewBackgroundColor;
++ (UIColor *)loginSignupTableViewBackgroundColor;
+
++ (UIColor *)loginSignupCellBackgroundColor;
 
 + (UIColor *)selectedCellColor;
 

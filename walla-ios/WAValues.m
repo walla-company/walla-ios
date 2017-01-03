@@ -22,6 +22,16 @@
     return [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
 }
 
++ (UIColor *)loginSignupTableViewBackgroundColor {
+    
+    return [[UIColor alloc] initWithRed:255.0/255.0 green:163.0/255.0 blue:74.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)loginSignupCellBackgroundColor {
+    
+    return [[UIColor alloc] initWithRed:253.0/255.0 green:225.0/255.0 blue:209.0/255.0 alpha:1.0];
+}
+
 + (UIColor *)selectedCellColor {
     
     return [[UIColor alloc] initWithRed:255.0/255.0 green:243.0/255.0 blue:229.0/255.0 alpha:1.0];

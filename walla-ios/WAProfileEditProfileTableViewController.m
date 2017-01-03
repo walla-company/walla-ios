@@ -8,7 +8,18 @@
 
 #import "WAProfileEditProfileTableViewController.h"
 
+#import "WAProfileEditProfilePictureTableViewCell.h"
+#import "WAProfileEditProfileNameTableViewCell.h"
+#import "WAProfileEditProfileAcademicLevelTableViewCell.h"
+#import "WAProfileEditProfileYearTableViewCell.h"
+#import "WAProfileEditProfileMajorTableViewCell.h"
+#import "WAProfileEditProfileLocationTableViewCell.h"
+#import "WAProfileEditProfileDetailsTableViewCell.h"
+
 #import "WAValues.h"
+#import "WAServer.h"
+
+@import Firebase;
 
 @interface WAProfileEditProfileTableViewController ()
 
@@ -27,6 +38,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfilePictureTableViewCell" bundle:nil] forCellReuseIdentifier:@"pictureCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileNameTableViewCell" bundle:nil] forCellReuseIdentifier:@"nameCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileAcademicLevelTableViewCell" bundle:nil] forCellReuseIdentifier:@"academicLevelCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileYearTableViewCell" bundle:nil] forCellReuseIdentifier:@"yearCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileMajorTableViewCell" bundle:nil] forCellReuseIdentifier:@"majorCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
@@ -45,10 +57,21 @@
     
     // Initialize default values
     
+    /*
     self.user = [[WAUser alloc] initWithFirstName:@"John" lastName:@"Smith" userID:@"USERID" classYear:@"2020" major:@"Computer Science" image:[UIImage imageNamed:@"BlankCircle"]];
     
     self.user.details = @"This is stuff about me...";
-    self.user.location = @"Durham, NC";
+    self.user.hometown = @"Durham, NC";*/
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        [WAServer getUserWithID:[FIRAuth auth].currentUser.uid completion:^(WAUser *user){
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                self.user = user;
+                [self.tableView reloadData];
+            });
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +88,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6;
+    if (self.user) return 7;
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,6 +132,28 @@
     
     if (indexPath.row == 2) {
         
+        WAProfileEditProfileAcademicLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"academicLevelCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        [cell.chooseButton addTarget:self action:@selector(chooseAcademicLevelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([self.user.academicLevel isEqualToString:@""]) {
+            cell.academicLevelLabel.textColor = [WAValues notSelectedTextColor];
+            cell.academicLevelLabel.text = @"Choose academic level";
+        }
+        else {
+            cell.academicLevelLabel.textColor = [WAValues selectedTextColor];
+            cell.academicLevelLabel.text = ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate";
+        }
+        
+        return cell;
+        
+    }
+    
+    if (indexPath.row == 3) {
+        
         WAProfileEditProfileYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yearCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor clearColor];
@@ -114,10 +161,19 @@
         
         [cell.chooseButton addTarget:self action:@selector(chooseYearButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        if ([self.user.graduationYear isEqualToString:@""]) {
+            cell.graduationYearLabel.textColor = [WAValues notSelectedTextColor];
+            cell.graduationYearLabel.text = @"Choose graduation year";
+        }
+        else {
+            cell.graduationYearLabel.textColor = [WAValues selectedTextColor];
+            cell.graduationYearLabel.text = self.user.graduationYear;
+        }
+        
         return cell;
     }
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         
         WAProfileEditProfileMajorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"majorCell" forIndexPath:indexPath];
         
@@ -132,14 +188,14 @@
         return cell;
     }
     
-    if (indexPath.row == 4) {
+    if (indexPath.row == 5) {
         
         WAProfileEditProfileLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.locationTextField.text = self.user.location;
+        cell.locationTextField.text = self.user.hometown;
         
         cell.locationTextField.tag = 4;
         cell.locationTextField.delegate = self;
@@ -169,29 +225,68 @@
 
 #pragma mark - Button targets
 
-- (void)chooseYearButtonPressed:(UIButton *)button {
+- (void)chooseAcademicLevelButtonPressed:(UIButton *)button {
     
-    UIAlertController *yearMenu = [UIAlertController alertControllerWithTitle:@"Graduation Year" message:@"Choose an option" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *levelMenu = [UIAlertController alertControllerWithTitle:@"Academic Level" message:@"Choose an option" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *option1 = [UIAlertAction actionWithTitle:@"2017" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+    UIAlertAction *option1 = [UIAlertAction actionWithTitle:@"Undergraduate" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
         
+        self.user.academicLevel = @"undergrad";
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
+        });
+        
+        [self.tableView reloadData];
     }];
-    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"2018" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"Graduate" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
         
-    }];
-    UIAlertAction *option3 = [UIAlertAction actionWithTitle:@"2019" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+        self.user.academicLevel = @"grad";
         
-    }];
-    UIAlertAction *option4 = [UIAlertAction actionWithTitle:@"2020" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
+        });
         
+        [self.tableView reloadData];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
-    [yearMenu addAction:option1];
-    [yearMenu addAction:option2];
-    [yearMenu addAction:option3];
-    [yearMenu addAction:option4];
+    [levelMenu addAction:option1];
+    [levelMenu addAction:option2];
+    
+    [levelMenu addAction:cancelAction];
+    
+    [self presentViewController:levelMenu animated:true completion:nil];
+    
+}
+
+- (void)chooseYearButtonPressed:(UIButton *)button {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy"];
+    NSInteger yearInt = [[formatter stringFromDate:[NSDate date]] integerValue];
+    
+    UIAlertController *yearMenu = [UIAlertController alertControllerWithTitle:@"Graduation Year" message:@"Choose an option" preferredStyle:UIAlertControllerStyleAlert];
+    
+    for (int i=0; i < 6; i++) {
+        
+        UIAlertAction *option = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%ld", (long) yearInt + i] style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+            
+            self.user.graduationYear = [NSString stringWithFormat:@"%ld", (long) yearInt + i];
+            
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                
+                [WAServer updateUserGraduationYear:yearInt + i completion:nil];
+            });
+        }];
+        
+        [yearMenu addAction:option];
+    }
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     [yearMenu addAction:cancelAction];
     
@@ -269,6 +364,8 @@
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:true completion:nil];
+    
+    [self uploadPhoto];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -331,6 +428,31 @@
     return [[UIImage alloc] initWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
 }
 
+- (void)uploadPhoto {
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://walla-launch.appspot.com"];
+    
+    NSData *data = UIImageJPEGRepresentation(self.user.profileImage, 0.75);
+    
+    FIRStorageReference *riversRef = [storageRef child:[NSString stringWithFormat:@"profile_images/%@.jpg", [FIRAuth auth].currentUser.uid]];
+    
+    [riversRef putData:data metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+        if (error != nil) {
+            
+            NSLog(@"Profile Image upload error");
+            
+        } else {
+            
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                
+                [WAServer updateUserProfileImageURL:[NSString stringWithFormat:@"gs://walla-launch.appspot.com/profile_images/%@.jpg", [FIRAuth auth].currentUser.uid] completion:nil];
+            });
+        }
+    }];
+    
+}
+
 #pragma mark - Text field delegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
@@ -338,18 +460,38 @@
     if (textField.tag == 1) {
         
         self.user.firstName = textField.text;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserFirstName:self.user.firstName completion:nil];
+        });
     }
     else if (textField.tag == 2) {
         
         self.user.lastName = textField.text;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserLastName:self.user.lastName completion:nil];
+        });
     }
     else if (textField.tag == 3) {
         
         self.user.major = textField.text;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserMajor:self.user.major completion:nil];
+        });
     }
     else if (textField.tag == 4) {
         
-        self.user.location = textField.text;
+        self.user.hometown = textField.text;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            
+            [WAServer updateUserHometown:self.user.hometown completion:nil];
+        });
     }
 }
 

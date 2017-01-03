@@ -8,6 +8,8 @@
 
 #import "WAMyProfileTableViewController.h"
 
+@import Firebase;
+
 @interface WAMyProfileTableViewController ()
 
 @end
@@ -36,7 +38,7 @@
     self.tableView.showsVerticalScrollIndicator = false;
     
     // Initialize values
-    self.titleArray = @[@"Edit profile", @"My friends", @"My groups", @"My interests", @"About Walla", @"Logout"];
+    self.titleArray = @[@"Edit profile", @"My friends", @"My groups", @"My interests", @"About Walla", @"Log out"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,6 +120,32 @@
             break;
     }
     
+    if (indexPath.row == 6) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"You will have to log back in." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Log out" style:UIAlertActionStyleDestructive handler: ^(UIAlertAction *action){
+            [self logout];
+        }];
+        
+        [alert addAction:option];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    
+}
+
+- (void)logout {
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
 }
 
 #pragma mark - Navigation
