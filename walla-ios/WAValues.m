@@ -62,6 +62,26 @@
     return [[UIColor alloc] initWithRed:251.0/255.0 green:251.0/255.0 blue:251.0/255.0 alpha:1.0];
 }
 
++ (UIColor *)buttonBlueColor {
+    
+    return [[UIColor alloc] initWithRed:99.0/255.0 green:201.0/255.0 blue:249.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)buttonInterestedColor {
+    
+    return [[UIColor alloc] initWithRed:255.0/255.0 green:213.0/255.0 blue:75.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)buttonGoingColor {
+    
+    return [[UIColor alloc] initWithRed:255.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)buttonGrayColor {
+    
+    return [[UIColor alloc] initWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0];
+}
+
 #pragma  mark - Other
 
 + (NSArray *)interestsArray {
@@ -70,6 +90,14 @@
              @[@"Study", @"InterestIcon_Study"], @[@"Sports", @"InterestIcon_Sports"], @[@"Rides", @"InterestIcon_Rides"],
              @[@"Exhibition", @"InterestIcon_Exhibition"], @[@"Music", @"InterestIcon_Music"], @[@"Games", @"InterestIcon_Games"],
              @[@"Dance", @"InterestIcon_Dance"], @[@"Socialize", @"InterestIcon_Socialize"], @[@"Volunteer", @"InterestIcon_Volunteer"]];
+}
+
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 @end

@@ -22,7 +22,4 @@
 @property (strong, nonatomic) IBOutlet UIView *shareView;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *invitedPeopleHeaderLabel;
-@property (strong, nonatomic) IBOutlet UILabel *invitedPeopleLabel;
-
 @end

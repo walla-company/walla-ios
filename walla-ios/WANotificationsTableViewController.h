@@ -10,4 +10,10 @@
 
 @interface WANotificationsTableViewController : UITableViewController
 
+@property NSMutableArray *notificationsArray;
+
+@property NSMutableDictionary *profileImagesDictionary;
+
+@property NSString *openActivityID;
+
 @end

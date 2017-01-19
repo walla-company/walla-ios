@@ -8,6 +8,11 @@
 
 #import "WADiscoverFriendSuggestionsTableViewCell.h"
 
+#import "WAServer.h"
+#import "WAUser.h"
+
+@import Firebase;
+
 @implementation WADiscoverFriendSuggestionsTableViewCell
 
 - (void)awakeFromNib {
@@ -19,6 +24,17 @@
     
     self.suggestedFriendsCollectionView.delegate = self;
     self.suggestedFriendsCollectionView.dataSource = self;
+    
+    // Load suggested users
+    
+    [WAServer getSuggestedUsers:^(NSArray *users) {
+        self.suggestedUsers = users;
+        [self.suggestedFriendsCollectionView reloadData];
+    }];
+    
+    // Initialize default values
+    
+    self.profileImagesDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,12 +52,14 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 10;
+    return [self.suggestedUsers count];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.delegate suggestedUserSelected:@"USERID"];
+    WAUser *user = [self.suggestedUsers objectAtIndex:indexPath.row];
+    
+    [self.delegate suggestedUserSelected:user.userID];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,7 +70,46 @@
     
     cell.addFriendView.layer.cornerRadius = 6.0;
     
+    WAUser *user = [self.suggestedUsers objectAtIndex:indexPath.row];
+    
+    cell.nameInfoLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+    
+    UIImage *profileImage = [self.profileImagesDictionary objectForKey:user.userID];
+    
+    cell.profileImageView.clipsToBounds = true;
+    cell.profileImageView.layer.cornerRadius = 32.5;
+    
+    if (profileImage) {
+        cell.profileImageView.image = profileImage;
+    }
+    else {
+        [self.profileImagesDictionary setObject:[UIImage imageNamed:@"BlankCircle"] forKey:user.userID];
+        [self loadProfileImage:user.profileImageURL forUserID:user.userID];
+    }
+    
     return cell;
+}
+
+- (void)loadProfileImage:(NSString *)profileImageURL forUserID:(NSString *)userID {
+    
+    if (![profileImageURL isEqualToString:@""]) {
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                [self.profileImagesDictionary setObject:[UIImage imageWithData:data] forKey:userID];
+                [self.suggestedFriendsCollectionView reloadData];
+            }
+        }];
+    }
 }
 
 @end

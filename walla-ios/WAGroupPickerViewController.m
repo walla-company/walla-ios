@@ -14,14 +14,14 @@
 
 @implementation WAGroupPickerViewController
 
-- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups canSelectMultipleGourps:(BOOL)canSelectMultipleGourps {
+- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups userGroupIDs:(NSArray *)userGroupIDs canSelectMultipleGourps:(BOOL)canSelectMultipleGourps {
     
     self = [super init];
     
     if (self) {
         self.groupPickerTitle = title;
         self.selectedGroups = selectedGroups;
-        self.allGroups = allGroups;
+        self.userGroupIDs = userGroupIDs;
         self.canSelectMultipleGourps = canSelectMultipleGourps;
     }
     
@@ -43,7 +43,7 @@
     singleFingerTap.delegate = self;
     [self.view addGestureRecognizer:singleFingerTap];
     
-    self.groupPicker = [[WAGroupPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.groupPickerTitle selectedGroups:self.selectedGroups allGroups:self.allGroups canSelectMultipleGroups:self.canSelectMultipleGourps];
+    self.groupPicker = [[WAGroupPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.groupPickerTitle selectedGroups:self.selectedGroups userGroupIDs:self.userGroupIDs canSelectMultipleGroups:self.canSelectMultipleGourps];
     
     self.groupPicker.delegate = self;
     

@@ -8,8 +8,12 @@
 
 #import "WAMyProfileGroupsTableViewController.h"
 
+#import "WAViewGroupTableViewController.h"
+
+#import "WAServer.h"
 #import "WAValues.h"
-#import "WAGroup.h"
+
+@import Firebase;
 
 @interface WAMyProfileGroupsTableViewController ()
 
@@ -36,16 +40,37 @@
     self.tableView.estimatedRowHeight = 65.0;
     
     self.tableView.showsVerticalScrollIndicator = false;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     
-    // Initialize values
+    [super viewWillAppear:animated];
     
-    WAGroup *group1 = [[WAGroup alloc] initWithName:@"Something Borrowed Something Blue" shortName:@"SBSB" groupID:@"1" color:[UIColor orangeColor]];
-    WAGroup *group2 = [[WAGroup alloc] initWithName:@"Mechanical Engineers" shortName:@"MechEng" groupID:@"2" color:[UIColor purpleColor]];
-    WAGroup *group3 = [[WAGroup alloc] initWithName:@"Residential Assisstants" shortName:@"RA" groupID:@"3" color:[UIColor greenColor]];
-    WAGroup *group4 = [[WAGroup alloc] initWithName:@"Group 1" shortName:@"G1" groupID:@"4" color:[UIColor magentaColor]];
-    WAGroup *group5 = [[WAGroup alloc] initWithName:@"Group 2" shortName:@"G2" groupID:@"3" color:[UIColor blueColor]];
+    [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups){
+       
+        self.userGroupIDs = groups;
+        
+        [self loadUserGroups];
+    }];
+}
+
+- (void)loadUserGroups {
     
-    self.groups = @[group1, group2, group3, group4, group5];
+    self.userGroupsArray =[[NSMutableArray alloc] init];
+    
+    for (NSString *groupID in self.userGroupIDs) {
+        
+        [WAServer getGroupBasicInfoWithID:groupID completion:^(NSDictionary *group){
+            
+            [self.userGroupsArray addObject:group];
+            
+            [self.userGroupsArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+            
+            [self.tableView reloadData];
+        }];
+    }
+    
+    if ([self.userGroupIDs count] == 0) [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.groups count];
+    return [self.userGroupsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,12 +97,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    WAGroup *group = [self.groups objectAtIndex:indexPath.row];
+    NSDictionary *group = [self.userGroupsArray objectAtIndex:indexPath.row];
     
-    cell.groupNameLabel.text = group.name;
-    cell.groupTagViewLabel.text = group.shortName;
+    cell.groupNameLabel.text = group[@"name"];
+    cell.groupTagViewLabel.text = group[@"short_name"];
     
-    cell.groupTagView.backgroundColor = group.groupColor;
+    cell.groupTagView.backgroundColor = [WAValues colorFromHexString:group[@"color"]];
     
     cell.groupTagView.layer.cornerRadius = 8.0;
     
@@ -86,17 +111,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    self.openGroupID = [[self.userGroupsArray objectAtIndex:indexPath.row] objectForKey:@"group_id"];
+    
     [self performSegueWithIdentifier:@"openViewGroup" sender:self];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"openViewGroup"]) {
+        
+        WAViewGroupTableViewController *destinationController = (WAViewGroupTableViewController *) [segue destinationViewController];
+        destinationController.viewingGroupID = self.openGroupID;
+    }
+    
 }
-*/
 
 @end

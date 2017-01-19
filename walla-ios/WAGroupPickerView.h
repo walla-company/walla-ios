@@ -10,8 +10,6 @@
 
 #import "WAGroupTableViewCell.h"
 
-#import "WAGroup.h"
-
 typedef void(^animationCompletion)(void);
 
 @protocol WAGroupPickerViewDelegate <NSObject>
@@ -38,11 +36,13 @@ typedef void(^animationCompletion)(void);
 @property BOOL canSelectMultipleGroups;
 
 @property NSMutableArray *selectedGroups;
-@property NSArray *allGroups;
+@property NSArray *userGroupIDs;
+
+@property NSMutableDictionary *groupsDictionary;
 
 @property id <WAGroupPickerViewDelegate> delegate;
 
-- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups canSelectMultipleGroups:(BOOL)canSelectMultipleGroups;
+- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedGroups:(NSArray *)selectedGroups userGroupIDs:(NSArray *)userGroupIDs canSelectMultipleGroups:(BOOL)canSelectMultipleGroups;
 
 - (void)animateUp:(CGRect)frame;
 

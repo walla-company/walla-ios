@@ -33,11 +33,18 @@
     [mapView setCamera:camera];
     
     self.view = mapView;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Directions" style:UIBarButtonItemStylePlain target:self action:@selector(getDirections)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)getDirections {
+    NSString *directionsURL = [NSString stringWithFormat:@"http://maps.apple.com/?daddr=%f,%f",self.location.coordinate.latitude, self.location.coordinate.longitude];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:directionsURL] options:@{} completionHandler:nil];
 }
 
 @end

@@ -159,8 +159,8 @@ to 8:00</string>
             <connections>
                 <outlet property="audienceImageView" destination="4y4-yb-Fqe" id="3nf-Zz-dDZ"/>
                 <outlet property="dateLabel" destination="KxV-R5-cRi" id="4AJ-x5-pQ8"/>
-                <outlet property="goinNamesLabel" destination="eIP-5J-rpD" id="1i6-p5-e2f"/>
                 <outlet property="goingCountLabel" destination="ZUf-hz-vZK" id="iy9-mo-Xll"/>
+                <outlet property="goingNamesLabel" destination="eIP-5J-rpD" id="T1b-rz-l0i"/>
                 <outlet property="headerView" destination="N6Q-dl-mhY" id="y9r-CM-NYn"/>
                 <outlet property="interestedCountLabel" destination="aKA-zA-3ps" id="oJ8-4j-a4y"/>
                 <outlet property="timeLabel" destination="VIx-3r-GkG" id="0KI-TR-DYC"/>

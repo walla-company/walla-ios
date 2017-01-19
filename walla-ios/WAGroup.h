@@ -16,9 +16,15 @@
 @property NSString *shortName;
 @property NSString *groupID;
 @property UIColor *groupColor;
+@property NSString *details;
+
+@property NSMutableArray *activities;
+@property NSMutableArray *members;
 
 - (id)init;
 
 - (id)initWithName:(NSString *)name shortName:(NSString *)shortName groupID:(NSString *)groupID color:(UIColor *)groupColor;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

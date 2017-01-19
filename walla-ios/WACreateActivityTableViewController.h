@@ -72,5 +72,7 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
     kPostCellRow = 10,
 };
 
+@property NSArray *userGroupIDs;
+@property NSArray *userFriendIDs;
 
 @end

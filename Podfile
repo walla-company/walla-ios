@@ -13,5 +13,6 @@ target 'walla-ios' do
   pod 'Firebase/Storage'
   pod 'Firebase/DynamicLinks'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Database'
 
 end

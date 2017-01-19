@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-#import "WAMyProfileMainTableViewCell.h"
-#import "WAMyProfileTextTableViewCell.h"
-
 @interface WAMyProfileTableViewController : UITableViewController
 
 @property NSArray *titleArray;
+
+@property NSString *name;
+@property NSString *academicLevel;
+@property NSString *graduationYear;
+@property NSString *major;
+@property NSString *hometown;
+@property NSString *profileImageURL;
+
+@property UIImage *profileImage;
 
 @end

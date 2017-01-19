@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-XX-RvH" customClass="WAShadowView">
-                        <rect key="frame" x="15" y="10" width="413" height="91.5"/>
+                        <rect key="frame" x="15" y="10" width="413" height="92"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audience" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6F-e5-WBS">
-                                <rect key="frame" x="15" y="15" width="61" height="17.5"/>
+                                <rect key="frame" x="15" y="15" width="61" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qp8-0K-bVi">
-                                <rect key="frame" x="8" y="40.5" width="125" height="36"/>
+                                <rect key="frame" x="15" y="41" width="125" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="P6c-i1-lKI"/>
                                     <constraint firstAttribute="height" constant="36" id="dVj-Ek-Mha"/>
@@ -36,7 +36,7 @@
                                 <state key="normal" image="PublicButtonPressed"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNe-km-sbE">
-                                <rect key="frame" x="141" y="40.5" width="125" height="36"/>
+                                <rect key="frame" x="148" y="41" width="125" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="AXY-fm-wEx"/>
                                     <constraint firstAttribute="height" constant="36" id="ZrL-FY-Ker"/>
@@ -52,7 +52,7 @@
                             <constraint firstAttribute="bottom" secondItem="Qp8-0K-bVi" secondAttribute="bottom" constant="15" id="W97-mR-lhc"/>
                             <constraint firstItem="gNe-km-sbE" firstAttribute="leading" secondItem="Qp8-0K-bVi" secondAttribute="trailing" constant="8" id="WGB-th-jOf"/>
                             <constraint firstItem="W6F-e5-WBS" firstAttribute="leading" secondItem="jJO-XX-RvH" secondAttribute="leading" constant="15" id="bj8-Nc-E4F"/>
-                            <constraint firstItem="Qp8-0K-bVi" firstAttribute="leading" secondItem="jJO-XX-RvH" secondAttribute="leading" constant="8" id="slc-jz-DPJ"/>
+                            <constraint firstItem="Qp8-0K-bVi" firstAttribute="leading" secondItem="jJO-XX-RvH" secondAttribute="leading" constant="15" id="slc-jz-DPJ"/>
                         </constraints>
                     </view>
                 </subviews>

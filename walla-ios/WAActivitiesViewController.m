@@ -53,15 +53,20 @@
     
     self.interestsArray = [WAValues interestsArray];
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    self.userInfoDictionary = [[NSMutableDictionary alloc] init];
+    
+    self.filteredActivities = [[NSMutableArray alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [WAServer getActivitisFromLastHours:24.0 completion:^(NSArray *activities){
         
-        [WAServer getActivitisFromLastHours:72.0 completion:^(NSArray *activities){
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                self.activitiesArray = activities;
-                [self.activitiesTableView reloadData];
-            });
-        }];
-    });
+        self.activitiesArray = activities;
+        [self.activitiesTableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +83,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (self.currentFilterIndex > 0) return [self.filteredActivities count];
+    
     return [self.activitiesArray count];;
 }
 
@@ -88,7 +95,10 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    WAActivity *activity = self.activitiesArray[indexPath.row];
+    WAActivity *activity;
+    
+    if (self.currentFilterIndex > 0) activity = [self.filteredActivities objectAtIndex:indexPath.row];
+    else activity = self.activitiesArray[indexPath.row];
     
     NSMutableArray *headerTabs = [[NSMutableArray alloc] init];
     
@@ -120,9 +130,9 @@
     cell.titleLabel.text = activity.title;
     
     NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
-    [formatter1 setDateFormat:@"HH:mm aa"];
+    [formatter1 setDateFormat:@"h:mm aa"];
     NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-    [formatter2 setDateFormat:@"HH:mm"];
+    [formatter2 setDateFormat:@"h:mm aa"];
     NSDateFormatter *formatter3 = [[NSDateFormatter alloc] init];
     [formatter3 setDateFormat:@"MM/dd"];
     
@@ -132,6 +142,32 @@
     cell.timeLabel.text = [NSString stringWithFormat:@"%@\nto %@", startTimeString, endTimeString];
     
     cell.dateLabel.text = [formatter3 stringFromDate:activity.startTime];
+    
+    cell.interestedCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberInterested];
+    cell.goingCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberGoing];
+    
+    cell.audienceImageView.image = (activity.activityPublic) ? [UIImage imageNamed:@"Lit"] : [UIImage imageNamed:@"Chill"];
+    
+    if ([activity.goingUserIDs count] > 0) {
+        if ([[self.userInfoDictionary allKeys] containsObject:[activity.goingUserIDs objectAtIndex:0]]) {
+            NSDictionary *userInfo = [self.userInfoDictionary objectForKey:[activity.goingUserIDs objectAtIndex:0]];
+            if ([activity.goingUserIDs count] == 1) {
+                cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ is going", userInfo[@"name"]];
+            }
+            else {
+                if (activity.numberGoing == 2) cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ and %ld other are going", userInfo[@"name"], (long)(activity.numberGoing-1)];
+                else cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ and %ld others are going", userInfo[@"name"], (long)(activity.numberGoing-1)];
+            }
+        }
+        else {
+            cell.goingNamesLabel.text = @"";
+            [self.userInfoDictionary setObject:@{@"name": @""} forKey:[activity.goingUserIDs objectAtIndex:0]];
+            [WAServer getUserBasicInfoWithID:[activity.goingUserIDs objectAtIndex:0] completion:^(NSDictionary *user) {
+                [self.userInfoDictionary setObject:user forKey:user[@"user_id"]];
+                [self.activitiesTableView reloadData];
+            }];
+        }
+    }
     
     return cell;
 }
@@ -172,7 +208,25 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.currentFilterIndex = (int) indexPath.row;
     
+    if (self.currentFilterIndex > 0) {
+        NSString *filter = [[self.interestsArray objectAtIndex:self.currentFilterIndex-1] objectAtIndex:0];
+        
+        [self.filteredActivities removeAllObjects];
+        
+        for (WAActivity *activity in self.activitiesArray) {
+            NSArray *interests = activity.interests;
+            
+            for (NSString *interest in interests) {
+                if ([interest isEqualToString:filter]) {
+                    [self.filteredActivities addObject:activity];
+                }
+            }
+        }
+    }
+    
     [collectionView reloadData];
+    
+    [self.activitiesTableView reloadData];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

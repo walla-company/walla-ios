@@ -8,6 +8,8 @@
 
 #import "WAViewUserProfileTableViewCell.h"
 
+#import "WAValues.h"
+
 @implementation WAViewUserProfileTableViewCell
 
 - (void)awakeFromNib {
@@ -34,15 +36,7 @@
     
     self.groupsTableView.scrollEnabled = false;
     
-    // Set up default values;
-    
-    WAGroup *group1 = [[WAGroup alloc] initWithName:@"Something Borrowed Something Blue" shortName:@"SBSB" groupID:@"1" color:[UIColor orangeColor]];
-    WAGroup *group2 = [[WAGroup alloc] initWithName:@"Mechanical Engineers" shortName:@"MechEng" groupID:@"2" color:[UIColor purpleColor]];
-    WAGroup *group3 = [[WAGroup alloc] initWithName:@"Residential Assisstants" shortName:@"RA" groupID:@"3" color:[UIColor greenColor]];
-    WAGroup *group4 = [[WAGroup alloc] initWithName:@"Group 1" shortName:@"G1" groupID:@"4" color:[UIColor magentaColor]];
-    WAGroup *group5 = [[WAGroup alloc] initWithName:@"Group 2" shortName:@"G2" groupID:@"3" color:[UIColor blueColor]];
-    
-    self.grouspArray = @[group1, group2, group3, group4, group5];
+    self.grouspArray = [[NSArray alloc] init];
     
     self.showMore = false;
 }
@@ -93,11 +87,11 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    WAGroup *group = [self.grouspArray objectAtIndex:indexPath.row];
+    NSDictionary *group = [self.grouspArray objectAtIndex:indexPath.row];
     
-    cell.groupNameLabel.text = group.name;
-    cell.groupTagViewLabel.text = group.shortName;
-    cell.groupTagView.backgroundColor = group.groupColor;
+    cell.groupNameLabel.text = group[@"name"];
+    cell.groupTagViewLabel.text = group[@"short_name"];
+    cell.groupTagView.backgroundColor = [WAValues colorFromHexString:group[@"color"]];
     
     return cell;
 }
@@ -106,7 +100,9 @@
     
     if (!(self.showMore && ([self.grouspArray count] > 3 && indexPath.row == [self.grouspArray count])) && !(!self.showMore && ([self.grouspArray count] > 3 && indexPath.row == 3))) {
         
-        [self.delegate userGroupSelected:@"GROUPID"];
+        NSDictionary *group = [self.grouspArray objectAtIndex:indexPath.row];
+        
+        [self.delegate userGroupSelected:group[@"group_id"]];
     }
     
 }

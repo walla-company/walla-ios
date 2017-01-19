@@ -8,6 +8,8 @@
 
 #import "WAUserPickerView.h"
 
+@import Firebase;
+
 @implementation WAUserPickerView
 
 static CGFloat VIEW_HEIGHT = 360.0; // 300 for primary
@@ -17,6 +19,9 @@ static CGFloat VIEW_WIDTH = 320.0;
 # pragma mark - Initialization
 
 - (void)initialize:(NSString *)title {
+    
+    self.usersDictionary = [[NSMutableDictionary alloc] init];
+    self.userProfileImageDictionary = [[NSMutableDictionary alloc] init];
     
     self.backgroundColor = [UIColor clearColor];
     
@@ -69,12 +74,17 @@ static CGFloat VIEW_WIDTH = 320.0;
     
 }
 
-- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers {
+- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedUsers:(NSArray *)selectedUsers userFriendIDs:(NSArray *)userFriendIDs {
     
     self = [super initWithFrame:CGRectMake((frame.size.width-VIEW_WIDTH)/2, frame.size.height, VIEW_WIDTH, VIEW_HEIGHT)];
     
-    self.selectedUsers = [[NSMutableArray alloc] initWithArray:selectedUsers];
-    self.allUsers = allUsers;
+    self.userFriendIDs = userFriendIDs;
+    
+    self.selectedUsers = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *user in selectedUsers) {
+        [self.selectedUsers addObject:user[@"user_id"]];
+    }
     
     if (self) {
         [self initialize:title];
@@ -124,28 +134,53 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.allUsers count];
+    return [self.userFriendIDs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     WAUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
     
-    WAUser *user = [self.allUsers objectAtIndex:indexPath.row];
+    NSString *userID = [self.userFriendIDs objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+    NSDictionary *user = [self.usersDictionary objectForKey:userID];
     
-    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.graduationYear, user.major];
+    cell.profileImageView.clipsToBounds = true;
+    cell.profileImageView.layer.cornerRadius = 17.5;
     
-    cell.profileImageView.image = user.profileImage;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if ([self.selectedUsers containsObject:[self.allUsers objectAtIndex:indexPath.row]]) {
-        cell.backgroundColor = [[UIColor alloc] initWithRed:255.0/255.0 green:243.0/255.0 blue:229.0/255.0 alpha:1.0];
+    if (user) {
+        
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@", user[@"name"]];
+        
+        cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@ / %@", ([user[@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate", user[@"graduation_year"], user[@"major"]];
+        
+        cell.profileImageView.image = [self.userProfileImageDictionary objectForKey:userID];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([self.selectedUsers containsObject:userID]) {
+            cell.backgroundColor = [WAValues selectedCellColor];
+        }
+        else {
+            cell.backgroundColor = [UIColor whiteColor];
+        }
     }
     else {
+        
+        cell.nameLabel.text = @"";
+        cell.infoLabel.text = @"";
+        cell.profileImageView.image = [UIImage imageNamed:@"BlankCircle"];
         cell.backgroundColor = [UIColor whiteColor];
+        
+        [self.usersDictionary setObject:@{@"name": @"", @"graduation_year": @"", @"major": @"", @"academic_level": @"", @"hometown": @"", @"profile_image_url": @"", @"user_id": userID} forKey:userID];
+        
+        [self.userProfileImageDictionary setObject:[UIImage imageNamed:@"BlankCircle"] forKey:userID];
+        
+        [WAServer getUserBasicInfoWithID:userID completion:^(NSDictionary *user) {
+            [self.usersDictionary setObject:user forKey:userID];
+            [self.usersTableView reloadData];
+            [self loadProfileImage:user[@"profile_image_url"] forUserID:userID];
+        }];
     }
     
     return cell;
@@ -153,16 +188,47 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (![self.selectedUsers containsObject:[self.allUsers objectAtIndex:indexPath.row]]){
-        [self.selectedUsers addObject:[self.allUsers objectAtIndex:indexPath.row]];
+    NSString *userID = [self.userFriendIDs objectAtIndex:indexPath.row];
+    
+    if (![self.selectedUsers containsObject:userID]){
+        [self.selectedUsers addObject:userID];
     }
     else {
-        [self.selectedUsers removeObject:[self.allUsers objectAtIndex:indexPath.row]];
+        [self.selectedUsers removeObject:userID];
     }
     
     [self.usersTableView reloadData];
     
-    [self.delegate usersChanges:self.selectedUsers];
+    NSMutableArray *selectedUsersInfo = [[NSMutableArray alloc] init];
+    
+    for (NSString *userID in self.selectedUsers) {
+        NSDictionary *user = [self.usersDictionary objectForKey:userID];
+        [selectedUsersInfo addObject:user];
+    }
+    
+    [self.delegate usersChanges:selectedUsersInfo];
+}
+
+- (void)loadProfileImage:(NSString *)profileImageURL forUserID:(NSString *)userID {
+    
+    if (![profileImageURL isEqualToString:@""]) {
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                [self.userProfileImageDictionary setObject:[UIImage imageWithData:data] forKey:userID];
+                [self.usersTableView reloadData];
+            }
+        }];
+    }
 }
 
 # pragma mark - Delgate

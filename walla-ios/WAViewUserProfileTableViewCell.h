@@ -11,8 +11,6 @@
 #import "WAViewUserGroupTableViewCell.h"
 #import "WAViewUserGroupMoreLessTableViewCell.h"
 
-#import "WAGroup.h"
-
 @protocol WAViewUserProfileTableViewCellDelegate <NSObject>
 
 - (void)showMoreLessButtonPressed;

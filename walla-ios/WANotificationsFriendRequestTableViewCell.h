@@ -10,4 +10,14 @@
 
 @interface WANotificationsFriendRequestTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *acceptView;
+@property (strong, nonatomic) IBOutlet UIButton *acceptButton;
+
+@property (strong, nonatomic) IBOutlet UIView *ignoreView;
+@property (strong, nonatomic) IBOutlet UIButton *ignoreButton;
+
 @end

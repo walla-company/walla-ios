@@ -26,6 +26,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *goingCountLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *goinNamesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goingNamesLabel;
 
 @end

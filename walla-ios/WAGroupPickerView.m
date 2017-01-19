@@ -8,6 +8,9 @@
 
 #import "WAGroupPickerView.h"
 
+#import "WAValues.h"
+#import "WAServer.h"
+
 @implementation WAGroupPickerView
 
 static CGFloat VIEW_HEIGHT = 360.0; // 300 for primary
@@ -18,8 +21,7 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (void)initialize:(NSString *)title {
     
-    //self.layer.cornerRadius = 15.0;
-    //self.backgroundColor = [UIColor whiteColor];
+    self.groupsDictionary = [[NSMutableDictionary alloc] init];
     
     self.backgroundColor = [UIColor clearColor];
     
@@ -72,12 +74,17 @@ static CGFloat VIEW_WIDTH = 320.0;
     
 }
 
-- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray*) allGroups canSelectMultipleGroups:(BOOL)canSelectMultipleGroups {
+- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedGroups:(NSArray *)selectedGroups userGroupIDs:(NSArray*) userGroupIDs canSelectMultipleGroups:(BOOL)canSelectMultipleGroups {
     
     self = [super initWithFrame:CGRectMake((frame.size.width-VIEW_WIDTH)/2, frame.size.height, VIEW_WIDTH, VIEW_HEIGHT)];
     
-    self.selectedGroups = [[NSMutableArray alloc] initWithArray:selectedGroups];
-    self.allGroups = allGroups;
+    self.selectedGroups = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *group in selectedGroups) {
+        [self.selectedGroups addObject:group[@"group_id"]];
+    }
+    
+    self.userGroupIDs = userGroupIDs;
     self.canSelectMultipleGroups = canSelectMultipleGroups;
     
     if (self) {
@@ -129,29 +136,48 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.allGroups count];
+    return [self.userGroupIDs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     WAGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
     
-    WAGroup *group = [self.allGroups objectAtIndex:indexPath.row];
+    NSString *groupID = [self.userGroupIDs objectAtIndex:indexPath.row];
     
-    cell.groupTagView.backgroundColor = group.groupColor;
+    NSDictionary *group = [self.groupsDictionary objectForKey:groupID];
+    
     cell.groupTagView.layer.cornerRadius = 8.0;
     cell.groupTagView.clipsToBounds = false;
-    cell.groupTagViewLabel.text = group.shortName;
     
-    cell.groupNameLabel.text = group.name;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if ([self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]) {
-        cell.backgroundColor = [[UIColor alloc] initWithRed:255.0/255.0 green:243.0/255.0 blue:229.0/255.0 alpha:1.0];
+    if (group) {
+        
+        cell.groupTagView.backgroundColor = [WAValues colorFromHexString:group[@"color"]];
+        cell.groupTagViewLabel.text = group[@"short_name"];
+        
+        cell.groupNameLabel.text = group[@"name"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([self.selectedGroups containsObject:groupID]) {
+            cell.backgroundColor = [WAValues selectedCellColor];
+        }
+        else {
+            cell.backgroundColor = [UIColor whiteColor];
+        }
     }
     else {
+        
+        cell.groupTagView.backgroundColor = [UIColor whiteColor];
+        cell.groupTagViewLabel.text = @"";
+        cell.groupNameLabel.text = @"";
         cell.backgroundColor = [UIColor whiteColor];
+        
+        [self.groupsDictionary setObject:@{@"name": @"", @"short_name": @"", @"color": @"#ffffff", @"group_id": groupID} forKey:groupID];
+        [WAServer getGroupBasicInfoWithID:groupID completion:^(NSDictionary *group) {
+            [self.groupsDictionary setObject:group forKey:groupID];
+            [self.groupsTableView reloadData];
+        }];
     }
     
     return cell;
@@ -159,27 +185,36 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSString *groupID = [self.userGroupIDs objectAtIndex:indexPath.row];
+    
     if (self.canSelectMultipleGroups) {
-        if (![self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]){
-            [self.selectedGroups addObject:[self.allGroups objectAtIndex:indexPath.row]];
+        if (![self.selectedGroups containsObject:groupID]){
+            [self.selectedGroups addObject:groupID];
         }
         else {
-            [self.selectedGroups removeObject:[self.allGroups objectAtIndex:indexPath.row]];
+            [self.selectedGroups removeObject:groupID];
         }
     }
     else {
-        if ([self.selectedGroups containsObject:[self.allGroups objectAtIndex:indexPath.row]]){
+        if ([self.selectedGroups containsObject:groupID]){
             [self.selectedGroups removeAllObjects];
         }
         else {
             [self.selectedGroups removeAllObjects];
-            [self.selectedGroups addObject:[self.allGroups objectAtIndex:indexPath.row]];
+            [self.selectedGroups addObject:groupID];
         }
     }
     
     [self.groupsTableView reloadData];
     
-    [self.delegate groupsChanged:self.selectedGroups];
+    NSMutableArray *selectedGroupsInfo = [[NSMutableArray alloc] init];
+    
+    for (NSString *groupID in self.selectedGroups) {
+        NSDictionary *group = [self.groupsDictionary objectForKey:groupID];
+        [selectedGroupsInfo addObject:group];
+    }
+    
+    [self.delegate groupsChanged:selectedGroupsInfo];
 }
 
 # pragma mark - Delgate

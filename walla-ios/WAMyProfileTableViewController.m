@@ -8,6 +8,11 @@
 
 #import "WAMyProfileTableViewController.h"
 
+#import "WAMyProfileMainTableViewCell.h"
+#import "WAMyProfileTextTableViewCell.h"
+
+#import "WAServer.h"
+
 @import Firebase;
 
 @interface WAMyProfileTableViewController ()
@@ -39,11 +44,60 @@
     
     // Initialize values
     self.titleArray = @[@"Edit profile", @"My friends", @"My groups", @"My interests", @"About Walla", @"Log out"];
+    
+    self.name = @"";
+    self.academicLevel = @"";
+    self.major = @"";
+    self.graduationYear = @"";
+    self.hometown = @"";
+    self.profileImageURL = @"";
+    self.profileImage = [UIImage imageNamed:@"BlankCircle"];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [WAServer getUserBasicInfoWithID:[FIRAuth auth].currentUser.uid completion:^(NSDictionary *user){
+        
+        self.name = [user objectForKey:@"name"];
+        self.graduationYear = [NSString stringWithFormat:@"%@", [user objectForKey:@"graduation_year"]];
+        self.academicLevel = ([[user objectForKey:@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate";
+        self.major = [user objectForKey:@"major"];
+        self.hometown = [user objectForKey:@"hometown"];
+        self.profileImageURL = [user objectForKey:@"profile_image_url"];
+        
+        [self.tableView reloadData];
+        
+        [self loadProfileImage];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadProfileImage {
+    
+    if (![self.profileImageURL isEqualToString:@""]) {
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:self.profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                self.profileImage = [UIImage imageWithData:data];
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 #pragma mark - Table view data source
@@ -67,9 +121,14 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.nameLabel.text = @"Name";
-        cell.infoLabel.text = @"Grade\nMajor";
-        cell.locationLabel.text = @"From city, country";
+        cell.profileImageView.image = (self.profileImage) ? self.profileImage : [UIImage imageNamed:@"BlankCircle"];
+        
+        cell.profileImageView.clipsToBounds = true;
+        cell.profileImageView.layer.cornerRadius = 32.5;
+        
+        cell.nameLabel.text = self.name;
+        cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@\n%@", self.academicLevel, self.graduationYear, self.major];
+        cell.locationLabel.text = self.hometown;
         
         return cell;
     }

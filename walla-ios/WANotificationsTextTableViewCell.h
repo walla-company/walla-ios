@@ -10,4 +10,6 @@
 
 @interface WANotificationsTextTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+
 @end

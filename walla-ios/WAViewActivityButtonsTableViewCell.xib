@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="145" id="KGk-i7-Jjw" customClass="WAViewActivityButtonsTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="KGk-i7-Jjw" customClass="WAViewActivityButtonsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="144.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buw-yI-ji6" customClass="WAShadowView">
-                        <rect key="frame" x="15" y="5" width="290" height="134.5"/>
+                        <rect key="frame" x="15" y="5" width="290" height="96"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcB-6h-vhR">
                                 <rect key="frame" x="15" y="15" width="59" height="65"/>
@@ -97,38 +97,21 @@
                                     <constraint firstItem="rsV-mp-PqK" firstAttribute="centerY" secondItem="ixV-he-mvj" secondAttribute="centerY" id="nXH-sq-KPe"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited people ()" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2M-lv-Cqc">
-                                <rect key="frame" x="15" y="88" width="105" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mvB-vD-8tp">
-                                <rect key="frame" x="15" y="105" width="260" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="odO-hm-zWQ" firstAttribute="leading" secondItem="OpS-3P-WYb" secondAttribute="trailing" constant="8" id="0Bt-ji-Afy"/>
-                            <constraint firstAttribute="trailing" secondItem="mvB-vD-8tp" secondAttribute="trailing" constant="15" id="24e-fU-CMb"/>
                             <constraint firstItem="OpS-3P-WYb" firstAttribute="top" secondItem="buw-yI-ji6" secondAttribute="top" constant="15" id="3r6-Ii-Gyq"/>
                             <constraint firstItem="OpS-3P-WYb" firstAttribute="width" secondItem="odO-hm-zWQ" secondAttribute="width" id="6If-PR-ma2"/>
                             <constraint firstItem="odO-hm-zWQ" firstAttribute="top" secondItem="buw-yI-ji6" secondAttribute="top" constant="15" id="Din-j9-CFx"/>
                             <constraint firstItem="ixV-he-mvj" firstAttribute="leading" secondItem="odO-hm-zWQ" secondAttribute="trailing" constant="8" id="LnU-QA-Mx0"/>
                             <constraint firstItem="wcB-6h-vhR" firstAttribute="width" secondItem="OpS-3P-WYb" secondAttribute="width" id="Occ-Yc-u1N"/>
-                            <constraint firstItem="mvB-vD-8tp" firstAttribute="top" secondItem="c2M-lv-Cqc" secondAttribute="bottom" id="S77-lO-CYv"/>
                             <constraint firstItem="ixV-he-mvj" firstAttribute="top" secondItem="buw-yI-ji6" secondAttribute="top" constant="15" id="WHe-2S-vpe"/>
-                            <constraint firstItem="c2M-lv-Cqc" firstAttribute="leading" secondItem="buw-yI-ji6" secondAttribute="leading" constant="15" id="WK0-MQ-0tt"/>
                             <constraint firstItem="OpS-3P-WYb" firstAttribute="leading" secondItem="wcB-6h-vhR" secondAttribute="trailing" constant="8" id="WhB-Iz-1MB"/>
+                            <constraint firstAttribute="bottom" secondItem="wcB-6h-vhR" secondAttribute="bottom" constant="15" id="XPU-Xv-X0J"/>
                             <constraint firstItem="wcB-6h-vhR" firstAttribute="leading" secondItem="buw-yI-ji6" secondAttribute="leading" constant="15" id="cdU-iA-43a"/>
                             <constraint firstAttribute="trailing" secondItem="ixV-he-mvj" secondAttribute="trailing" constant="15" id="fFT-W8-tk3"/>
                             <constraint firstItem="odO-hm-zWQ" firstAttribute="width" secondItem="ixV-he-mvj" secondAttribute="width" id="gYD-4R-5r3"/>
-                            <constraint firstItem="mvB-vD-8tp" firstAttribute="leading" secondItem="buw-yI-ji6" secondAttribute="leading" constant="15" id="iHv-g0-Urj"/>
-                            <constraint firstAttribute="bottom" secondItem="mvB-vD-8tp" secondAttribute="bottom" constant="15" id="kKt-q9-A6e"/>
-                            <constraint firstItem="c2M-lv-Cqc" firstAttribute="top" secondItem="OpS-3P-WYb" secondAttribute="bottom" constant="8" id="now-zz-u6A"/>
                             <constraint firstItem="wcB-6h-vhR" firstAttribute="top" secondItem="buw-yI-ji6" secondAttribute="top" constant="15" id="ogY-6h-S5z"/>
                         </constraints>
                     </view>
@@ -147,12 +130,10 @@
                 <outlet property="interestedView" destination="wcB-6h-vhR" id="uat-Rv-dRN"/>
                 <outlet property="inviteButton" destination="qwf-ua-FEJ" id="4xf-ES-VG0"/>
                 <outlet property="inviteView" destination="odO-hm-zWQ" id="A8d-Nl-QoB"/>
-                <outlet property="invitedPeopleHeaderLabel" destination="c2M-lv-Cqc" id="eQB-Nk-gO5"/>
-                <outlet property="invitedPeopleLabel" destination="mvB-vD-8tp" id="udy-fv-hoa"/>
                 <outlet property="shareButton" destination="rsV-mp-PqK" id="HLS-T1-Hxw"/>
                 <outlet property="shareView" destination="ixV-he-mvj" id="XL7-PU-P8L"/>
             </connections>
-            <point key="canvasLocation" x="34" y="104.5"/>
+            <point key="canvasLocation" x="34" y="88"/>
         </tableViewCell>
     </objects>
     <resources>

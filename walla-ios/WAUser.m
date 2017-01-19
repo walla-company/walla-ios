@@ -24,8 +24,6 @@
     
     if (self) {
         
-        self.profileImage = [[UIImage alloc] init];;
-        
         self.userID = [dictionary objectForKey:@"user_id"];
         
         self.firstName = [dictionary objectForKey:@"first_name"];
@@ -41,55 +39,27 @@
         self.details = [dictionary objectForKey:@"description"];
         self.hometown = [dictionary objectForKey:@"hometown"];
         
-        self.friends = [dictionary objectForKey:@"friends"];
+        self.friends = [[dictionary objectForKey:@"friends"] allKeys];
         if (self.friends == nil) self.friends = [[NSArray alloc] init];
         
-        self.groups = [dictionary objectForKey:@"groups"];
+        self.groups = [[dictionary objectForKey:@"groups"] allKeys];
         if (self.groups == nil) self.groups = [[NSArray alloc] init];
         
         self.interests = [dictionary objectForKey:@"interests"];
         if (self.interests == nil) self.interests = [[NSArray alloc] init];
         
-        self.activities = [dictionary objectForKey:@"activities"];
+        self.activities = [[dictionary objectForKey:@"activities"] allKeys];
         if (self.activities == nil) self.activities = [[NSArray alloc] init];
         
-        self.calendar = [dictionary objectForKey:@"calendar"];
+        self.calendar = [[dictionary objectForKey:@"calendar"] allKeys];
         if (self.calendar == nil) self.calendar = [[NSArray alloc] init];
         
         self.pendingFriendRequests = [dictionary objectForKey:@"pending_friend_requests"];
         if (self.pendingFriendRequests == nil) self.pendingFriendRequests = [[NSDictionary alloc] init];
         
-        [self loadProfileImage];
-        
     }
     
     return self;
-    
-}
-
-- (void)loadProfileImage {
-    
-    if ([self.profileImageURL isEqualToString:@""]) {
-        
-        self.profileImage = [UIImage imageNamed:@"BlankCircle"];
-    }
-    else {
-        
-        FIRStorage *storage = [FIRStorage storage];
-        
-        FIRStorageReference *imageRef = [storage referenceWithPath:self.profileImageURL];
-        
-        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
-            if (error != nil) {
-                
-                NSLog(@"Error downloading profile image: %@", error);
-                
-            } else {
-                
-                self.profileImage = [UIImage imageWithData:data];
-            }
-        }];
-    }
     
 }
 
@@ -103,8 +73,6 @@
         
         self.graduationYear = classYear;
         self.major = major;
-        
-        self.profileImage = (image == nil) ? [UIImage imageNamed:@"BlankCircle"] : image;
     }
     
     return self;

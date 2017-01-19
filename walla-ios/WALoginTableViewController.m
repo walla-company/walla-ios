@@ -45,6 +45,11 @@
     self.tableView.estimatedRowHeight = 100.0;
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    // Initialize values
+    
+    self.emailAddress = @"";
+    self.password = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +145,8 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
     
+    NSLog(@"textFieldDidEndEditing: %@", textField.text);
+    
     if (textField.tag == 1) {
         self.emailAddress = textField.text;
     }
@@ -159,6 +166,8 @@
     else if (textField.tag == 2) {
         
         [textField resignFirstResponder];
+        
+        [self loginButtonPressed:nil];
     }
     
     return false;
@@ -170,6 +179,53 @@
     
     [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"inSignup"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if ([self.emailAddress isEqualToString:@""] || [self.password isEqualToString:@""]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete" message:@"You must enter an email address and password to log in. If you forgot your password, click \"Forgot password\" below." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else {
+        [[FIRAuth auth] signInWithEmail:self.emailAddress password:self.password completion:^(FIRUser *user, NSError *error) {
+            
+            if (error) {
+                
+                if (error.code == FIRAuthErrorCodeWrongPassword) {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wrong Password" message:@"The password you entered is incorrect. Tap on \"Forgot password\" below to reset your password if you cannot remember it." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:true completion:nil];
+                }
+                else if (error.code == FIRAuthErrorCodeNetworkError) {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Error" message:@"There was a problem communicating with our servers. Please make sure you are connected to the internet and try again." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:true completion:nil];
+                }
+                else if (error.code == FIRAuthErrorCodeUserDisabled) {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"User Account Disabled" message:@"Your account has been disabled. We disable accounts when we find that they violate the Community Guidelines. Please contact us to resolve this issue." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:true completion:nil];
+                }
+                else {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Check Email Address" message:@"Make sure the email address you entered is correct." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:true completion:nil];
+                }
+                
+                NSLog(@"Login Error: \(error)");
+            }
+            
+        }];
+    }
     
 }
 

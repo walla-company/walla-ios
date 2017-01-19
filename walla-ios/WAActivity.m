@@ -21,6 +21,7 @@
     self = [super init];
     
     if (self) {
+        
         self.activityID = dictionary[@"activity_id"];
         
         self.startTime = [NSDate dateWithTimeIntervalSinceReferenceDate:[dictionary[@"start_time"] doubleValue]];
@@ -37,15 +38,22 @@
         self.locationAddress = dictionary[@"location"][@"address"];
         self.location = [[CLLocation alloc] initWithLatitude:[dictionary[@"location"][@"lat"] doubleValue] longitude:[dictionary[@"location"][@"long"] doubleValue]];
         
-        self.host = [[WAUser alloc] initWithFirstName:@"Ben" lastName:@"Yang" userID:@"1" classYear:@"Freshman" major:@"Computer Science" image:nil];
+        self.host = dictionary[@"host"];
         
         self.hostGroupID = dictionary[@"host_group"];
-        //self.hostGroupName = dictionary[@"host_group_name"];
-        //self.hostGroupShortName = dictionary[@"host_group_short_name"];
-        self.hostGroupName = @"Group Name";
-        self.hostGroupShortName = @"GNAME";
+        self.hostGroupName = dictionary[@"host_group_name"];
+        self.hostGroupShortName = dictionary[@"host_group_short_name"];
         
         self.canOthersInvite = [dictionary[@"can_others_invite"] boolValue];
+        
+        self.invitedUserIDs = [[NSMutableArray alloc] init];
+        self.invitedGroupIDs = [[NSMutableArray alloc] init];
+        
+        NSDictionary *invitedUsers = dictionary[@"invited_users"];
+        if (invitedUsers) self.invitedUserIDs = [[NSMutableArray alloc] initWithArray:[invitedUsers allKeys]];
+        
+        NSDictionary *invitedGroups = dictionary[@"invited_groups"];
+        if (invitedGroups) self.invitedGroupIDs = [[NSMutableArray alloc] initWithArray:[invitedGroups allKeys]];
         
         self.repliesDictionary = dictionary[@"replies"];
         
@@ -58,18 +66,23 @@
 
 - (void)processReplies {
     
-    self.interestedUsers = [[NSMutableArray alloc] init];
-    self.goingUsers = [[NSMutableArray alloc] init];
+    self.interestedUserIDs = [[NSMutableArray alloc] init];
+    self.goingUserIDs = [[NSMutableArray alloc] init];
+    
+    self.numberInterested = 0;
+    self.numberGoing = 0;
     
     for (NSString *uid in [self.repliesDictionary allKeys]) {
-        if ([self.repliesDictionary[uid] isEqualToString:@"interested"]) self.numberInterested++;
-        else self.numberGoing++;
-        
-        // load user
+        if ([self.repliesDictionary[uid] isEqualToString:@"interested"]) {
+            [self.interestedUserIDs addObject:uid];
+        }
+        else {
+            [self.goingUserIDs addObject:uid];
+        }
     }
     
-    //@property NSArray *interestedUsers;
-    //@property NSArray *goingUsers;
+    self.numberInterested = [self.interestedUserIDs count];
+    self.numberGoing = [self.goingUserIDs count];
 }
 
 @end

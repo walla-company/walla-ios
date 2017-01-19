@@ -12,6 +12,10 @@
 
 @interface WAMyProfileGroupsTableViewController : UITableViewController
 
-@property NSArray *groups;
+@property NSMutableArray *userGroupsArray;
+
+@property NSArray *userGroupIDs;
+
+@property NSString *openGroupID;
 
 @end

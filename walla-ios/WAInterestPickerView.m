@@ -136,7 +136,7 @@ static CGFloat VIEW_WIDTH = 320.0;
     
     WAInterestCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"interestCell" forIndexPath:indexPath];
     
-    if ([self.selectedInterests containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+    if ([self.selectedInterests containsObject:[self.allInterests objectAtIndex:indexPath.row][0]]) {
         [cell.shadowView changeFillColor:[WAValues selectedCellColor]];
     }
     else {
@@ -157,11 +157,11 @@ static CGFloat VIEW_WIDTH = 320.0;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([self.selectedInterests containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
-        [self.selectedInterests removeObject:[NSNumber numberWithInteger:indexPath.row]];
+    if ([self.selectedInterests containsObject:[self.allInterests objectAtIndex:indexPath.row][0]]) {
+        [self.selectedInterests removeObject:[self.allInterests objectAtIndex:indexPath.row][0]];
     }
     else {
-        [self.selectedInterests addObject:[NSNumber numberWithInteger:indexPath.row]];
+        [self.selectedInterests addObject:[self.allInterests objectAtIndex:indexPath.row][0]];
     }
     
     if ([self.selectedInterests count] > 2) {

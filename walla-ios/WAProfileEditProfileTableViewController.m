@@ -55,28 +55,57 @@
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    // Initialize default values
+    // Initialize defualt values
     
-    /*
-    self.user = [[WAUser alloc] initWithFirstName:@"John" lastName:@"Smith" userID:@"USERID" classYear:@"2020" major:@"Computer Science" image:[UIImage imageNamed:@"BlankCircle"]];
+    self.profileImage = [UIImage imageNamed:@"BlankCircle"];
     
-    self.user.details = @"This is stuff about me...";
-    self.user.hometown = @"Durham, NC";*/
+    self.loadProfilePhoto = true;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [super viewWillAppear:animated];
+    
+    [WAServer getUserWithID:[FIRAuth auth].currentUser.uid completion:^(WAUser *user){
         
-        [WAServer getUserWithID:[FIRAuth auth].currentUser.uid completion:^(WAUser *user){
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                self.user = user;
-                [self.tableView reloadData];
-            });
-        }];
-    });
+        self.user = user;
+        [self.tableView reloadData];
+        
+        if (self.loadProfilePhoto) {
+            [self loadProfileImage];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadProfileImage {
+    
+    NSLog(@"Load profile photo");
+    
+    if (![self.user.profileImageURL isEqualToString:@""]) {
+        
+        NSLog(@"profileImageURL: %@", self.user.profileImageURL);
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:self.user.profileImageURL];;
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                self.profileImage = [UIImage imageWithData:data];
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 #pragma mark - Table view data source
@@ -102,7 +131,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.profileImageView.image = self.user.profileImage;
+        cell.profileImageView.image = self.profileImage;
         
         cell.profileImageView.layer.cornerRadius = 50.0;
         cell.profileImageView.clipsToBounds = true;
@@ -233,10 +262,7 @@
         
         self.user.academicLevel = @"undergrad";
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
-        });
+        [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
         
         [self.tableView reloadData];
     }];
@@ -244,10 +270,7 @@
         
         self.user.academicLevel = @"grad";
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
-        });
+        [WAServer updateUserAcademicLevel:self.user.academicLevel completion:nil];
         
         [self.tableView reloadData];
     }];
@@ -277,10 +300,9 @@
             
             self.user.graduationYear = [NSString stringWithFormat:@"%ld", (long) yearInt + i];
             
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                
-                [WAServer updateUserGraduationYear:yearInt + i completion:nil];
-            });
+            [WAServer updateUserGraduationYear:yearInt + i completion:nil];
+            
+            [self.tableView reloadData];
         }];
         
         [yearMenu addAction:option];
@@ -357,13 +379,17 @@
     
     image = [self resizeImage:image targetSize:CGSizeMake(300.0, 300.0)];
     
-    self.user.profileImage = image;
+    self.profileImage = image;
     
     NSLog(@"(RESIZE) height: %f, width: %f", image.size.height, image.size.width);
     
     [self.tableView reloadData];
     
-    [self dismissViewControllerAnimated:true completion:nil];
+    self.loadProfilePhoto = false;
+    
+    [self dismissViewControllerAnimated:true completion:^(void){
+        self.loadProfilePhoto = true;
+    }];
     
     [self uploadPhoto];
 }
@@ -433,7 +459,7 @@
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://walla-launch.appspot.com"];
     
-    NSData *data = UIImageJPEGRepresentation(self.user.profileImage, 0.75);
+    NSData *data = UIImageJPEGRepresentation(self.profileImage, 0.75);
     
     FIRStorageReference *riversRef = [storageRef child:[NSString stringWithFormat:@"profile_images/%@.jpg", [FIRAuth auth].currentUser.uid]];
     
@@ -444,10 +470,7 @@
             
         } else {
             
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                
-                [WAServer updateUserProfileImageURL:[NSString stringWithFormat:@"gs://walla-launch.appspot.com/profile_images/%@.jpg", [FIRAuth auth].currentUser.uid] completion:nil];
-            });
+            [WAServer updateUserProfileImageURL:[metadata.downloadURL absoluteString] completion:nil];
         }
     }];
     
@@ -461,37 +484,25 @@
         
         self.user.firstName = textField.text;
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserFirstName:self.user.firstName completion:nil];
-        });
+        [WAServer updateUserFirstName:self.user.firstName completion:nil];
     }
     else if (textField.tag == 2) {
         
         self.user.lastName = textField.text;
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserLastName:self.user.lastName completion:nil];
-        });
+        [WAServer updateUserLastName:self.user.lastName completion:nil];
     }
     else if (textField.tag == 3) {
         
         self.user.major = textField.text;
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserMajor:self.user.major completion:nil];
-        });
+        [WAServer updateUserMajor:self.user.major completion:nil];
     }
     else if (textField.tag == 4) {
         
         self.user.hometown = textField.text;
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserHometown:self.user.hometown completion:nil];
-        });
+        [WAServer updateUserHometown:self.user.hometown completion:nil];
     }
 }
 
@@ -520,6 +531,8 @@
         textView.textColor = [WAValues notSelectedTextColor];
         textView.text = @"Details";
     }
+    
+    [WAServer updateUserDescription:self.user.details completion:nil];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {

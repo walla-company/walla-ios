@@ -441,6 +441,8 @@
                     [alert addAction:cancelAction];
                     [self presentViewController:alert animated:true completion:nil];
                 }
+                
+                NSLog(@"Signup Error: \(error)");
             }
          }];
     }
@@ -495,14 +497,10 @@
 
 - (void)uploadUserInfo {
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [WAServer addUser:[FIRAuth auth].currentUser.uid firstName:self.firstName lastName:self.lastName email:self.emailAddress academicLevel:self.academicLevel major:self.major graduationYear:self.graduationYear completion:^(BOOL success){
         
-        [WAServer addUser:[FIRAuth auth].currentUser.uid firstName:self.firstName lastName:self.lastName email:self.emailAddress academicLevel:self.academicLevel major:self.major graduationYear:self.graduationYear completion:^(BOOL success){
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                if (success) [self uploadUserPhoto];
-            });
-        }];
-    });
+        if (success) [self uploadUserPhoto];
+    }];
 }
 
 - (void)uploadUserPhoto {
@@ -525,12 +523,10 @@
                 
             } else {
                 
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                [WAServer updateUserProfileImageURL:[metadata.downloadURL absoluteString] completion:^(BOOL success) {
                     
-                    [WAServer updateUserProfileImageURL:[NSString stringWithFormat:@"gs://walla-launch.appspot.com/profile_images/%@.jpg", [FIRAuth auth].currentUser.uid] completion:^(BOOL success) {
-                        [self doneSigningUp];
-                    }];
-                });
+                    [self doneSigningUp];
+                }];
             }
         }];
         

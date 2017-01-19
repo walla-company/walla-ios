@@ -10,7 +10,8 @@
 
 #import "WAUserTableViewCell.h"
 
-#import "WAUser.h"
+#import "WAServer.h"
+#import "WAValues.h"
 
 typedef void(^animationCompletion)(void);
 
@@ -36,11 +37,14 @@ typedef void(^animationCompletion)(void);
 @property UITableView *usersTableView;
 
 @property NSMutableArray *selectedUsers;
-@property NSArray *allUsers;
+@property NSArray *userFriendIDs;
+
+@property NSMutableDictionary *usersDictionary;
+@property NSMutableDictionary *userProfileImageDictionary;
 
 @property id <WAUserPickerViewDelegate> delegate;
 
-- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers;
+- (id)initWithSuperViewFrame:(CGRect)frame title:(NSString *)title selectedUsers:(NSArray *)selectedUsers userFriendIDs:(NSArray *)userFriendIDs;
 
 - (void)animateUp:(CGRect)frame;
 

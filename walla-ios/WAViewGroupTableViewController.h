@@ -14,8 +14,19 @@
 
 #import "WAActivityTabsHeaderView.h"
 
+#import "WAGroup.h"
+
 @interface WAViewGroupTableViewController : UITableViewController <WAActivityTabDelegate>
 
 @property NSString *viewingGroupID;
+
+@property WAGroup *viewingGroup;
+
+@property NSMutableDictionary *activitiesDictionary;
+@property NSMutableSet *loadingActivitiesSet;
+
+@property NSMutableDictionary *userInfoDictionary;
+
+@property NSMutableArray *userGroups;
 
 @end

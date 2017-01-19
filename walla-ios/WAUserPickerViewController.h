@@ -24,8 +24,8 @@
 
 @property NSString *userPickerTitle;
 @property NSArray *selectedUsers;
-@property NSArray *allUsers;
+@property NSArray *userFriendIDs;
 
-- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers;
+- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers userFriendIDs:(NSArray *)userFriendIDs;
 
 @end

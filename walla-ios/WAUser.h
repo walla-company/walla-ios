@@ -22,7 +22,7 @@
 @property NSString *graduationYear;
 @property NSString *major;
 
-@property UIImage *profileImage;
+//@property UIImage *profileImage;
 @property NSString *profileImageURL;
 
 @property NSString *details;

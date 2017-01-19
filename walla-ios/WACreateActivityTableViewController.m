@@ -10,6 +10,10 @@
 
 #import "WAValues.h"
 
+#import "WAServer.h"
+
+@import Firebase;
+
 @interface WACreateActivityTableViewController ()
 
 @end
@@ -77,6 +81,16 @@
     self.activityInvitedGroups = [[NSArray alloc] init];
     self.activityInvitedFriends = [[NSArray alloc] init];
     
+    self.userGroupIDs = [[NSArray alloc] init];
+    self.userFriendIDs = [[NSArray alloc] init];
+    
+    [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups) {
+        self.userGroupIDs = groups;
+    }];
+    
+    [WAServer getUserFriendsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *users) {
+        self.userFriendIDs = users;
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -321,6 +335,12 @@
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
+        [cell.yesButton setImage:[UIImage imageNamed:(self.guestsCanInviteOthers) ? @"YesButtonPressed" : @"YesButtonReleased"] forState:UIControlStateNormal];
+        [cell.noButton setImage:[UIImage imageNamed:(self.guestsCanInviteOthers) ? @"NoButtonReleased" : @"NoButtonPressed"] forState:UIControlStateNormal];
+        
+        [cell.yesButton addTarget:self action:@selector(guestsCanInviteOthersButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.noButton addTarget:self action:@selector(guestsCannotInviteOthersButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         return cell;
     }
     
@@ -341,6 +361,8 @@
 - (void)activityPublicButtonPressed:(UIButton *)button {
     
     self.activityPublic = true;
+    
+    self.guestsCanInviteOthers = true;
     
     [self.tableView reloadData];
 }
@@ -426,11 +448,7 @@
 
 - (void)chooseGroupButtonPressed:(UIButton *) button {
     
-    WAGroup *group1 = [[WAGroup alloc] initWithName:@"Something Borrowed Something Blue" shortName:@"SBSB" groupID:@"1" color:[UIColor orangeColor]];
-    WAGroup *group2 = [[WAGroup alloc] initWithName:@"Mechanical Engineers" shortName:@"MechEng" groupID:@"2" color:[UIColor purpleColor]];
-    WAGroup *group3 = [[WAGroup alloc] initWithName:@"Residential Assisstants" shortName:@"RA" groupID:@"3" color:[UIColor greenColor]];
-    
-    WAGroupPickerViewController *groupPicker = [[WAGroupPickerViewController alloc] initWithTitle:((button.tag == 1) ? @"Choose Host Group" : @"Invite Group(s)") selectedGroups:((button.tag == 1) ? self.activityHostGroup : self.activityInvitedGroups) allGroups:@[group1, group2, group3] canSelectMultipleGourps:(button.tag == 2)];
+    WAGroupPickerViewController *groupPicker = [[WAGroupPickerViewController alloc] initWithTitle:((button.tag == 1) ? @"Choose Host Group" : @"Invite Group(s)") selectedGroups:((button.tag == 1) ? self.activityHostGroup : self.activityInvitedGroups) userGroupIDs:self.userGroupIDs canSelectMultipleGourps:(button.tag == 2)];
     
     groupPicker.view.tag = button.tag;
     
@@ -445,11 +463,7 @@
 
 - (void)inviteFriendsButtonPressed:(UIButton *)button {
     
-    WAUser *user1 = [[WAUser alloc] initWithFirstName:@"Ben" lastName:@"Yang" userID:@"1" classYear:@"Freshman" major:@"Computer Science" image:nil];
-    WAUser *user2 = [[WAUser alloc] initWithFirstName:@"Alexis" lastName:@"Angel" userID:@"2" classYear:@"Freshman" major:@"Economics" image:nil];
-    WAUser *user3 = [[WAUser alloc] initWithFirstName:@"Mia" lastName:@"Carlson" userID:@"3" classYear:@"Freshman" major:@"Pre-med" image:nil];
-    
-    WAUserPickerViewController *userPicker = [[WAUserPickerViewController alloc] initWithTitle:@"Invite Friends" selectedUsers:self.activityInvitedFriends allUsers:@[user1, user2, user3]];
+    WAUserPickerViewController *userPicker = [[WAUserPickerViewController alloc] initWithTitle:@"Invite Friends" selectedUsers:self.activityInvitedFriends userFriendIDs:self.userFriendIDs];
     
     userPicker.view.tag = button.tag;
     
@@ -464,14 +478,104 @@
 
 - (void)guestsCanInviteOthersButtonPressed:(UIButton *)button {
     
+    self.guestsCanInviteOthers = true;
+    
+    [self.tableView reloadData];
 }
 
 - (void)guestsCannotInviteOthersButtonPressed:(UIButton *)button {
     
+    self.guestsCanInviteOthers = false;
+    
+    [self.tableView reloadData];
 }
 
 - (void)postButtonPressed:(UIButton *)button {
     
+    if ([self.activityTitle isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Title Required" message:@"You must enter a title for the activity." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else if (!self.activityStartTime && !self.activityEndTime) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Times Required" message:@"You must select a start and end time for the activity." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else if (!self.activityLocation) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Required" message:@"You must enter a location for the activity." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else if ([self.activityInterests count] == 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Interest Required" message:@"You must select at least one interest for the activity." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else {
+        
+        self.tableView.userInteractionEnabled = false;
+        
+        NSString *hostGroupID = @"";
+        NSString *hostGroupName = @"";
+        NSString *hostGroupShortaName = @"";
+        
+        if ([self.activityHostGroup count] == 1) {
+            NSDictionary *group = [self.activityHostGroup objectAtIndex:0];
+            
+            hostGroupID = group[@"group_id"];
+            hostGroupName = group[@"name"];
+            hostGroupShortaName = group[@"short_name"];
+        }
+        
+        NSMutableArray *invitedGroups = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *group in self.activityInvitedGroups) {
+            [invitedGroups addObject:group[@"group_id"]];
+        }
+        
+        NSMutableArray *invitedFriends = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *user in self.activityInvitedFriends) {
+            [invitedFriends addObject:user[@"user_id"]];
+        }
+        
+        NSLog(@"self.activityPublic: %@", (self.activityPublic) ? @"true" : @"false");
+        
+        [WAServer createActivity:self.activityTitle startTime:self.activityStartTime endTime:self.activityEndTime locationName:self.activityLocation.name locationAddress:self.activityLocation.formattedAddress location:[[CLLocation alloc] initWithLatitude:self.activityLocation.coordinate.latitude longitude:self.activityLocation.coordinate.longitude] interests:self.activityInterests details:self.activityDetails hostGroupID:hostGroupID hostGroupName:hostGroupName hostGroupShortName:hostGroupShortaName invitedUsers:invitedFriends invitedGroups:invitedGroups activityPublic:self.activityPublic guestsCanInviteOthers:self.guestsCanInviteOthers completion:^(BOOL success) {
+            
+            self.tableView.userInteractionEnabled = true;
+            
+            if (success) {
+                [self dismissViewControllerAnimated:true completion:nil];
+            }
+            else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was a problem posting the activity." preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                
+                [alert addAction:cancelAction];
+                
+                [self presentViewController:alert animated:true completion:nil];
+            }
+        }];
+    }
 }
 
 #pragma mark - Date picker delegate
@@ -564,9 +668,9 @@ didFailAutocompleteWithError:(NSError *)error {
     if ([groups count] > 0) {
         
         int count = 0;
-        for (WAGroup *group in groups) {
+        for (NSDictionary *group in groups) {
             
-            groupsString = [groupsString stringByAppendingString:group.shortName];
+            groupsString = [groupsString stringByAppendingString:group[@"short_name"]];
             
             if (count != [groups count]-1) {
                 groupsString = [groupsString stringByAppendingString:@", "];
@@ -608,9 +712,9 @@ didFailAutocompleteWithError:(NSError *)error {
     if ([users count] > 0) {
         
         int count = 0;
-        for (WAUser *user in users) {
+        for (NSDictionary *user in users) {
             
-            usersString = [usersString stringByAppendingString:user.firstName];
+            usersString = [usersString stringByAppendingString:user[@"name"]];
             
             if (count != [users count]-1) {
                 usersString = [usersString stringByAppendingString:@", "];
@@ -648,9 +752,9 @@ didFailAutocompleteWithError:(NSError *)error {
     if ([interests count] > 0) {
         
         int count = 0;
-        for (NSNumber *index in interests) {
+        for (NSString *interest in interests) {
             
-            interestsString = [interestsString stringByAppendingString:[WAValues interestsArray][index.integerValue][0]];
+            interestsString = [interestsString stringByAppendingString:interest];
             
             if (count != [interests count]-1) {
                 interestsString = [interestsString stringByAppendingString:@", "];

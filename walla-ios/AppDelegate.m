@@ -13,8 +13,6 @@
 @import GoogleMaps;
 @import GooglePlaces;
 
-@import Firebase;
-
 @interface AppDelegate ()
 
 @end
@@ -34,11 +32,6 @@
     
     [WAServer loadAllowedDomains];
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        
-        [WAServer loadAllowedDomains];
-    });
-    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -50,6 +43,8 @@
     [self.window makeKeyAndVisible];
     
     self.userSignedIn = true;
+    self.underMaintenance = false;
+    self.versionTooOld = false;
     
     [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
         
@@ -59,12 +54,9 @@
         
         if (user && !inSignup) {
             NSLog(@"delegate signed in");
-            if (!self.userSignedIn) {
+            if (!self.userSignedIn && !self.underMaintenance) {
                 
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                    
-                    [WAServer updateUserLastLogon];
-                });
+                [WAServer updateUserLastLogon];
                 
                 UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
                 NSLog(@"delegate tabbarController: %@", tabBarController);
@@ -74,7 +66,7 @@
             }
             self.userSignedIn = true;
         }
-        else {
+        else if (!self.underMaintenance) {
             NSLog(@"delegate not signed in");
             if (self.userSignedIn) {
                 UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
@@ -86,7 +78,86 @@
             self.userSignedIn = false;
         }
         
-     }];
+    }];
+    
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    
+    [[[ref child:@"app_settings"] child:@"under_maintenance"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        BOOL maintenance = [[snapshot value] boolValue];
+        NSLog(@"underMaintenance: %@", (maintenance) ? @"true" : @"false");
+        
+        if (maintenance && !self.underMaintenance && !self.versionTooOld) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"UnderMaintenanceViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
+        else if (self.versionTooOld) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
+        else if ([FIRAuth auth].currentUser && self.userSignedIn && self.underMaintenance) {
+            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            NSLog(@"delegate tabbarController: %@", tabBarController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+            
+            self.window.rootViewController = tabBarController;
+        }
+        else if (!self.userSignedIn && self.underMaintenance) {
+            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+            NSLog(@"delegate navigationController: %@", navigationController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            
+            self.window.rootViewController = navigationController;
+        }
+        
+        self.underMaintenance = maintenance;
+    }];
+    
+    [[[[ref child:@"app_settings"] child:@"min_version"] child:@"ios"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        NSString *verison = [snapshot value];
+        NSLog(@"supported verison: %@", verison);
+        
+        BOOL tooOld = ![self checkMinimumVersion:verison];
+        
+        NSLog(@"version too old: %@", (tooOld) ? @"true" : @"false");
+        
+        if (tooOld && !self.versionTooOld) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
+        else if (self.underMaintenance) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"UnderMaintenanceViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
+        else if ([FIRAuth auth].currentUser && self.userSignedIn && self.versionTooOld) {
+            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            NSLog(@"delegate tabbarController: %@", tabBarController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+            
+            self.window.rootViewController = tabBarController;
+        }
+        else if (!self.userSignedIn && self.versionTooOld) {
+            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+            NSLog(@"delegate navigationController: %@", navigationController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            
+            self.window.rootViewController = navigationController;
+        }
+        
+        self.versionTooOld = tooOld;
+    }];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
@@ -97,12 +168,9 @@
     
     NSLog(@"signupComplete");
     
-    if ([FIRAuth auth].currentUser && !self.userSignedIn) {
+    if ([FIRAuth auth].currentUser && !self.userSignedIn && !self.underMaintenance) {
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            
-            [WAServer updateUserLastLogon];
-        });
+        [WAServer updateUserLastLogon];
         
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
@@ -110,9 +178,27 @@
         [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
         
         self.window.rootViewController = tabBarController;
+        
+        self.userSignedIn = true;
     }
-    self.userSignedIn = true;
     
+}
+
+- (BOOL)checkMinimumVersion:(NSString *)minimumVersion {
+    
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    NSArray *checkArray = [currentVersion componentsSeparatedByString:@"."];
+    NSArray *minimumArray = [minimumVersion componentsSeparatedByString:@"."];
+    
+    int i = 0;
+    
+    for (NSString *min in minimumArray) {
+        if ([[checkArray objectAtIndex:i] integerValue] < [min integerValue]) return false;
+        i++;
+    }
+    
+    return true;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

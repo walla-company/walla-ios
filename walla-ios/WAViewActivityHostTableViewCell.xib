@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOn-J7-LvE" customClass="WAShadowView">
-                        <rect key="frame" x="15" y="5" width="290" height="89.5"/>
+                        <rect key="frame" x="15" y="5" width="290" height="90"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig9-Wb-tvi">
                                 <rect key="frame" x="15" y="15" width="31" height="17"/>

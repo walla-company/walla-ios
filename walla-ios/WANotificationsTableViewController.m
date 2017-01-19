@@ -8,6 +8,20 @@
 
 #import "WANotificationsTableViewController.h"
 
+#import "WANotificationsFriendRequestTableViewCell.h"
+#import "WANotificationsTextTableViewCell.h"
+
+#import "WAViewActivityViewController.h"
+
+#import "WAServer.h"
+#import "WAValues.h"
+
+@import Firebase;
+
+static NSString *NOTIFICATION_FRIEND_REQUEST = @"friend_request";
+static NSString *NOTIFICATION_USER_INVITED = @"user_invited";
+static NSString *NOTIFICATION_GROUP_INVITED = @"group_invited";
+
 @interface WANotificationsTableViewController ()
 
 @end
@@ -19,11 +33,65 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CreateNewEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(openCreateActivity)];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // Set up activities table view
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"WANotificationsFriendRequestTableViewCell" bundle:nil] forCellReuseIdentifier:@"friendRequestCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WANotificationsTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tableView.backgroundColor = [WAValues defaultTableViewBackgroundColor];
+    
+    self.tableView.showsVerticalScrollIndicator = false;
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 120.0;
+    
+    // Initialize default values
+    
+    self.notificationsArray = [[NSMutableArray alloc] init];
+    self.profileImagesDictionary = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [WAServer getNotifications:^(NSArray *notifications) {
+        
+        NSLog(@"notifications: %@", notifications);
+        
+        NSMutableArray *friendRequestsArray = [[NSMutableArray alloc] init];
+        NSMutableArray *othersArray = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *notification in notifications) {
+            
+            if ([notification[@"type"] isEqualToString:NOTIFICATION_FRIEND_REQUEST]) {
+                [friendRequestsArray addObject:notification];
+            }
+            else {
+                [othersArray addObject:notification];
+            }
+            
+            if ([notification[@"read"] boolValue]) {
+                [WAServer updateNotificationRead:notification[@"notification_id"] completion:nil];
+            }
+            
+        }
+        
+        [friendRequestsArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time_created" ascending:false]]];
+        [othersArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time_created" ascending:false]]];
+        
+        [self.notificationsArray removeAllObjects];
+        
+        [self.notificationsArray addObjectsFromArray:friendRequestsArray];
+        [self.notificationsArray addObjectsFromArray:othersArray];
+        
+        [self.tableView reloadData];
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,52 +108,118 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 0;
+    return [self.notificationsArray count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSDictionary *notification = [self.notificationsArray objectAtIndex:indexPath.row];
+    
+    if ([notification[@"type"] isEqualToString:NOTIFICATION_FRIEND_REQUEST]) {
+        
+        WANotificationsFriendRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendRequestCell" forIndexPath:indexPath];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        
+        [cell.acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.ignoreButton addTarget:self action:@selector(ignoreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.acceptButton.tag = indexPath.row;
+        cell.ignoreButton.tag = indexPath.row;
+        
+        cell.acceptView.layer.cornerRadius = 6.0;
+        cell.ignoreView.layer.cornerRadius = 6.0;
+        
+        cell.infoLabel.text = notification[@"text"];
+        
+        cell.profileImageView.clipsToBounds = true;
+        cell.profileImageView.layer.cornerRadius = 20.0;
+        
+        UIImage *proifleImage = [self.profileImagesDictionary objectForKey:notification[@"sender"]];
+        
+        if (proifleImage) {
+            cell.profileImageView.image = proifleImage;
+        }
+        else {
+            cell.profileImageView.image = [UIImage imageNamed:@"BlankCircle"];
+            [self loadProfileImage:notification[@"profile_image_url"] forUserID:notification[@"sender"]];
+        }
+        
+        return cell;
+        
+    }
+    
+    WANotificationsTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    
+    cell.infoLabel.text = notification[@"text"];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)loadProfileImage:(NSString *)profileImageURL forUserID:(NSString *)userID {
+    
+    if (![profileImageURL isEqualToString:@""]) {
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                [self.profileImagesDictionary setObject:[UIImage imageWithData:data] forKey:userID];
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary *notification = [self.notificationsArray objectAtIndex:indexPath.row];
+    
+    if (![notification[@"type"] isEqualToString:NOTIFICATION_FRIEND_REQUEST]) {
+        
+        self.openActivityID = notification[@"activity_id"];
+        
+        [self performSegueWithIdentifier:@"openActivityDetails" sender:self];
+    }
+    
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+#pragma mark - Button targets
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)acceptButtonPressed:(UIButton *)button {
+    
+    NSString *uid = [[self.notificationsArray objectAtIndex:button.tag] objectForKey:@"sender"];
+    
+    [WAServer acceptFriendRequestWithUID:uid completion:nil];
+    
+    [self.notificationsArray removeObjectAtIndex:button.tag];
+    
+    [self.tableView reloadData];
+    
 }
-*/
+
+- (void)ignoreButtonPressed:(UIButton *)button {
+    
+    NSString *uid = [[self.notificationsArray objectAtIndex:button.tag] objectForKey:@"sender"];
+    
+    [WAServer ignoreFriendRequestWithUID:uid completion:nil];
+    
+    [self.notificationsArray removeObjectAtIndex:button.tag];
+    
+    [self.tableView reloadData];
+    
+}
 
 #pragma mark - Navigation
 
@@ -94,14 +228,13 @@
     [self performSegueWithIdentifier:@"openCreateActivity" sender:self];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
+        
+        WAViewActivityViewController *destinationController = (WAViewActivityViewController *) [segue destinationViewController];
+        destinationController.viewingActivityID = self.openActivityID;
+    }
 }
-*/
 
 @end

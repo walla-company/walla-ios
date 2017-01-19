@@ -8,8 +8,12 @@
 
 #import "WAMyProfileFriendsTableViewController.h"
 
+#import "WAViewUserTableViewController.h"
+
+#import "WAServer.h"
 #import "WAValues.h"
-#import "WAUser.h"
+
+@import Firebase;
 
 @interface WAMyProfileFriendsTableViewController ()
 
@@ -37,13 +41,77 @@
     
     self.tableView.showsVerticalScrollIndicator = false;
     
-    // Initialize default values
+    // Initialize defualt values
     
-    WAUser *user1 = [[WAUser alloc] initWithFirstName:@"Ben" lastName:@"Yang" userID:@"1" classYear:@"Freshman" major:@"Computer Science" image:nil];
-    WAUser *user2 = [[WAUser alloc] initWithFirstName:@"Alexis" lastName:@"Angel" userID:@"2" classYear:@"Freshman" major:@"Economics" image:nil];
-    WAUser *user3 = [[WAUser alloc] initWithFirstName:@"Mia" lastName:@"Carlson" userID:@"3" classYear:@"Freshman" major:@"Pre-med" image:nil];
+    self.profileImages = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     
-    self.users = @[user1, user2, user3];
+    [super viewWillAppear:animated];
+    
+    [WAServer getUserFriendsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *users){
+        
+        self.userFriendIDs = users;
+        
+        [self loadUserFriends];
+    }];
+}
+
+- (void)loadUserFriends {
+    
+    self.userFriendsArray =[[NSMutableArray alloc] init];
+    
+    for (NSString *userID in self.userFriendIDs) {
+        
+        [WAServer getUserBasicInfoWithID:userID completion:^(NSDictionary *user){
+            
+            [self loadProfileImage:[user objectForKey:@"profile_image_url"] uid:[user objectForKey:@"user_id"]];
+            
+            [self.userFriendsArray addObject:user];
+            
+            [self.userFriendsArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+            
+            [self.tableView reloadData];
+        }];
+    }
+    
+    if ([self.userFriendIDs count] == 0) [self.tableView reloadData];
+}
+
+- (void)loadProfileImage:(NSString *)profileImageURL uid:(NSString *)uid {
+    
+    NSLog(@"loadProfileImage: %@ : %@", profileImageURL, uid);
+    
+    if ([profileImageURL isEqualToString:@""]) {
+        
+        [self.profileImages setObject:[UIImage imageNamed:@"BlankCircle"] forKey:uid];
+        
+        [self.tableView reloadData];
+        
+    }
+    else if (![self.profileImages objectForKey:uid]) {
+        
+        [self.profileImages setObject:[UIImage imageNamed:@"BlankCircle"] forKey:uid];
+        
+        [self.tableView reloadData];
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                [self.profileImages setObject:[UIImage imageWithData:data] forKey:uid];
+                [self.tableView reloadData];
+            }
+        }];
+    }
     
 }
 
@@ -61,7 +129,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.users count];
+    return [self.userFriendsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,29 +139,36 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    WAUser *user = [self.users objectAtIndex:indexPath.row];
+    NSDictionary *user = [self.userFriendsArray objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+    cell.nameLabel.text = [user objectForKey:@"name"];
     
-    cell.infoLabel.text = [NSString stringWithFormat:@"%@ / %@", user.graduationYear, user.major];
+    cell.infoLabel.text = [NSString stringWithFormat:@"Class of %@ / %@", [user objectForKey:@"graduation_year"], [user objectForKey:@"major"]];
     
-    cell.profileImageView.image = user.profileImage;
+    cell.profileImageView.image = [self.profileImages objectForKey:[user objectForKey:@"user_id"]];
+    
+    cell.profileImageView.layer.cornerRadius = 17.5;
+    cell.profileImageView.clipsToBounds = true;
     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    self.openUserID = [[self.userFriendsArray objectAtIndex:indexPath.row] objectForKey:@"user_id"];
+    
     [self performSegueWithIdentifier:@"openViewUser" sender:self];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"openViewUser"]) {
+        
+        WAViewUserTableViewController *destinationController = (WAViewUserTableViewController *) [segue destinationViewController];
+        destinationController.viewingUserID = self.openUserID;
+    }
+    
 }
-*/
 
 @end

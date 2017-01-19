@@ -24,9 +24,9 @@
 
 @property NSString *groupPickerTitle;
 @property NSArray *selectedGroups;
-@property NSArray *allGroups;
+@property NSArray *userGroupIDs;
 @property BOOL canSelectMultipleGourps;
 
-- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups allGroups:(NSArray *)allGroups canSelectMultipleGourps:(BOOL)canSelectMultipleGourps;
+- (id)initWithTitle:(NSString *)title selectedGroups:(NSArray *)selectedGroups userGroupIDs:(NSArray *)userGroupIDs canSelectMultipleGourps:(BOOL)canSelectMultipleGourps;
 
 @end

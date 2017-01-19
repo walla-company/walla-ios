@@ -11,11 +11,27 @@
 #import "WADiscoverFriendSuggestionsTableViewCell.h"
 #import "WADiscoverSuggestedGroupTableViewCell.h"
 
-@interface WADiscoverViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WADiscoverFriendSuggestionsTableViewCellDelegate>
+@interface WADiscoverViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WADiscoverFriendSuggestionsTableViewCellDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 @property NSString *openUserID;
 @property NSString *openGroupID;
 
 @property (strong, nonatomic) IBOutlet UITableView *discoverTableView;
+
+@property NSArray *suggestedGroups;
+
+@property NSDictionary *searchGroupsDictionary;
+@property NSDictionary *searchUsersDictionary;
+
+@property NSMutableArray *filteredUserArray;
+@property NSMutableArray *filteredGroupArray;
+
+@property UISearchController *searchController;
+
+@property BOOL shouldShowSearchResults;
+
+@property NSMutableDictionary *userInfoDictionary;
+@property NSMutableDictionary *userProfileImageDictionary;
+@property NSMutableDictionary *groupsDictionary;
 
 @end

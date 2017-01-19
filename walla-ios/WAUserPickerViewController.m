@@ -14,14 +14,14 @@
 
 @implementation WAUserPickerViewController
 
-- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers allUsers:(NSArray *)allUsers {
+- (id)initWithTitle:(NSString *)title selectedUsers:(NSArray *)selectedUsers userFriendIDs:(NSArray *)userFriendIDs {
     
     self = [super init];
     
     if (self) {
         self.userPickerTitle = title;
         self.selectedUsers = selectedUsers;
-        self.allUsers = allUsers;
+        self.userFriendIDs = userFriendIDs;
     }
     
     return self;
@@ -42,7 +42,7 @@
     singleFingerTap.delegate = self;
     [self.view addGestureRecognizer:singleFingerTap];
     
-    self.userPicker = [[WAUserPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.userPickerTitle selectedUsers:self.selectedUsers allUsers:self.allUsers];
+    self.userPicker = [[WAUserPickerView alloc] initWithSuperViewFrame:self.view.frame title:self.userPickerTitle selectedUsers:self.selectedUsers userFriendIDs:self.userFriendIDs];
     
     self.userPicker.delegate = self;
     

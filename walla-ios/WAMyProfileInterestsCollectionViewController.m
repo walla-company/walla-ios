@@ -8,7 +8,10 @@
 
 #import "WAMyProfileInterestsCollectionViewController.h"
 
+#import "WAServer.h"
 #import "WAValues.h"
+
+@import Firebase;
 
 @interface WAMyProfileInterestsCollectionViewController ()
 
@@ -33,6 +36,32 @@
     self.interestsArray = [WAValues interestsArray];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [WAServer getUserInterestsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *interests){
+        
+        if ([interests count] > 0) {
+            
+            [self.selectedInterestsArray removeAllObjects];
+            
+            for (NSString *interest in interests) {
+                [self.selectedInterestsArray addObject:interest];
+            }
+            
+            [self.collectionView reloadData];
+        }
+    }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [WAServer updateUserInterests:self.selectedInterestsArray completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,7 +84,7 @@
     
     WAInterestCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"interestCell" forIndexPath:indexPath];
     
-    if ([self.selectedInterestsArray containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+    if ([self.selectedInterestsArray containsObject:[self.interestsArray objectAtIndex:indexPath.row][0]]) {
         [cell.shadowView changeFillColor:[WAValues selectedCellColor]];
     }
     else {
@@ -76,11 +105,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([self.selectedInterestsArray containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
-        [self.selectedInterestsArray removeObject:[NSNumber numberWithInteger:indexPath.row]];
+    if ([self.selectedInterestsArray containsObject:[self.interestsArray objectAtIndex:indexPath.row][0]]) {
+        [self.selectedInterestsArray removeObject:[self.interestsArray objectAtIndex:indexPath.row][0]];
     }
     else {
-        [self.selectedInterestsArray addObject:[NSNumber numberWithInteger:indexPath.row]];
+        [self.selectedInterestsArray addObject:[self.interestsArray objectAtIndex:indexPath.row][0]];
     }
     
     [collectionView reloadData];

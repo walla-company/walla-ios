@@ -17,14 +17,29 @@
 
 #import "WAActivityTabsHeaderView.h"
 
+#import "WAGroupPickerViewController.h"
+#import "WAUserPickerViewController.h"
+
 #import "WAActivity.h"
 
-@interface WAViewActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WAActivityTabDelegate>
+@interface WAViewActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WAActivityTabDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *viewActivityTableView;
 
 @property NSString *viewingActivityID;
 
 @property WAActivity *viewingActivity;
+
+@property NSMutableDictionary *userInfoDictionary;
+
+@property NSString *activityHostName;
+@property NSString *activityHostDetails;
+@property UIImage *activityHostImage;
+
+@property NSMutableArray *invitedUserIDs;
+@property NSMutableArray *invitedGroupIDs;
+
+@property NSArray *userFriends;
+@property NSArray *userGroups;
 
 @end

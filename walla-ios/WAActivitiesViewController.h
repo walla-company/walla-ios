@@ -26,4 +26,8 @@
 
 @property NSArray *activitiesArray;
 
+@property NSMutableDictionary *userInfoDictionary;
+
+@property NSMutableArray *filteredActivities;
+
 @end

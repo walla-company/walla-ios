@@ -18,784 +18,2648 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
 
 + (void)getActivityWithID:(NSString *)auid completion:(void (^) (WAActivity *activity))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSLog(@"getActivityWithID: %@", auid);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activity?token=%@&school_identifier=%@&auid=%@", API_KEY, [self schoolIdentifier], auid];
-        NSLog(@"url: %@", url);
-        [request setURL:[NSURL URLWithString:url]];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([self userAuthenticated]) {
+            NSLog(@"getActivityWithID: %@", auid);
             
-            if (error) {
-                NSLog(@"Error getting (%@): %@", url, error);
-            }
-            else {
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                
-                NSLog(@"activity: %@", jsonData);
-                
-                WAActivity *activity = [[WAActivity alloc] initWithDictionary:jsonData];
-                completionBlock(activity);
-            }
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activity?token=%@&school_identifier=%@&auid=%@", API_KEY, [self schoolIdentifier], auid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
             
-        }];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"activity (%@): %@", auid, jsonData);
+                    
+                    WAActivity *activity = [[WAActivity alloc] initWithDictionary:jsonData];
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(activity);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
         
-        [dataTask resume];
-    }
-    else {
-        completionBlock(nil);
-    }
+    });
 }
 
 + (void)getActivitisFromLastHours:(double)hours completion:(void (^) (NSArray *activities))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSLog(@"getActivitisSince: %f", hours);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activities?token=%@&school_identifier=%@&filter=%f", API_KEY, [self schoolIdentifier], hours];
-        NSLog(@"url: %@", url);
-        [request setURL:[NSURL URLWithString:url]];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([self userAuthenticated]) {
+            NSLog(@"getActivitisSince: %f", hours);
             
-            if (error) {
-                NSLog(@"Error getting (%@): %@", url, error);
-            }
-            else {
-                NSArray *activities = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activities?token=%@&school_identifier=%@&filter=%f", API_KEY, [self schoolIdentifier], hours];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
-                NSLog(@"activities: %@", activities);
-                
-                NSMutableArray *formattedActivities = [[NSMutableArray alloc] init];
-                
-                for (NSDictionary *activity in activities) {
-                    [formattedActivities addObject:[[WAActivity alloc] initWithDictionary:activity]];
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSArray *activities = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"activities: %@", activities);
+                    
+                    NSMutableArray *formattedActivities = [[NSMutableArray alloc] init];
+                    
+                    for (NSDictionary *activity in activities) {
+                        [formattedActivities addObject:[[WAActivity alloc] initWithDictionary:activity]];
+                    }
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(formattedActivities);
+                        });
+                    }
                 }
                 
-                completionBlock(formattedActivities);
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+}
+
++ (void)createActivity:(NSString *)title startTime:(NSDate *)startTime endTime:(NSDate *)endTime locationName:(NSString *)locationName locationAddress:(NSString *)locationAddress location:(CLLocation *)location interests:(NSArray *)interests details:(NSString *)details hostGroupID:(NSString *)hostGroupID hostGroupName:(NSString *)hostGroupName hostGroupShortName:(NSString *)hostGroupShortName invitedUsers:(NSArray *)invitedUsers invitedGroups:(NSArray *)invitedGroups activityPublic:(BOOL)activityPublic guestsCanInviteOthers:(BOOL)guestsCanInviteOthers completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/add_activity?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"title": title,
+                                                @"start_time": [NSNumber numberWithDouble:[startTime timeIntervalSince1970]],
+                                                @"end_time": [NSNumber numberWithDouble:[endTime timeIntervalSince1970]],
+                                                @"location_name": locationName,
+                                                @"location_address": locationAddress,
+                                                @"location_lat": [NSNumber numberWithDouble:location.coordinate.latitude],
+                                                @"location_long": [NSNumber numberWithDouble:location.coordinate.longitude],
+                                                @"activity_public": [NSNumber numberWithBool:activityPublic],
+                                                @"interests": interests,
+                                                @"host": [FIRAuth auth].currentUser.uid,
+                                                @"details": details,
+                                                @"host_group": hostGroupID,
+                                                @"host_group_name": hostGroupName,
+                                                @"host_group_short_name": hostGroupShortName,
+                                                @"invited_users": invitedUsers,
+                                                @"invited_groups": invitedGroups,
+                                                @"can_others_invite": [NSNumber numberWithBool:guestsCanInviteOthers]
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
             }
             
-        }];
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error creating activity (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success creating activity");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
         
-        [dataTask resume];
-    }
-    else {
-        completionBlock(nil);
-    }
+    });
+    
+}
+
++ (void)activityInterested:(NSString *)uid activityID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/interested?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": auid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error changing interested user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success changing interested user");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)activityGoing:(NSString *)uid activityID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/going?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": auid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error changing interested user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success changing interested user");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)activityRemoveUser:(NSString *)uid activityID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/remove_reply?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": auid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error removing user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success removing user");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)activityInviteUserWithID:(NSString *)uid toActivity:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/invite_user?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": auid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error inviting user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success inviting user");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)activityInviteGroupWithID:(NSString *)guid toActivity:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/invite_group?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"guid": guid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": auid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error inviting group (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success inviting group");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
 }
 
 #pragma mark - User
 
-+ (void)getUserWithID:(NSString *)uid completion:(void (^) (WAUser *activity))completionBlock {
++ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email academicLevel:(NSString *)academicLevel major:(NSString *)major graduationYear:(NSInteger)graduationYear completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSLog(@"getActivityWithID: %@", uid);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
-        NSLog(@"url: %@", url);
-        [request setURL:[NSURL URLWithString:url]];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/add_user?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            if (error) {
-                NSLog(@"Error getting (%@): %@", url, error);
-            }
-            else {
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"first_name": firstName,
+                                                @"last_name": lastName,
+                                                @"email": email,
+                                                @"academic_level": academicLevel,
+                                                @"major": major,
+                                                @"graduation_year": [NSNumber numberWithInt:(int) graduationYear],
+                                                @"hometown": @"",
+                                                @"description": @"",
+                                                @"profile_image_url": @""
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
                 
-                NSLog(@"user: %@", jsonData);
+                NSLog(@"jsonError: %@", jsonError);
                 
-                WAUser *user = [[WAUser alloc] initWithDictionary:jsonData];
-                completionBlock(user);
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
             }
             
-        }];
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error adding user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success adding user");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
         
-        [dataTask resume];
-    }
-    else {
-        completionBlock(nil);
-    }
+    });
     
 }
 
-+ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email academicLevel:(NSString *)academicLevel major:(NSString *)major graduationYear:(NSInteger)graduationYear completion:(void (^) (BOOL success))completionBlock {
++ (void)getUserWithID:(NSString *)uid completion:(void (^) (WAUser *user))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/add_user?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"first_name": firstName,
-                                            @"last_name": lastName,
-                                            @"email": email,
-                                            @"academic_level": academicLevel,
-                                            @"major": major,
-                                            @"graduation_year": [NSNumber numberWithInt:(int) graduationYear],
-                                            @"hometown": @"",
-                                            @"description": @"",
-                                            @"profile_image_url": @""
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserWithID: %@", uid);
             
-            NSLog(@"jsonError: %@", jsonError);
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
             
-            completionBlock(false);
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"user: %@", jsonData);
+                    
+                    WAUser *user = [[WAUser alloc] initWithDictionary:jsonData];
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(user);
+                        });
+                    }
+                }
+                
+            }];
             
-            return;
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
+    });
+    
+}
+
++ (void)getUserBasicInfoWithID:(NSString *)uid completion:(void (^) (NSDictionary *user))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserBasicInfoWithID: %@", uid);
             
-            if (error) {
-                NSLog(@"Error adding user (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success adding user");
-                
-                completionBlock(true);
-            }
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_basic_info?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
             
-        }];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"user basic info: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(jsonData);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+    });
+    
+}
+
++ (void)getUserFriendsWithID:(NSString *)uid completion:(void (^) (NSArray *friends))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserFriendsWithID: %@", uid);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_friends?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"friends: %@", jsonDictionary);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonDictionary allKeys]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getUserInterestsWithID:(NSString *)uid completion:(void (^) (NSArray *interests))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserInterestsWithID: %@", uid);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_interests?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"interests: %@", jsonArray);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(jsonArray);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getUserGroupsWithID:(NSString *)uid completion:(void (^) (NSArray *groups))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserGroupsWithID: %@", uid);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_groups?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"groups: %@", jsonDictionary);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonDictionary allKeys]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getUserCalendarWithID:(NSString *)uid completion:(void (^) (NSArray *groups))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserCalendarWithID: %@", uid);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_calendar?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"calendar: %@", jsonDictionary);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonDictionary allKeys]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
     
 }
 
 + (void)updateUserFirstName:(NSString *)firstName completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_first_name?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"first_name": firstName
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_first_name?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"first_name": firstName
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating first name (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating first name");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating first name (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating first name");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserLastName:(NSString *)lastName completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_last_name?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"last_name": lastName
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_last_name?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"last_name": lastName
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating last name (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating last name");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating last name (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating last name");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserEmail:(NSString *)email completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_email?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"email": email
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_email?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"email": email
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating email (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating email");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating email (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating email");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserAcademicLevel:(NSString *)academicLevel completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_academic_level?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"academic_level": academicLevel
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_academic_level?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"academic_level": academicLevel
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating academic level (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating academic level");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating academic level (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating academic level");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserInterests:(NSArray *)userInterests completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_interests?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"interests": userInterests
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_interests?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"interests": userInterests
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating user (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating interests");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating user (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating interests");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserMajor:(NSString *)major completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_major?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"major": major
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_major?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"major": major
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating major (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating major");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating major (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating major");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserGraduationYear:(NSInteger)graduationYear completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_graduation_year?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"graduation_year": [NSNumber numberWithInt:(int) graduationYear]
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_graduation_year?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"graduation_year": [NSNumber numberWithInt:(int) graduationYear]
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating graduation year (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating geaduation year");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating graduation year (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating geaduation year");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserHometown:(NSString *)hometown completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_hometown?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"hometown": hometown
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_hometown?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"hometown": hometown
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating hometown (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating hometown");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating hometown (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating hometown");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserDescription:(NSString *)description completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_description?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"description": description
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_description?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"description": description
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating description (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating description");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating description (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating description");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
     
 }
 
 + (void)updateUserProfileImageURL:(NSString *)profileImageURL completion:(void (^) (BOOL success))completionBlock {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_profile_image_url?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"profile_image_url": profileImageURL
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_profile_image_url?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            completionBlock(false);
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"profile_image_url": profileImageURL
+                                                };
             
-            return;
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating profile image url (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating profile image url");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
-        
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error updating profile image url (%@): %@", url, error);
-                
-                completionBlock(false);
-            }
-            else {
-                
-                NSLog(@"Success updating profile image url");
-                
-                completionBlock(true);
-            }
-            
-        }];
-        
-        [dataTask resume];
-    }
-    else {
-        completionBlock(false);
-    }
+    });
+    
 }
 
 + (void)updateUserLastLogon {
     
-    if ([self userAuthenticated]) {
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"POST"];
-        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_last_logon?token=%@", API_KEY];
-        NSLog(@"url: %@", url);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        
-        NSDictionary *requestDictionary = @{
-                                            @"uid": [FIRAuth auth].currentUser.uid,
-                                            @"school_identifier": [self schoolIdentifier],
-                                            @"last_logon": [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
-                                            };
-        
-        NSError *jsonError;
-        NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
-        
-        if (jsonError) {
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_last_logon?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
             
-            NSLog(@"jsonError: %@", jsonError);
             
-            return;
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"last_logon": [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating last logon (%@): %@", url, error);
+                }
+                else {
+                    
+                    NSLog(@"Success updating last logon");
+                }
+                
+            }];
+            
+            [dataTask resume];
         }
         
-        [request setURL:[NSURL URLWithString:url]];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:requestData];
+    });
+    
+}
+
+# pragma mark - Groups
+
++ (void)getGroupWithID:(NSString *)guid completion:(void (^) (WAGroup *group))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([self userAuthenticated]) {
+            NSLog(@"getGroupWithID: %@", guid);
             
-            if (error) {
-                NSLog(@"Error updating last logon (%@): %@", url, error);
-            }
-            else {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_group?token=%@&school_identifier=%@&guid=%@", API_KEY, [self schoolIdentifier], guid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
-                NSLog(@"Success updating last logon");
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"group info: %@", jsonData);
+                    
+                    WAGroup *group = [[WAGroup alloc] initWithDictionary:jsonData];
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(group);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+    });
+    
+}
+
++ (void)getGroupBasicInfoWithID:(NSString *)guid completion:(void (^) (NSDictionary *group))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getGroupBasicInfoWithID: %@", guid);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_group_basic_info?token=%@&school_identifier=%@&guid=%@", API_KEY, [self schoolIdentifier], guid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"group basic info: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(jsonData);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+    });
+    
+}
+
++ (void)joinGroup:(NSString *)guid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/join_group?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"guid": guid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
             }
             
-        }];
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error joining group (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success joining group");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
         
-        [dataTask resume];
-    }
+    });
+    
+}
+
++ (void)leaveGroup:(NSString *)guid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/leave_group?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"guid": guid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error leaving group (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success leaving group");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
+#pragma mark - Friends
+
++ (void)requestFriendRequestWithUID:(NSString *)uid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/request_friend?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"friend": uid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error requesting friend (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success requesting friend");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+
+    
+}
+
++ (void)acceptFriendRequestWithUID:(NSString *)uid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/approve_friend?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"friend": uid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error accepting friend (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success accepting friend");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)ignoreFriendRequestWithUID:(NSString *)uid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/ignore_friend_request?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"friend": uid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error ignoring friend (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success ignoring friend");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getSentFriendRequests:(void (^) (NSArray *sentFriendRequests))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSentFriendRequests");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_sent_friend_requests?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], [FIRAuth auth].currentUser.uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"sent requests: %@", jsonDictionary);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonDictionary allKeys]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getRecievedFriendRequests:(void (^) (NSArray *srecievedFriendRequests))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSentFriendRequests");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_received_friend_requests?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], [FIRAuth auth].currentUser.uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"recieved requests: %@", jsonDictionary);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonDictionary allKeys]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
+#pragma mark - Notifications
+
++ (void)getNotifications:(void (^) (NSArray *notifications))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getNotifications");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_notifications?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], [FIRAuth auth].currentUser.uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"notifications: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonData allValues]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+    });
+
+    
+}
+
++ (void)updateNotificationRead:(NSString *)notificationID completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_notification_read?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"notification_id": notificationID,
+                                                @"read": [NSNumber numberWithBool:true]
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating notification read (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating notification read");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
+#pragma mark - Discover
+
++ (void)getSuggestedGroups:(void (^) (NSArray *groups))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSuggestedGroups");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_suggested_groups?token=%@&school_identifier=%@", API_KEY, [self schoolIdentifier]];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSArray *groups = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"groups: %@", groups);
+                    
+                    NSMutableArray *formattedGroups = [[NSMutableArray alloc] init];
+                    
+                    for (NSDictionary *group in groups) {
+                        [formattedGroups addObject:[[WAGroup alloc] initWithDictionary:group]];
+                    }
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(formattedGroups);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getSuggestedUsers:(void (^) (NSArray *users))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSuggestedUsers");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_suggested_users?token=%@&school_identifier=%@", API_KEY, [self schoolIdentifier]];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSArray *users = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"users: %@", users);
+                    
+                    NSMutableArray *formattedUsers = [[NSMutableArray alloc] init];
+                    
+                    for (NSDictionary *user in users) {
+                        [formattedUsers addObject:[[WAUser alloc] initWithDictionary:user]];
+                    }
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(formattedUsers);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getSearchUserDictionary:(void (^) (NSDictionary *users))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSearchUserDictionary");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_search_users_array?token=%@&school_identifier=%@", API_KEY, [self schoolIdentifier]];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *users = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"users: %@", users);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(users);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getSearchGroupDictionary:(void (^) (NSDictionary *groups))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getSearchGroupDictionary");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_search_groups_array?token=%@&school_identifier=%@", API_KEY, [self schoolIdentifier]];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *groups = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"groups: %@", groups);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(groups);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
 }
 
 #pragma mark - Other
@@ -834,39 +2698,44 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
 
 + (void)loadAllowedDomains {
     
-    NSLog(@"loadAllowedDomains");
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"GET"];
-    NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/domains?token=%@", API_KEY];
-    [request setURL:[NSURL URLWithString:url]];
-    
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        NSLog(@"IN HADNLER");
+        NSLog(@"loadAllowedDomains");
         
-        if (error) {
-            NSLog(@"Error getting (%@): %@", url, error);
-        }
-        else {
-            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"GET"];
+        NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/domains?token=%@", API_KEY];
+        [request setURL:[NSURL URLWithString:url]];
+        
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
-            NSMutableDictionary *schoolIdentifiersDictionary = [[NSMutableDictionary alloc] init];
+            NSLog(@"IN HADNLER");
             
-            for (NSString *schoolIdentifier in jsonData.allKeys) {
-                [schoolIdentifiersDictionary setObject:schoolIdentifier forKey:jsonData[schoolIdentifier][@"domain"]];
+            if (error) {
+                NSLog(@"Error getting (%@): %@", url, error);
+            }
+            else {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                
+                NSMutableDictionary *schoolIdentifiersDictionary = [[NSMutableDictionary alloc] init];
+                
+                for (NSString *schoolIdentifier in jsonData.allKeys) {
+                    [schoolIdentifiersDictionary setObject:schoolIdentifier forKey:jsonData[schoolIdentifier][@"domain"]];
+                }
+                
+                NSLog(@"school identifiers: %@", schoolIdentifiersDictionary);
+                
+                [[NSUserDefaults standardUserDefaults] setObject:schoolIdentifiersDictionary forKey:@"schoolIdentifiersDictionary"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }
             
-            NSLog(@"school identifiers: %@", schoolIdentifiersDictionary);
-            
-            [[NSUserDefaults standardUserDefaults] setObject:schoolIdentifiersDictionary forKey:@"schoolIdentifiersDictionary"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+        }];
         
-    }];
+        [dataTask resume];
+        
+    });
     
-    [dataTask resume];
 }
 
 @end

@@ -12,6 +12,12 @@
 
 @interface WAMyProfileFriendsTableViewController : UITableViewController
 
-@property NSArray *users;
+@property NSMutableArray *userFriendsArray;
+
+@property NSArray *userFriendIDs;
+
+@property NSString *openUserID;
+
+@property NSMutableDictionary *profileImages;
 
 @end

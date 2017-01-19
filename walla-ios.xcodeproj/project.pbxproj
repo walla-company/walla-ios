@@ -150,6 +150,7 @@
 		EBDA5C691E071AD100B61AED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA5C681E071AD100B61AED /* MapKit.framework */; };
 		EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6B1E071BD400B61AED /* WARoundedView.m */; };
 		EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */; };
+		EBFFE21F1E2F44AD00153AE0 /* WACalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFFE21E1E2F44AD00153AE0 /* WACalendarTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +405,8 @@
 		EBDA5C6B1E071BD400B61AED /* WARoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARoundedView.m; sourceTree = "<group>"; };
 		EBDA5C6D1E072C7100B61AED /* WADatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerView.h; sourceTree = "<group>"; };
 		EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerView.m; sourceTree = "<group>"; };
+		EBFFE21D1E2F44AD00153AE0 /* WACalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACalendarTableViewController.h; sourceTree = "<group>"; };
+		EBFFE21E1E2F44AD00153AE0 /* WACalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACalendarTableViewController.m; sourceTree = "<group>"; };
 		EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-walla-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -535,6 +538,7 @@
 				EB0E8BB91E008B0A00BC293C /* AppDelegate.h */,
 				EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */,
 				EB4EA79A1E0344AC000F4834 /* WAActivitiesViewController */,
+				EBFFE21C1E2F449300153AE0 /* WACalendarTableViewController */,
 				EBDA5C271E05B11C00B61AED /* WADiscoverTableViewController */,
 				EBDA5C281E05B12D00B61AED /* WANotificationsTableViewController */,
 				EBDA5C291E05B13900B61AED /* WAMyProfileTableViewController */,
@@ -801,9 +805,9 @@
 			isa = PBXGroup;
 			children = (
 				EBCB56A11E12E423000530F6 /* WAViewActivityInfoTableViewCell */,
+				EBCB56A41E12E431000530F6 /* WAViewActivityButtonsTableViewCell */,
 				EBCB56A21E12E428000530F6 /* WAViewActivityLocationTableViewCell */,
 				EBCB56A31E12E42C000530F6 /* WAViewActivityAttendeesTableViewCell */,
-				EBCB56A41E12E431000530F6 /* WAViewActivityButtonsTableViewCell */,
 				EBCB56A51E12E436000530F6 /* WAViewActivityHostTableViewCell */,
 				EBCB56A61E12E43A000530F6 /* WAViewActivityDetailsTableViewCell */,
 			);
@@ -1459,6 +1463,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EBFFE21C1E2F449300153AE0 /* WACalendarTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EBFFE21D1E2F44AD00153AE0 /* WACalendarTableViewController.h */,
+				EBFFE21E1E2F44AD00153AE0 /* WACalendarTableViewController.m */,
+			);
+			name = WACalendarTableViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1776,6 +1789,7 @@
 				EB9C2D8B1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.m in Sources */,
 				EBCB56DC1E130DED000530F6 /* WAViewUserDetailsTableViewCell.m in Sources */,
 				EBCB57271E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m in Sources */,
+				EBFFE21F1E2F44AD00153AE0 /* WACalendarTableViewController.m in Sources */,
 				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
 				EBCB567E1E10F410000530F6 /* WAViewActivityHostTableViewCell.m in Sources */,
 				EBCB572C1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m in Sources */,

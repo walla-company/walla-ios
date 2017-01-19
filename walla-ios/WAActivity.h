@@ -33,7 +33,7 @@
 @property NSString *locationAddress;
 @property CLLocation *location;
 
-@property WAUser *host;
+@property NSString *host;
 @property NSString *hostGroupID;
 @property NSString *hostGroupName;
 @property NSString *hostGroupShortName;
@@ -42,11 +42,14 @@
 
 @property NSDictionary *repliesDictionary;
 
-@property NSMutableArray *interestedUsers;
-@property NSMutableArray *goingUsers;
+@property NSMutableArray *interestedUserIDs;
+@property NSMutableArray *goingUserIDs;
 
 @property NSInteger numberInterested;
 @property NSInteger numberGoing;
+
+@property NSMutableArray *invitedUserIDs;
+@property NSMutableArray *invitedGroupIDs;
 
 - (id)init;
 

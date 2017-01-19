@@ -14,4 +14,7 @@
 
 @property WAUser *user;
 
+@property UIImage *profileImage;
+@property BOOL loadProfilePhoto;
+
 @end

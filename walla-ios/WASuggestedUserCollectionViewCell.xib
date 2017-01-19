@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlankCircle" translatesAutoresizingMaskIntoConstraints="NO" id="mCk-Lk-ELh">
-                        <rect key="frame" x="18" y="4" width="65" height="65"/>
+                        <rect key="frame" x="18" y="20" width="65" height="65"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="2So-Jt-wZV"/>
                             <constraint firstAttribute="height" constant="65" id="qvY-Y2-dcJ"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-JU-aPM">
-                        <rect key="frame" x="10" y="77" width="80" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-JU-aPM">
+                        <rect key="frame" x="10" y="93" width="80" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="9u4-3h-OK4"/>
                         </constraints>
@@ -34,42 +34,18 @@
                         <color key="textColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-87-UJG">
-                        <rect key="frame" x="10" y="111" width="80" height="25"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3S-ar-vOB">
-                                <rect key="frame" x="10" y="-1.5" width="60" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Add friend">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.38823529411764707" green="0.792156862745098" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="L3S-ar-vOB" firstAttribute="centerY" secondItem="UUl-87-UJG" secondAttribute="centerY" id="cs2-wu-aLv"/>
-                            <constraint firstAttribute="height" constant="25" id="gs1-rQ-nW5"/>
-                            <constraint firstItem="L3S-ar-vOB" firstAttribute="centerX" secondItem="UUl-87-UJG" secondAttribute="centerX" id="qZk-oh-G2X"/>
-                        </constraints>
-                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="UUl-87-UJG" firstAttribute="top" secondItem="Fmc-JU-aPM" secondAttribute="bottom" constant="4" id="Jn9-aZ-klr"/>
-                <constraint firstAttribute="trailing" secondItem="UUl-87-UJG" secondAttribute="trailing" constant="10" id="NA7-xF-ca2"/>
                 <constraint firstItem="Fmc-JU-aPM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Z1T-sw-0Ru"/>
                 <constraint firstAttribute="trailing" secondItem="Fmc-JU-aPM" secondAttribute="trailing" constant="10" id="dnJ-ji-cHK"/>
-                <constraint firstItem="UUl-87-UJG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="gIS-WH-NwB"/>
                 <constraint firstItem="Fmc-JU-aPM" firstAttribute="top" secondItem="mCk-Lk-ELh" secondAttribute="bottom" constant="8" id="iuX-cv-Nhi"/>
-                <constraint firstItem="UUl-87-UJG" firstAttribute="top" secondItem="Fmc-JU-aPM" secondAttribute="bottom" constant="4" id="waK-xX-TDC"/>
                 <constraint firstItem="mCk-Lk-ELh" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="yR5-tL-dao"/>
-                <constraint firstItem="mCk-Lk-ELh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="zBs-Kc-klp"/>
+                <constraint firstItem="mCk-Lk-ELh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="zBs-Kc-klp"/>
             </constraints>
             <size key="customSize" width="148" height="136"/>
             <connections>
-                <outlet property="addFriendButton" destination="L3S-ar-vOB" id="kLx-aL-UuV"/>
-                <outlet property="addFriendView" destination="UUl-87-UJG" id="fkU-nA-90D"/>
                 <outlet property="nameInfoLabel" destination="Fmc-JU-aPM" id="koJ-iD-WiQ"/>
                 <outlet property="profileImageView" destination="mCk-Lk-ELh" id="hOi-wg-729"/>
             </connections>

@@ -14,6 +14,8 @@
 
 #import "WAActivityTabsHeaderView.h"
 
+#import "WAUser.h"
+
 @interface WAViewUserTableViewController : UITableViewController <WAActivityTabDelegate, WAViewUserProfileTableViewCellDelegate>
 
 @property NSString *viewingUserID;
@@ -22,5 +24,19 @@
 @property UIColor *tabColorOrange;
 @property UIColor *tabColorOffwhite;
 
+@property WAUser *viewingUser;
+
+@property UIImage *viewingUserProfileImage;
+
+@property NSMutableDictionary *groupInfoDictionary;
+
+@property NSMutableDictionary *activitiesDictionary;
+@property NSMutableSet *loadingActivitiesSet;
+
+@property NSMutableDictionary *userInfoDictionary;
+
+@property NSArray *userFriendsArray;
+@property NSArray *userSentFriendRequestsArray;
+@property NSArray *userReceivedFriendRequestsArray;
 
 @end

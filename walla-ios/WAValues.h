@@ -30,8 +30,15 @@
 + (UIColor *)tabColorOrange;
 + (UIColor *)tabColorOffWhite;
 
++ (UIColor *)buttonBlueColor;
++ (UIColor *)buttonInterestedColor;
++ (UIColor *)buttonGoingColor;
++ (UIColor *)buttonGrayColor;
+
 // Others
 
 + (NSArray *)interestsArray;
+
++ (UIColor *)colorFromHexString:(NSString *)hexString;
 
 @end

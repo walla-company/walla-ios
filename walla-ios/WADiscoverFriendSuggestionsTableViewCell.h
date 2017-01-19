@@ -22,4 +22,8 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *suggestedFriendsCollectionView;
 
+@property NSArray *suggestedUsers;
+
+@property NSMutableDictionary *profileImagesDictionary;
+
 @end
