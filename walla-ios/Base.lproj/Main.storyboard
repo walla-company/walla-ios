@@ -552,11 +552,30 @@
                     <navigationItem key="navigationItem" id="LNI-Nr-GZb"/>
                     <connections>
                         <segue destination="gqS-8S-nEm" kind="show" identifier="openSignup" id="3eB-5v-4vc"/>
+                        <segue destination="0w9-kn-Fgg" kind="presentation" identifier="openForgotPassword" id="UOy-Mj-RnR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRh-tD-rJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-711.20000000000005" y="1049.3253373313344"/>
+        </scene>
+        <!--Forgot Password Table View Controller-->
+        <scene sceneID="725-G3-Bcw">
+            <objects>
+                <tableViewController id="0w9-kn-Fgg" customClass="WAForgotPasswordTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kxy-HF-VvL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="0w9-kn-Fgg" id="rC7-X9-C8o"/>
+                            <outlet property="delegate" destination="0w9-kn-Fgg" id="y7C-B7-RZb"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3cX-K6-Okc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-711" y="1789"/>
         </scene>
         <!--Signup Table View Controller-->
         <scene sceneID="6Vt-xo-OYT">

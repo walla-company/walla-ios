@@ -161,7 +161,33 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
+    [self setupNotifications];
+    
     return YES;
+}
+
+- (void)setupNotifications {
+    UNAuthorizationOptions authOptions =
+    UNAuthorizationOptionAlert
+    | UNAuthorizationOptionSound
+    | UNAuthorizationOptionBadge;
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+    }];
+    
+    // For iOS 10 display notification (sent via APNS)
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    // For iOS 10 data message (sent via FCM)
+    [FIRMessaging messaging].remoteMessageDelegate = self;
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    NSString *token = [[FIRInstanceID instanceID] token];
+    NSLog(@"Messaging instanceID token: %@", token);
+    
+    if (token != nil && ![token isEqualToString:@""]) {
+        [WAServer addNotificationToken:token completion:nil];
+    }
+    
 }
 
 - (void)signupComplete {

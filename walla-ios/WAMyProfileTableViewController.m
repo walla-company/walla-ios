@@ -199,11 +199,20 @@
 }
 
 - (void)logout {
-    NSError *signOutError;
-    BOOL status = [[FIRAuth auth] signOut:&signOutError];
-    if (!status) {
-        NSLog(@"Error signing out: %@", signOutError);
-        return;
+    
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    
+    NSString *token = [[FIRInstanceID instanceID] token];
+    NSLog(@"Messaging instanceID token: %@", token);
+    
+    if (token != nil && ![token isEqualToString:@""]) {
+        [WAServer removeNotificationToken:token completion:^(BOOL success) {
+            NSError *signOutError;
+            BOOL status = [[FIRAuth auth] signOut:&signOutError];
+            if (!status) {
+                NSLog(@"Error signing out: %@", signOutError);
+            }
+        }];
     }
 }
 

@@ -253,8 +253,8 @@
                 NSDictionary *userInfo = [self.userInfoDictionary objectForKey:replyUID];
                 [interestedNames appendString:[NSString stringWithFormat:@"%@", userInfo[@"name"]]];
                 if ([self.viewingActivity.interestedUserIDs count] == 1) [interestedNames appendString:@" is interested"];
-                else if ((i == 2 || i == [self.viewingActivity.interestedUserIDs count]-1) && [self.viewingActivity.goingUserIDs count] > 3) [interestedNames appendString:[NSString stringWithFormat:@" and %ld %@ are going", (long)(self.viewingActivity.numberInterested-3), (self.viewingActivity.numberInterested-3 == 1) ? @"other" : @"others"]];
-                else if (i == [self.viewingActivity.interestedUserIDs count]-1) [interestedNames appendString:@" are going"];
+                else if ((i == 2 || i == [self.viewingActivity.interestedUserIDs count]-1) && [self.viewingActivity.goingUserIDs count] > 3) [interestedNames appendString:[NSString stringWithFormat:@" and %ld %@ are interested", (long)(self.viewingActivity.numberInterested-3), (self.viewingActivity.numberInterested-3 == 1) ? @"other" : @"others"]];
+                else if (i == [self.viewingActivity.interestedUserIDs count]-1) [interestedNames appendString:@" are interested"];
                 else if ([self.viewingActivity.interestedUserIDs count] > 3 || i != [self.viewingActivity.interestedUserIDs count]-2) [interestedNames appendString:@", "];
                 else [interestedNames appendString:@" and "];
             }
@@ -483,7 +483,7 @@
     NSMutableArray *friendsToInvite = [[NSMutableArray alloc] init];
     
     for (NSString *uid in self.userFriends) {
-        if (![self.viewingActivity.invitedUserIDs containsObject:uid]) {
+        if (![self.viewingActivity.invitedUserIDs containsObject:uid] && ![self.viewingActivity.goingUserIDs containsObject:uid]) {
             [friendsToInvite addObject:uid];
         }
     }

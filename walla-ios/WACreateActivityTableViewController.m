@@ -84,6 +84,8 @@
     self.userGroupIDs = [[NSArray alloc] init];
     self.userFriendIDs = [[NSArray alloc] init];
     
+    self.userVerified = false;
+    
     [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups) {
         self.userGroupIDs = groups;
     }];
@@ -93,7 +95,49 @@
     }];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    [WAServer getUserVerified:^(BOOL verified) {
+        self.userVerified = verified;
+        
+        NSLog(@"self.userVerified: %@", (self.userVerified) ? @"true" : @"false");
+        
+        if (!self.userVerified) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Account not Verified" message:@"You cannot post an activity until your account has been verified. Open the verification link to verify your account. If you have not received a verification link, you can request one now." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *requestAction = [UIAlertAction actionWithTitle:@"Request Verification Link" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                self.tableView.userInteractionEnabled = false;
+                
+                [WAServer sendVerificationEmail:^(BOOL success) {
+                    
+                    self.tableView.userInteractionEnabled = true;
+                    
+                    if (success) {
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email Sent" message:@"We have sent you a verification email. Please open the verification link." preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                            [self dismissViewControllerAnimated:true completion:nil];
+                        }];
+                        [alert addAction:cancelAction];
+                        [self presentViewController:alert animated:true completion:nil];
+                    }
+                    else {
+                        [self dismissViewControllerAnimated:true completion:nil];
+                    }
+                }];
+            }];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                [self dismissViewControllerAnimated:true completion:nil];
+            }];
+            [alert addAction:requestAction];
+            [alert addAction:cancelAction];
+            [self presentViewController:alert animated:true completion:nil];
+        }
+    }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
     
     for (GMSMapView *mapView in self.mapViews) {
         
@@ -528,7 +572,7 @@
         
         [self presentViewController:alert animated:true completion:nil];
     }
-    else {
+    else if (self.userVerified) {
         
         self.tableView.userInteractionEnabled = false;
         

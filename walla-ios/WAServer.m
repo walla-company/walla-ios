@@ -449,7 +449,8 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             NSDictionary *requestDictionary = @{
                                                 @"uid": uid,
                                                 @"school_identifier": [self schoolIdentifier],
-                                                @"auid": auid
+                                                @"auid": auid,
+                                                @"sender": [FIRAuth auth].currentUser.uid
                                                 };
             
             NSError *jsonError;
@@ -1767,6 +1768,129 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
     
 }
 
++ (void)getUserVerified:(void (^) (BOOL verified))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getUserVerified");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_user_verified?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], [FIRAuth auth].currentUser.uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"user verified: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([[jsonData objectForKey:@"verified"] boolValue]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+    });
+
+    
+}
+
++ (void)sendVerificationEmail:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/request_verification?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"email": [FIRAuth auth].currentUser.email
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error sending verification email (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success sending verification email");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
 # pragma mark - Groups
 
 + (void)getGroupWithID:(NSString *)guid completion:(void (^) (WAGroup *group))completionBlock {
@@ -2458,6 +2582,156 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
         
     });
     
+}
+
++ (void)addNotificationToken:(NSString *)token completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/add_notification_token?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"token": token
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error adding token (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success adding token");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)removeNotificationToken:(NSString *)token completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/remove_notification_token?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"token": token
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error removing token (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success removing token");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+
 }
 
 #pragma mark - Discover

@@ -73,6 +73,10 @@
 
 + (void)updateUserLastLogon;
 
++ (void)getUserVerified:(void (^) (BOOL verified))completionBlock;
+
++ (void)sendVerificationEmail:(void (^) (BOOL success))completionBlock;
+
 // Groups
 
 + (void)getGroupWithID:(NSString *)guid completion:(void (^) (WAGroup *group))completionBlock;
@@ -100,6 +104,10 @@
 + (void)getNotifications:(void (^) (NSArray *notifications))completionBlock;
 
 + (void)updateNotificationRead:(NSString *)notificationID completion:(void (^) (BOOL success))completionBlock;
+
++ (void)addNotificationToken:(NSString *)token completion:(void (^) (BOOL success))completionBlock;
+
++ (void)removeNotificationToken:(NSString *)token completion:(void (^) (BOOL success))completionBlock;
 
 // Discover
 

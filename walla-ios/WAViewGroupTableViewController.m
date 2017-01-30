@@ -120,7 +120,7 @@
             
             cell.groupNameLabel.text = self.viewingGroup.name;
             
-            cell.infoLabel.text = [NSString stringWithFormat:@"%ld %@", [self.viewingGroup.members count], ([self.viewingGroup.members count] == 1) ? @"member" : @"members"];
+            cell.infoLabel.text = [NSString stringWithFormat:@"%ld %@", (unsigned long)[self.viewingGroup.members count], ([self.viewingGroup.members count] == 1) ? @"member" : @"members"];
             
             return cell;
         }

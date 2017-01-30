@@ -113,7 +113,7 @@
     
     if (indexPath.row == 1) {
         
-        cell.textField.placeholder = @"Eamil Address";
+        cell.textField.placeholder = @"Email Address";
         cell.textField.tag = 1;
         cell.textField.delegate = self;
         
@@ -236,6 +236,7 @@
 
 - (void)forgotPasswordButtonPressed:(UIButton *)button {
     
+    [self performSegueWithIdentifier:@"openForgotPassword" sender:self];
 }
 
 @end
