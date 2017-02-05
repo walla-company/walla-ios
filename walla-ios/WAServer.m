@@ -25,7 +25,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
             [request setHTTPMethod:@"GET"];
-            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activity?token=%@&school_identifier=%@&auid=%@", API_KEY, [self schoolIdentifier], auid];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activity?token=%@&school_identifier=%@&auid=%@&uid=%@", API_KEY, [self schoolIdentifier], auid, [FIRAuth auth].currentUser.uid];
             NSLog(@"url: %@", url);
             [request setURL:[NSURL URLWithString:url]];
             
@@ -73,7 +73,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
             [request setHTTPMethod:@"GET"];
-            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activities?token=%@&school_identifier=%@&filter=%f", API_KEY, [self schoolIdentifier], hours];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_activities?token=%@&school_identifier=%@&filter=%f&uid=%@", API_KEY, [self schoolIdentifier], hours, [FIRAuth auth].currentUser.uid];
             NSLog(@"url: %@", url);
             [request setURL:[NSURL URLWithString:url]];
             
@@ -1806,7 +1806,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
         else {
             if (completionBlock) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
-                    completionBlock(nil);
+                    completionBlock(false);
                 });
             }
         }
@@ -2597,7 +2597,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             NSDictionary *requestDictionary = @{
                                                 @"uid": [FIRAuth auth].currentUser.uid,
                                                 @"school_identifier": [self schoolIdentifier],
-                                                @"token": token
+                                                @"notification_token": token
                                                 };
             
             NSError *jsonError;
@@ -2672,7 +2672,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             NSDictionary *requestDictionary = @{
                                                 @"uid": [FIRAuth auth].currentUser.uid,
                                                 @"school_identifier": [self schoolIdentifier],
-                                                @"token": token
+                                                @"notification_token": token
                                                 };
             
             NSError *jsonError;
@@ -2932,6 +2932,130 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             }
         }
         
+    });
+    
+}
+
+#pragma mark - Discussions
+
++ (void)postDiscussion:(NSString *)text activityID:(NSString *)activityID completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/post_discussion?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": activityID,
+                                                @"text": text
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error posting discussion (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success posting discussion");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)getDiscussions:(NSString *)activityID completion:(void (^) (NSArray *discussions))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getNotifications");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_discussions?token=%@&school_identifier=%@&auid=%@", API_KEY, [self schoolIdentifier], activityID];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"Discussions: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([jsonData allValues]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
     });
     
 }

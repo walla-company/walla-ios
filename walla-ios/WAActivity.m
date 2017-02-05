@@ -24,8 +24,8 @@
         
         self.activityID = dictionary[@"activity_id"];
         
-        self.startTime = [NSDate dateWithTimeIntervalSinceReferenceDate:[dictionary[@"start_time"] doubleValue]];
-        self.endTime = [NSDate dateWithTimeIntervalSinceReferenceDate:[dictionary[@"end_time"] doubleValue]];
+        self.startTime = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"start_time"] doubleValue]];
+        self.endTime = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"end_time"] doubleValue]];
         
         self.title = dictionary[@"title"];
         self.details = dictionary[@"details"];

@@ -1,15 +1,14 @@
 //
-//  WAViewActivityViewController.m
+//  WAViewActivityTableViewController.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/26/16.
-//  Copyright © 2016 GenieUS, Inc. All rights reserved.
+//  Created by Joseph DeChicchis on 2/4/17.
+//  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAViewActivityViewController.h"
+#import "WAViewActivityTableViewController.h"
 
 #import "WAViewGroupTableViewController.h"
-
 #import "WAViewUserTableViewController.h"
 
 #import "WAShowMapViewController.h"
@@ -20,11 +19,11 @@
 
 @import Firebase;
 
-@interface WAViewActivityViewController ()
+@interface WAViewActivityTableViewController ()
 
 @end
 
-@implementation WAViewActivityViewController
+@implementation WAViewActivityTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,30 +34,38 @@
     
     // Set up view activity table view
     
-    self.viewActivityTableView.delegate = self;
-    self.viewActivityTableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
-    self.viewActivityTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityAttendeesTableViewCell" bundle:nil] forCellReuseIdentifier:@"attendeesCell"];
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityButtonsTableViewCell" bundle:nil] forCellReuseIdentifier:@"buttonsCell"];
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityHostTableViewCell" bundle:nil] forCellReuseIdentifier:@"hostCell"];
-    [self.viewActivityTableView registerNib:[UINib nibWithNibName:@"WAViewActivityDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityAttendeesTableViewCell" bundle:nil] forCellReuseIdentifier:@"attendeesCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityButtonsTableViewCell" bundle:nil] forCellReuseIdentifier:@"buttonsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityHostTableViewCell" bundle:nil] forCellReuseIdentifier:@"hostCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityDiscussionTableViewCell" bundle:nil] forCellReuseIdentifier:@"discussionCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityPostDiscussionTableViewCell" bundle:nil] forCellReuseIdentifier:@"postDiscussionCell"];
     
-    self.viewActivityTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.viewActivityTableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
     
-    self.viewActivityTableView.showsVerticalScrollIndicator = false;
+    self.tableView.showsVerticalScrollIndicator = false;
     
-    self.viewActivityTableView.rowHeight = UITableViewAutomaticDimension;
-    self.viewActivityTableView.estimatedRowHeight = 150.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 150.0;
     
     self.userInfoDictionary = [[NSMutableDictionary alloc] init];
+    self.profilesImagesDictionary = [[NSMutableDictionary alloc] init];
+    self.userInfoDiscussionsDictionary = [[NSMutableDictionary alloc] init];
     
     self.activityHostImage = [UIImage imageNamed:@"BlankCircle"];
+    
+    self.discussionPostText = @"";
+    
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,13 +77,13 @@
         self.viewingActivity = activity;
         if (self.viewingActivity.activityPublic) self.title = @"Public";
         else self.title = @"Private";
-        [self.viewActivityTableView reloadData];
+        [self.tableView reloadData];
         
         [WAServer getUserBasicInfoWithID:self.viewingActivity.host completion:^(NSDictionary *user) {
             
             self.activityHostName = user[@"name"];
             self.activityHostDetails = [NSString stringWithFormat:@"%@ Class of %@", ([user[@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate", user[@"graduation_year"]];
-            [self.viewActivityTableView reloadData];
+            [self.tableView reloadData];
             
             [self loadProfileImage:user[@"profile_image_url"]];
         }];
@@ -89,6 +96,8 @@
     [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups) {
         self.userGroups = groups;
     }];
+    
+    [self loadDiscussions];
 }
 
 - (void)loadProfileImage:(NSString *)profileImageURL {
@@ -107,10 +116,61 @@
             } else {
                 
                 self.activityHostImage = [UIImage imageWithData:data];
-                [self.viewActivityTableView reloadData];
+                [self.tableView reloadData];
             }
         }];
     }
+}
+
+- (void)loadDiscussions {
+    
+    [WAServer getDiscussions:self.viewingActivityID completion:^(NSArray *discussions) {
+        self.discussions = discussions;
+        
+        self.discussions = [self.discussions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            double first = [((NSDictionary *)a)[@"time_posted"] doubleValue];
+            double second = [((NSDictionary *)b)[@"time_posted"] doubleValue];
+            return first >= second;
+        }];
+        
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)loadProfileImage:(NSString *)profileImageURL uid:(NSString *)uid {
+    
+    NSLog(@"loadProfileImage: %@ : %@", profileImageURL, uid);
+    
+    if ([profileImageURL isEqualToString:@""]) {
+        
+        [self.profilesImagesDictionary setObject:[UIImage imageNamed:@"BlankCircle"] forKey:uid];
+        
+        [self.tableView reloadData];
+        
+    }
+    else if (![self.profilesImagesDictionary objectForKey:uid]) {
+        
+        [self.profilesImagesDictionary setObject:[UIImage imageNamed:@"BlankCircle"] forKey:uid];
+        
+        [self.tableView reloadData];
+        
+        FIRStorage *storage = [FIRStorage storage];
+        
+        FIRStorageReference *imageRef = [storage referenceForURL:profileImageURL];
+        
+        [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+            if (error != nil) {
+                
+                NSLog(@"Error downloading profile image: %@", error);
+                
+            } else {
+                
+                [self.profilesImagesDictionary setObject:[UIImage imageWithData:data] forKey:uid];
+                [self.tableView reloadData];
+            }
+        }];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,10 +182,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        
+        if (!self.viewingActivity) return 0;
+        
+        return ([self.discussions count] == 0) ? 1 : [self.discussions count] + 1;
+    }
     
     if (self.viewingActivity) return ([self.viewingActivity.details isEqualToString:@""]) ? 5 : 6;
     
@@ -134,9 +201,83 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.section == 1) {
+        
+        if (indexPath.row == [self.discussions count]) {
+            WAViewActivityPostDiscussionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postDiscussionCell" forIndexPath:indexPath];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+            
+            cell.postTextView.scrollEnabled = false;
+            cell.postTextView.delegate = self;
+            
+            if ([self.discussionPostText isEqualToString:@""]) {
+                cell.postTextView.textColor = [WAValues notSelectedTextColor];
+                cell.postTextView.text = @"Join the discussion!";
+            }
+            else {
+                cell.postTextView.textColor = [WAValues selectedTextColor];
+                cell.postTextView.text = self.discussionPostText;
+            }
+            
+            [cell.postButton addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
+            return cell;
+        }
+        
+        NSDictionary *discussion = [self.discussions objectAtIndex:indexPath.row];
+        
+        NSString *discussionUID = discussion[@"user_id"];
+        
+        NSDate *timePosted = [NSDate dateWithTimeIntervalSince1970:[discussion[@"time_posted"] doubleValue]];
+        
+        WAViewActivityDiscussionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"discussionCell" forIndexPath:indexPath];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        
+        cell.profileImageView.layer.cornerRadius = 15.0;
+        cell.profileImageView.clipsToBounds = true;
+        
+        NSDictionary *user = self.userInfoDiscussionsDictionary[discussionUID];
+        
+        if (user) {
+            cell.nameLabel.text = user[@"name"];
+        }
+        else {
+            cell.nameLabel.text = @"";
+            [self.userInfoDiscussionsDictionary setObject:@{@"name": @"", @"profile_image_url": @""} forKey:discussionUID];
+            [WAServer getUserBasicInfoWithID:discussionUID completion:^(NSDictionary *user) {
+                
+                NSLog(@"user loaded");
+                
+                [self.userInfoDiscussionsDictionary setObject:user forKey:discussionUID];
+                [self loadProfileImage:user[@"profile_image_url"] uid:discussionUID];
+                
+                [self.tableView reloadData];
+            }];
+        }
+        
+        UIImage *image = self.profilesImagesDictionary[discussionUID];
+        
+        cell.profileImageView.image = (image) ? image : [UIImage imageNamed:@"BlankCircle"];
+        
+        cell.discussionTextLabel.text = discussion[@"text"];
+        
+        NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+        [formatter1 setDateFormat:@"h:mm aa on MM/dd"];
+        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+        [formatter2 setDateFormat:@"MM/dd"];
+        
+        cell.timeLabel.text = [NSString stringWithFormat:@"%@ on %@", [formatter1 stringFromDate:timePosted], [formatter2 stringFromDate:timePosted]];
+        
+        return cell;
+    }
+    
     if (indexPath.row == 0) {
         
-        WAViewActivityInfoTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
+        WAViewActivityInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -189,7 +330,7 @@
     
     if (indexPath.row == 1) {
         
-        WAViewActivityButtonsTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"buttonsCell" forIndexPath:indexPath];
+        WAViewActivityButtonsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"buttonsCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -214,7 +355,7 @@
     
     if (indexPath.row == 2) {
         
-        WAViewActivityLocationTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
+        WAViewActivityLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -228,7 +369,7 @@
     
     if (indexPath.row == 3) {
         
-        WAViewActivityAttendeesTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"attendeesCell" forIndexPath:indexPath];
+        WAViewActivityAttendeesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"attendeesCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -262,7 +403,7 @@
                 interestedNames = [NSMutableString stringWithFormat:@""];
                 [WAServer getUserBasicInfoWithID:replyUID completion:^(NSDictionary *user) {
                     [self.userInfoDictionary setObject:user forKey:replyUID];
-                    [self.viewActivityTableView reloadData];
+                    [self.tableView reloadData];
                 }];
                 break;
             }
@@ -293,7 +434,7 @@
                 goingNames = [NSMutableString stringWithFormat:@""];
                 [WAServer getUserBasicInfoWithID:replyUID completion:^(NSDictionary *user) {
                     [self.userInfoDictionary setObject:user forKey:replyUID];
-                    [self.viewActivityTableView reloadData];
+                    [self.tableView reloadData];
                 }];
                 break;
             }
@@ -306,7 +447,7 @@
     
     if (indexPath.row == 4) {
         
-        WAViewActivityHostTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"hostCell" forIndexPath:indexPath];
+        WAViewActivityHostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hostCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -323,7 +464,7 @@
         return cell;
     }
     
-    WAViewActivityDetailsTableViewCell *cell = [self.viewActivityTableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
+    WAViewActivityDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
@@ -336,7 +477,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 4) {
+    if (indexPath.section == 0 && indexPath.row == 4) {
         
         if ([self.viewingActivity.host isEqualToString:[FIRAuth auth].currentUser.uid]) {
             [self.tabBarController setSelectedIndex:4];
@@ -347,7 +488,54 @@
             [self.navigationController pushViewController:destinationController animated:YES];
         }
     }
+    if (indexPath.section == 1 && indexPath.row < [self.discussions count]) {
+        
+        NSDictionary *discussion = [self.discussions objectAtIndex:indexPath.row];
+        
+        if ([discussion[@"user_id"] isEqualToString:[FIRAuth auth].currentUser.uid]) {
+            [self.tabBarController setSelectedIndex:4];
+        }
+        else {
+            WAViewUserTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewUserTableViewController"];
+            destinationController.viewingUserID = discussion[@"user_id"];
+            [self.navigationController pushViewController:destinationController animated:YES];
+        }
+    }
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        
+        return [[UIView alloc] init];
+    }
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 20)];
+    
+    headerView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 0, self.tableView.frame.size.width-30, 20)];
+    
+    label.textColor = [UIColor colorWithRed:143./255.0 green:142./255.0 blue:148./255.0 alpha:1.0];
+    
+    label.text = @"Discussion";
+    
+    label.font = [UIFont systemFontOfSize:14.0];
+    
+    [headerView addSubview:label];
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        
+        return 0;
+    }
+    
+    return 20;
 }
 
 # pragma mark - Button targets
@@ -376,7 +564,7 @@
     self.viewingActivity.numberInterested = [self.viewingActivity.interestedUserIDs count];
     self.viewingActivity.numberGoing = [self.viewingActivity.goingUserIDs count];
     
-    [self.viewActivityTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)goingButtonPressed:(UIButton *)button {
@@ -397,7 +585,7 @@
     self.viewingActivity.numberInterested = [self.viewingActivity.interestedUserIDs count];
     self.viewingActivity.numberGoing = [self.viewingActivity.goingUserIDs count];
     
-    [self.viewActivityTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)inviteButtonPressed:(UIButton *)button {
@@ -542,6 +730,65 @@
         
         [WAServer activityInviteUserWithID:inviteUID toActivity:self.viewingActivityID completion:nil];
     }
+}
+
+#pragma mark - Text view delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    if ([self.discussionPostText isEqualToString:@""]) {
+        textView.textColor = [WAValues selectedTextColor];
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    self.discussionPostText = textView.text;
+    
+    if ([self.discussionPostText isEqualToString:@""]) {
+        textView.textColor = [WAValues notSelectedTextColor];
+        textView.text = @"Join the discussion!";
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    self.discussionPostText = textView.text;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
+#pragma mark - Post discussion
+
+- (void)postButtonPressed:(UIButton *)button {
+    
+    NSLog(@"postButtonPressed");
+    
+    WAViewActivityPostDiscussionTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.discussions count] inSection:1]];
+    
+    [cell.postTextView resignFirstResponder];
+    
+    if ([self.discussionPostText isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Text" message:@"You must write something before you can join the discussion." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else {
+        
+        [WAServer postDiscussion:self.discussionPostText activityID:self.viewingActivityID completion:^(BOOL success) {
+            if (success) {
+                [self loadDiscussions];
+            }
+        }];
+        
+        self.discussionPostText = @"";
+        
+        [self.tableView reloadData];
+    }
+    
 }
 
 #pragma mark - Navigation

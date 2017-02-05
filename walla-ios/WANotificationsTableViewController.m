@@ -11,7 +11,7 @@
 #import "WANotificationsFriendRequestTableViewCell.h"
 #import "WANotificationsTextTableViewCell.h"
 
-#import "WAViewActivityViewController.h"
+#import "WAViewActivityTableViewController.h"
 
 #import "WAServer.h"
 #import "WAValues.h"
@@ -21,6 +21,7 @@
 static NSString *NOTIFICATION_FRIEND_REQUEST = @"friend_request";
 static NSString *NOTIFICATION_USER_INVITED = @"user_invited";
 static NSString *NOTIFICATION_GROUP_INVITED = @"group_invited";
+static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
 
 @interface WANotificationsTableViewController ()
 
@@ -232,7 +233,7 @@ static NSString *NOTIFICATION_GROUP_INVITED = @"group_invited";
     
     if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
         
-        WAViewActivityViewController *destinationController = (WAViewActivityViewController *) [segue destinationViewController];
+        WAViewActivityTableViewController *destinationController = (WAViewActivityTableViewController *) [segue destinationViewController];
         destinationController.viewingActivityID = self.openActivityID;
     }
 }

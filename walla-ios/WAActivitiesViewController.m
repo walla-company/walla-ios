@@ -9,7 +9,7 @@
 #import "WAActivitiesViewController.h"
 
 #import "WAViewGroupTableViewController.h"
-#import "WAViewActivityViewController.h"
+#import "WAViewActivityTableViewController.h"
 
 #import "WAValues.h"
 
@@ -143,6 +143,8 @@
     
     cell.dateLabel.text = [formatter3 stringFromDate:activity.startTime];
     
+    NSLog(@"%@ start time: %f : %@", activity.title, [activity.startTime timeIntervalSince1970], [formatter3 stringFromDate:activity.startTime]);
+    
     cell.interestedCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberInterested];
     cell.goingCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberGoing];
     
@@ -273,7 +275,7 @@
     }
     else if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
         
-        WAViewActivityViewController *destinationController = (WAViewActivityViewController *) [segue destinationViewController];
+        WAViewActivityTableViewController *destinationController = (WAViewActivityTableViewController *) [segue destinationViewController];
         destinationController.viewingActivityID = self.openActivityID;
     }
 }

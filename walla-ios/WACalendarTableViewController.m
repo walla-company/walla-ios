@@ -9,7 +9,7 @@
 #import "WACalendarTableViewController.h"
 
 #import "WAViewGroupTableViewController.h"
-#import "WAViewActivityViewController.h"
+#import "WAViewActivityTableViewController.h"
 
 #import "WAValues.h"
 
@@ -225,7 +225,7 @@
     }
     else if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
         
-        WAViewActivityViewController *destinationController = (WAViewActivityViewController *) [segue destinationViewController];
+        WAViewActivityTableViewController *destinationController = (WAViewActivityTableViewController *) [segue destinationViewController];
         destinationController.viewingActivityID = self.openActivityID;
     }
 }

@@ -119,6 +119,12 @@
 
 + (void)getSearchGroupDictionary:(void (^) (NSDictionary *groups))completionBlock;
 
+// Discussions
+
++ (void)postDiscussion:(NSString *)text activityID:(NSString *)activityID completion:(void (^) (BOOL success))completionBlock;
+
++ (void)getDiscussions:(NSString *)activityID completion:(void (^) (NSArray *discussions))completionBlock;
+
 // Other
 
 + (BOOL)userAuthenticated;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -117,7 +117,7 @@
                     <navigationItem key="navigationItem" title="Notifications" id="hCu-0V-lFG"/>
                     <connections>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="hyR-wN-DlP"/>
-                        <segue destination="V5u-vA-Koq" kind="show" identifier="openActivityDetails" id="xgg-1k-mnr"/>
+                        <segue destination="IDO-BN-C0f" kind="show" identifier="openActivityDetails" id="nC8-TM-6wt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEF-SN-aE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -345,48 +345,34 @@
                         <outlet property="activitiesTableView" destination="JpZ-Xc-6f3" id="xXg-Zu-DgO"/>
                         <outlet property="filtersCollectionView" destination="D20-To-bqj" id="aQY-xd-Eck"/>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="bW0-lF-GSs"/>
-                        <segue destination="V5u-vA-Koq" kind="show" identifier="openActivityDetails" id="VPJ-sK-MWW"/>
                         <segue destination="SCV-YU-bQb" kind="show" identifier="openViewGroup" id="Dno-9f-m5g"/>
+                        <segue destination="IDO-BN-C0f" kind="show" identifier="openActivityDetails" id="mOU-VR-Nuh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxY-tV-er1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2991.1999999999998" y="-1201.3493253373315"/>
         </scene>
-        <!--View Activity View Controller-->
-        <scene sceneID="6kp-vg-ZkT">
+        <!--View Activity Table View Controller-->
+        <scene sceneID="Fgh-ve-omg">
             <objects>
-                <viewController storyboardIdentifier="WAViewActivityViewController" id="V5u-vA-Koq" customClass="WAViewActivityViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HAH-o0-B22"/>
-                        <viewControllerLayoutGuide type="bottom" id="VGm-mE-DHg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iwv-LI-buS">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                <tableViewController storyboardIdentifier="WAViewActivityTableViewController" id="IDO-BN-C0f" customClass="WAViewActivityTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Os3-FS-CMe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QI7-9N-fzH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="QI7-9N-fzH" firstAttribute="top" secondItem="iwv-LI-buS" secondAttribute="top" id="XJD-IM-c24"/>
-                            <constraint firstAttribute="trailing" secondItem="QI7-9N-fzH" secondAttribute="trailing" id="pPz-AG-0qn"/>
-                            <constraint firstItem="QI7-9N-fzH" firstAttribute="leading" secondItem="iwv-LI-buS" secondAttribute="leading" id="tPI-ij-mrH"/>
-                            <constraint firstAttribute="bottom" secondItem="QI7-9N-fzH" secondAttribute="bottom" id="tnu-5A-AsU"/>
-                        </constraints>
-                    </view>
+                        <connections>
+                            <outlet property="dataSource" destination="IDO-BN-C0f" id="Tuf-fg-DwT"/>
+                            <outlet property="delegate" destination="IDO-BN-C0f" id="qUX-pG-KQJ"/>
+                        </connections>
+                    </tableView>
                     <connections>
-                        <outlet property="viewActivityTableView" destination="QI7-9N-fzH" id="Ba9-oc-lea"/>
-                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="Jie-Mb-Ble"/>
-                        <segue destination="yge-hd-rZi" kind="show" identifier="openShowMap" id="Rve-YC-9jv"/>
+                        <segue destination="yge-hd-rZi" kind="show" identifier="openShowMap" id="zp7-Y6-GrX"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RxZ-e1-pES" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VVc-nt-f7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5088.8000000000002" y="-1201.3493253373315"/>
+            <point key="canvasLocation" x="4998" y="-1113"/>
         </scene>
         <!--Show Map View Controller-->
         <scene sceneID="dKM-7I-o4R">
@@ -397,14 +383,14 @@
                         <viewControllerLayoutGuide type="bottom" id="e9s-w8-SXq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HGn-dg-lzN">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgc-3m-pGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5848.8000000000002" y="-1201.3493253373315"/>
+            <point key="canvasLocation" x="5822" y="-1114"/>
         </scene>
         <!--View Group Table View Controller-->
         <scene sceneID="8M2-w0-PJI">
@@ -504,8 +490,8 @@
                     <navigationItem key="navigationItem" id="9Ox-Wt-Zsg"/>
                     <connections>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="Psa-0z-Dv5"/>
-                        <segue destination="V5u-vA-Koq" kind="show" identifier="openActivityDetails" id="YeU-f4-Pwa"/>
                         <segue destination="SCV-YU-bQb" kind="show" identifier="openViewGroup" id="2o6-eE-Nvu"/>
+                        <segue destination="IDO-BN-C0f" kind="show" identifier="openActivityDetails" id="3tE-im-TIx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elL-N0-oUL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -749,9 +735,9 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YeU-f4-Pwa"/>
         <segue reference="RU4-NS-liN"/>
-        <segue reference="NXK-eG-CAf"/>
         <segue reference="Fbb-hK-71o"/>
+        <segue reference="nC8-TM-6wt"/>
+        <segue reference="lpc-gH-RLT"/>
     </inferredMetricsTieBreakers>
 </document>

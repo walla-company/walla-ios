@@ -53,6 +53,11 @@
 		EB4EA7A41E039604000F4834 /* WAFilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA7A31E039604000F4834 /* WAFilterCollectionViewCell.m */; };
 		EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */; };
 		EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */; };
+		EB9958901E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB99588E1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m */; };
+		EB9958911E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB99588F1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib */; };
+		EB9958961E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9958941E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m */; };
+		EB9958971E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9958951E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib */; };
+		EB99589A1E46E0D200601E2D /* WAViewActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9958991E46E0D200601E2D /* WAViewActivityTableViewController.m */; };
 		EB9C2D8B1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9C2D891E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.m */; };
 		EB9C2D8C1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C2D8A1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.xib */; };
 		EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */; };
@@ -83,7 +88,6 @@
 		EBCB567F1E10F410000530F6 /* WAViewActivityHostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB567D1E10F410000530F6 /* WAViewActivityHostTableViewCell.xib */; };
 		EBCB56831E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56811E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.m */; };
 		EBCB56841E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56821E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.xib */; };
-		EBCB56871E10F448000530F6 /* WAViewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56861E10F448000530F6 /* WAViewActivityViewController.m */; };
 		EBCB568B1E11B0AB000530F6 /* WAActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB568A1E11B0AB000530F6 /* WAActivity.m */; };
 		EBCB568F1E12DF7F000530F6 /* WAViewGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB568E1E12DF7F000530F6 /* WAViewGroupTableViewController.m */; };
 		EBCB56951E12E094000530F6 /* WAViewGroupInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56931E12E094000530F6 /* WAViewGroupInfoTableViewCell.m */; };
@@ -249,6 +253,14 @@
 		EB8B8E4E1E0EFB8700FB7389 /* WAGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAGroupTableViewCell.h; sourceTree = "<group>"; };
 		EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAGroupTableViewCell.m; sourceTree = "<group>"; };
 		EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAGroupTableViewCell.xib; sourceTree = "<group>"; };
+		EB99588D1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityDiscussionTableViewCell.h; sourceTree = "<group>"; };
+		EB99588E1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewActivityDiscussionTableViewCell.m; sourceTree = "<group>"; };
+		EB99588F1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAViewActivityDiscussionTableViewCell.xib; sourceTree = "<group>"; };
+		EB9958931E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityPostDiscussionTableViewCell.h; sourceTree = "<group>"; };
+		EB9958941E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewActivityPostDiscussionTableViewCell.m; sourceTree = "<group>"; };
+		EB9958951E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAViewActivityPostDiscussionTableViewCell.xib; sourceTree = "<group>"; };
+		EB9958981E46E0D200601E2D /* WAViewActivityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityTableViewController.h; sourceTree = "<group>"; };
+		EB9958991E46E0D200601E2D /* WAViewActivityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewActivityTableViewController.m; sourceTree = "<group>"; };
 		EB9C2D881E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditProfileAcademicLevelTableViewCell.h; sourceTree = "<group>"; };
 		EB9C2D891E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditProfileAcademicLevelTableViewCell.m; sourceTree = "<group>"; };
 		EB9C2D8A1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditProfileAcademicLevelTableViewCell.xib; sourceTree = "<group>"; };
@@ -297,8 +309,6 @@
 		EBCB56801E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityDetailsTableViewCell.h; sourceTree = "<group>"; };
 		EBCB56811E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewActivityDetailsTableViewCell.m; sourceTree = "<group>"; };
 		EBCB56821E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAViewActivityDetailsTableViewCell.xib; sourceTree = "<group>"; };
-		EBCB56851E10F448000530F6 /* WAViewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityViewController.h; sourceTree = "<group>"; };
-		EBCB56861E10F448000530F6 /* WAViewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewActivityViewController.m; sourceTree = "<group>"; };
 		EBCB56891E11B0AB000530F6 /* WAActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAActivity.h; sourceTree = "<group>"; };
 		EBCB568A1E11B0AB000530F6 /* WAActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAActivity.m; sourceTree = "<group>"; };
 		EBCB568D1E12DF7F000530F6 /* WAViewGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewGroupTableViewController.h; sourceTree = "<group>"; };
@@ -733,6 +743,26 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		EB99588C1E46CBD600601E2D /* WAViewActivityDiscussionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB99588D1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.h */,
+				EB99588E1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m */,
+				EB99588F1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib */,
+			);
+			name = WAViewActivityDiscussionTableViewCell;
+			sourceTree = "<group>";
+		};
+		EB9958921E46D9E900601E2D /* WAViewActivityPostDiscussionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB9958931E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.h */,
+				EB9958941E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m */,
+				EB9958951E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib */,
+			);
+			name = WAViewActivityPostDiscussionTableViewCell;
+			sourceTree = "<group>";
+		};
 		EB9C2D8D1E1B64D50053D057 /* WAProfileEditProfileAcademicLevelTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,8 +829,8 @@
 		EBCB565E1E10EF3A000530F6 /* WAViewActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EBCB56851E10F448000530F6 /* WAViewActivityViewController.h */,
-				EBCB56861E10F448000530F6 /* WAViewActivityViewController.m */,
+				EB9958981E46E0D200601E2D /* WAViewActivityTableViewController.h */,
+				EB9958991E46E0D200601E2D /* WAViewActivityTableViewController.m */,
 				EB2A20CE1E1976EB00BE93CD /* WAShowMapViewController */,
 				EBCB56651E10F347000530F6 /* Cells */,
 			);
@@ -816,6 +846,8 @@
 				EBCB56A31E12E42C000530F6 /* WAViewActivityAttendeesTableViewCell */,
 				EBCB56A51E12E436000530F6 /* WAViewActivityHostTableViewCell */,
 				EBCB56A61E12E43A000530F6 /* WAViewActivityDetailsTableViewCell */,
+				EB99588C1E46CBD600601E2D /* WAViewActivityDiscussionTableViewCell */,
+				EB9958921E46D9E900601E2D /* WAViewActivityPostDiscussionTableViewCell */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1624,6 +1656,7 @@
 				EBCB569B1E12E0A9000530F6 /* WAViewGroupDetailsTableViewCell.xib in Resources */,
 				EBCB57231E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib in Resources */,
 				EBCB574A1E16138E000530F6 /* WANotificationsTextTableViewCell.xib in Resources */,
+				EB9958971E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib in Resources */,
 				EB033A181E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib in Resources */,
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
 				EBCB56961E12E094000530F6 /* WAViewGroupInfoTableViewCell.xib in Resources */,
@@ -1659,6 +1692,7 @@
 				EB2A20E91E1AF20300BE93CD /* WALoginSignupButtonTableViewCell.xib in Resources */,
 				EBCB571E1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib in Resources */,
 				EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */,
+				EB9958911E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1748,6 +1782,7 @@
 				EBCB57061E1349D6000530F6 /* WAUserShadowTableViewCell.m in Sources */,
 				EBCB56451E0F4336000530F6 /* WACreateActivityCanInviteTableViewCell.m in Sources */,
 				EBCB56BB1E12EE00000530F6 /* WADiscoverFriendSuggestionsTableViewCell.m in Sources */,
+				EB9958961E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m in Sources */,
 				EB2A21011E1AFF8100BE93CD /* WASignupBottomButtonTableViewCell.m in Sources */,
 				EB033A331E0E340E00621C35 /* WAGroupPickerView.m in Sources */,
 				EBCB56FB1E134439000530F6 /* WAMyProfileGroupsTableViewController.m in Sources */,
@@ -1763,7 +1798,6 @@
 				EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */,
 				EBCB568F1E12DF7F000530F6 /* WAViewGroupTableViewController.m in Sources */,
 				EBD65F3F1E3E7E210017B54F /* WAForgotPasswordTableViewController.m in Sources */,
-				EBCB56871E10F448000530F6 /* WAViewActivityViewController.m in Sources */,
 				EBDA5C3B1E05B70400B61AED /* WACreateActivityAudienceTableViewCell.m in Sources */,
 				EB2A20D81E19BAD700BE93CD /* WALoginTableViewController.m in Sources */,
 				EB2A20E81E1AF20300BE93CD /* WALoginSignupButtonTableViewCell.m in Sources */,
@@ -1809,6 +1843,7 @@
 				EB2A20DE1E19BB9200BE93CD /* WALoginSignupIconTableViewCell.m in Sources */,
 				EB9C2D8B1E1B64CF0053D057 /* WAProfileEditProfileAcademicLevelTableViewCell.m in Sources */,
 				EBCB56DC1E130DED000530F6 /* WAViewUserDetailsTableViewCell.m in Sources */,
+				EB9958901E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m in Sources */,
 				EBCB57271E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m in Sources */,
 				EBFFE21F1E2F44AD00153AE0 /* WACalendarTableViewController.m in Sources */,
 				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
@@ -1825,6 +1860,7 @@
 				EBCB563B1E0F42FE000530F6 /* WACreateActivityInviteGroupsTableViewCell.m in Sources */,
 				EBCB56E31E131315000530F6 /* WAViewUserGroupTableViewCell.m in Sources */,
 				EBCB56551E108774000530F6 /* WAUserPickerViewController.m in Sources */,
+				EB99589A1E46E0D200601E2D /* WAViewActivityTableViewController.m in Sources */,
 				EBCB56B61E12EC64000530F6 /* WADiscoverViewController.m in Sources */,
 				EBDA5C501E05B91C00B61AED /* WAMyProfileTextTableViewCell.m in Sources */,
 				EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */,
@@ -1985,6 +2021,7 @@
 				CODE_SIGN_ENTITLEMENTS = "walla-ios/walla-ios.entitlements";
 				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1999,6 +2036,7 @@
 				CODE_SIGN_ENTITLEMENTS = "walla-ios/walla-ios.entitlements";
 				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

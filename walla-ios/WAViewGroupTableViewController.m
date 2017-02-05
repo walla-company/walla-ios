@@ -8,7 +8,7 @@
 
 #import "WAViewGroupTableViewController.h"
 
-#import "WAViewActivityViewController.h"
+#import "WAViewActivityTableViewController.h"
 
 #import "WAValues.h"
 #import "WAServer.h"
@@ -280,7 +280,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 1) {
-        WAViewActivityViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewActivityViewController"];
+        WAViewActivityTableViewController *destinationController = [self.storyboard instantiateViewControllerWithIdentifier:@"WAViewActivityTableViewController"];
         destinationController.viewingActivityID = [self.viewingGroup.activities objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:destinationController animated:YES];
     }

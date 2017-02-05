@@ -225,7 +225,7 @@
     cell.groupTagViewLabel.text = group.shortName;
     cell.groupTagView.backgroundColor = group.groupColor;
     
-    cell.groupInfoLabel.text = [NSString stringWithFormat:@"%ld members", [group.members count]];
+    cell.groupInfoLabel.text = [NSString stringWithFormat:@"%ld members", (unsigned long)[group.members count]];
     
     cell.groupNameLabel.text = group.name;
     

@@ -1,9 +1,9 @@
 //
-//  WAViewActivityViewController.h
+//  WAViewActivityTableViewController.h
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/26/16.
-//  Copyright © 2016 GenieUS, Inc. All rights reserved.
+//  Created by Joseph DeChicchis on 2/4/17.
+//  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,6 +14,8 @@
 #import "WAViewActivityButtonsTableViewCell.h"
 #import "WAViewActivityHostTableViewCell.h"
 #import "WAViewActivityDetailsTableViewCell.h"
+#import "WAViewActivityDiscussionTableViewCell.h"
+#import "WAViewActivityPostDiscussionTableViewCell.h"
 
 #import "WAActivityTabsHeaderView.h"
 
@@ -22,15 +24,15 @@
 
 #import "WAActivity.h"
 
-@interface WAViewActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WAActivityTabDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate>
-
-@property (strong, nonatomic) IBOutlet UITableView *viewActivityTableView;
+@interface WAViewActivityTableViewController : UITableViewController <WAActivityTabDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, UITextViewDelegate>
 
 @property NSString *viewingActivityID;
 
 @property WAActivity *viewingActivity;
 
+@property NSMutableDictionary *profilesImagesDictionary;
 @property NSMutableDictionary *userInfoDictionary;
+@property NSMutableDictionary *userInfoDiscussionsDictionary;
 
 @property NSString *activityHostName;
 @property NSString *activityHostDetails;
@@ -41,5 +43,11 @@
 
 @property NSArray *userFriends;
 @property NSArray *userGroups;
+
+@property (strong, nonatomic) IBOutlet UIView *keyboardView;
+
+@property NSString *discussionPostText;
+
+@property NSArray *discussions;
 
 @end
