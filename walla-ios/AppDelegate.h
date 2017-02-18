@@ -22,5 +22,7 @@
 
 @property BOOL versionTooOld;
 
+@property BOOL userSuspended;
+
 @end
 

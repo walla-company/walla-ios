@@ -51,6 +51,8 @@
 @property NSMutableArray *invitedUserIDs;
 @property NSMutableArray *invitedGroupIDs;
 
+@property BOOL activityDeleted;
+
 - (id)init;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;

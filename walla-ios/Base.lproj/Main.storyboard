@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under maintenance. We'll be back soon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFl-ta-wQL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under maintenance. We'll be back soon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFl-ta-wQL">
                                 <rect key="frame" x="16" y="298" width="343" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,7 +213,7 @@
         <scene sceneID="K8n-B3-UPJ">
             <objects>
                 <collectionViewController id="aRx-Jz-4pS" customClass="WAMyProfileInterestsCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -457,7 +456,7 @@
         <scene sceneID="Uc0-Nt-q4W">
             <objects>
                 <navigationController id="7y8-Se-XhZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GbL-Eo-hgW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GbL-Eo-hgW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -504,7 +503,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yV4-aP-dxA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="TabbarIcon1" id="bJK-S7-tQq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vm9-uJ-i4N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vm9-uJ-i4N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -587,7 +586,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdQ-EN-hEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Profile" image="TabbarIcon5" id="J9U-f5-Ee8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kr4-DY-Dct">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kr4-DY-Dct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -611,7 +610,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gd1-JI-yaw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="TabbarIcon4" id="YR8-b0-Oen"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ptP-od-nTd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ptP-od-nTd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -635,7 +634,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GhL-ns-gYU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="TabbarIcon3" id="mJo-pl-TYf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xHd-th-JXV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xHd-th-JXV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -658,7 +657,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginSignUpNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Zll-ss-jyF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LdL-uI-aro">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LdL-uI-aro">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -677,7 +676,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LRv-49-kZw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Calendar" image="TabbarIcon2" id="A9M-dM-41X"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3xz-SJ-ot6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="3xz-SJ-ot6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -695,10 +694,10 @@
             </objects>
             <point key="canvasLocation" x="-175.19999999999999" y="-1320.0899550224888"/>
         </scene>
-        <!--View Controller-->
+        <!--Account Suspended View Controller-->
         <scene sceneID="0R5-tq-D0d">
             <objects>
-                <viewController storyboardIdentifier="OldVersionViewController" id="RfK-3k-XVI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OldVersionViewController" id="RfK-3k-XVI" customClass="AccountSuspendedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WzU-Ke-KSZ"/>
                         <viewControllerLayoutGuide type="bottom" id="P5y-zh-KVT"/>
@@ -707,8 +706,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version not supported. Update Walla from the App Store." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-Vn-Pdd">
-                                <rect key="frame" x="16" y="280.5" width="343" height="107.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version not supported. Update Walla from the App Store." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-Vn-Pdd">
+                                <rect key="frame" x="16" y="280" width="343" height="108"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -724,7 +723,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bS-YP-pBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1932" y="-349"/>
+            <point key="canvasLocation" x="-1946" y="-349"/>
+        </scene>
+        <!--Account Suspended View Controller-->
+        <scene sceneID="lA7-xZ-Xbh">
+            <objects>
+                <viewController storyboardIdentifier="AccountSuspendedViewController" id="mpC-bn-TKg" customClass="AccountSuspendedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dSO-zC-zLM"/>
+                        <viewControllerLayoutGuide type="bottom" id="OuT-gj-icm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EH7-i7-nbz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Suspended" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svC-EH-XpQ">
+                                <rect key="frame" x="16" y="316" width="343" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shU-tb-zcE">
+                                <rect key="frame" x="127" y="372" width="120" height="39"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyy-1d-5TW">
+                                        <rect key="frame" x="15" y="0.0" width="90" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Log out">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logoutButtonPressed:" destination="mpC-bn-TKg" eventType="touchUpInside" id="FMj-Hw-36B"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.38823529410000002" green="0.79215686269999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="oyy-1d-5TW" secondAttribute="bottom" id="0nE-kg-m3X"/>
+                                    <constraint firstAttribute="height" constant="39" id="68A-dE-PzI"/>
+                                    <constraint firstItem="oyy-1d-5TW" firstAttribute="leading" secondItem="shU-tb-zcE" secondAttribute="leading" constant="15" id="CJi-s9-wuB"/>
+                                    <constraint firstAttribute="trailing" secondItem="oyy-1d-5TW" secondAttribute="trailing" constant="15" id="FLc-QZ-sUJ"/>
+                                    <constraint firstItem="oyy-1d-5TW" firstAttribute="top" secondItem="shU-tb-zcE" secondAttribute="top" id="WuJ-2L-uCi"/>
+                                    <constraint firstAttribute="width" constant="120" id="r2W-aX-ypg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="shU-tb-zcE" firstAttribute="top" secondItem="svC-EH-XpQ" secondAttribute="bottom" constant="20" id="9iR-8D-EGn"/>
+                            <constraint firstItem="svC-EH-XpQ" firstAttribute="trailing" secondItem="EH7-i7-nbz" secondAttribute="trailingMargin" id="ECL-5u-PKR"/>
+                            <constraint firstItem="shU-tb-zcE" firstAttribute="centerX" secondItem="EH7-i7-nbz" secondAttribute="centerX" id="bxO-m7-Uvo"/>
+                            <constraint firstItem="svC-EH-XpQ" firstAttribute="centerY" secondItem="EH7-i7-nbz" secondAttribute="centerY" id="eVH-oK-5w8"/>
+                            <constraint firstItem="svC-EH-XpQ" firstAttribute="leading" secondItem="EH7-i7-nbz" secondAttribute="leadingMargin" id="nVN-Db-thQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonView" destination="shU-tb-zcE" id="CuQ-ug-Bsw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEI-Rt-Rcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1214" y="-349"/>
         </scene>
     </scenes>
     <resources>

@@ -22,6 +22,8 @@
     
     if (self) {
         
+        self.activityDeleted = [[dictionary objectForKey:@"deleted"] boolValue];
+        
         self.activityID = dictionary[@"activity_id"];
         
         self.startTime = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"start_time"] doubleValue]];

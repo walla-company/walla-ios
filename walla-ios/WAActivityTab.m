@@ -21,8 +21,10 @@
     
     self.corners = UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerTopLeft;
     
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 8.0, 74.0, 22.0)];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 8.0, 60.0, 22.0)];
     
+    textLabel.minimumScaleFactor = 0.5;
+    textLabel.adjustsFontSizeToFitWidth = true;
     textLabel.text = text;
     textLabel.textColor = textColor;
     textLabel.textAlignment = NSTextAlignmentCenter;

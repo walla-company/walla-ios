@@ -31,7 +31,7 @@
 @property NSArray *friends;
 @property NSArray *groups;
 @property NSArray *interests;
-@property NSArray *activities;
+@property NSMutableArray *activities;
 
 @property NSArray *calendar;
 

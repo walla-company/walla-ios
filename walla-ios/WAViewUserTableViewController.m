@@ -326,7 +326,16 @@
             [self.loadingActivitiesSet addObject:auid];
             NSLog(@"load activity: %@", auid);
             [WAServer getActivityWithID:auid completion:^(WAActivity *activity) {
-                [self.activitiesDictionary setObject:activity forKey:auid];
+                NSLog(@"ACTIVITY LOADED: %@", activity);
+                if (activity) {
+                    NSLog(@"ACTIVITY TRUE");
+                    [self.activitiesDictionary setObject:activity forKey:auid];
+                }
+                else {
+                    NSLog(@"ACTIVITY FALSE");
+                    [self.activitiesDictionary removeObjectForKey:auid];
+                    [self.viewingUser.activities removeObject:auid];
+                }
                 [self.tableView reloadData];
             }];
         }

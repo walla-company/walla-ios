@@ -87,6 +87,22 @@
             
             [self loadProfileImage:user[@"profile_image_url"]];
         }];
+        
+        if (activity.activityDeleted) {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Activity Delete" message:@"This activity no longer exists." preferredStyle:UIAlertControllerStyleAlert];
+            
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+                
+                [self.navigationController popViewControllerAnimated:true];
+                
+            }];
+            
+            [alert addAction:cancelAction];
+            
+            [self presentViewController:alert animated:true completion:nil];
+            
+        }
     }];
     
     [WAServer getUserFriendsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *friends) {
@@ -191,10 +207,17 @@
         
         if (!self.viewingActivity) return 0;
         
+        if (self.viewingActivity.activityDeleted) return 0;
+        
         return ([self.discussions count] == 0) ? 1 : [self.discussions count] + 1;
     }
     
-    if (self.viewingActivity) return ([self.viewingActivity.details isEqualToString:@""]) ? 5 : 6;
+    if (self.viewingActivity) {
+        
+        if (self.viewingActivity.activityDeleted) return 0;
+        
+        return ([self.viewingActivity.details isEqualToString:@""]) ? 5 : 6;
+    }
     
     return 0;
 }
@@ -461,6 +484,15 @@
         cell.hostNameLabel.text = self.activityHostName;
         cell.hostInfoLabel.text = self.activityHostDetails;
         
+        if ([self.viewingActivity.host isEqualToString:[FIRAuth auth].currentUser.uid]) {
+            [cell.hostButton setTitle:@"Delete Activity" forState:UIControlStateNormal];
+        }
+        else {
+            [cell.hostButton setTitle:@"Flag Activity" forState:UIControlStateNormal];
+        }
+        
+        [cell.hostButton addTarget:self action:@selector(hostButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         return cell;
     }
     
@@ -650,6 +682,49 @@
     }
     
     [self presentViewController:shareMenu animated:true completion:nil];
+    
+}
+
+- (void)hostButtonPressed:(UIButton *)button {
+    
+    if ([self.viewingActivity.host isEqualToString:[FIRAuth auth].currentUser.uid]) {  // Delete event
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Activity" message:@"This action cannot be undone." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Delete Activity" style:UIAlertActionStyleDestructive handler: ^(UIAlertAction *action){
+            
+            [WAServer deleteActivityWithID:self.viewingActivityID completion:^(BOOL sucess) {
+                [self.navigationController popViewControllerAnimated:true];
+            }];
+            
+        }];
+        
+        [alert addAction:option];
+        
+        [self presentViewController:alert animated:true completion:nil];
+        
+    }
+    else {  // Flag event
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Flag Activity" message:@"We will determine if the activity should be removed from Walla once you flag this activity." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Flag Activity" style:UIAlertActionStyleDestructive handler: ^(UIAlertAction *action){
+            
+        }];
+        
+        [alert addAction:option];
+        
+        [self presentViewController:alert animated:true completion:nil];
+        
+    }
     
 }
 

@@ -178,7 +178,8 @@
     
     NSLog(@"SELECTED");
     
-    self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
+    if (self.currentFilterIndex > 0) self.openActivityID = ((WAActivity *)self.filteredActivities[indexPath.row]).activityID;
+    else self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
     
     [self performSegueWithIdentifier:@"openActivityDetails" sender:self];
     

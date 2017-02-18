@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *hostInfoLabel;
 
+@property (strong, nonatomic) IBOutlet UIButton *hostButton;
+
 @end

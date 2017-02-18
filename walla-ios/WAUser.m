@@ -48,8 +48,10 @@
         self.interests = [dictionary objectForKey:@"interests"];
         if (self.interests == nil) self.interests = [[NSArray alloc] init];
         
-        self.activities = [[dictionary objectForKey:@"activities"] allKeys];
-        if (self.activities == nil) self.activities = [[NSArray alloc] init];
+        self.activities = [[NSMutableArray alloc] initWithArray:[[dictionary objectForKey:@"activities"] allKeys]];
+        
+        //self.activities = [[dictionary objectForKey:@"activities"] allKeys];
+        if (self.activities == nil) self.activities = [[NSMutableArray alloc] init];
         
         self.calendar = [[dictionary objectForKey:@"calendar"] allKeys];
         if (self.calendar == nil) self.calendar = [[NSArray alloc] init];

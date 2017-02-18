@@ -43,6 +43,7 @@
     self.userSignedIn = true;
     self.underMaintenance = false;
     self.versionTooOld = false;
+    self.userSuspended = false;
     
     [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
         
@@ -52,16 +53,32 @@
         
         if (user && !inSignup) {
             NSLog(@"delegate signed in");
+            
             if (!self.userSignedIn && !self.underMaintenance) {
-                
-                [WAServer updateUserLastLogon];
                 
                 UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
                 NSLog(@"delegate tabbarController: %@", tabBarController);
                 [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
                 
                 self.window.rootViewController = tabBarController;
+                
+                [WAServer updateUserLastLogon];
             }
+            
+            [WAServer isUserSuspended:^(BOOL suspended){
+                NSLog(@"User suspended: %@", (suspended) ? @"true" : @"false");
+                
+                self.userSuspended = suspended;
+                
+                if (!self.underMaintenance && self.userSuspended) {
+                    UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
+                    NSLog(@"delegate viewController: %@", viewController);
+                    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+                    
+                    self.window.rootViewController = viewController;
+                }
+            }];
+            
             self.userSignedIn = true;
         }
         else if (!self.underMaintenance) {
@@ -93,6 +110,13 @@
         }
         else if (self.versionTooOld) {
             UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
+        else if (self.userSuspended) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
             NSLog(@"delegate viewController: %@", viewController);
             [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
             
@@ -138,6 +162,13 @@
             
             self.window.rootViewController = viewController;
         }
+        else if (self.userSuspended) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+        }
         else if ([FIRAuth auth].currentUser && self.userSignedIn && self.versionTooOld) {
             UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
             NSLog(@"delegate tabbarController: %@", tabBarController);
@@ -155,7 +186,6 @@
         
         self.versionTooOld = tooOld;
     }];
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
@@ -246,6 +276,7 @@
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
 }
 
 

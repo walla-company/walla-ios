@@ -40,6 +40,12 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
                     
                     NSLog(@"activity (%@): %@", auid, jsonData);
                     
+                    if ([[jsonData allKeys] count] == 0 && completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(nil);
+                        });
+                    }
+                    
                     WAActivity *activity = [[WAActivity alloc] initWithDictionary:jsonData];
                     
                     if (completionBlock) {
@@ -564,6 +570,82 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
                 else {
                     
                     NSLog(@"Success inviting group");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
++ (void)deleteActivityWithID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/delete_activity?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"auid": auid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"uid": [FIRAuth auth].currentUser.uid
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error deleting group (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success deleting activity");
                     
                     if (completionBlock) {
                         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -1887,6 +1969,52 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             }
         }
         
+    });
+    
+}
+
++ (void)isUserSuspended:(void (^) (BOOL suspended))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"isUserSuspended");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/is_user_suspended?token=%@&school_identifier=%@&uid=%@", API_KEY, [self schoolIdentifier], [FIRAuth auth].currentUser.uid];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"suspended: %@", jsonData);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock([[jsonData objectForKey:@"suspended"] boolValue]);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
     });
     
 }
