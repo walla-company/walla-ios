@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *termsLabel;
+
 @end

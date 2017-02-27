@@ -3188,6 +3188,83 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
     
 }
 
+#pragma mark - Flagging
+
++ (void)flagActivity:(NSString *)activityID completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/flag_activity?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"auid": activityID,
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error flagging activity (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success flagging activity");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
 #pragma mark - Other
 
 + (BOOL)userAuthenticated {

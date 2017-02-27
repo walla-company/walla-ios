@@ -66,6 +66,8 @@
     self.discussionPostText = @"";
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    self.userVerified = false;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,6 +116,12 @@
     }];
     
     [self loadDiscussions];
+    
+    [WAServer getUserVerified:^(BOOL verified) {
+        self.userVerified = verified;
+        
+        NSLog(@"self.userVerified: %@", (self.userVerified) ? @"true" : @"false");
+    }];
 }
 
 - (void)loadProfileImage:(NSString *)profileImageURL {
@@ -718,6 +726,16 @@
         
         UIAlertAction *option = [UIAlertAction actionWithTitle:@"Flag Activity" style:UIAlertActionStyleDestructive handler: ^(UIAlertAction *action){
             
+            [WAServer flagActivity:self.viewingActivityID completion:^(BOOL success) {
+                UIAlertController *flagAlert = [UIAlertController alertControllerWithTitle:@"Activity Flagged" message:@"The activity has been flagged for review." preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                
+                [flagAlert addAction:cancelAction];
+                
+                [self presentViewController:flagAlert animated:true completion:nil];
+            }];
+            
         }];
         
         [alert addAction:option];
@@ -845,7 +863,30 @@
     
     [cell.postTextView resignFirstResponder];
     
-    if ([self.discussionPostText isEqualToString:@""]) {
+    if (!self.userVerified) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Account not Verified" message:@"You cannot post in discussions until your account has been verified. Open the verification link to verify your account. If you have not received a verification link, you can request one now." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *requestAction = [UIAlertAction actionWithTitle:@"Request Verification Link" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            self.tableView.userInteractionEnabled = false;
+            
+            [WAServer sendVerificationEmail:^(BOOL success) {
+                
+                self.tableView.userInteractionEnabled = true;
+                
+                if (success) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email Sent" message:@"We have sent you a verification email. Please open the verification link." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:true completion:nil];
+                }
+            }];
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:requestAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else if ([self.discussionPostText isEqualToString:@""]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Text" message:@"You must write something before you can join the discussion." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:cancelAction];

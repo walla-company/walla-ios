@@ -607,7 +607,16 @@
             self.tableView.userInteractionEnabled = true;
             
             if (success) {
-                [self dismissViewControllerAnimated:true completion:nil];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Activity Posted" message:@"Your activity was successfully posted." preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    [self dismissViewControllerAnimated:true completion:nil];
+                }];
+                
+                [alert addAction:cancelAction];
+                
+                [self presentViewController:alert animated:true completion:nil];
             }
             else {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was a problem posting the activity." preferredStyle:UIAlertControllerStyleAlert];

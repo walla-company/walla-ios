@@ -129,6 +129,10 @@
 
 + (void)getDiscussions:(NSString *)activityID completion:(void (^) (NSArray *discussions))completionBlock;
 
+// Flagging
+
++ (void)flagActivity:(NSString *)activityID completion:(void (^) (BOOL success))completionBlock;
+
 // Other
 
 + (BOOL)userAuthenticated;

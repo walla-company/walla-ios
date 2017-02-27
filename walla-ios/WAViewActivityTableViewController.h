@@ -26,6 +26,8 @@
 
 @interface WAViewActivityTableViewController : UITableViewController <WAActivityTabDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, UITextViewDelegate>
 
+@property BOOL userVerified;
+
 @property NSString *viewingActivityID;
 
 @property WAActivity *viewingActivity;

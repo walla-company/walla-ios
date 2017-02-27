@@ -169,6 +169,20 @@
         
         [cell.loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        //cell.termsLabel.text  = @"";
+        
+        NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString:@"You are hereby agreeing to the Terms and Conditions by signing up." attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+        [termsString addAttribute:NSForegroundColorAttributeName value:[WAValues buttonBlueColor] range:NSMakeRange(30,21)];
+        [termsString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(30,21)];
+        
+        cell.termsLabel.attributedText = termsString;
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(termsTapped:)];
+        
+        cell.termsLabel.userInteractionEnabled = true;
+        
+        [cell.termsLabel addGestureRecognizer:tapRecognizer];
+        
         return cell;
     }
     
@@ -560,6 +574,13 @@
     [alert addAction:option];
     
     [self presentViewController:alert animated:true completion:nil];
+}
+
+- (void)termsTapped:(UITapGestureRecognizer *)sender {
+    
+    NSLog(@"termsTapped");
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.wallasquad.com/terms-and-conditions/"] options:@{} completionHandler:nil];
 }
 
 #pragma mark - Choose photo
