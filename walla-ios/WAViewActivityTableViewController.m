@@ -92,7 +92,7 @@
         
         if (activity.activityDeleted) {
             
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Activity Delete" message:@"This activity no longer exists." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Activity Deleted" message:@"This activity no longer exists." preferredStyle:UIAlertControllerStyleAlert];
             
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
                 

@@ -20,6 +20,8 @@
 
 @property NSArray *suggestedGroups;
 
+@property NSArray *allGroups;
+
 @property NSDictionary *searchGroupsDictionary;
 @property NSDictionary *searchUsersDictionary;
 

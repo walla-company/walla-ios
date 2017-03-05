@@ -10,6 +10,7 @@
 
 #import "WAMyProfileMainTableViewCell.h"
 #import "WAMyProfileTextTableViewCell.h"
+#import "WAMyProfileInfoTableViewCell.h"
 
 #import "WAServer.h"
 
@@ -32,6 +33,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileMainTableViewCell" bundle:nil] forCellReuseIdentifier:@"mainCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -109,7 +111,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,6 +131,18 @@
         cell.nameLabel.text = self.name;
         cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@\n%@", self.academicLevel, self.graduationYear, self.major];
         cell.locationLabel.text = self.hometown;
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 7) {
+        WAMyProfileInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor clearColor];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.infoLabel.text = [NSString stringWithFormat:@"Version %@\n\n%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"© 2017 GenieUs, Inc. All rights reserved."];
         
         return cell;
     }

@@ -83,6 +83,8 @@
 
 // Groups
 
++ (void)getGroups:(void (^) (NSArray *groups))completionBlock;
+
 + (void)getGroupWithID:(NSString *)guid completion:(void (^) (WAGroup *group))completionBlock;
 
 + (void)getGroupBasicInfoWithID:(NSString *)guid completion:(void (^) (NSDictionary *group))completionBlock;

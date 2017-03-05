@@ -55,9 +55,21 @@
     self.discoverTableView.estimatedRowHeight = 100.0;
     
     // Load suggested groups
-    
+    /*
     [WAServer getSuggestedGroups:^(NSArray *groups) {
         self.suggestedGroups = groups;
+        [self.discoverTableView reloadData];
+    }];*/
+    
+    [WAServer getGroups:^(NSArray *groups) {
+        self.allGroups = groups;
+        
+        self.allGroups = [self.allGroups sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = ((WAGroup *)a).name;
+            NSString *second = ((WAGroup *)b).name;
+            return [first compare:second options:NSCaseInsensitiveSearch];
+        }];
+        
         [self.discoverTableView reloadData];
     }];
     
@@ -120,7 +132,8 @@
     
     if (section == 0) return 1;
     
-    return [self.suggestedGroups count];
+    //return [self.suggestedGroups count];
+    return [self.allGroups count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -220,7 +233,9 @@
     cell.groupTagView.layer.cornerRadius = 8.0;
     cell.groupTagView.clipsToBounds = false;
     
-    WAGroup *group = [self.suggestedGroups objectAtIndex:indexPath.row];
+    //WAGroup *group = [self.suggestedGroups objectAtIndex:indexPath.row];
+    
+    WAGroup *group = [self.allGroups objectAtIndex:indexPath.row];
     
     cell.groupTagViewLabel.text = group.shortName;
     cell.groupTagView.backgroundColor = group.groupColor;
@@ -268,7 +283,8 @@
         label.text = (section == 0) ? @"Users" : @"Groups";
     }
     else {
-        label.text = (section == 0) ? @"Suggested friends" : @"Suggested groups";
+        //label.text = (section == 0) ? @"Suggested friends" : @"Suggested groups";
+        label.text = (section == 0) ? @"Suggested friends" : @"All groups";
     }
     
     label.font = [UIFont systemFontOfSize:14.0];
@@ -288,7 +304,9 @@
     if (!self.shouldShowSearchResults) {
         if (indexPath.section == 1) {
             
-            WAGroup *group = [self.suggestedGroups objectAtIndex:indexPath.row];
+            //WAGroup *group = [self.suggestedGroups objectAtIndex:indexPath.row];
+            
+            WAGroup *group = [self.allGroups objectAtIndex:indexPath.row];
             
             self.openGroupID = group.groupID;
             

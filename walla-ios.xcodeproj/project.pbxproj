@@ -155,6 +155,8 @@
 		EBDA5C691E071AD100B61AED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA5C681E071AD100B61AED /* MapKit.framework */; };
 		EBDA5C6C1E071BD400B61AED /* WARoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6B1E071BD400B61AED /* WARoundedView.m */; };
 		EBDA5C6F1E072C7100B61AED /* WADatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */; };
+		EBF9D4921E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF9D4901E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m */; };
+		EBF9D4931E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBF9D4911E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.xib */; };
 		EBFEF8341E516FB100FBA24F /* AccountSuspendedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFEF8331E516FB100FBA24F /* AccountSuspendedViewController.m */; };
 		EBFFE21F1E2F44AD00153AE0 /* WACalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFFE21E1E2F44AD00153AE0 /* WACalendarTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -420,6 +422,9 @@
 		EBDA5C6B1E071BD400B61AED /* WARoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARoundedView.m; sourceTree = "<group>"; };
 		EBDA5C6D1E072C7100B61AED /* WADatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerView.h; sourceTree = "<group>"; };
 		EBDA5C6E1E072C7100B61AED /* WADatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerView.m; sourceTree = "<group>"; };
+		EBF9D48F1E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileInfoTableViewCell.h; sourceTree = "<group>"; };
+		EBF9D4901E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMyProfileInfoTableViewCell.m; sourceTree = "<group>"; };
+		EBF9D4911E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAMyProfileInfoTableViewCell.xib; sourceTree = "<group>"; };
 		EBFEF8321E516FB100FBA24F /* AccountSuspendedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSuspendedViewController.h; sourceTree = "<group>"; };
 		EBFEF8331E516FB100FBA24F /* AccountSuspendedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSuspendedViewController.m; sourceTree = "<group>"; };
 		EBFFE21D1E2F44AD00153AE0 /* WACalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACalendarTableViewController.h; sourceTree = "<group>"; };
@@ -570,6 +575,7 @@
 				EBCB56F51E133B9D000530F6 /* Walla API */,
 				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
 				EB2A20DA1E19BAF700BE93CD /* Login / Signup */,
+				EB2ECEFA1E6CAC0D0022C87A /* Restriciton Views */,
 				EB0E8BC51E008B0A00BC293C /* Assets.xcassets */,
 				EB0E8BC71E008B0A00BC293C /* LaunchScreen.storyboard */,
 				EB0E8BCA1E008B0A00BC293C /* Info.plist */,
@@ -644,8 +650,6 @@
 				EB2A20F31E1AF9E300BE93CD /* WASignupTableViewController */,
 				EBD65F3C1E3E7E040017B54F /* WAForgotPasswordTableViewController */,
 				EB2A20D91E19BAEA00BE93CD /* Cells */,
-				EBFEF8321E516FB100FBA24F /* AccountSuspendedViewController.h */,
-				EBFEF8331E516FB100FBA24F /* AccountSuspendedViewController.m */,
 			);
 			name = "Login / Signup";
 			sourceTree = "<group>";
@@ -727,6 +731,15 @@
 				EB2A21061E1B019C00BE93CD /* WASignupPopupTableViewCell.xib */,
 			);
 			name = WASignupPopupTableViewCell;
+			sourceTree = "<group>";
+		};
+		EB2ECEFA1E6CAC0D0022C87A /* Restriciton Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBFEF8321E516FB100FBA24F /* AccountSuspendedViewController.h */,
+				EBFEF8331E516FB100FBA24F /* AccountSuspendedViewController.m */,
+			);
+			name = "Restriciton Views";
 			sourceTree = "<group>";
 		};
 		EB4EA79A1E0344AC000F4834 /* WAActivitiesViewController */ = {
@@ -1465,6 +1478,7 @@
 			children = (
 				EBCB56B21E12E4CB000530F6 /* WAMyProfileMainTableViewCell */,
 				EBCB56B31E12E4CF000530F6 /* WAMyProfileTextTableViewCell */,
+				EBF9D48E1E6CA99C002A7CE3 /* WAMyProfileInfoTableViewCell */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1513,6 +1527,16 @@
 				EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EBF9D48E1E6CA99C002A7CE3 /* WAMyProfileInfoTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBF9D48F1E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.h */,
+				EBF9D4901E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m */,
+				EBF9D4911E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.xib */,
+			);
+			name = WAMyProfileInfoTableViewCell;
 			sourceTree = "<group>";
 		};
 		EBFFE21C1E2F449300153AE0 /* WACalendarTableViewController */ = {
@@ -1662,6 +1686,7 @@
 				EBCB57231E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib in Resources */,
 				EBCB574A1E16138E000530F6 /* WANotificationsTextTableViewCell.xib in Resources */,
 				EB9958971E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib in Resources */,
+				EBF9D4931E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.xib in Resources */,
 				EB033A181E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib in Resources */,
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
 				EBCB56961E12E094000530F6 /* WAViewGroupInfoTableViewCell.xib in Resources */,
@@ -1824,6 +1849,7 @@
 				EBCB56691E10F366000530F6 /* WAViewActivityInfoTableViewCell.m in Sources */,
 				EBCB56741E10F3A2000530F6 /* WAViewActivityAttendeesTableViewCell.m in Sources */,
 				EBCB570B1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m in Sources */,
+				EBF9D4921E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m in Sources */,
 				EBCB570E1E136E57000530F6 /* WAProfileEditProfileTableViewController.m in Sources */,
 				EB2A21071E1B019C00BE93CD /* WASignupPopupTableViewCell.m in Sources */,
 				EB2A20D11E1976FE00BE93CD /* WAShowMapViewController.m in Sources */,

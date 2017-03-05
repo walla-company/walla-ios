@@ -2021,6 +2021,59 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
 
 # pragma mark - Groups
 
++ (void)getGroups:(void (^) (NSArray *groups))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSLog(@"getGroups");
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"GET"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/get_groups?token=%@&school_identifier=%@", API_KEY, [self schoolIdentifier]];
+            NSLog(@"url: %@", url);
+            [request setURL:[NSURL URLWithString:url]];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error getting (%@): %@", url, error);
+                }
+                else {
+                    NSDictionary *groups = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                    
+                    NSLog(@"groups: %@", groups);
+                    
+                    NSMutableArray *formattedGroups = [[NSMutableArray alloc] init];
+                    
+                    for (NSDictionary *group in [groups allValues]) {
+                        [formattedGroups addObject:[[WAGroup alloc] initWithDictionary:group]];
+                    }
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(formattedGroups);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(nil);
+                });
+            }
+        }
+        
+    });
+    
+}
+
 + (void)getGroupWithID:(NSString *)guid completion:(void (^) (WAGroup *group))completionBlock {
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
