@@ -16,16 +16,11 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *activitiesTableView;
 
-@property int currentFilterIndex;
-@property NSArray *interestsArray;
-
 @property NSString *openGroupID;
 @property NSString *openActivityID;
 
 @property NSArray *activitiesArray;
 
 @property NSMutableDictionary *userInfoDictionary;
-
-@property NSMutableArray *filteredActivities;
 
 @end

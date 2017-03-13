@@ -44,17 +44,11 @@
     self.activitiesTableView.rowHeight = UITableViewAutomaticDimension;
     self.activitiesTableView.estimatedRowHeight = 170.0;
     
-    self.activitiesTableView.contentInset = UIEdgeInsetsMake(self.activitiesTableView.contentInset.top + 40, 0, 0, self.activitiesTableView.contentInset.bottom);
+    self.activitiesTableView.contentInset = UIEdgeInsetsMake(self.activitiesTableView.contentInset.top + 40, 0, 0, 0);
     
-    // Set up filters colleciton view
-    
-    self.currentFilterIndex = 0;
-    
-    self.interestsArray = [WAValues interestsArray];
+    // Set up
     
     self.userInfoDictionary = [[NSMutableDictionary alloc] init];
-    
-    self.filteredActivities = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,8 +76,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.currentFilterIndex > 0) return [self.filteredActivities count];
-    
     return [self.activitiesArray count];;
 }
 
@@ -94,10 +86,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    WAActivity *activity;
-    
-    if (self.currentFilterIndex > 0) activity = [self.filteredActivities objectAtIndex:indexPath.row];
-    else activity = self.activitiesArray[indexPath.row];
+    WAActivity *activity = self.activitiesArray[indexPath.row];
     
     NSMutableArray *headerTabs = [[NSMutableArray alloc] init];
     
@@ -177,8 +166,7 @@
     
     NSLog(@"SELECTED");
     
-    if (self.currentFilterIndex > 0) self.openActivityID = ((WAActivity *)self.filteredActivities[indexPath.row]).activityID;
-    else self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
+    self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
     
     [self performSegueWithIdentifier:@"openActivityDetails" sender:self];
     
