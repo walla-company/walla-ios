@@ -46,9 +46,6 @@
     
     // Set up filters colleciton view
     
-    self.filtersCollectionView.delegate = self;
-    self.filtersCollectionView.dataSource = self;
-    
     self.currentFilterIndex = 0;
     
     self.interestsArray = [WAValues interestsArray];
@@ -194,70 +191,6 @@
     self.openGroupID = groupID;
     
     [self performSegueWithIdentifier:@"openViewGroup" sender:self];
-}
-
-#pragma mark - Collections view
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    return [self.interestsArray count] + 1;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.currentFilterIndex = (int) indexPath.row;
-    
-    if (self.currentFilterIndex > 0) {
-        NSString *filter = [[self.interestsArray objectAtIndex:self.currentFilterIndex-1] objectAtIndex:0];
-        
-        [self.filteredActivities removeAllObjects];
-        
-        for (WAActivity *activity in self.activitiesArray) {
-            NSArray *interests = activity.interests;
-            
-            for (NSString *interest in interests) {
-                if ([interest isEqualToString:filter]) {
-                    [self.filteredActivities addObject:activity];
-                }
-            }
-        }
-    }
-    
-    [collectionView reloadData];
-    
-    [self.activitiesTableView reloadData];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    WAFilterCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"filterCell" forIndexPath:indexPath];
-    
-    cell.circleView.clipsToBounds = true;
-    cell.circleView.layer.cornerRadius = 20.0;
-    
-    if (indexPath.row == self.currentFilterIndex) {
-        cell.circleView.backgroundColor = [WAValues wallaOrangeColor];
-    }
-    else {
-        cell.circleView.backgroundColor = [[UIColor alloc] initWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
-    }
-    
-    if (indexPath.row == 0) {
-        cell.filterLabel.text = @"All";
-        cell.filterImageView.image = [[UIImage imageNamed:@"InterestIcon_All"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [cell.filterImageView setTintColor:[UIColor whiteColor]];
-    }
-    else {
-        cell.filterLabel.text = self.interestsArray[indexPath.row-1][0];
-        cell.filterImageView.image = [[UIImage imageNamed:self.interestsArray[indexPath.row-1][1]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [cell.filterImageView setTintColor:[UIColor whiteColor]];
-    }
-    
-    return cell;
 }
 
 #pragma mark - Navigation

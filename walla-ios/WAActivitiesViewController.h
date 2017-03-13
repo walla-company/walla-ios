@@ -12,11 +12,9 @@
 
 #import "WAFilterCollectionViewCell.h"
 
-@interface WAActivitiesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, WAActivityTabDelegate>
+@interface WAActivitiesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, WAActivityTabDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *activitiesTableView;
-
-@property (strong, nonatomic) IBOutlet UICollectionView *filtersCollectionView;
 
 @property int currentFilterIndex;
 @property NSArray *interestsArray;
