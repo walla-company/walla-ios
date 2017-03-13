@@ -51,6 +51,7 @@
 		EB4EA79E1E036CD2000F4834 /* WAActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA79D1E036CD2000F4834 /* WAActivitiesViewController.m */; };
 		EB4EA7A11E03715D000F4834 /* WAShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA7A01E03715D000F4834 /* WAShadowView.m */; };
 		EB4EA7A41E039604000F4834 /* WAFilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA7A31E039604000F4834 /* WAFilterCollectionViewCell.m */; };
+		EB80C1E21E76223500CF01D1 /* WAShadowHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB80C1E11E76223500CF01D1 /* WAShadowHeader.m */; };
 		EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */; };
 		EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */; };
 		EB9958901E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB99588E1E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m */; };
@@ -253,6 +254,8 @@
 		EB4EA7A01E03715D000F4834 /* WAShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAShadowView.m; sourceTree = "<group>"; };
 		EB4EA7A21E039604000F4834 /* WAFilterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFilterCollectionViewCell.h; sourceTree = "<group>"; };
 		EB4EA7A31E039604000F4834 /* WAFilterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFilterCollectionViewCell.m; sourceTree = "<group>"; };
+		EB80C1E01E76223500CF01D1 /* WAShadowHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAShadowHeader.h; sourceTree = "<group>"; };
+		EB80C1E11E76223500CF01D1 /* WAShadowHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAShadowHeader.m; sourceTree = "<group>"; };
 		EB8B8E4E1E0EFB8700FB7389 /* WAGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAGroupTableViewCell.h; sourceTree = "<group>"; };
 		EB8B8E4F1E0EFB8700FB7389 /* WAGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAGroupTableViewCell.m; sourceTree = "<group>"; };
 		EB8B8E501E0EFB8700FB7389 /* WAGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAGroupTableViewCell.xib; sourceTree = "<group>"; };
@@ -761,6 +764,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		EB80C1DF1E76220800CF01D1 /* WAShadowHeader */ = {
+			isa = PBXGroup;
+			children = (
+				EB80C1E01E76223500CF01D1 /* WAShadowHeader.h */,
+				EB80C1E11E76223500CF01D1 /* WAShadowHeader.m */,
+			);
+			name = WAShadowHeader;
+			sourceTree = "<group>";
+		};
 		EB99588C1E46CBD600601E2D /* WAViewActivityDiscussionTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +806,7 @@
 		EBBF5AC81E05ACFD0066F7E1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB80C1DF1E76220800CF01D1 /* WAShadowHeader */,
 				EB033A291E0E338D00621C35 /* WAShadowView */,
 				EB033A2A1E0E339E00621C35 /* WARoundedView */,
 				EB033A2B1E0E33B200621C35 /* WAActivityTabsHeaderView */,
@@ -1846,6 +1859,7 @@
 				EB033A301E0E33F400621C35 /* WAGroupPickerViewController.m in Sources */,
 				EB2A20E31E19BBC200BE93CD /* WALoginSignupTextFieldTableViewCell.m in Sources */,
 				EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */,
+				EB80C1E21E76223500CF01D1 /* WAShadowHeader.m in Sources */,
 				EBCB56691E10F366000530F6 /* WAViewActivityInfoTableViewCell.m in Sources */,
 				EBCB56741E10F3A2000530F6 /* WAViewActivityAttendeesTableViewCell.m in Sources */,
 				EBCB570B1E136A55000530F6 /* WAMyProfileFriendsTableViewController.m in Sources */,

@@ -44,6 +44,8 @@
     self.activitiesTableView.rowHeight = UITableViewAutomaticDimension;
     self.activitiesTableView.estimatedRowHeight = 170.0;
     
+    self.activitiesTableView.contentInset = UIEdgeInsetsMake(self.activitiesTableView.contentInset.top + 40, 0, 0, self.activitiesTableView.contentInset.bottom);
+    
     // Set up filters colleciton view
     
     self.currentFilterIndex = 0;
