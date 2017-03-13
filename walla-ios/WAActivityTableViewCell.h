@@ -14,11 +14,19 @@
 
 @property (strong, nonatomic) IBOutlet WAActivityTabsHeaderView *headerView;
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *timeDateLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+@property (strong, nonatomic) IBOutlet UIImageView *freeFoodImageView;
+
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
-
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *audienceImageView;
 

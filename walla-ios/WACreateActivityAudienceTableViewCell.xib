@@ -14,10 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="443" height="107"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="443" height="106.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="443" height="106"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-XX-RvH" customClass="WAShadowView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-XX-RvH">
                         <rect key="frame" x="15" y="10" width="413" height="92"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audience" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6F-e5-WBS">
@@ -43,7 +43,7 @@
                                 <state key="normal" image="PrivateButtonReleased"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qp8-0K-bVi" firstAttribute="top" secondItem="W6F-e5-WBS" secondAttribute="bottom" constant="8" id="BIb-w2-eb7"/>
                             <constraint firstItem="W6F-e5-WBS" firstAttribute="top" secondItem="jJO-XX-RvH" secondAttribute="top" constant="15" id="CXo-Iq-3TF"/>

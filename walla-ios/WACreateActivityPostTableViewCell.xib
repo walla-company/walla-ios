@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyX-1I-PEk" customClass="WAShadowView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyX-1I-PEk">
                         <rect key="frame" x="15" y="5" width="290" height="65.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MuQ-Di-9VX">
@@ -41,7 +41,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="MuQ-Di-9VX" secondAttribute="bottom" constant="15" id="3de-VF-RFZ"/>
                             <constraint firstItem="MuQ-Di-9VX" firstAttribute="top" secondItem="IyX-1I-PEk" secondAttribute="top" constant="15" id="MjV-KQ-GJH"/>

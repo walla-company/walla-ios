@@ -54,7 +54,7 @@
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     // Initialize default values
     

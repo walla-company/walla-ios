@@ -14,11 +14,11 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    self.layer.shadowOffset = CGSizeMake(0, 5);
+    self.layer.shadowOffset = CGSizeMake(0, 3);
     
     self.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.layer.shadowOpacity = 0.5;
-    self.layer.shadowRadius = 2.0;
+    self.layer.shadowOpacity = 0.25;
+    self.layer.shadowRadius = 1.0;
 }
 
 - (id)init {
