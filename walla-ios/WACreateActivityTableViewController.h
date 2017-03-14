@@ -13,27 +13,21 @@
 
 #import <MapKit/MapKit.h>
 
-#import "WACreateActivityAudienceTableViewCell.h"
-#import "WACreateActivityTitleTableViewCell.h"
-#import "WACreateActivityTimeTableViewCell.h"
-#import "WACreateActivityLocationTableViewCell.h"
 #import "WACreateActivityDetailsTableViewCell.h"
+#import "WACreateActivityTimeTableViewCell.h"
+#import "WACreateActivityMeetingPlaceTableViewCell.h"
+#import "WACreateActivityLocationTableViewCell.h"
 #import "WACreateActivityHostTableViewCell.h"
-#import "WACreateActivityInterestsTableViewCell.h"
-#import "WACreateActivityInviteGroupsTableViewCell.h"
-#import "WACreateActivityInviteFriendsTableViewCell.h"
-#import "WACreateActivityCanInviteTableViewCell.h"
+#import "WACreateActivityFoodTableViewCell.h"
 #import "WACreateActivityPostTableViewCell.h"
 
 #import "WADatePickerViewController.h"
 #import "WAGroupPickerViewController.h"
-#import "WAUserPickerViewController.h"
-#import "WAInterestPickerViewController.h"
 
 #import "WAGroup.h"
 #import "WAUser.h"
 
-@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, WAInterestPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
+@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
 
 @property BOOL userVerified;
 
@@ -42,39 +36,28 @@
 @property CLLocation *userLocation;
 @property BOOL firstUserLocationUpdate;
 
-// Required
 @property BOOL activityPublic;
+
 @property NSString *activityTitle;
 @property NSDate *activityStartTime;
-@property NSDate *activityEndTime;
+@property NSString *meetingPlace;
 @property GMSPlace *activityLocation;
-@property NSArray *activityInterests;
-@property BOOL guestsCanInviteOthers;
-
-// Optional
-@property NSString *activityDetails;
 @property NSArray *activityHostGroup;
-@property NSArray *activityInvitedGroups;
-@property NSArray *activityInvitedFriends;
+@property BOOL freeFood;
 
 @property UIColor *notSelectedColor;
 @property UIColor *selectedColor;
 
 typedef NS_ENUM(NSUInteger, ShapeType) {
-    kAudienceCellRow = 0,
-    kTitleCellRow = 1,
-    kTimeCellRow = 2,
+    kDetailsCellRow = 0,
+    kTimeCellRow = 1,
+    kMeetingPlaceCellRow = 2,
     kLocationCellRow = 3,
-    kInterestsCellRow = 4,
-    kDetailsCellRow = 5,
-    kHostCellRow = 6,
-    kInviteGroupsCellRow = 7,
-    kInviteFriendsCellRow = 8,
-    kCanInviteCellRow = 9,
-    kPostCellRow = 10,
+    kHostCellRow = 4,
+    kFoodCellRow = 5,
+    kPostCellRow = 6,
 };
 
 @property NSArray *userGroupIDs;
-@property NSArray *userFriendIDs;
 
 @end

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="WACreateActivityMeetingPlaceTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CO5-jU-oqt" customClass="WARoundedView">
+                        <rect key="frame" x="20" y="33" width="280" height="30"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="The gym..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Fx-wo-YYA">
+                                <rect key="frame" x="10" y="0.0" width="260" height="30"/>
+                                <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="67W-it-oNl"/>
+                            <constraint firstAttribute="bottom" secondItem="0Fx-wo-YYA" secondAttribute="bottom" id="T09-j4-OIW"/>
+                            <constraint firstAttribute="trailing" secondItem="0Fx-wo-YYA" secondAttribute="trailing" constant="10" id="dt0-12-WUu"/>
+                            <constraint firstItem="0Fx-wo-YYA" firstAttribute="leading" secondItem="CO5-jU-oqt" secondAttribute="leading" constant="10" id="qFK-A1-epi"/>
+                            <constraint firstItem="0Fx-wo-YYA" firstAttribute="top" secondItem="CO5-jU-oqt" secondAttribute="top" id="uFr-Gb-pR9"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where should we meet?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7F-4N-dTF">
+                        <rect key="frame" x="20" y="8" width="280" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="v7F-4N-dTF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="0pS-Yr-FhU"/>
+                    <constraint firstAttribute="trailing" secondItem="v7F-4N-dTF" secondAttribute="trailing" constant="20" id="6RZ-4E-pW5"/>
+                    <constraint firstItem="v7F-4N-dTF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Sd2-JW-fvZ"/>
+                    <constraint firstAttribute="trailing" secondItem="CO5-jU-oqt" secondAttribute="trailing" constant="20" id="fmX-pg-A6u"/>
+                    <constraint firstAttribute="bottom" secondItem="CO5-jU-oqt" secondAttribute="bottom" id="koo-CJ-MwD"/>
+                    <constraint firstItem="CO5-jU-oqt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="sLA-cf-NAh"/>
+                    <constraint firstItem="CO5-jU-oqt" firstAttribute="top" secondItem="v7F-4N-dTF" secondAttribute="bottom" constant="8" id="zNv-G0-Y2k"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="meetingPlaceTextField" destination="0Fx-wo-YYA" id="rs7-Eo-G7g"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="64"/>
+        </tableViewCell>
+    </objects>
+</document>

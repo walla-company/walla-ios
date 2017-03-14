@@ -11,6 +11,7 @@
 #import "WAMyProfileMainTableViewCell.h"
 #import "WAMyProfileTextTableViewCell.h"
 #import "WAMyProfileInfoTableViewCell.h"
+#import "WAMyProfileClearTableViewCell.h"
 
 #import "WAServer.h"
 
@@ -34,8 +35,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileMainTableViewCell" bundle:nil] forCellReuseIdentifier:@"mainCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileClearTableViewCell" bundle:nil] forCellReuseIdentifier:@"clearCell"];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
     
@@ -45,7 +47,7 @@
     self.tableView.showsVerticalScrollIndicator = false;
     
     // Initialize values
-    self.titleArray = @[@"Edit profile", @"My friends", @"My groups", @"My interests", @"About Walla", @"Log out"];
+    self.titleArray = @[@"Edit profile", @"About Walla", @"Log out"];
     
     self.name = @"";
     self.academicLevel = @"";
@@ -111,7 +113,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 8;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,7 +121,7 @@
     if (indexPath.row == 0) {
         WAMyProfileMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -135,25 +137,35 @@
         return cell;
     }
     
-    if (indexPath.row == 7) {
-        WAMyProfileInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
+    if (indexPath.row == 1 || indexPath.row == 5) {
+        WAMyProfileClearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"clearCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor clearColor];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.infoLabel.text = [NSString stringWithFormat:@"Version %@\n\n%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"© 2017 GenieUs, Inc. All rights reserved."];
+        return cell;
+    }
+    
+    if (indexPath.row == 6) {
+        WAMyProfileInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.infoLabel.text = [NSString stringWithFormat:@"Version %@\n%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"© 2017 GenieUs, Inc. All rights reserved."];
         
         return cell;
     }
     
     WAMyProfileTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = [UIColor whiteColor];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.customTextLabel.text = self.titleArray[indexPath.row - 1];
+    cell.customTextLabel.text = self.titleArray[indexPath.row - 2];
     
     if (indexPath.row == 6) {
         cell.textLabel.textColor = [UIColor redColor];
@@ -169,23 +181,11 @@
     
     switch (indexPath.row) {
             
-        case 1:
+        case 2:
             [self performSegueWithIdentifier:@"openEditProfile" sender:self];
             break;
             
-        case 2:
-            [self performSegueWithIdentifier:@"openMyFriends" sender:self];
-            break;
-            
         case 3:
-            [self performSegueWithIdentifier:@"openMyGroups" sender:self];
-            break;
-            
-        case 4:
-            [self performSegueWithIdentifier:@"openMyInterests" sender:self];
-            break;
-            
-        case 5:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.wallasquad.com/"] options:@{} completionHandler:nil];
             break;
             
@@ -193,7 +193,7 @@
             break;
     }
     
-    if (indexPath.row == 6) {
+    if (indexPath.row == 4) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"You will have to log back in." preferredStyle:UIAlertControllerStyleAlert];
         

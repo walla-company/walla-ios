@@ -245,14 +245,16 @@
     NSArray *checkArray = [currentVersion componentsSeparatedByString:@"."];
     NSArray *minimumArray = [minimumVersion componentsSeparatedByString:@"."];
     
-    int i = 0;
+    if ([[checkArray objectAtIndex:0] integerValue] > [[minimumArray objectAtIndex:0] integerValue]) return true;
+    if ([[checkArray objectAtIndex:0] integerValue] < [[minimumArray objectAtIndex:0] integerValue]) return false;
     
-    for (NSString *min in minimumArray) {
-        if ([[checkArray objectAtIndex:i] integerValue] < [min integerValue]) return false;
-        i++;
-    }
+    if ([[checkArray objectAtIndex:1] integerValue] > [[minimumArray objectAtIndex:1] integerValue]) return true;
+    if ([[checkArray objectAtIndex:1] integerValue] < [[minimumArray objectAtIndex:1] integerValue]) return false;
     
-    return true;
+    if ([[checkArray objectAtIndex:2] integerValue] >= [[minimumArray objectAtIndex:2] integerValue]) return true;
+    if ([[checkArray objectAtIndex:2] integerValue] < [[minimumArray objectAtIndex:2] integerValue]) return false;
+    
+    return false;
 }
 
 - (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {

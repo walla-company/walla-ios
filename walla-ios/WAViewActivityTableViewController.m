@@ -238,7 +238,7 @@
             WAViewActivityPostDiscussionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postDiscussionCell" forIndexPath:indexPath];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = [UIColor whiteColor];
             
             cell.postTextView.scrollEnabled = false;
             cell.postTextView.delegate = self;

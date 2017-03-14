@@ -13,7 +13,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *startTimeButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *endTimeLabel;
-@property (strong, nonatomic) IBOutlet UIButton *endTimeButton;
-
 @end

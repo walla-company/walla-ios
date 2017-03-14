@@ -1,14 +1,14 @@
 //
-//  WACreateActivityTitleTableViewCell.m
+//  WAViewActivityTextTableViewCell.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/23/16.
-//  Copyright © 2016 GenieUS, Inc. All rights reserved.
+//  Created by Joseph DeChicchis on 3/12/17.
+//  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 
-#import "WACreateActivityTitleTableViewCell.h"
+#import "WAViewActivityTextTableViewCell.h"
 
-@implementation WACreateActivityTitleTableViewCell
+@implementation WAViewActivityTextTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

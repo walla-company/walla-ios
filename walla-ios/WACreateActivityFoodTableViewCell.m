@@ -1,14 +1,14 @@
 //
-//  WACreateActivityInterestsTableViewCell.m
+//  WACreateActivityFoodTableViewCell.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 12/24/16.
-//  Copyright © 2016 GenieUS, Inc. All rights reserved.
+//  Created by Joseph DeChicchis on 3/12/17.
+//  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 
-#import "WACreateActivityInterestsTableViewCell.h"
+#import "WACreateActivityFoodTableViewCell.h"
 
-@implementation WACreateActivityInterestsTableViewCell
+@implementation WACreateActivityFoodTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

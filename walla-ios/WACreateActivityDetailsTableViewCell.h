@@ -10,6 +10,6 @@
 
 @interface WACreateActivityDetailsTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UITextView *detailsTextView;
+@property (strong, nonatomic) IBOutlet UITextView *titleTextView;
 
 @end

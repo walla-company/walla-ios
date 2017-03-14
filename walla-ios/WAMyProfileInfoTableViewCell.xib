@@ -18,17 +18,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro8-At-BcU">
-                        <rect key="frame" x="25" y="10" width="270" height="32.5"/>
+                        <rect key="frame" x="20" y="8" width="280" height="36.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ro8-At-BcU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="26P-rI-Tgs"/>
-                    <constraint firstAttribute="trailing" secondItem="Ro8-At-BcU" secondAttribute="trailing" constant="25" id="GOG-H8-yfR"/>
-                    <constraint firstAttribute="bottom" secondItem="Ro8-At-BcU" secondAttribute="bottom" constant="10" id="IXj-eD-UjI"/>
-                    <constraint firstItem="Ro8-At-BcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="YG0-dZ-cbe"/>
+                    <constraint firstItem="Ro8-At-BcU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="26P-rI-Tgs"/>
+                    <constraint firstAttribute="trailing" secondItem="Ro8-At-BcU" secondAttribute="trailing" constant="20" id="GOG-H8-yfR"/>
+                    <constraint firstAttribute="bottom" secondItem="Ro8-At-BcU" secondAttribute="bottom" constant="8" id="IXj-eD-UjI"/>
+                    <constraint firstItem="Ro8-At-BcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="YG0-dZ-cbe"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -41,9 +41,9 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
     [self.tableView registerNib:[UINib nibWithNibName:@"WANotificationsFriendRequestTableViewCell" bundle:nil] forCellReuseIdentifier:@"friendRequestCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WANotificationsTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    self.tableView.backgroundColor = [WAValues defaultTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     self.tableView.showsVerticalScrollIndicator = false;
     
@@ -121,7 +121,7 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
         WANotificationsFriendRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendRequestCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         [cell.acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [cell.ignoreButton addTarget:self action:@selector(ignoreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
