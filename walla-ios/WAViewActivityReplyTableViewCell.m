@@ -1,14 +1,14 @@
 //
-//  WAViewActivityActionTableViewCell.m
+//  WAViewActivityReplyTableViewCell.m
 //  walla-ios
 //
-//  Created by Joseph DeChicchis on 3/12/17.
+//  Created by Joseph DeChicchis on 3/15/17.
 //  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 
-#import "WAViewActivityActionTableViewCell.h"
+#import "WAViewActivityReplyTableViewCell.h"
 
-@implementation WAViewActivityActionTableViewCell
+@implementation WAViewActivityReplyTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

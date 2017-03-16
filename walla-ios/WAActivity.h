@@ -53,6 +53,8 @@
 
 @property BOOL activityDeleted;
 
+@property BOOL freeFood;
+
 - (id)init;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;

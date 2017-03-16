@@ -48,7 +48,13 @@
     
     // Set up
     
-    self.userInfoDictionary = [[NSMutableDictionary alloc] init];
+    self.userNamesDictionary = [[NSMutableDictionary alloc] init];
+    self.profileImagesDictionary = [[NSMutableDictionary alloc] init];
+    
+    self.filteredActivities = [[NSMutableArray alloc] init];
+    
+    self.showAllActivities = true;
+    [self setupTopBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,15 +63,60 @@
     
     [WAServer getActivitisFromLastHours:24.0 completion:^(NSArray *activities){
         
+        NSLog(@"Activities loaded");
+        
         self.activitiesArray = activities;
         [self.activitiesTableView reloadData];
+        
+        [self filterActivities];
     }];
+}
+
+- (void)filterActivities {
+    
+    [self.filteredActivities removeAllObjects];
+    
+    NSTimeInterval endOfDay = [[[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]] timeIntervalSince1970] + 86400;
+    
+    for (WAActivity *activity in self.activitiesArray) {
+        
+        if ([activity.startTime timeIntervalSince1970] < endOfDay) {
+            [self.filteredActivities addObject:activity];
+        }
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)setupTopBar {
+    
+    //[self.allButton setTitleColor:(self.showAllActivities) ? [WAValues barHighlightColor] : [UIColor clearColor]forState:UIControlStateNormal];
+    //[self.todayButton setTitleColor:(self.showAllActivities) ? [UIColor clearColor] : [WAValues barHighlightColor] forState:UIControlStateNormal];
+    
+    self.allHighlightView.backgroundColor = (self.showAllActivities) ? [WAValues barHighlightColor] : [UIColor clearColor];
+    self.todayHighlightView.backgroundColor = (self.showAllActivities) ? [UIColor clearColor] : [WAValues barHighlightColor];
+}
+
+- (IBAction)allButtonPressed:(id)sender {
+    
+    self.showAllActivities = true;
+    [self setupTopBar];
+    
+    [self.activitiesTableView reloadData];
+}
+
+- (IBAction)todayButtonPressed:(id)sender {
+    self.showAllActivities = false;
+    [self setupTopBar];
+    
+    [self.activitiesTableView reloadData];
+}
+
 
 #pragma mark - Table view
 
@@ -76,7 +127,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.activitiesArray count];;
+    if (self.showAllActivities) return [self.activitiesArray count];
+    
+    return [self.filteredActivities count];
 }
 
 
@@ -86,78 +139,66 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    WAActivity *activity = self.activitiesArray[indexPath.row];
+    WAActivity *activity;
     
-    NSMutableArray *headerTabs = [[NSMutableArray alloc] init];
+    if (self.showAllActivities) activity = self.activitiesArray[indexPath.row];
+    else activity = self.filteredActivities[indexPath.row];
     
-    for (int i=0; i<[activity.interests count]; i++) {
-        NSString *interest = [activity.interests objectAtIndex:i];
+    NSString *nameString = @"";
+    
+    if ([activity.hostGroupID isEqualToString:@""]) {
         
-        switch (i) {
-            case 0:
-                [headerTabs addObject:@[interest, [UIColor whiteColor], [WAValues tabTextColorLightGray], @false]];
-                break;
-            case 1:
-                [headerTabs addObject:@[interest, [WAValues tabColorOffWhite], [WAValues tabTextColorLightGray], @false]];
-                break;
+        if (self.userNamesDictionary[activity.host]) {
+            nameString = self.userNamesDictionary[activity.host];
+        }
+        else {
+            [self.userNamesDictionary setObject:@"" forKey:activity.host];
+            [WAServer getUserBasicInfoWithID:activity.host completion:^ (NSDictionary *user) {
+                NSLog(@"User Info: %@", user);
                 
-            default:
-                break;
+                [self.userNamesDictionary setObject:user[@"name"] forKey:activity.host];
+                [self.activitiesTableView reloadData];
+                
+                [self loadProfileImageWithURL:user[@"profile_image_url"] forUID:activity.host];
+            }];
         }
     }
-    
-    if ([activity.hostGroupID length] > 0) {
-        [headerTabs addObject:@[activity.hostGroupShortName, [WAValues tabColorOrange], [UIColor whiteColor], @true]];
-        cell.headerView.groupID = activity.hostGroupID;
+    else {
+        
+        nameString = [NSString stringWithFormat:@"Hosted by %@", activity.hostGroupName];
     }
     
-    [cell.headerView setTabs:headerTabs];
+    UIImage *profileImage = [UIImage imageNamed:@"BlankCircle"];
     
-    cell.headerView.delegate = self;
+    if (self.profileImagesDictionary[activity.host]) {
+        profileImage = self.profileImagesDictionary[activity.host];
+    }
+    
+    cell.nameLabel.text = nameString;
     
     cell.titleLabel.text = activity.title;
+    
+    cell.profileImageView.image = profileImage;
+    
+    cell.profileImageView.layer.cornerRadius = 17.5;
+    cell.profileImageView.clipsToBounds = true;
     
     NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
     [formatter1 setDateFormat:@"h:mm aa"];
     NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-    [formatter2 setDateFormat:@"h:mm aa"];
-    NSDateFormatter *formatter3 = [[NSDateFormatter alloc] init];
-    [formatter3 setDateFormat:@"MM/dd"];
+    [formatter2 setDateFormat:@"M/d"];
     
     NSString *startTimeString = [formatter1 stringFromDate:activity.startTime];
-    NSString *endTimeString = [formatter2 stringFromDate:activity.endTime];
+    NSString *dateString = [formatter2 stringFromDate:activity.startTime];
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@\nto %@", startTimeString, endTimeString];
+    NSLog(@"%@ start time: %f", activity.activityID, [activity.startTime timeIntervalSince1970]);
     
-    cell.dateLabel.text = [formatter3 stringFromDate:activity.startTime];
+    cell.timeLabel.text = startTimeString;
     
-    NSLog(@"%@ start time: %f : %@", activity.title, [activity.startTime timeIntervalSince1970], [formatter3 stringFromDate:activity.startTime]);
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@ (%@)", [WAValues dayOfWeekFromDate:activity.startTime], dateString];
     
-    cell.interestedCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberInterested];
-    cell.goingCountLabel.text = [NSString stringWithFormat:@"%ld", (long)activity.numberGoing];
-    
-    cell.audienceImageView.image = (activity.activityPublic) ? [UIImage imageNamed:@"Lit"] : [UIImage imageNamed:@"Chill"];
-    
-    if ([activity.goingUserIDs count] > 0) {
-        if ([[self.userInfoDictionary allKeys] containsObject:[activity.goingUserIDs objectAtIndex:0]]) {
-            NSDictionary *userInfo = [self.userInfoDictionary objectForKey:[activity.goingUserIDs objectAtIndex:0]];
-            if ([activity.goingUserIDs count] == 1) {
-                cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ is going", userInfo[@"name"]];
-            }
-            else {
-                if (activity.numberGoing == 2) cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ and %ld other are going", userInfo[@"name"], (long)(activity.numberGoing-1)];
-                else cell.goingNamesLabel.text = [NSString stringWithFormat:@"%@ and %ld others are going", userInfo[@"name"], (long)(activity.numberGoing-1)];
-            }
-        }
-        else {
-            cell.goingNamesLabel.text = @"";
-            [self.userInfoDictionary setObject:@{@"name": @""} forKey:[activity.goingUserIDs objectAtIndex:0]];
-            [WAServer getUserBasicInfoWithID:[activity.goingUserIDs objectAtIndex:0] completion:^(NSDictionary *user) {
-                [self.userInfoDictionary setObject:user forKey:user[@"user_id"]];
-                [self.activitiesTableView reloadData];
-            }];
-        }
-    }
+    if (activity.freeFood) cell.freeFoodImageView.hidden = false;
+    else cell.freeFoodImageView.hidden = true;
     
     return cell;
 }
@@ -172,15 +213,30 @@
     
 }
 
-#pragma mark - Tab header view delegate
-
-- (void)activityTabButtonPressed:(NSString *)groupID {
+- (void)loadProfileImageWithURL:(NSString *)url forUID:(NSString *)userID {
     
-    NSLog(@"Tab pressed: %@", groupID);
-    
-    self.openGroupID = groupID;
-    
-    [self performSegueWithIdentifier:@"openViewGroup" sender:self];
+    if (!self.profileImagesDictionary[userID]) {
+        [self.profileImagesDictionary setObject:[UIImage imageNamed:@"BlankCircle"] forKey:userID];
+        
+        if (![url isEqualToString:@""]) {
+            
+            FIRStorage *storage = [FIRStorage storage];
+            
+            FIRStorageReference *imageRef = [storage referenceForURL:url];
+            
+            [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
+                if (error != nil) {
+                    
+                    NSLog(@"Error downloading profile image: %@", error);
+                    
+                } else {
+                    
+                    [self.profileImagesDictionary setObject:[UIImage imageWithData:data] forKey:userID];
+                    [self.activitiesTableView reloadData];
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark - Navigation

@@ -10,6 +10,19 @@
 
 @implementation WAValues
 
+#pragma mark
+
++ (NSString *)dayOfWeekFromDate:(NSDate *)date {
+    
+    if ([[NSCalendar currentCalendar] isDateInToday:date]) return @"Today";
+    if ([[NSCalendar currentCalendar] isDateInTomorrow:date]) return @"Tomorrow";
+    
+    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
+    [dayFormatter setDateFormat: @"EEEE"];
+    
+    return [dayFormatter stringFromDate:date];
+}
+
 #pragma mark - Colors
 
 + (UIColor *)wallaOrangeColor {
@@ -80,6 +93,11 @@
 + (UIColor *)buttonGrayColor {
     
     return [[UIColor alloc] initWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0];
+}
+
++ (UIColor *)barHighlightColor {
+    
+    return [[UIColor alloc] initWithRed:252.0/255.0 green:208.0/255.0 blue:152.0/255.0 alpha:1.0];
 }
 
 #pragma  mark - Other

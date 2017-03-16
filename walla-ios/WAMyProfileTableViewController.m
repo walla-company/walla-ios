@@ -84,7 +84,7 @@
 
 - (void)loadProfileImage {
     
-    if (![self.profileImageURL isEqualToString:@""]) {
+    if (![self.profileImageURL isEqualToString:@""] && self.profileImageURL) {
         
         FIRStorage *storage = [FIRStorage storage];
         

@@ -136,7 +136,7 @@
     }
     
     WAActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activityCell" forIndexPath:indexPath];
-    
+    /*
     cell.backgroundColor = [UIColor clearColor];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -238,7 +238,7 @@
         }
     }
 
-    
+    */
     return cell;
     
 }

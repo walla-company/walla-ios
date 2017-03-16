@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WAViewActivityReplyTableViewCell.h"
+#import "WAViewActivityTextTableViewCell.h"
+
 #import "WAViewActivityInfoTableViewCell.h"
 #import "WAViewActivityLocationTableViewCell.h"
 #import "WAViewActivityAttendeesTableViewCell.h"

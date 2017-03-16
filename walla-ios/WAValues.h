@@ -12,6 +12,10 @@
 
 @interface WAValues : NSObject
 
+// Date processing
+
++ (NSString *)dayOfWeekFromDate:(NSDate *)date;
+
 // Colors
 
 + (UIColor *)wallaOrangeColor;
@@ -34,6 +38,8 @@
 + (UIColor *)buttonInterestedColor;
 + (UIColor *)buttonGoingColor;
 + (UIColor *)buttonGrayColor;
+
++ (UIColor *)barHighlightColor;
 
 // Others
 

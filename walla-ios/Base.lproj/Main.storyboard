@@ -213,7 +213,7 @@
         <scene sceneID="K8n-B3-UPJ">
             <objects>
                 <collectionViewController id="aRx-Jz-4pS" customClass="WAMyProfileInterestsCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="i7I-O0-9ch">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -261,9 +261,63 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTb-Dm-DgG" customClass="WAShadowHeader">
                                 <rect key="frame" x="0.0" y="64" width="375" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1n-Jg-Yns">
+                                        <rect key="frame" x="0.0" y="5" width="187.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="uiM-ph-9Ea"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="All">
+                                            <color key="titleColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="allButtonPressed:" destination="nvA-Dt-Bsd" eventType="touchUpInside" id="iuM-y0-mEy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-ob-zyv">
+                                        <rect key="frame" x="187.5" y="5" width="187.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="oXc-2o-OCp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="todayButtonPressed:" destination="nvA-Dt-Bsd" eventType="touchUpInside" id="uTd-EH-X6l"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9c-1h-8U3">
+                                        <rect key="frame" x="0.0" y="32" width="187.5" height="3"/>
+                                        <color key="backgroundColor" red="0.9882352941176471" green="0.81568627450980391" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="oon-uH-rwW"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUW-kK-dDc">
+                                        <rect key="frame" x="187.5" y="32" width="187.5" height="3"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="Keu-5U-Q4q"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="z9c-1h-8U3" firstAttribute="width" secondItem="aUW-kK-dDc" secondAttribute="width" id="27M-3X-kUf"/>
+                                    <constraint firstItem="x1n-Jg-Yns" firstAttribute="leading" secondItem="bTb-Dm-DgG" secondAttribute="leading" id="AVk-k5-R8N"/>
+                                    <constraint firstAttribute="trailing" secondItem="jYd-ob-zyv" secondAttribute="trailing" id="Byi-sF-9jd"/>
+                                    <constraint firstAttribute="trailing" secondItem="aUW-kK-dDc" secondAttribute="trailing" id="CiB-Va-7GC"/>
+                                    <constraint firstItem="x1n-Jg-Yns" firstAttribute="centerY" secondItem="bTb-Dm-DgG" secondAttribute="centerY" id="IWs-XR-Xps"/>
                                     <constraint firstAttribute="height" constant="35" id="M2H-hL-cE2"/>
+                                    <constraint firstAttribute="bottom" secondItem="z9c-1h-8U3" secondAttribute="bottom" id="Qb4-VF-8DS"/>
+                                    <constraint firstAttribute="bottom" secondItem="aUW-kK-dDc" secondAttribute="bottom" id="Uqy-zO-jp3"/>
+                                    <constraint firstItem="aUW-kK-dDc" firstAttribute="leading" secondItem="z9c-1h-8U3" secondAttribute="trailing" id="hVS-CE-0jk"/>
+                                    <constraint firstItem="z9c-1h-8U3" firstAttribute="leading" secondItem="bTb-Dm-DgG" secondAttribute="leading" id="ive-hF-8AN"/>
+                                    <constraint firstItem="jYd-ob-zyv" firstAttribute="centerY" secondItem="bTb-Dm-DgG" secondAttribute="centerY" id="kI7-7e-bUz"/>
+                                    <constraint firstItem="x1n-Jg-Yns" firstAttribute="width" secondItem="jYd-ob-zyv" secondAttribute="width" id="rmr-1A-sZo"/>
+                                    <constraint firstItem="jYd-ob-zyv" firstAttribute="leading" secondItem="x1n-Jg-Yns" secondAttribute="trailing" id="sIg-mj-O6Y"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -281,6 +335,10 @@
                     <navigationItem key="navigationItem" title="Activities" id="0Nb-Um-302"/>
                     <connections>
                         <outlet property="activitiesTableView" destination="JpZ-Xc-6f3" id="xXg-Zu-DgO"/>
+                        <outlet property="allButton" destination="x1n-Jg-Yns" id="cBc-0s-dgb"/>
+                        <outlet property="allHighlightView" destination="z9c-1h-8U3" id="b1Z-iq-hCd"/>
+                        <outlet property="todayButton" destination="jYd-ob-zyv" id="vn9-Uj-UW2"/>
+                        <outlet property="todayHighlightView" destination="aUW-kK-dDc" id="B0d-5r-B7V"/>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="bW0-lF-GSs"/>
                         <segue destination="SCV-YU-bQb" kind="show" identifier="openViewGroup" id="Dno-9f-m5g"/>
                         <segue destination="IDO-BN-C0f" kind="show" identifier="openActivityDetails" id="mOU-VR-Nuh"/>
@@ -394,7 +452,7 @@
         <scene sceneID="Uc0-Nt-q4W">
             <objects>
                 <navigationController id="7y8-Se-XhZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GbL-Eo-hgW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GbL-Eo-hgW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -524,7 +582,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdQ-EN-hEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Profile" image="TabbarIcon5" id="J9U-f5-Ee8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kr4-DY-Dct">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kr4-DY-Dct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -548,7 +606,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gd1-JI-yaw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="TabbarIcon4" id="YR8-b0-Oen"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ptP-od-nTd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ptP-od-nTd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,7 +630,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GhL-ns-gYU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="TabbarIcon3" id="mJo-pl-TYf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xHd-th-JXV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xHd-th-JXV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -595,7 +653,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginSignUpNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Zll-ss-jyF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LdL-uI-aro">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LdL-uI-aro">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -614,7 +672,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LRv-49-kZw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Calendar" image="TabbarIcon2" id="A9M-dM-41X"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="3xz-SJ-ot6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3xz-SJ-ot6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -645,7 +703,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version not supported. Update Walla from the App Store." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-Vn-Pdd">
-                                <rect key="frame" x="16" y="280" width="343" height="108"/>
+                                <rect key="frame" x="16" y="280.5" width="343" height="107.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -732,9 +790,9 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fbb-hK-71o"/>
         <segue reference="mOU-VR-Nuh"/>
-        <segue reference="Dno-9f-m5g"/>
+        <segue reference="Fbb-hK-71o"/>
         <segue reference="bW0-lF-GSs"/>
+        <segue reference="Dno-9f-m5g"/>
     </inferredMetricsTieBreakers>
 </document>

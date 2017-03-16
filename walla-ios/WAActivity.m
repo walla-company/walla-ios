@@ -59,6 +59,8 @@
         
         self.repliesDictionary = dictionary[@"replies"];
         
+        self.freeFood = [dictionary[@"free_food"] boolValue];
+        
         [self processReplies];
     }
     

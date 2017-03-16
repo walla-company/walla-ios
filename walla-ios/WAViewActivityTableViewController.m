@@ -39,6 +39,9 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityReplyTableViewCell" bundle:nil] forCellReuseIdentifier:@"replyCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAViewActivityAttendeesTableViewCell" bundle:nil] forCellReuseIdentifier:@"attendeesCell"];
@@ -50,7 +53,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     self.tableView.showsVerticalScrollIndicator = false;
     
@@ -206,11 +209,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return 1;
+    
+    //return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    return 6 + [self.discussions count];
+    
+    /*
     if (section == 1) {
         
         if (!self.viewingActivity) return 0;
@@ -228,12 +236,44 @@
     }
     
     return 0;
+    */
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 1) {
+    if (indexPath.row == 0) {
+        WAViewActivityReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"replyCell" forIndexPath:indexPath];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        return cell;
+    }
+    
+    /*
+    cell.postTextView.scrollEnabled = false;
+    cell.postTextView.delegate = self;
+    
+    if ([self.discussionPostText isEqualToString:@""]) {
+        cell.postTextView.textColor = [WAValues notSelectedTextColor];
+        cell.postTextView.text = @"Join the discussion!";
+    }
+    else {
+        cell.postTextView.textColor = [WAValues selectedTextColor];
+        cell.postTextView.text = self.discussionPostText;
+    }
+    
+    [cell.postButton addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
+    
+    WAViewActivityTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+    
+    /*
+    if (indexPath.section == 1) {
+     
         if (indexPath.row == [self.discussions count]) {
             WAViewActivityPostDiscussionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postDiscussionCell" forIndexPath:indexPath];
             
@@ -512,7 +552,7 @@
     cell.detailsTextLabel.text = self.viewingActivity.details;
     
     return cell;
-    
+    */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
