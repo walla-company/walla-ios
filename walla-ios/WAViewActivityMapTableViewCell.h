@@ -22,4 +22,6 @@
 
 @property (strong, nonatomic) IBOutlet WARoundedView *discussionView;
 
+@property (strong, nonatomic) IBOutlet UIButton *showMapButton;
+
 @end

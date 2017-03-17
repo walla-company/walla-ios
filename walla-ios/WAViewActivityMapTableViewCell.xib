@@ -51,16 +51,23 @@
                                     <constraint firstAttribute="width" secondItem="da8-zQ-RTx" secondAttribute="height" multiplier="103:62" id="hAh-JP-NwA"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hW-07-aex">
+                                <rect key="frame" x="10" y="23" width="206" height="124"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1hW-07-aex" secondAttribute="bottom" constant="10" id="19b-6o-Jff"/>
                             <constraint firstAttribute="bottom" secondItem="da8-zQ-RTx" secondAttribute="bottom" constant="10" id="Ahh-KN-MWx"/>
                             <constraint firstItem="UnL-Bs-DFc" firstAttribute="top" secondItem="9EW-x9-acF" secondAttribute="top" constant="10" id="DvG-8r-U18"/>
                             <constraint firstItem="da8-zQ-RTx" firstAttribute="leading" secondItem="9EW-x9-acF" secondAttribute="leading" constant="10" id="HEd-Yw-DyT"/>
+                            <constraint firstItem="1hW-07-aex" firstAttribute="top" secondItem="UnL-Bs-DFc" secondAttribute="bottom" constant="10" id="L1G-ld-4lK"/>
                             <constraint firstItem="da8-zQ-RTx" firstAttribute="top" secondItem="UnL-Bs-DFc" secondAttribute="bottom" constant="10" id="Lby-FR-l1W"/>
                             <constraint firstItem="UnL-Bs-DFc" firstAttribute="leading" secondItem="9EW-x9-acF" secondAttribute="leading" constant="10" id="SJn-Hl-51b"/>
+                            <constraint firstAttribute="trailing" secondItem="1hW-07-aex" secondAttribute="trailing" constant="10" id="SyX-jU-lcF"/>
                             <constraint firstAttribute="trailing" secondItem="da8-zQ-RTx" secondAttribute="trailing" constant="10" id="U8K-WO-vcI"/>
                             <constraint firstAttribute="trailing" secondItem="UnL-Bs-DFc" secondAttribute="trailing" constant="10" id="W2W-tC-gZ8"/>
+                            <constraint firstItem="1hW-07-aex" firstAttribute="leading" secondItem="9EW-x9-acF" secondAttribute="leading" constant="10" id="tfx-Uz-mOp"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -83,6 +90,7 @@
                 <outlet property="locationMapView" destination="da8-zQ-RTx" id="rsc-Hf-Hkc"/>
                 <outlet property="nameLabel" destination="r9I-fo-NUt" id="Kkr-0f-KTQ"/>
                 <outlet property="profileImageView" destination="cD0-Qb-adJ" id="1CA-Ye-eQo"/>
+                <outlet property="showMapButton" destination="1hW-07-aex" id="ELC-AD-VBy"/>
             </connections>
             <point key="canvasLocation" x="34" y="129.5"/>
         </tableViewCell>

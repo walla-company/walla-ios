@@ -160,8 +160,6 @@
     }
     
     return 0;
-    
-    //return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -299,6 +297,8 @@
         
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.viewingActivity.location.coordinate zoom:16];
         [cell.locationMapView setCamera:camera];
+        
+        [cell.showMapButton addTarget:self action:@selector(showMapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     }
