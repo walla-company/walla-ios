@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQT-DN-QIA">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post in Discussions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQT-DN-QIA">
                         <rect key="frame" x="20" y="8" width="280" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,6 +65,10 @@
                     <constraint firstItem="zLJ-Jg-gtI" firstAttribute="leading" secondItem="yuA-bp-106" secondAttribute="trailing" constant="8" id="udU-Yz-75n"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="postButton" destination="zLJ-Jg-gtI" id="yym-UJ-jR1"/>
+                <outlet property="postTextView" destination="HKN-ZQ-2tx" id="zLT-Yx-mGi"/>
+            </connections>
             <point key="canvasLocation" x="34" y="91.5"/>
         </tableViewCell>
     </objects>

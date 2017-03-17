@@ -363,6 +363,7 @@
                     </tableView>
                     <connections>
                         <segue destination="yge-hd-rZi" kind="show" identifier="openShowMap" id="zp7-Y6-GrX"/>
+                        <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="7BD-Kn-vwa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVc-nt-f7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -792,7 +793,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="mOU-VR-Nuh"/>
         <segue reference="Fbb-hK-71o"/>
-        <segue reference="bW0-lF-GSs"/>
         <segue reference="Dno-9f-m5g"/>
+        <segue reference="7BD-Kn-vwa"/>
     </inferredMetricsTieBreakers>
 </document>

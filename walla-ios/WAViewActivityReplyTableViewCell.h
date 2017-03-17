@@ -16,4 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *interestedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *goingLabel;
 
+@property (strong, nonatomic) IBOutlet UIView *interestedView;
+@property (strong, nonatomic) IBOutlet UIView *goingView;
+
 @end

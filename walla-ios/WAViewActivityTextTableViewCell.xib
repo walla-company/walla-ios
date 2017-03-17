@@ -38,7 +38,7 @@
                         <rect key="frame" x="71" y="31" width="226" height="26"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8x-mf-n8R">
-                                <rect key="frame" x="5" y="5" width="216" height="16"/>
+                                <rect key="frame" x="10" y="10" width="206" height="6"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -46,10 +46,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="j8x-mf-n8R" firstAttribute="leading" secondItem="z4y-Rh-GBT" secondAttribute="leading" constant="5" id="5bW-hc-L6b"/>
-                            <constraint firstAttribute="bottom" secondItem="j8x-mf-n8R" secondAttribute="bottom" constant="5" id="5iC-vz-Tub"/>
-                            <constraint firstAttribute="trailing" secondItem="j8x-mf-n8R" secondAttribute="trailing" constant="5" id="c0v-tY-w8K"/>
-                            <constraint firstItem="j8x-mf-n8R" firstAttribute="top" secondItem="z4y-Rh-GBT" secondAttribute="top" constant="5" id="li8-Jc-Kul"/>
+                            <constraint firstItem="j8x-mf-n8R" firstAttribute="leading" secondItem="z4y-Rh-GBT" secondAttribute="leading" constant="10" id="5bW-hc-L6b"/>
+                            <constraint firstAttribute="bottom" secondItem="j8x-mf-n8R" secondAttribute="bottom" constant="10" id="5iC-vz-Tub"/>
+                            <constraint firstAttribute="trailing" secondItem="j8x-mf-n8R" secondAttribute="trailing" constant="10" id="c0v-tY-w8K"/>
+                            <constraint firstItem="j8x-mf-n8R" firstAttribute="top" secondItem="z4y-Rh-GBT" secondAttribute="top" constant="10" id="li8-Jc-Kul"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -68,6 +68,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="discussionTextLabel" destination="j8x-mf-n8R" id="chd-q4-4B3"/>
+                <outlet property="discussionView" destination="z4y-Rh-GBT" id="0D6-KG-GF8"/>
                 <outlet property="nameLabel" destination="YFB-Yg-KoC" id="XdW-PJ-Vnt"/>
                 <outlet property="profileImageView" destination="nQa-9N-aEP" id="0yO-Xz-nXo"/>
             </connections>

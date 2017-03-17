@@ -128,8 +128,10 @@
             <connections>
                 <outlet property="goingButton" destination="6ew-ZP-2RR" id="v7p-M2-pZW"/>
                 <outlet property="goingLabel" destination="Unm-Ky-hhs" id="y5R-9D-TwG"/>
+                <outlet property="goingView" destination="TyT-cT-sba" id="M7j-Wv-qqM"/>
                 <outlet property="interestedButton" destination="Jfe-I5-nFo" id="olS-2E-k33"/>
                 <outlet property="interestedLabel" destination="eFd-L9-DYT" id="KJT-R6-6FY"/>
+                <outlet property="interestedView" destination="du2-xd-OGe" id="FN4-g1-G1K"/>
             </connections>
         </tableViewCell>
     </objects>

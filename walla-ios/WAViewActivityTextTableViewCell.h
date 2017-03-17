@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WARoundedView.h"
+
 @interface WAViewActivityTextTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *discussionTextLabel;
+
+@property (strong, nonatomic) IBOutlet WARoundedView *discussionView;
 
 @end

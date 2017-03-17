@@ -10,24 +10,13 @@
 
 #import "WAViewActivityReplyTableViewCell.h"
 #import "WAViewActivityTextTableViewCell.h"
-
-#import "WAViewActivityInfoTableViewCell.h"
-#import "WAViewActivityLocationTableViewCell.h"
-#import "WAViewActivityAttendeesTableViewCell.h"
-#import "WAViewActivityButtonsTableViewCell.h"
-#import "WAViewActivityHostTableViewCell.h"
-#import "WAViewActivityDetailsTableViewCell.h"
-#import "WAViewActivityDiscussionTableViewCell.h"
+#import "WAViewActivityMapTableViewCell.h"
 #import "WAViewActivityPostDiscussionTableViewCell.h"
-
-#import "WAActivityTabsHeaderView.h"
-
-#import "WAGroupPickerViewController.h"
-#import "WAUserPickerViewController.h"
+#import "WAViewActivityExtraTableViewCell.h"
 
 #import "WAActivity.h"
 
-@interface WAViewActivityTableViewController : UITableViewController <WAActivityTabDelegate, WAGroupPickerViewControllerDelegate, WAUserPickerViewControllerDelegate, UITextViewDelegate>
+@interface WAViewActivityTableViewController : UITableViewController <UITextViewDelegate>
 
 @property BOOL userVerified;
 
@@ -35,24 +24,11 @@
 
 @property WAActivity *viewingActivity;
 
-@property NSMutableDictionary *profilesImagesDictionary;
-@property NSMutableDictionary *userInfoDictionary;
-@property NSMutableDictionary *userInfoDiscussionsDictionary;
-
-@property NSString *activityHostName;
-@property NSString *activityHostDetails;
-@property UIImage *activityHostImage;
-
-@property NSMutableArray *invitedUserIDs;
-@property NSMutableArray *invitedGroupIDs;
-
-@property NSArray *userFriends;
-@property NSArray *userGroups;
-
-@property (strong, nonatomic) IBOutlet UIView *keyboardView;
-
 @property NSString *discussionPostText;
 
 @property NSArray *discussions;
+
+@property NSMutableDictionary *userNamesDictionary;
+@property NSMutableDictionary *profileImagesDictionary;
 
 @end

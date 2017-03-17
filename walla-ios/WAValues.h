@@ -41,6 +41,8 @@
 
 + (UIColor *)barHighlightColor;
 
++ (UIColor *)discussionColor;
+
 // Others
 
 + (NSArray *)interestsArray;

@@ -59,7 +59,7 @@
         
         self.repliesDictionary = dictionary[@"replies"];
         
-        self.freeFood = [dictionary[@"free_food"] boolValue];
+        self.freeFood = [self.interests containsObject:@"Free Food"];
         
         [self processReplies];
     }

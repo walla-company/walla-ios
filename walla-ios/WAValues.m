@@ -100,6 +100,11 @@
     return [[UIColor alloc] initWithRed:252.0/255.0 green:208.0/255.0 blue:152.0/255.0 alpha:1.0];
 }
 
++ (UIColor *)discussionColor {
+    
+    return [[UIColor alloc] initWithRed:252.0/255.0 green:248.0/255.0 blue:234.0/255.0 alpha:1.0];
+}
+
 #pragma  mark - Other
 
 + (NSArray *)interestsArray {

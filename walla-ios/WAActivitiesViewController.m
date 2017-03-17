@@ -156,7 +156,7 @@
             [WAServer getUserBasicInfoWithID:activity.host completion:^ (NSDictionary *user) {
                 NSLog(@"User Info: %@", user);
                 
-                [self.userNamesDictionary setObject:user[@"name"] forKey:activity.host];
+                [self.userNamesDictionary setObject:user[@"first_name"] forKey:activity.host];
                 [self.activitiesTableView reloadData];
                 
                 [self loadProfileImageWithURL:user[@"profile_image_url"] forUID:activity.host];
