@@ -8,9 +8,6 @@
 
 #import "WAViewActivityTableViewController.h"
 
-#import "WAViewGroupTableViewController.h"
-#import "WAViewUserTableViewController.h"
-
 #import "WAShowMapViewController.h"
 
 #import "WAServer.h"

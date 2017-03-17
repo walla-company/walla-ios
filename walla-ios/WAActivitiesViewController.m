@@ -8,7 +8,6 @@
 
 #import "WAActivitiesViewController.h"
 
-#import "WAViewGroupTableViewController.h"
 #import "WAViewActivityTableViewController.h"
 
 #import "WAValues.h"
@@ -261,12 +260,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"openViewGroup"]) {
-        
-        WAViewGroupTableViewController *destinationController = (WAViewGroupTableViewController *) [segue destinationViewController];
-        destinationController.viewingGroupID = self.openGroupID;
-    }
-    else if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
+    if ([segue.identifier isEqualToString:@"openActivityDetails"]) {
         
         WAViewActivityTableViewController *destinationController = (WAViewActivityTableViewController *) [segue destinationViewController];
         destinationController.viewingActivityID = self.openActivityID;

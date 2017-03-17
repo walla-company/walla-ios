@@ -10,8 +10,6 @@
 
 #import "WAActivityTableViewCell.h"
 
-#import "WAFilterCollectionViewCell.h"
-
 @import Firebase;
 
 @interface WAActivitiesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
