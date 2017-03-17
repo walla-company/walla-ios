@@ -23,8 +23,18 @@
                         <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJO-JI-LGD">
+                        <rect key="frame" x="15" y="63.5" width="305" height="0.5"/>
+                        <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="TLM-WA-Bo2"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="PJO-JI-LGD" secondAttribute="trailing" id="A83-E9-QAf"/>
+                    <constraint firstItem="PJO-JI-LGD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="GeL-cv-skW"/>
+                    <constraint firstAttribute="bottom" secondItem="PJO-JI-LGD" secondAttribute="bottom" id="gF0-lI-ClQ"/>
                     <constraint firstItem="IW2-Pd-qPq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="jov-NP-TCr"/>
                     <constraint firstAttribute="trailing" secondItem="IW2-Pd-qPq" secondAttribute="trailing" constant="20" id="p4u-7h-R22"/>
                     <constraint firstItem="IW2-Pd-qPq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="u6h-Nw-4hP"/>

@@ -8,17 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WAUser.h"
+
 @interface WAMyProfileTableViewController : UITableViewController
 
 @property NSArray *titleArray;
 
-@property NSString *name;
-@property NSString *academicLevel;
-@property NSString *graduationYear;
-@property NSString *major;
-@property NSString *hometown;
-@property NSString *profileImageURL;
+@property WAUser *user;
 
 @property UIImage *profileImage;
+
+@property NSMutableDictionary *groupsDictionary;
 
 @end

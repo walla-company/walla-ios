@@ -9,11 +9,14 @@
 #import "WAMyProfileTableViewController.h"
 
 #import "WAMyProfileMainTableViewCell.h"
+#import "WAMyProfileGroupTableViewCell.h"
+#import "WAMyProfileDetailsTableViewCell.h"
 #import "WAMyProfileTextTableViewCell.h"
 #import "WAMyProfileInfoTableViewCell.h"
 #import "WAMyProfileClearTableViewCell.h"
 
 #import "WAServer.h"
+#import "WAValues.h"
 
 @import Firebase;
 
@@ -33,11 +36,13 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileMainTableViewCell" bundle:nil] forCellReuseIdentifier:@"mainCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"textCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"infoCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAMyProfileClearTableViewCell" bundle:nil] forCellReuseIdentifier:@"clearCell"];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
     
@@ -49,27 +54,18 @@
     // Initialize values
     self.titleArray = @[@"Edit profile", @"About Walla", @"Log out"];
     
-    self.name = @"";
-    self.academicLevel = @"";
-    self.major = @"";
-    self.graduationYear = @"";
-    self.hometown = @"";
-    self.profileImageURL = @"";
     self.profileImage = [UIImage imageNamed:@"BlankCircle"];
+    
+    self.groupsDictionary = [[NSMutableDictionary alloc] init];;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
-    [WAServer getUserBasicInfoWithID:[FIRAuth auth].currentUser.uid completion:^(NSDictionary *user){
+    [WAServer getUserWithID:[FIRAuth auth].currentUser.uid  completion:^(WAUser *user) {
         
-        self.name = [user objectForKey:@"name"];
-        self.graduationYear = [NSString stringWithFormat:@"%@", [user objectForKey:@"graduation_year"]];
-        self.academicLevel = ([[user objectForKey:@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate";
-        self.major = [user objectForKey:@"major"];
-        self.hometown = [user objectForKey:@"hometown"];
-        self.profileImageURL = [user objectForKey:@"profile_image_url"];
+        self.user = user;
         
         [self.tableView reloadData];
         
@@ -84,11 +80,11 @@
 
 - (void)loadProfileImage {
     
-    if (![self.profileImageURL isEqualToString:@""] && self.profileImageURL) {
+    if (![self.user.profileImageURL isEqualToString:@""]) {
         
         FIRStorage *storage = [FIRStorage storage];
         
-        FIRStorageReference *imageRef = [storage referenceForURL:self.profileImageURL];
+        FIRStorageReference *imageRef = [storage referenceForURL:self.user.profileImageURL];
         
         [imageRef dataWithMaxSize:10 * 1024 * 1024 completion:^(NSData *data, NSError *error) {
             if (error != nil) {
@@ -113,7 +109,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 7;
+    return 8 + [self.user.groups count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,14 +126,61 @@
         cell.profileImageView.clipsToBounds = true;
         cell.profileImageView.layer.cornerRadius = 32.5;
         
-        cell.nameLabel.text = self.name;
-        cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@\n%@", self.academicLevel, self.graduationYear, self.major];
-        cell.locationLabel.text = self.hometown;
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName];
+        
+        NSString *levelString = ([self.user.academicLevel isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@ ", ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate"];
+        NSString *yearString = ([self.user.graduationYear integerValue] <=0 ) ? @"" : [NSString stringWithFormat:@"Class of %@", self.user.graduationYear];
+        NSString *majorString = ([self.user.major isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"\n%@", self.user.major];
+        
+        cell.infoLabel.text = [NSString stringWithFormat:@"%@%@%@", levelString, yearString, majorString];
+        cell.locationLabel.text = ([self.user.hometown isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"From %@", self.user.hometown];
         
         return cell;
     }
     
-    if (indexPath.row == 1 || indexPath.row == 5) {
+    if ([self.user.groups count] > 0 && indexPath.row >= 1 && indexPath.row <= [self.user.groups count]) {
+        WAMyProfileGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSString *groupID = self.user.groups[indexPath.row - 1];
+        
+        if (self.groupsDictionary[groupID]) {
+            NSDictionary *group = self.groupsDictionary[groupID];
+            
+            cell.groupNameLabel.text = group[@"name"];
+            cell.groupTagViewLabel.text = group[@"short_name"];
+            cell.groupTagView.backgroundColor = [WAValues colorFromHexString:group[@"color"]];
+        }
+        else {
+            cell.groupTagView.backgroundColor = [UIColor whiteColor];
+            cell.groupTagViewLabel.text = @"";
+            cell.groupNameLabel.text = @"";
+            [self.groupsDictionary setObject:@{@"name": @"", @"short_name": @"", @"color": @"#ffffff"} forKey:groupID];
+            [WAServer getGroupBasicInfoWithID:groupID completion:^(NSDictionary *group) {
+                
+                [self.groupsDictionary setObject:group forKey:groupID];
+            }];
+        }
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 1 + [self.user.groups count]) {
+        WAMyProfileDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.detailsLabel.text = self.user.details;
+        
+        return cell;
+    }
+    
+    if (indexPath.row == 2 + [self.user.groups count] || indexPath.row == 6 + [self.user.groups count]) {
         WAMyProfileClearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"clearCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor clearColor];
@@ -147,7 +190,7 @@
         return cell;
     }
     
-    if (indexPath.row == 6) {
+    if (indexPath.row == 7 + [self.user.groups count]) {
         WAMyProfileInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor whiteColor];
@@ -165,13 +208,13 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.customTextLabel.text = self.titleArray[indexPath.row - 2];
+    cell.customTextLabel.text = self.titleArray[indexPath.row - (3 + [self.user.groups count])];
     
-    if (indexPath.row == 6) {
-        cell.textLabel.textColor = [UIColor redColor];
+    if (indexPath.row == 5 + [self.user.groups count]) {
+        cell.customTextLabel.textColor = [UIColor redColor];
     }
     else {
-        cell.textLabel.textColor = [[UIColor alloc] initWithRed:109.0/255.0 green:109.0/255.0 blue:109.0/255.0 alpha:1.0];
+        cell.customTextLabel.textColor = [[UIColor alloc] initWithRed:109.0/255.0 green:109.0/255.0 blue:109.0/255.0 alpha:1.0];
     }
     
     return cell;
@@ -179,21 +222,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    switch (indexPath.row) {
-            
-        case 2:
-            [self performSegueWithIdentifier:@"openEditProfile" sender:self];
-            break;
-            
-        case 3:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.wallasquad.com/"] options:@{} completionHandler:nil];
-            break;
-            
-        default:
-            break;
+    if (indexPath.row == 3 + [self.user.groups count]) {
+        
+        [self performSegueWithIdentifier:@"openEditProfile" sender:self];
     }
-    
-    if (indexPath.row == 4) {
+    else if (indexPath.row == 4 + [self.user.groups count]) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.wallasquad.com/"] options:@{} completionHandler:nil];
+    }
+    else if (indexPath.row == 5 + [self.user.groups count]) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"You will have to log back in." preferredStyle:UIAlertControllerStyleAlert];
         
