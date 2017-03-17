@@ -122,7 +122,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
     });
 }
 
-+ (void)createActivity:(NSString *)title startTime:(NSDate *)startTime endTime:(NSDate *)endTime locationName:(NSString *)locationName locationAddress:(NSString *)locationAddress location:(CLLocation *)location interests:(NSArray *)interests details:(NSString *)details hostGroupID:(NSString *)hostGroupID hostGroupName:(NSString *)hostGroupName hostGroupShortName:(NSString *)hostGroupShortName invitedUsers:(NSArray *)invitedUsers invitedGroups:(NSArray *)invitedGroups activityPublic:(BOOL)activityPublic guestsCanInviteOthers:(BOOL)guestsCanInviteOthers completion:(void (^) (BOOL success))completionBlock {
++ (void)createActivity:(NSString *)title startTime:(NSDate *)startTime endTime:(NSDate *)endTime locationName:(NSString *)locationName locationAddress:(NSString *)locationAddress location:(CLLocation *)location interests:(NSArray *)interests hostGroupID:(NSString *)hostGroupID hostGroupName:(NSString *)hostGroupName hostGroupShortName:(NSString *)hostGroupShortName completion:(void (^) (BOOL success))completionBlock {
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
@@ -142,16 +142,11 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
                                                 @"location_address": locationAddress,
                                                 @"location_lat": [NSNumber numberWithDouble:location.coordinate.latitude],
                                                 @"location_long": [NSNumber numberWithDouble:location.coordinate.longitude],
-                                                @"activity_public": [NSNumber numberWithBool:activityPublic],
                                                 @"interests": interests,
                                                 @"host": [FIRAuth auth].currentUser.uid,
-                                                @"details": details,
                                                 @"host_group": hostGroupID,
                                                 @"host_group_name": hostGroupName,
-                                                @"host_group_short_name": hostGroupShortName,
-                                                @"invited_users": invitedUsers,
-                                                @"invited_groups": invitedGroups,
-                                                @"can_others_invite": [NSNumber numberWithBool:guestsCanInviteOthers]
+                                                @"host_group_short_name": hostGroupShortName
                                                 };
             
             NSError *jsonError;

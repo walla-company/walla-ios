@@ -61,8 +61,6 @@
     
     self.mapViews = [[NSMutableArray alloc] init];
     
-    self.activityPublic = true;
-    
     self.activityTitle = @"";
     self.activityStartTime = nil;
     self.meetingPlace = @"";
@@ -73,6 +71,8 @@
     self.userGroupIDs = [[NSArray alloc] init];
     
     self.userVerified = false;
+    
+    self.activityLocation = nil;
     
     [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups) {
         self.userGroupIDs = groups;
@@ -378,10 +378,10 @@
     NSLog(@"Host group: %@", self.activityHostGroup);
     NSLog(@"Free food: %@", (self.freeFood) ? @"Yes" : @"No");
     
+    self.tableView.userInteractionEnabled = false;
     
-    /*
     if ([self.activityTitle isEqualToString:@""]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Title Required" message:@"You must enter a title for the activity." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Description Required" message:@"You have to tell us what this activity is about." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
         
@@ -389,8 +389,8 @@
         
         [self presentViewController:alert animated:true completion:nil];
     }
-    else if (!self.activityStartTime && !self.activityEndTime) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Times Required" message:@"You must select a start and end time for the activity." preferredStyle:UIAlertControllerStyleAlert];
+    else if (!self.activityStartTime) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Time Required" message:@"You have to tell us when this activity begins." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
         
@@ -398,17 +398,8 @@
         
         [self presentViewController:alert animated:true completion:nil];
     }
-    else if (!self.activityLocation) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Required" message:@"You must enter a location for the activity." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
-        
-        [alert addAction:cancelAction];
-        
-        [self presentViewController:alert animated:true completion:nil];
-    }
-    else if ([self.activityInterests count] == 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Interest Required" message:@"You must select at least one interest for the activity." preferredStyle:UIAlertControllerStyleAlert];
+    else if ([self.meetingPlace isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Meeting Place Required" message:@"You have to tell us where you're meeting." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
         
@@ -432,21 +423,17 @@
             hostGroupShortaName = group[@"short_name"];
         }
         
-        NSMutableArray *invitedGroups = [[NSMutableArray alloc] init];
+        NSArray *interests = (self.freeFood) ? @[@"Free Food"] : @[];
         
-        for (NSDictionary *group in self.activityInvitedGroups) {
-            [invitedGroups addObject:group[@"group_id"]];
+        CLLocation *activityLocation = [[CLLocation alloc] initWithLatitude:0 longitude:0];
+        NSString *activityAddress = @"";
+        
+        if (self.activityLocation) {
+            activityLocation = [[CLLocation alloc] initWithLatitude:self.activityLocation.coordinate.latitude longitude:self.activityLocation.coordinate.longitude] ;
+            activityAddress = self.activityLocation.formattedAddress;
         }
         
-        NSMutableArray *invitedFriends = [[NSMutableArray alloc] init];
-        
-        for (NSDictionary *user in self.activityInvitedFriends) {
-            [invitedFriends addObject:user[@"user_id"]];
-        }
-        
-        NSLog(@"self.activityPublic: %@", (self.activityPublic) ? @"true" : @"false");
-        
-        [WAServer createActivity:self.activityTitle startTime:self.activityStartTime endTime:self.activityEndTime locationName:self.activityLocation.name locationAddress:self.activityLocation.formattedAddress location:[[CLLocation alloc] initWithLatitude:self.activityLocation.coordinate.latitude longitude:self.activityLocation.coordinate.longitude] interests:self.activityInterests details:self.activityDetails hostGroupID:hostGroupID hostGroupName:hostGroupName hostGroupShortName:hostGroupShortaName invitedUsers:invitedFriends invitedGroups:invitedGroups activityPublic:self.activityPublic guestsCanInviteOthers:self.guestsCanInviteOthers completion:^(BOOL success) {
+        [WAServer createActivity:self.activityTitle startTime:self.activityStartTime endTime:self.activityStartTime locationName:self.meetingPlace locationAddress:activityAddress location:activityLocation interests:interests hostGroupID:hostGroupID hostGroupName:hostGroupName hostGroupShortName:hostGroupShortaName completion:^(BOOL success) {
             
             self.tableView.userInteractionEnabled = true;
             
@@ -471,8 +458,9 @@
                 
                 [self presentViewController:alert animated:true completion:nil];
             }
+            
         }];
-    }*/
+    }
 }
 
 #pragma mark - Date picker delegate

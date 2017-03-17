@@ -36,8 +36,6 @@
 @property CLLocation *userLocation;
 @property BOOL firstUserLocationUpdate;
 
-@property BOOL activityPublic;
-
 @property NSString *activityTitle;
 @property NSDate *activityStartTime;
 @property NSString *meetingPlace;

@@ -23,7 +23,7 @@
 
 + (void)getActivitisFromLastHours:(double)hours completion:(void (^) (NSArray *activities))completionBlock;
 
-+ (void)createActivity:(NSString *)title startTime:(NSDate *)startTime endTime:(NSDate *)endTime locationName:(NSString *)locationName locationAddress:(NSString *)locationAddress location:(CLLocation *)location interests:(NSArray *)interests details:(NSString *)details hostGroupID:(NSString *)hostGroupID hostGroupName:(NSString *)hostGroupName hostGroupShortName:(NSString *)hostGroupShortName invitedUsers:(NSArray *)invitedUsers invitedGroups:(NSArray *)invitedGroups activityPublic:(BOOL)activityPublic guestsCanInviteOthers:(BOOL)guestsCanInviteOthers completion:(void (^) (BOOL success))completionBlock;
++ (void)createActivity:(NSString *)title startTime:(NSDate *)startTime endTime:(NSDate *)endTime locationName:(NSString *)locationName locationAddress:(NSString *)locationAddress location:(CLLocation *)location interests:(NSArray *)interests hostGroupID:(NSString *)hostGroupID hostGroupName:(NSString *)hostGroupName hostGroupShortName:(NSString *)hostGroupShortName completion:(void (^) (BOOL success))completionBlock;
 
 + (void)activityInterested:(NSString *)uid activityID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock;
 
