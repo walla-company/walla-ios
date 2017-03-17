@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="KGk-i7-Jjw" customClass="WAAddGroupTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-j1-eaW">
+                        <rect key="frame" x="20" y="10" width="70" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-MS-oLe">
+                                <rect key="frame" x="5" y="0.0" width="60" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6xB-MS-oLe" secondAttribute="bottom" id="4by-b4-Yoo"/>
+                            <constraint firstAttribute="height" constant="20" id="6dG-Oh-nrt"/>
+                            <constraint firstAttribute="width" constant="70" id="HCU-Bp-DoX"/>
+                            <constraint firstItem="6xB-MS-oLe" firstAttribute="leading" secondItem="cIO-j1-eaW" secondAttribute="leading" constant="5" id="kwn-so-gEw"/>
+                            <constraint firstItem="6xB-MS-oLe" firstAttribute="top" secondItem="cIO-j1-eaW" secondAttribute="top" id="m0n-ry-BUz"/>
+                            <constraint firstAttribute="trailing" secondItem="6xB-MS-oLe" secondAttribute="trailing" constant="5" id="oRp-W0-BQh"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSm-Wx-eHe">
+                        <rect key="frame" x="105" y="10" width="179" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="pcM-zX-QIr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TG8-SK-HvW">
+                        <rect key="frame" x="20" y="38" width="80" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="UIR-kX-48K"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.64313725489999995" green="0.66666666669999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-jX-nfe">
+                        <rect key="frame" x="292" y="10" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Hof-ac-aab"/>
+                            <constraint firstAttribute="width" constant="20" id="UR0-4K-RM9"/>
+                        </constraints>
+                        <state key="normal" image="Add-Icon"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="TG8-SK-HvW" secondAttribute="bottom" constant="10" id="50Z-hO-qnX"/>
+                    <constraint firstItem="TG8-SK-HvW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Af4-g0-bDQ"/>
+                    <constraint firstItem="eAv-jX-nfe" firstAttribute="leading" secondItem="dSm-Wx-eHe" secondAttribute="trailing" constant="8" id="CVe-o7-qe8"/>
+                    <constraint firstItem="eAv-jX-nfe" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="O6X-L7-hdb"/>
+                    <constraint firstItem="cIO-j1-eaW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="d1d-nz-cyj"/>
+                    <constraint firstItem="dSm-Wx-eHe" firstAttribute="leading" secondItem="cIO-j1-eaW" secondAttribute="trailing" constant="15" id="hCz-lU-R9D"/>
+                    <constraint firstItem="dSm-Wx-eHe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="hza-hf-fam"/>
+                    <constraint firstItem="eAv-jX-nfe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="i7r-L9-OdD"/>
+                    <constraint firstItem="TG8-SK-HvW" firstAttribute="top" secondItem="dSm-Wx-eHe" secondAttribute="bottom" constant="8" id="lgg-4g-Ta2"/>
+                    <constraint firstItem="cIO-j1-eaW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="lhL-J1-wmt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addButton" destination="eAv-jX-nfe" id="lAC-KQ-s8c"/>
+                <outlet property="groupInfoLabel" destination="TG8-SK-HvW" id="Pj6-hU-P4t"/>
+                <outlet property="groupNameLabel" destination="dSm-Wx-eHe" id="TnW-fz-ATj"/>
+                <outlet property="groupTagView" destination="cIO-j1-eaW" id="kVj-o6-4Us"/>
+                <outlet property="groupTagViewLabel" destination="6xB-MS-oLe" id="mjc-EP-3Id"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="57.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Add-Icon" width="20" height="20"/>
+    </resources>
+</document>

@@ -77,6 +77,15 @@
 		EBA976AD1E7B94E100B4A996 /* WAMyProfileDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976AB1E7B94E100B4A996 /* WAMyProfileDetailsTableViewCell.xib */; };
 		EBA976B11E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976AF1E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.m */; };
 		EBA976B21E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976B01E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.xib */; };
+		EBA976B91E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976B71E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.m */; };
+		EBA976BA1E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976B81E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.xib */; };
+		EBA976BE1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976BC1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m */; };
+		EBA976BF1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976BD1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib */; };
+		EBA976C31E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976C11E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.m */; };
+		EBA976C41E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976C21E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib */; };
+		EBA976C81E7BB32B00B4A996 /* WAAddGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976C71E7BB32B00B4A996 /* WAAddGroupTableViewController.m */; };
+		EBA976CD1E7BB38300B4A996 /* WAAddGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA976CB1E7BB38300B4A996 /* WAAddGroupTableViewCell.m */; };
+		EBA976CE1E7BB38300B4A996 /* WAAddGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA976CC1E7BB38300B4A996 /* WAAddGroupTableViewCell.xib */; };
 		EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */; };
 		EBCB564A1E0F434B000530F6 /* WACreateActivityPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB56481E0F434B000530F6 /* WACreateActivityPostTableViewCell.m */; };
 		EBCB564B1E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCB56491E0F434B000530F6 /* WACreateActivityPostTableViewCell.xib */; };
@@ -300,6 +309,20 @@
 		EBA976AE1E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMyProfileGroupTableViewCell.h; sourceTree = "<group>"; };
 		EBA976AF1E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMyProfileGroupTableViewCell.m; sourceTree = "<group>"; };
 		EBA976B01E7B94F000B4A996 /* WAMyProfileGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAMyProfileGroupTableViewCell.xib; sourceTree = "<group>"; };
+		EBA976B61E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditGroupHeaderTableViewCell.h; sourceTree = "<group>"; };
+		EBA976B71E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditGroupHeaderTableViewCell.m; sourceTree = "<group>"; };
+		EBA976B81E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditGroupHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		EBA976BB1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditGroupTableViewCell.h; sourceTree = "<group>"; };
+		EBA976BC1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditGroupTableViewCell.m; sourceTree = "<group>"; };
+		EBA976BD1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditGroupTableViewCell.xib; sourceTree = "<group>"; };
+		EBA976C01E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileEditAddGroupTableViewCell.h; sourceTree = "<group>"; };
+		EBA976C11E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileEditAddGroupTableViewCell.m; sourceTree = "<group>"; };
+		EBA976C21E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAProfileEditAddGroupTableViewCell.xib; sourceTree = "<group>"; };
+		EBA976C61E7BB32B00B4A996 /* WAAddGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAddGroupTableViewController.h; sourceTree = "<group>"; };
+		EBA976C71E7BB32B00B4A996 /* WAAddGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAddGroupTableViewController.m; sourceTree = "<group>"; };
+		EBA976CA1E7BB38300B4A996 /* WAAddGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAddGroupTableViewCell.h; sourceTree = "<group>"; };
+		EBA976CB1E7BB38300B4A996 /* WAAddGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAddGroupTableViewCell.m; sourceTree = "<group>"; };
+		EBA976CC1E7BB38300B4A996 /* WAAddGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAAddGroupTableViewCell.xib; sourceTree = "<group>"; };
 		EBC9D6F21E309A6B00F83DF6 /* walla-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "walla-ios.entitlements"; sourceTree = "<group>"; };
 		EBCB562A1E0F0C92000530F6 /* WADatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WADatePickerViewController.h; sourceTree = "<group>"; };
 		EBCB562B1E0F0C92000530F6 /* WADatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WADatePickerViewController.m; sourceTree = "<group>"; };
@@ -908,6 +931,56 @@
 			name = WAMyProfileDetailsTableViewCell;
 			sourceTree = "<group>";
 		};
+		EBA976B31E7BA3DE00B4A996 /* WAProfileEditAddGroupTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBA976C01E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.h */,
+				EBA976C11E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.m */,
+				EBA976C21E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib */,
+			);
+			name = WAProfileEditAddGroupTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBA976B41E7BA3E100B4A996 /* WAProfileEditGroupTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBA976BB1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.h */,
+				EBA976BC1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m */,
+				EBA976BD1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib */,
+			);
+			name = WAProfileEditGroupTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBA976B51E7BA3E400B4A996 /* WAProfileEditGroupHeaderTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBA976B61E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.h */,
+				EBA976B71E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.m */,
+				EBA976B81E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.xib */,
+			);
+			name = WAProfileEditGroupHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
+		EBA976C51E7BB31000B4A996 /* WAAddGroupTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EBA976C61E7BB32B00B4A996 /* WAAddGroupTableViewController.h */,
+				EBA976C71E7BB32B00B4A996 /* WAAddGroupTableViewController.m */,
+				EBA976C91E7BB34700B4A996 /* WAAddGroupTableViewCell */,
+			);
+			name = WAAddGroupTableViewController;
+			sourceTree = "<group>";
+		};
+		EBA976C91E7BB34700B4A996 /* WAAddGroupTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBA976CA1E7BB38300B4A996 /* WAAddGroupTableViewCell.h */,
+				EBA976CB1E7BB38300B4A996 /* WAAddGroupTableViewCell.m */,
+				EBA976CC1E7BB38300B4A996 /* WAAddGroupTableViewCell.xib */,
+			);
+			name = WAAddGroupTableViewCell;
+			sourceTree = "<group>";
+		};
 		EBBF5AC81E05ACFD0066F7E1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,6 +1433,9 @@
 				EBCB57311E144728000530F6 /* WAProfileEditProfileMajorTableViewCell */,
 				EBCB57321E14472D000530F6 /* WAProfileEditProfileLocationTableViewCell */,
 				EBCB57331E144734000530F6 /* WAProfileEditProfileDetailsTableViewCell */,
+				EBA976B51E7BA3E400B4A996 /* WAProfileEditGroupHeaderTableViewCell */,
+				EBA976B41E7BA3E100B4A996 /* WAProfileEditGroupTableViewCell */,
+				EBA976B31E7BA3DE00B4A996 /* WAProfileEditAddGroupTableViewCell */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1576,6 +1652,7 @@
 			children = (
 				EBCB570C1E136E57000530F6 /* WAProfileEditProfileTableViewController.h */,
 				EBCB570D1E136E57000530F6 /* WAProfileEditProfileTableViewController.m */,
+				EBA976C51E7BB31000B4A996 /* WAAddGroupTableViewController */,
 				EBCB570F1E136F55000530F6 /* Cells */,
 			);
 			name = WAProfileEditProfileTableViewController;
@@ -1730,6 +1807,7 @@
 				EB2A20DF1E19BB9200BE93CD /* WALoginSignupIconTableViewCell.xib in Resources */,
 				EBCB56E41E131315000530F6 /* WAViewUserGroupTableViewCell.xib in Resources */,
 				EBCB57011E134671000530F6 /* WAGroupShadowTableViewCell.xib in Resources */,
+				EBA976BF1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib in Resources */,
 				EBDA5C4C1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib in Resources */,
 				EB4EA7991E0344A5000F4834 /* WAActivityTableViewCell.xib in Resources */,
 				EBCB56841E10F42F000530F6 /* WAViewActivityDetailsTableViewCell.xib in Resources */,
@@ -1754,6 +1832,7 @@
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
 				EBCB56961E12E094000530F6 /* WAViewGroupInfoTableViewCell.xib in Resources */,
 				EB2A20CD1E17724100BE93CD /* GoogleService-Info.plist in Resources */,
+				EBA976C41E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib in Resources */,
 				EBCB565D1E108D12000530F6 /* WAUserTableViewCell.xib in Resources */,
 				EBCB57141E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib in Resources */,
 				EBCB56D61E130DD2000530F6 /* WAViewUserProfileTableViewCell.xib in Resources */,
@@ -1761,6 +1840,7 @@
 				EBCB56C21E12EE25000530F6 /* WADiscoverSuggestedGroupTableViewCell.xib in Resources */,
 				EB033A221E0D927300621C35 /* WACreateActivityHostTableViewCell.xib in Resources */,
 				EB0E8BC61E008B0A00BC293C /* Assets.xcassets in Resources */,
+				EBA976BA1E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.xib in Resources */,
 				EBCB567F1E10F410000530F6 /* WAViewActivityHostTableViewCell.xib in Resources */,
 				EBCB56EA1E13132F000530F6 /* WAViewUserGroupMoreLessTableViewCell.xib in Resources */,
 				EBCB567A1E10F3D9000530F6 /* WAViewActivityButtonsTableViewCell.xib in Resources */,
@@ -1785,6 +1865,7 @@
 				EB2A20E91E1AF20300BE93CD /* WALoginSignupButtonTableViewCell.xib in Resources */,
 				EBCB571E1E1446CD000530F6 /* WAProfileEditProfileYearTableViewCell.xib in Resources */,
 				EB8B8E521E0EFB8700FB7389 /* WAGroupTableViewCell.xib in Resources */,
+				EBA976CE1E7BB38300B4A996 /* WAAddGroupTableViewCell.xib in Resources */,
 				EB99154C1E763CDA0036D897 /* WACreateActivityFoodTableViewCell.xib in Resources */,
 				EB9958911E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.xib in Resources */,
 			);
@@ -1883,6 +1964,7 @@
 				EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */,
 				EBFEF8341E516FB100FBA24F /* AccountSuspendedViewController.m in Sources */,
 				EBCB566E1E10F379000530F6 /* WAViewActivityLocationTableViewCell.m in Sources */,
+				EBA976BE1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m in Sources */,
 				EBCB56951E12E094000530F6 /* WAViewGroupInfoTableViewCell.m in Sources */,
 				EBDA5C641E05DE5A00B61AED /* WAActivityTab.m in Sources */,
 				EBDA5C611E05DB9000B61AED /* WAActivityTabsHeaderView.m in Sources */,
@@ -1904,6 +1986,7 @@
 				EBCB56E91E13132F000530F6 /* WAViewUserGroupMoreLessTableViewCell.m in Sources */,
 				EBCB57181E1446B1000530F6 /* WAProfileEditProfileNameTableViewCell.m in Sources */,
 				EB0238751E7A424B0037844D /* WAViewActivityExtraTableViewCell.m in Sources */,
+				EBA976C81E7BB32B00B4A996 /* WAAddGroupTableViewController.m in Sources */,
 				EBCB56D01E12F888000530F6 /* WAViewUserTableViewController.m in Sources */,
 				EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */,
 				EBCB568B1E11B0AB000530F6 /* WAActivity.m in Sources */,
@@ -1946,10 +2029,12 @@
 				EB9958901E46CC5500601E2D /* WAViewActivityDiscussionTableViewCell.m in Sources */,
 				EBCB57271E1446FE000530F6 /* WAProfileEditProfileLocationTableViewCell.m in Sources */,
 				EBFFE21F1E2F44AD00153AE0 /* WACalendarTableViewController.m in Sources */,
+				EBA976B91E7BA41400B4A996 /* WAProfileEditGroupHeaderTableViewCell.m in Sources */,
 				EB0E8BB81E008B0A00BC293C /* main.m in Sources */,
 				EBCB567E1E10F410000530F6 /* WAViewActivityHostTableViewCell.m in Sources */,
 				EBCB572C1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m in Sources */,
 				EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */,
+				EBA976CD1E7BB38300B4A996 /* WAAddGroupTableViewCell.m in Sources */,
 				EB9915701E7649440036D897 /* WAViewActivityTextTableViewCell.m in Sources */,
 				EB9915761E7649570036D897 /* WAViewActivityMapTableViewCell.m in Sources */,
 				EBCB56EE1E133890000530F6 /* WAMyProfileInterestsCollectionViewController.m in Sources */,
@@ -1965,6 +2050,7 @@
 				EBCB56B61E12EC64000530F6 /* WADiscoverViewController.m in Sources */,
 				EBDA5C501E05B91C00B61AED /* WAMyProfileTextTableViewCell.m in Sources */,
 				EB8B8E511E0EFB8700FB7389 /* WAGroupTableViewCell.m in Sources */,
+				EBA976C31E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.m in Sources */,
 				EBCB56F31E133920000530F6 /* WAInterestCollectionViewCell.m in Sources */,
 				EB4EA7A11E03715D000F4834 /* WAShadowView.m in Sources */,
 			);

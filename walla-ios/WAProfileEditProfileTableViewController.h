@@ -17,4 +17,6 @@
 @property UIImage *profileImage;
 @property BOOL loadProfilePhoto;
 
+@property NSMutableDictionary *groupsDictionary;
+
 @end

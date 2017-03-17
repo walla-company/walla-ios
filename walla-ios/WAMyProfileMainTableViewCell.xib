@@ -57,6 +57,7 @@
                     <constraint firstAttribute="trailing" secondItem="CUL-aV-f9Y" secondAttribute="trailing" constant="20" id="hKJ-6f-tNE"/>
                     <constraint firstItem="EQX-BO-LkJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="pSO-eY-TSQ"/>
                     <constraint firstAttribute="trailing" secondItem="QiG-ck-hWR" secondAttribute="trailing" constant="20" id="wgh-ae-FtP"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="EQX-BO-LkJ" secondAttribute="bottom" constant="1" id="x9S-ob-IMX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

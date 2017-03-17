@@ -1,82 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="WAProfileEditProfileYearTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="KGk-i7-Jjw" customClass="WAProfileEditProfileYearTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzM-SZ-d17" customClass="WAShadowView">
-                        <rect key="frame" x="15" y="5" width="290" height="84.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graduation year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKm-32-0NX">
+                        <rect key="frame" x="20" y="10" width="104" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxD-Cp-p1o" customClass="WARoundedView">
+                        <rect key="frame" x="20" y="35" width="280" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graduation year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHe-uV-3GV">
-                                <rect key="frame" x="15" y="15" width="104" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose graduation year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-sh-HF2">
+                                <rect key="frame" x="10" y="0.0" width="260" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2go-p8-Oyi" customClass="WARoundedView">
-                                <rect key="frame" x="15" y="40" width="260" height="30"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose graduation year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XB7-ti-fZJ">
-                                        <rect key="frame" x="10" y="0.0" width="240" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5F-jI-cLM">
-                                        <rect key="frame" x="10" y="0.0" width="240" height="30"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="XB7-ti-fZJ" secondAttribute="bottom" id="4pe-Op-KXr"/>
-                                    <constraint firstItem="T5F-jI-cLM" firstAttribute="leading" secondItem="2go-p8-Oyi" secondAttribute="leading" constant="10" id="Bzs-cj-xr7"/>
-                                    <constraint firstAttribute="trailing" secondItem="XB7-ti-fZJ" secondAttribute="trailing" constant="10" id="G4s-JK-tla"/>
-                                    <constraint firstAttribute="bottom" secondItem="T5F-jI-cLM" secondAttribute="bottom" id="IJK-yA-OId"/>
-                                    <constraint firstItem="T5F-jI-cLM" firstAttribute="top" secondItem="2go-p8-Oyi" secondAttribute="top" id="INo-Or-eQT"/>
-                                    <constraint firstAttribute="trailing" secondItem="T5F-jI-cLM" secondAttribute="trailing" constant="10" id="Qip-FP-tQ6"/>
-                                    <constraint firstItem="XB7-ti-fZJ" firstAttribute="top" secondItem="2go-p8-Oyi" secondAttribute="top" id="TJ0-vj-s53"/>
-                                    <constraint firstItem="XB7-ti-fZJ" firstAttribute="leading" secondItem="2go-p8-Oyi" secondAttribute="leading" constant="10" id="eLd-hg-hND"/>
-                                    <constraint firstAttribute="height" constant="30" id="qAl-Az-djR"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeA-FS-ibC">
+                                <rect key="frame" x="10" y="0.0" width="260" height="30"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="uHe-uV-3GV" firstAttribute="leading" secondItem="nzM-SZ-d17" secondAttribute="leading" constant="15" id="1YB-PA-0hx"/>
-                            <constraint firstAttribute="trailing" secondItem="2go-p8-Oyi" secondAttribute="trailing" constant="15" id="H9H-Y8-rLh"/>
-                            <constraint firstAttribute="bottom" secondItem="2go-p8-Oyi" secondAttribute="bottom" constant="15" id="Hl6-ke-EkF"/>
-                            <constraint firstItem="uHe-uV-3GV" firstAttribute="top" secondItem="nzM-SZ-d17" secondAttribute="top" constant="15" id="Nbz-Fw-W5S"/>
-                            <constraint firstItem="2go-p8-Oyi" firstAttribute="leading" secondItem="nzM-SZ-d17" secondAttribute="leading" constant="15" id="lAb-FX-1ff"/>
-                            <constraint firstItem="2go-p8-Oyi" firstAttribute="top" secondItem="uHe-uV-3GV" secondAttribute="bottom" constant="8" id="pOj-co-6Af"/>
+                            <constraint firstItem="qeA-FS-ibC" firstAttribute="leading" secondItem="fxD-Cp-p1o" secondAttribute="leading" constant="10" id="0H6-8g-0Za"/>
+                            <constraint firstAttribute="trailing" secondItem="MyX-sh-HF2" secondAttribute="trailing" constant="10" id="0Yo-2y-6aR"/>
+                            <constraint firstAttribute="bottom" secondItem="qeA-FS-ibC" secondAttribute="bottom" id="2Ve-Q9-glY"/>
+                            <constraint firstAttribute="bottom" secondItem="MyX-sh-HF2" secondAttribute="bottom" id="2ry-dZ-LpT"/>
+                            <constraint firstAttribute="height" constant="30" id="bxB-h8-mTj"/>
+                            <constraint firstItem="qeA-FS-ibC" firstAttribute="top" secondItem="fxD-Cp-p1o" secondAttribute="top" id="l1F-nc-uBS"/>
+                            <constraint firstAttribute="trailing" secondItem="qeA-FS-ibC" secondAttribute="trailing" constant="10" id="ov4-7b-kf6"/>
+                            <constraint firstItem="MyX-sh-HF2" firstAttribute="top" secondItem="fxD-Cp-p1o" secondAttribute="top" id="u4i-hu-FQF"/>
+                            <constraint firstItem="MyX-sh-HF2" firstAttribute="leading" secondItem="fxD-Cp-p1o" secondAttribute="leading" constant="10" id="wqm-Uj-KB8"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nzM-SZ-d17" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="3a0-qx-jTF"/>
-                    <constraint firstAttribute="trailing" secondItem="nzM-SZ-d17" secondAttribute="trailing" constant="15" id="6T4-qd-BWM"/>
-                    <constraint firstAttribute="bottom" secondItem="nzM-SZ-d17" secondAttribute="bottom" constant="5" id="Fbs-VD-HIQ"/>
-                    <constraint firstItem="nzM-SZ-d17" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="pdY-WI-fXY"/>
+                    <constraint firstAttribute="trailing" secondItem="fxD-Cp-p1o" secondAttribute="trailing" constant="20" id="99S-9m-8gr"/>
+                    <constraint firstItem="bKm-32-0NX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="GgJ-fz-hBs"/>
+                    <constraint firstItem="bKm-32-0NX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="K8c-lY-PuY"/>
+                    <constraint firstItem="fxD-Cp-p1o" firstAttribute="top" secondItem="bKm-32-0NX" secondAttribute="bottom" constant="8" id="Q7d-l5-vt9"/>
+                    <constraint firstAttribute="bottom" secondItem="fxD-Cp-p1o" secondAttribute="bottom" id="ViL-4d-UXt"/>
+                    <constraint firstItem="fxD-Cp-p1o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="aBc-t3-W2P"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="chooseButton" destination="T5F-jI-cLM" id="E3r-VG-WgX"/>
-                <outlet property="graduationYearLabel" destination="XB7-ti-fZJ" id="nRP-iY-of7"/>
+                <outlet property="chooseButton" destination="qeA-FS-ibC" id="u1p-e4-JxT"/>
+                <outlet property="graduationYearLabel" destination="MyX-sh-HF2" id="xPK-5w-xJo"/>
             </connections>
-            <point key="canvasLocation" x="30" y="140"/>
+            <point key="canvasLocation" x="30" y="124"/>
         </tableViewCell>
     </objects>
 </document>

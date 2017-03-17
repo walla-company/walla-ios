@@ -15,6 +15,9 @@
 #import "WAProfileEditProfileMajorTableViewCell.h"
 #import "WAProfileEditProfileLocationTableViewCell.h"
 #import "WAProfileEditProfileDetailsTableViewCell.h"
+#import "WAProfileEditGroupHeaderTableViewCell.h"
+#import "WAProfileEditGroupTableViewCell.h"
+#import "WAProfileEditAddGroupTableViewCell.h"
 
 #import "WAValues.h"
 #import "WAServer.h"
@@ -43,10 +46,13 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileMajorTableViewCell" bundle:nil] forCellReuseIdentifier:@"majorCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditGroupHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupHeaderCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditAddGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"addGroupCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.backgroundColor = [WAValues defaultTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100.0;
@@ -60,6 +66,8 @@
     self.profileImage = [UIImage imageNamed:@"BlankCircle"];
     
     self.loadProfilePhoto = true;
+    
+    self.groupsDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -117,7 +125,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.user) return 7;
+    if (self.user) return 9 + [self.user.groups count];
     
     return 0;
 }
@@ -128,7 +136,6 @@
         
         WAProfileEditProfilePictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pictureCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.profileImageView.image = self.profileImage;
@@ -145,7 +152,6 @@
         
         WAProfileEditProfileNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.firstNameTextField.text = self.user.firstName;
@@ -163,7 +169,6 @@
         
         WAProfileEditProfileAcademicLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"academicLevelCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell.chooseButton addTarget:self action:@selector(chooseAcademicLevelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -185,12 +190,11 @@
         
         WAProfileEditProfileYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yearCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell.chooseButton addTarget:self action:@selector(chooseYearButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        if ([self.user.graduationYear isEqualToString:@""]) {
+        if ([self.user.graduationYear integerValue] <= 0) {
             cell.graduationYearLabel.textColor = [WAValues notSelectedTextColor];
             cell.graduationYearLabel.text = @"Choose graduation year";
         }
@@ -206,7 +210,6 @@
         
         WAProfileEditProfileMajorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"majorCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.majorTextField.text = self.user.major;
@@ -221,7 +224,6 @@
         
         WAProfileEditProfileLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
         
-        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.locationTextField.text = self.user.hometown;
@@ -232,22 +234,72 @@
         return cell;
     }
     
-    WAProfileEditProfileDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
-    
-    cell.detailsTextView.scrollEnabled = false;
-    cell.detailsTextView.delegate = self;
-    
-    if ([self.user.details isEqual: @""]) {
-        cell.detailsTextView.textColor = [WAValues notSelectedTextColor];
-        cell.detailsTextView.text = @"Details";
+    if (indexPath.row == 6) {
+        
+        WAProfileEditProfileDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
+        
+        cell.detailsTextView.scrollEnabled = false;
+        cell.detailsTextView.delegate = self;
+        
+        if ([self.user.details isEqual: @""]) {
+            cell.detailsTextView.textColor = [WAValues notSelectedTextColor];
+            cell.detailsTextView.text = @"Details";
+        }
+        else {
+            cell.detailsTextView.textColor = [WAValues selectedTextColor];
+            cell.detailsTextView.text = self.user.details;
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
-    else {
-        cell.detailsTextView.textColor = [WAValues selectedTextColor];
-        cell.detailsTextView.text = self.user.details;
+    
+    if (indexPath.row == 7) {
+        
+        WAProfileEditGroupHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupHeaderCell" forIndexPath:indexPath];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
     
-    cell.backgroundColor = [UIColor clearColor];
+    if ([self.user.groups count] > 0 && indexPath.row >= 8 && indexPath.row <= [self.user.groups count] + 7) {
+        
+        WAProfileEditGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSString *groupID = self.user.groups[indexPath.row - 8];
+        
+        if (self.groupsDictionary[groupID]) {
+            NSDictionary *group = self.groupsDictionary[groupID];
+            
+            cell.nameLabel.text = group[@"name"];
+        }
+        else {
+            cell.nameLabel.text = @"";
+            [self.groupsDictionary setObject:@{@"name": @""} forKey:groupID];
+            [WAServer getGroupBasicInfoWithID:groupID completion:^(NSDictionary *group) {
+                
+                [self.groupsDictionary setObject:group forKey:groupID];
+                
+                [self.tableView reloadData];
+            }];
+        }
+
+        cell.deleteButton.tag = indexPath.row - 8;
+        
+        [cell.deleteButton addTarget:self action:@selector(leaveGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+    }
+    
+    WAProfileEditAddGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addGroupCell" forIndexPath:indexPath];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [cell.addGroupButton addTarget:self action:@selector(addGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
@@ -338,6 +390,26 @@
     }
     
     [self presentViewController:photoMenu animated:true completion:nil];
+}
+
+- (void)leaveGroupButtonPressed:(UIButton *) button {
+    
+    NSString *groupID = self.user.groups[button.tag];
+    
+    [WAServer leaveGroup:groupID completion:nil];
+    
+    NSMutableArray *groupsArray = [[NSMutableArray alloc] initWithArray:self.user.groups];
+    
+    [groupsArray removeObject:groupID];
+    
+    self.user.groups = groupsArray;
+    
+    [self.tableView reloadData];
+}
+
+- (void)addGroupButtonPressed:(UIButton *)button {
+    
+    [self performSegueWithIdentifier:@"openAddGroup" sender:self];
 }
 
 #pragma mark - Choose photo

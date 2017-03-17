@@ -378,10 +378,17 @@
     NSLog(@"Host group: %@", self.activityHostGroup);
     NSLog(@"Free food: %@", (self.freeFood) ? @"Yes" : @"No");
     
-    self.tableView.userInteractionEnabled = false;
-    
     if ([self.activityTitle isEqualToString:@""]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Description Required" message:@"You have to tell us what this activity is about." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+    else if ([self.activityTitle length] > 500) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Description Too Long" message:@"Your description has to be less than 500 characters." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
         

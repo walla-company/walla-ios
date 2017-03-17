@@ -53,8 +53,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="yV4-aP-dxA" kind="relationship" relationship="viewControllers" id="YKQ-Ao-m9F"/>
-                        <segue destination="LRv-49-kZw" kind="relationship" relationship="viewControllers" id="HR1-88-42D"/>
-                        <segue destination="GhL-ns-gYU" kind="relationship" relationship="viewControllers" id="NFD-Ub-Q5z"/>
                         <segue destination="Gd1-JI-yaw" kind="relationship" relationship="viewControllers" id="qI5-eV-XhE"/>
                         <segue destination="TdQ-EN-hEy" kind="relationship" relationship="viewControllers" id="4gg-OT-dic"/>
                     </connections>
@@ -183,10 +181,31 @@
                             <outlet property="delegate" destination="6gZ-kw-0Na" id="lmS-qN-iEZ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="gfr-F4-8Ml" kind="show" identifier="openAddGroup" id="tw5-kH-gUf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-lw-d8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3791.1999999999998" y="1049.3253373313344"/>
+        </scene>
+        <!--Add Group Table View Controller-->
+        <scene sceneID="bkD-gB-rFZ">
+            <objects>
+                <tableViewController id="gfr-F4-8Ml" customClass="WAAddGroupTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ute-f5-O7A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="gfr-F4-8Ml" id="yyF-Tq-YU3"/>
+                            <outlet property="delegate" destination="gfr-F4-8Ml" id="xGu-Fg-CDf"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khb-1b-gux" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4559" y="1050"/>
         </scene>
         <!--My Profile Groups Table View Controller-->
         <scene sceneID="5Nr-M5-PbV">
@@ -791,9 +810,9 @@
         <image name="TabbarIcon5" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="NXK-eG-CAf"/>
         <segue reference="mOU-VR-Nuh"/>
         <segue reference="Fbb-hK-71o"/>
-        <segue reference="Dno-9f-m5g"/>
-        <segue reference="7BD-Kn-vwa"/>
+        <segue reference="RU4-NS-liN"/>
     </inferredMetricsTieBreakers>
 </document>
