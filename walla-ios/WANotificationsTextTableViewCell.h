@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
 @end

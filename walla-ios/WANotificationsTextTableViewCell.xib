@@ -45,6 +45,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="infoLabel" destination="EPL-HC-ILW" id="gMd-gv-hf6"/>
+                <outlet property="profileImageView" destination="UBn-cj-S1b" id="f7L-3P-BvQ"/>
             </connections>
             <point key="canvasLocation" x="34" y="80.5"/>
         </tableViewCell>

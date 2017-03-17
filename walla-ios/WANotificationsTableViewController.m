@@ -158,6 +158,19 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
     
     cell.infoLabel.text = notification[@"text"];
     
+    UIImage *proifleImage = [self.profileImagesDictionary objectForKey:notification[@"sender"]];
+    
+    if (proifleImage) {
+        cell.profileImageView.image = proifleImage;
+    }
+    else {
+        cell.profileImageView.image = [UIImage imageNamed:@"BlankCircle"];
+        [self loadProfileImage:notification[@"profile_image_url"] forUserID:notification[@"sender"]];
+    }
+    
+    cell.profileImageView.clipsToBounds = true;
+    cell.profileImageView.layer.cornerRadius = 20.0;
+    
     return cell;
 }
 
