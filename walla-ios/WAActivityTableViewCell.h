@@ -25,6 +25,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *freeFoodImageView;
+
+@property (strong, nonatomic) IBOutlet UIView *cardView;
+
 /*
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 

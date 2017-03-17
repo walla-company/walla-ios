@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTF-C2-clq">
-                        <rect key="frame" x="0.0" y="8" width="499" height="97"/>
+                        <rect key="frame" x="0.0" y="8" width="499" height="96"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-aF-5hI">
                                 <rect key="frame" x="15" y="61" width="469" height="2"/>
@@ -100,6 +100,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="cardView" destination="CTF-C2-clq" id="uk0-MY-lgS"/>
                 <outlet property="dateLabel" destination="Okp-bJ-dGs" id="0aa-yJ-M2a"/>
                 <outlet property="freeFoodImageView" destination="dnF-f3-56r" id="SXE-EB-okO"/>
                 <outlet property="nameLabel" destination="qda-tr-0qk" id="rDc-56-L3W"/>

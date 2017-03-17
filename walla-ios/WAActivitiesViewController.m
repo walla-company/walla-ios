@@ -144,6 +144,19 @@
     if (self.showAllActivities) activity = self.activitiesArray[indexPath.row];
     else activity = self.filteredActivities[indexPath.row];
     
+    UIColor *cardColor = [UIColor whiteColor];
+    
+    if ([activity.goingUserIDs containsObject:[FIRAuth auth].currentUser.uid]) {
+        
+        cardColor = [WAValues colorFromHexString:@"#FFF4F4"];
+    }
+    else if ([activity.interestedUserIDs containsObject:[FIRAuth auth].currentUser.uid]) {
+        
+        cardColor = [WAValues colorFromHexString:@"#FEFFDF"];
+    }
+        
+    cell.cardView.backgroundColor = cardColor;
+    
     NSString *nameString = @"";
     
     if ([activity.hostGroupID isEqualToString:@""]) {

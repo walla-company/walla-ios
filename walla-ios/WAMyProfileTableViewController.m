@@ -162,6 +162,8 @@
             [WAServer getGroupBasicInfoWithID:groupID completion:^(NSDictionary *group) {
                 
                 [self.groupsDictionary setObject:group forKey:groupID];
+                
+                [self.tableView reloadData];
             }];
         }
         
