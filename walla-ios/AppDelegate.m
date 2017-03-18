@@ -30,6 +30,8 @@
     
     [WAServer loadAllowedDomains];
     
+    // Defualt to displaying app
+    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -40,153 +42,90 @@
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     
-    self.userSignedIn = true;
+    // Setup default values
+    
+    [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"openEditProfile"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.currentView = kViewingApp;
+    
     self.underMaintenance = false;
     self.versionTooOld = false;
+    self.userSignedIn = true;
     self.userSuspended = false;
+    self.userVerified = true;
+    self.introComplete = true;
+    
+    self.firstLogin = true;
     
     [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
         
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        BOOL inSignup = [[NSUserDefaults standardUserDefaults] boolForKey:@"inSignup"];
-        
-        if (user && !inSignup) {
-            NSLog(@"delegate signed in");
+        if (user) {
+            self.userSignedIn = true;
             
-            if (!self.userSignedIn && !self.underMaintenance) {
-                
-                UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-                NSLog(@"delegate tabbarController: %@", tabBarController);
-                [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
-                
-                self.window.rootViewController = tabBarController;
-                
-                [WAServer updateUserLastLogon];
-            }
+            [WAServer updateUserLastLogon];
+        }
+        else {
+            self.userSignedIn = false;
+            self.firstLogin = true;
+        }
+        
+        [self displayAppropriateView];
+        
+        if (user && self.firstLogin) {
+            self.firstLogin = false;
             
-            [WAServer isUserSuspended:^(BOOL suspended){
-                NSLog(@"User suspended: %@", (suspended) ? @"true" : @"false");
+            FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+            
+            [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/suspended", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-                self.userSuspended = suspended;
+                if ([snapshot value] != [NSNull null]) self.userSuspended = [[snapshot value] boolValue];
+                else self.userSuspended = false;
+                NSLog(@"userSuspended: %@", (self.userSuspended) ? @"true" : @"false");
                 
-                if (!self.underMaintenance && self.userSuspended) {
-                    UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
-                    NSLog(@"delegate viewController: %@", viewController);
-                    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-                    
-                    self.window.rootViewController = viewController;
-                }
+                [self displayAppropriateView];
             }];
             
-            self.userSignedIn = true;
-        }
-        else if (!self.underMaintenance) {
-            NSLog(@"delegate not signed in");
-            if (self.userSignedIn) {
-                UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
-                NSLog(@"delegate navigationController: %@", navigationController);
-                [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/verified", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-                self.window.rootViewController = navigationController;
-            }
-            self.userSignedIn = false;
+                if ([snapshot value] != [NSNull null]) self.userVerified = [[snapshot value] boolValue];
+                else self.userVerified = false;
+                NSLog(@"userVerified: %@", (self.userVerified) ? @"true" : @"false");
+                
+                [self displayAppropriateView];
+            }];
+            
+            [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/intro_complete", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+                
+                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
+                else self.introComplete = true;
+                NSLog(@"introComplete: %@", (self.introComplete) ? @"true" : @"false");
+                
+                [self displayAppropriateView];
+            }];
         }
-        
     }];
     
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     
-    [[[ref child:@"app_settings"] child:@"under_maintenance"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
-        BOOL maintenance = [[snapshot value] boolValue];
-        NSLog(@"underMaintenance: %@", (maintenance) ? @"true" : @"false");
+    [[ref child:@"app_settings/under_maintenance"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        self.underMaintenance = [[snapshot value] boolValue];
+        NSLog(@"underMaintenance: %@", (self.underMaintenance) ? @"true" : @"false");
         
-        if (maintenance && !self.underMaintenance && !self.versionTooOld) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"UnderMaintenanceViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if (self.versionTooOld) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if (self.userSuspended) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if ([FIRAuth auth].currentUser && self.userSignedIn && self.underMaintenance) {
-            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            NSLog(@"delegate tabbarController: %@", tabBarController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
-            
-            self.window.rootViewController = tabBarController;
-        }
-        else if (!self.userSignedIn && self.underMaintenance) {
-            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
-            NSLog(@"delegate navigationController: %@", navigationController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
-            
-            self.window.rootViewController = navigationController;
-        }
-        
-        self.underMaintenance = maintenance;
+        [self displayAppropriateView];
     }];
     
-    [[[[ref child:@"app_settings"] child:@"min_version"] child:@"ios"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    [[ref child:@"app_settings/min_version/ios"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         NSString *verison = [snapshot value];
         NSLog(@"supported verison: %@", verison);
         
-        BOOL tooOld = ![self checkMinimumVersion:verison];
+        self.versionTooOld = ![self checkMinimumVersion:verison];
         
-        NSLog(@"version too old: %@", (tooOld) ? @"true" : @"false");
+        NSLog(@"version too old: %@", (self.versionTooOld) ? @"true" : @"false");
         
-        if (tooOld && !self.versionTooOld) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if (self.underMaintenance) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"UnderMaintenanceViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if (self.userSuspended) {
-            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
-            NSLog(@"delegate viewController: %@", viewController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
-            
-            self.window.rootViewController = viewController;
-        }
-        else if ([FIRAuth auth].currentUser && self.userSignedIn && self.versionTooOld) {
-            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            NSLog(@"delegate tabbarController: %@", tabBarController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
-            
-            self.window.rootViewController = tabBarController;
-        }
-        else if (!self.userSignedIn && self.versionTooOld) {
-            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
-            NSLog(@"delegate navigationController: %@", navigationController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
-            
-            self.window.rootViewController = navigationController;
-        }
-        
-        self.versionTooOld = tooOld;
+        [self displayAppropriateView];
     }];
-    
+     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
     [self setupNotifications];
@@ -222,18 +161,126 @@
     
     NSLog(@"signupComplete");
     
-    if ([FIRAuth auth].currentUser && !self.userSignedIn && !self.underMaintenance) {
+    [self displayAppropriateView];
+}
+
+- (void)displayAppropriateView {
+    
+    NSLog(@"displayAppropriateView");
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    BOOL inSignup = [[NSUserDefaults standardUserDefaults] boolForKey:@"inSignup"];
+    
+    NSLog(@"inSignup: %@", (inSignup) ? @"true" : @"false");
+    
+    if (self.underMaintenance) {                    // Display under maintenance view
         
-        [WAServer updateUserLastLogon];
+        NSLog(@"Display under maintenance view");
         
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-        NSLog(@"delegate tabbarController: %@", tabBarController);
-        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+        if (self.currentView != kViewingUnderMaintenance) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"UnderMaintenanceViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+            
+            self.currentView = kViewingUnderMaintenance;
+        }
         
-        self.window.rootViewController = tabBarController;
+    }
+    else if (self.versionTooOld) {                  // Display verison too old view
         
-        self.userSignedIn = true;
+        NSLog(@"Display verison too old view");
+        
+        if (self.currentView != kViewingVersionTooOld) {
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OldVersionViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+            
+            self.currentView = kViewingVersionTooOld;
+        }
+        
+    }
+    else if (!self.userSignedIn && !inSignup) {     // Display login/signup view
+        
+        NSLog(@"Display login/signup view");
+        
+        if (self.currentView != kViewingLoginSignup) {
+            
+            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+            NSLog(@"delegate navigationController: %@", navigationController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            
+            self.window.rootViewController = navigationController;
+            
+            self.currentView = kViewingLoginSignup;
+        }
+        
+    }
+    else if (self.userSuspended && !inSignup) {     // Display user suspended view
+        
+        NSLog(@"Display user suspended view");
+        
+        if (self.currentView != kViewingUserSuspended) {
+            
+            UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSuspendedViewController"];
+            NSLog(@"delegate viewController: %@", viewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+            
+            self.window.rootViewController = viewController;
+            
+            self.currentView = kViewingUserSuspended;
+        }
+        
+    }
+    else if (!self.userVerified && !inSignup) {     // Display verify email view
+        
+        NSLog(@"Display verify email view");
+        
+        if (self.currentView != kViewingUserNotVerified) {
+            UITableViewController *tableViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ConfirmEmailTableViewController"];
+            NSLog(@"delegate tableViewController: %@", tableViewController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = tableViewController;
+            
+            self.window.rootViewController = tableViewController;
+            
+            self.currentView = kViewingUserNotVerified;
+        }
+        
+    }
+    else if (!self.introComplete && !inSignup) {    // Display intro
+        
+        NSLog(@"Display intro");
+        
+        if (self.currentView != kViewingUserIntroNotComplete) {
+            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroNavigationController"];
+            NSLog(@"delegate navigationController: %@", navigationController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            
+            self.window.rootViewController = navigationController;
+            
+            self.currentView = kViewingUserIntroNotComplete;
+        }
+        
+    }
+    else {                                          // Display app
+        
+        NSLog(@"Display app");
+        
+        if (self.currentView != kViewingApp) {
+            
+            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            NSLog(@"delegate tabbarController: %@", tabBarController);
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+            
+            self.window.rootViewController = tabBarController;
+            
+            self.currentView = kViewingApp;
+        }
+        
     }
     
 }

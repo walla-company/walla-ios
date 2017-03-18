@@ -39,7 +39,7 @@
 
 // User
 
-+ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email academicLevel:(NSString *)academicLevel major:(NSString *)major graduationYear:(NSInteger)graduationYear completion:(void (^) (BOOL success))completionBlock;
++ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email completion:(void (^) (BOOL success))completionBlock;
 
 + (void)getUserWithID:(NSString *)uid completion:(void (^) (WAUser *user))completionBlock;
 
@@ -80,6 +80,8 @@
 + (void)sendVerificationEmail:(void (^) (BOOL success))completionBlock;
 
 + (void)isUserSuspended:(void (^) (BOOL suspended))completionBlock;
+
++ (void)userIntroComplete:(void (^) (BOOL success))completionBlock;
 
 // Groups
 

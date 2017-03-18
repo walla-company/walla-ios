@@ -667,7 +667,7 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
 
 #pragma mark - User
 
-+ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email academicLevel:(NSString *)academicLevel major:(NSString *)major graduationYear:(NSInteger)graduationYear completion:(void (^) (BOOL success))completionBlock {
++ (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email completion:(void (^) (BOOL success))completionBlock {
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
@@ -684,11 +684,6 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
                                                 @"first_name": firstName,
                                                 @"last_name": lastName,
                                                 @"email": email,
-                                                @"academic_level": academicLevel,
-                                                @"major": major,
-                                                @"graduation_year": [NSNumber numberWithInt:(int) graduationYear],
-                                                @"hometown": @"",
-                                                @"description": @"",
                                                 @"profile_image_url": @""
                                                 };
             
@@ -2010,6 +2005,81 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
                 });
             }
         }
+    });
+    
+}
+
++ (void)userIntroComplete:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/user_intro_complete?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier]
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating user intro complete (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating user intro complete");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
     });
     
 }

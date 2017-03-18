@@ -83,6 +83,9 @@
             [self loadProfileImage];
         }
     }];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"openEditProfile"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -71,6 +71,13 @@
         
         [self loadProfileImage];
     }];
+    
+    BOOL openEditProfile = [[NSUserDefaults standardUserDefaults] boolForKey:@"openEditProfile"];
+    
+    if (openEditProfile) {
+        
+        [self performSegueWithIdentifier:@"openEditProfile" sender:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
