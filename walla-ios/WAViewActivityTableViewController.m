@@ -161,7 +161,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6 + [self.discussions count];
+    if ([self.viewingActivity.host isEqualToString:[FIRAuth auth].currentUser.uid]) return 6 + [self.discussions count];
+    
+    return 5 + [self.discussions count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -19,7 +19,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -98,7 +97,7 @@
             [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/intro_complete", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
                 if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
-                else self.introComplete = true;
+                else self.introComplete = false;
                 NSLog(@"introComplete: %@", (self.introComplete) ? @"true" : @"false");
                 
                 [self displayAppropriateView];

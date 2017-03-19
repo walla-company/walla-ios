@@ -85,6 +85,7 @@
         
     }
     
+    [self.activitiesTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,7 +148,7 @@
     
     if ([activity.goingUserIDs containsObject:[FIRAuth auth].currentUser.uid]) {
         
-        cardColor = [WAValues colorFromHexString:@"#FFF4F4"];
+        cardColor = [WAValues colorFromHexString:@"#EDFFEB"];
     }
     else if ([activity.interestedUserIDs containsObject:[FIRAuth auth].currentUser.uid]) {
         
@@ -212,6 +213,9 @@
     if (activity.freeFood) cell.freeFoodImageView.hidden = false;
     else cell.freeFoodImageView.hidden = true;
     
+    [cell.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    cell.flagButton.tag = indexPath.row;
+    
     return cell;
 }
 
@@ -219,7 +223,8 @@
     
     NSLog(@"SELECTED");
     
-    self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
+    if (self.showAllActivities) self.openActivityID = ((WAActivity *)self.activitiesArray[indexPath.row]).activityID;
+    else self.openActivityID = ((WAActivity *)self.filteredActivities[indexPath.row]).activityID;
     
     [self performSegueWithIdentifier:@"openActivityDetails" sender:self];
     
@@ -249,6 +254,42 @@
             }];
         }
     }
+}
+
+# pragma mark - Button target
+
+- (void)flagButtonPressed:(UIButton *)button {
+    
+    NSString *activityID = @"";
+    
+    if (self.showAllActivities) activityID = ((WAActivity *)self.activitiesArray[button.tag]).activityID;
+    else activityID = ((WAActivity *)self.filteredActivities[button.tag]).activityID;
+    
+    NSLog(@"Flag activity: %@", activityID);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Flag Activity" message:@"We will determine if the activity should be removed from Walla once you flag this activity." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:cancelAction];
+    
+    UIAlertAction *option = [UIAlertAction actionWithTitle:@"Flag Activity" style:UIAlertActionStyleDestructive handler: ^(UIAlertAction *action){
+        
+        [WAServer flagActivity:activityID completion:^(BOOL success) {
+            UIAlertController *flagAlert = [UIAlertController alertControllerWithTitle:@"Activity Flagged" message:@"The activity has been flagged for review." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+            
+            [flagAlert addAction:cancelAction];
+            
+            [self presentViewController:flagAlert animated:true completion:nil];
+        }];
+        
+    }];
+    
+    [alert addAction:option];
+    
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 #pragma mark - Navigation

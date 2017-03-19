@@ -182,7 +182,7 @@
         }
         else {
             cell.academicLevelLabel.textColor = [WAValues selectedTextColor];
-            cell.academicLevelLabel.text = ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate";
+            cell.academicLevelLabel.text = ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Grad/Prof";
         }
         
         return cell;
@@ -321,7 +321,7 @@
         
         [self.tableView reloadData];
     }];
-    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"Graduate" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"Grad/Prof" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
         
         self.user.academicLevel = @"grad";
         
@@ -583,7 +583,30 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [textField resignFirstResponder];
+    if (textField.tag == 1) {
+        
+        WAProfileEditProfileNameTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        
+        [cell.lastNameTextField becomeFirstResponder];
+    }
+    else if (textField.tag == 2) {
+        [textField resignFirstResponder];
+    }
+    else if (textField.tag == 3) {
+        
+        WAProfileEditProfileLocationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+        
+        [cell.locationTextField becomeFirstResponder];
+    }
+    else if (textField.tag == 4) {
+        
+        WAProfileEditProfileDetailsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+        
+        [cell.detailsTextView becomeFirstResponder];
+    }
+    else {
+        [textField resignFirstResponder];
+    }
     
     return false;
 }

@@ -71,15 +71,14 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
             
             if ([notification[@"type"] isEqualToString:NOTIFICATION_FRIEND_REQUEST]) {
                 [friendRequestsArray addObject:notification];
+                
+                if (![notification[@"read"] boolValue]) {
+                    [WAServer updateNotificationRead:notification[@"notification_id"] completion:nil];
+                }
             }
             else {
                 [othersArray addObject:notification];
             }
-            
-            if ([notification[@"read"] boolValue]) {
-                [WAServer updateNotificationRead:notification[@"notification_id"] completion:nil];
-            }
-            
         }
         
         [friendRequestsArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time_created" ascending:false]]];
@@ -154,7 +153,13 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
     WANotificationsTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
+    
+    if ([notification[@"read"] boolValue]) {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    else {
+        cell.backgroundColor = [WAValues colorFromHexString:@"#E6F8FF"];
+    }
     
     cell.infoLabel.text = notification[@"text"];
     
@@ -201,6 +206,14 @@ static NSString *NOTIFICATION_DISCUSSION_POSTED = @"discussion_posted";
     NSDictionary *notification = [self.notificationsArray objectAtIndex:indexPath.row];
     
     if (![notification[@"type"] isEqualToString:NOTIFICATION_FRIEND_REQUEST]) {
+        
+        NSLog(@"open notification: %@", notification[@"notification_id"]);
+        
+        if (![notification[@"read"] boolValue]) {
+            NSLog(@"Set notification read: %@", notification[@"notification_id"]);
+            
+            [WAServer updateNotificationRead:notification[@"notification_id"] completion:nil];
+        }
         
         self.openActivityID = notification[@"activity_id"];
         

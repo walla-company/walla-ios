@@ -135,7 +135,7 @@
         
         cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName];
         
-        NSString *levelString = ([self.user.academicLevel isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@ ", ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate"];
+        NSString *levelString = ([self.user.academicLevel isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@ ", ([self.user.academicLevel isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Grad/Prof"];
         NSString *yearString = ([self.user.graduationYear integerValue] <=0 ) ? @"" : [NSString stringWithFormat:@"Class of %@", self.user.graduationYear];
         NSString *majorString = ([self.user.major isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"\n%@", self.user.major];
         
@@ -206,7 +206,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.infoLabel.text = [NSString stringWithFormat:@"Version %@\n%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"© 2017 GenieUs, Inc. All rights reserved."];
+        cell.infoLabel.text = [NSString stringWithFormat:@"Account: %@\nVersion %@\n%@", [FIRAuth auth].currentUser.email, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"© 2017 GenieUs, Inc. All rights reserved."];
         
         return cell;
     }
@@ -220,7 +220,7 @@
     cell.customTextLabel.text = self.titleArray[indexPath.row - (3 + [self.user.groups count])];
     
     if (indexPath.row == 5 + [self.user.groups count]) {
-        cell.customTextLabel.textColor = [UIColor redColor];
+        cell.customTextLabel.textColor = [WAValues colorFromHexString:@"#FF8F6C"];
     }
     else {
         cell.customTextLabel.textColor = [[UIColor alloc] initWithRed:109.0/255.0 green:109.0/255.0 blue:109.0/255.0 alpha:1.0];

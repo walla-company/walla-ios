@@ -77,6 +77,8 @@
     [WAServer getUserGroupsWithID:[FIRAuth auth].currentUser.uid completion:^(NSArray *groups) {
         self.userGroupIDs = groups;
     }];
+    
+    self.titlePlaceHolder = @"Anyone want to ball this afternoon? We can play a 3 on 3 if we have two more people join";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -178,7 +180,7 @@
         
         if ([self.activityTitle isEqual: @""]) {
             cell.titleTextView.textColor = self.notSelectedColor;
-            cell.titleTextView.text = @"I'm thinking about...";
+            cell.titleTextView.text = self.titlePlaceHolder;
         }
         else {
             cell.titleTextView.textColor = self.selectedColor;
@@ -284,11 +286,9 @@
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
-        [cell.yesButton setImage:[UIImage imageNamed:(self.freeFood) ? @"YesButtonPressed" : @"YesButtonReleased"] forState:UIControlStateNormal];
-        [cell.noButton setImage:[UIImage imageNamed:(self.freeFood) ? @"NoButtonReleased" : @"NoButtonPressed"] forState:UIControlStateNormal];
+        [cell.freeFoodButton addTarget:self action:@selector(freeFoodButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        [cell.yesButton addTarget:self action:@selector(freeFoodYesButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.noButton addTarget:self action:@selector(freeFoodNoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        cell.freeFoodLabel.text = (self.freeFood) ? @"Yes" : @"No";
         
         return cell;
     }
@@ -351,22 +351,32 @@
     [self presentViewController:groupPicker animated:false completion:nil];
 }
 
-- (void)freeFoodYesButtonPressed:(UIButton *)button {
+- (void)freeFoodButtonPressed:(UIButton *)button {
     
-    self.freeFood = true;
+    UIAlertController *levelMenu = [UIAlertController alertControllerWithTitle:@"Is there free food?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kFoodCellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
-}
-
-- (void)freeFoodNoButtonPressed:(UIButton *)button {
+    UIAlertAction *option1 = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+        
+        self.freeFood = true;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
+        
+        self.freeFood = false;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
     
-    self.freeFood = false;
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kFoodCellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+    [levelMenu addAction:option1];
+    [levelMenu addAction:option2];
+    
+    [levelMenu addAction:cancelAction];
+    
+    [self presentViewController:levelMenu animated:true completion:nil];
+    
 }
 
 - (void)postButtonPressed:(UIButton *)button {
@@ -608,7 +618,7 @@ didFailAutocompleteWithError:(NSError *)error {
     
     if ([self.activityTitle isEqualToString:@""]) {
         textView.textColor = self.notSelectedColor;
-        textView.text = @"I'm thinking about...";
+        textView.text = self.titlePlaceHolder;
     }
 }
 

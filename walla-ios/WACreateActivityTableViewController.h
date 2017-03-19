@@ -58,4 +58,6 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
 
 @property NSArray *userGroupIDs;
 
+@property NSString *titlePlaceHolder;
+
 @end

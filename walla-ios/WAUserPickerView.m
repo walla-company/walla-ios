@@ -152,7 +152,7 @@ static CGFloat VIEW_WIDTH = 320.0;
         
         cell.nameLabel.text = [NSString stringWithFormat:@"%@", user[@"name"]];
         
-        cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@ / %@", ([user[@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Graduate", user[@"graduation_year"], user[@"major"]];
+        cell.infoLabel.text = [NSString stringWithFormat:@"%@ Class of %@ / %@", ([user[@"academic_level"] isEqualToString:@"undergrad"]) ? @"Undergraduate" : @"Grad/Prof", user[@"graduation_year"], user[@"major"]];
         
         cell.profileImageView.image = [self.userProfileImageDictionary objectForKey:userID];
         

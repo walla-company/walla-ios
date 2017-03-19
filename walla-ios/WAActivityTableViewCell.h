@@ -28,6 +28,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *cardView;
 
+@property (strong, nonatomic) IBOutlet UIButton *flagButton;
+
 /*
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 

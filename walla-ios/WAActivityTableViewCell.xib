@@ -54,26 +54,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saz-Ea-Hrg">
-                                <rect key="frame" x="58" y="71" width="36" height="17"/>
+                                <rect key="frame" x="58" y="71" width="35.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okp-bJ-dGs">
-                                <rect key="frame" x="102" y="71" width="356" height="17"/>
+                                <rect key="frame" x="101.5" y="71" width="356.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iat-fW-fLK">
+                                <rect key="frame" x="15" y="64" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="8hj-q5-8rG"/>
+                                    <constraint firstAttribute="height" constant="30" id="WUp-AK-3i6"/>
+                                </constraints>
+                                <state key="normal" image="Flag-Icon"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="saz-Ea-Hrg" firstAttribute="leading" secondItem="CTF-C2-clq" secondAttribute="leading" constant="58" id="1On-CH-DYp"/>
                             <constraint firstAttribute="bottom" secondItem="Okp-bJ-dGs" secondAttribute="bottom" constant="8" id="2gP-RV-ORi"/>
                             <constraint firstItem="wOK-Mk-qCx" firstAttribute="top" secondItem="CTF-C2-clq" secondAttribute="top" constant="8" id="E9z-nt-tgQ"/>
+                            <constraint firstAttribute="bottom" secondItem="iat-fW-fLK" secondAttribute="bottom" constant="2" id="G5g-0Z-ABV"/>
                             <constraint firstItem="dnF-f3-56r" firstAttribute="leading" secondItem="qda-tr-0qk" secondAttribute="trailing" constant="8" id="Hn1-gI-Kw5"/>
                             <constraint firstAttribute="trailing" secondItem="dnF-f3-56r" secondAttribute="trailing" constant="8" id="Kf2-Mt-Lqj"/>
                             <constraint firstAttribute="trailing" secondItem="eDm-nl-Bs9" secondAttribute="trailing" constant="41" id="LLc-uo-KUo"/>
+                            <constraint firstItem="saz-Ea-Hrg" firstAttribute="leading" secondItem="iat-fW-fLK" secondAttribute="trailing" constant="13" id="QNr-HJ-fTS"/>
                             <constraint firstItem="saz-Ea-Hrg" firstAttribute="top" secondItem="qHk-aF-5hI" secondAttribute="bottom" constant="8" id="RGs-A1-0qS"/>
                             <constraint firstItem="qda-tr-0qk" firstAttribute="leading" secondItem="wOK-Mk-qCx" secondAttribute="trailing" constant="8" id="csh-uv-2sB"/>
                             <constraint firstAttribute="bottom" secondItem="saz-Ea-Hrg" secondAttribute="bottom" constant="8" id="hvl-YJ-xns"/>
@@ -87,6 +96,7 @@
                             <constraint firstItem="qHk-aF-5hI" firstAttribute="leading" secondItem="CTF-C2-clq" secondAttribute="leading" constant="15" id="y87-dR-dw5"/>
                             <constraint firstItem="eDm-nl-Bs9" firstAttribute="leading" secondItem="wOK-Mk-qCx" secondAttribute="trailing" constant="8" id="yGb-cT-YE9"/>
                             <constraint firstItem="qHk-aF-5hI" firstAttribute="top" secondItem="eDm-nl-Bs9" secondAttribute="bottom" constant="8" id="yMV-Bp-deo"/>
+                            <constraint firstItem="iat-fW-fLK" firstAttribute="leading" secondItem="CTF-C2-clq" secondAttribute="leading" constant="15" id="zXU-5n-Aue"/>
                             <constraint firstItem="qda-tr-0qk" firstAttribute="top" secondItem="CTF-C2-clq" secondAttribute="top" constant="8" id="zdD-WX-Wr5"/>
                         </constraints>
                     </view>
@@ -102,6 +112,7 @@
             <connections>
                 <outlet property="cardView" destination="CTF-C2-clq" id="uk0-MY-lgS"/>
                 <outlet property="dateLabel" destination="Okp-bJ-dGs" id="0aa-yJ-M2a"/>
+                <outlet property="flagButton" destination="iat-fW-fLK" id="dPc-cq-mnE"/>
                 <outlet property="freeFoodImageView" destination="dnF-f3-56r" id="SXE-EB-okO"/>
                 <outlet property="nameLabel" destination="qda-tr-0qk" id="rDc-56-L3W"/>
                 <outlet property="profileImageView" destination="wOK-Mk-qCx" id="ARH-1J-eXq"/>
@@ -112,6 +123,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Flag-Icon" width="30" height="30"/>
         <image name="Food-Icon" width="25" height="25"/>
     </resources>
 </document>

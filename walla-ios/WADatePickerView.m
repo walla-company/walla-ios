@@ -45,7 +45,7 @@ static CGFloat VIEW_WIDTH = 320.0;
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     self.datePicker.minuteInterval = 1;
     self.datePicker.date = [NSDate new];
-    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970:[NSDate new].timeIntervalSince1970 - 3600];
+    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970:[NSDate new].timeIntervalSince1970];
     [self.datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     self.datePicker.date = date;
