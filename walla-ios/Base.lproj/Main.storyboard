@@ -743,7 +743,7 @@
         <scene sceneID="HUl-eI-FvJ">
             <objects>
                 <navigationController storyboardIdentifier="IntroNavigationController" navigationBarHidden="YES" id="Iyq-DJ-yyL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kpu-bG-Liz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kpu-bG-Liz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
