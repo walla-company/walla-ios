@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,20 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="192.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post in Discussions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQT-DN-QIA">
-                        <rect key="frame" x="20" y="8" width="280" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuA-bp-106" customClass="WARoundedView">
-                        <rect key="frame" x="20" y="33" width="227" height="151.5"/>
+                        <rect key="frame" x="20" y="8" width="227" height="177"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HKN-ZQ-2tx">
-                                <rect key="frame" x="5" y="0.0" width="217" height="151.5"/>
+                                <rect key="frame" x="5" y="0.0" width="217" height="177"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -55,14 +49,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="yuA-bp-106" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="C3n-WY-und"/>
-                    <constraint firstItem="yQT-DN-QIA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Lr1-46-rXk"/>
                     <constraint firstAttribute="bottom" secondItem="zLJ-Jg-gtI" secondAttribute="bottom" constant="8" id="PCV-zR-gnu"/>
-                    <constraint firstItem="yuA-bp-106" firstAttribute="top" secondItem="yQT-DN-QIA" secondAttribute="bottom" constant="8" id="WIy-5N-qpN"/>
-                    <constraint firstItem="yQT-DN-QIA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="WfU-VP-1fp"/>
-                    <constraint firstAttribute="trailing" secondItem="yQT-DN-QIA" secondAttribute="trailing" constant="20" id="Ygh-it-juW"/>
                     <constraint firstAttribute="trailing" secondItem="zLJ-Jg-gtI" secondAttribute="trailing" constant="20" id="cXi-q2-6GR"/>
                     <constraint firstAttribute="bottom" secondItem="yuA-bp-106" secondAttribute="bottom" constant="8" id="otS-s5-ISw"/>
                     <constraint firstItem="zLJ-Jg-gtI" firstAttribute="leading" secondItem="yuA-bp-106" secondAttribute="trailing" constant="8" id="udU-Yz-75n"/>
+                    <constraint firstItem="yuA-bp-106" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="wrf-jA-LKi"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

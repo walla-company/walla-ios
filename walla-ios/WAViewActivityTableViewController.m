@@ -315,7 +315,7 @@
         
         if ([self.discussionPostText isEqualToString:@""]) {
             cell.postTextView.textColor = [WAValues notSelectedTextColor];
-            cell.postTextView.text = @"Join the discussion!";
+            cell.postTextView.text = @"Type a message";
         }
         else {
             cell.postTextView.textColor = [WAValues selectedTextColor];
@@ -601,7 +601,7 @@
     
     if ([self.discussionPostText isEqualToString:@""]) {
         textView.textColor = [WAValues notSelectedTextColor];
-        textView.text = @"Join the discussion!";
+        textView.text = @"Type a message";
     }
 }
 
