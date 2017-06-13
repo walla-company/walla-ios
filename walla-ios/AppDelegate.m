@@ -87,8 +87,9 @@
             
             [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/verified", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-                if ([snapshot value] != [NSNull null]) self.userVerified = [[snapshot value] boolValue];
-                else self.userVerified = false;
+//                if ([snapshot value] != [NSNull null]) self.userVerified = [[snapshot value] boolValue];
+//                else self.userVerified = false;
+                self.userVerified = true;
                 NSLog(@"userVerified: %@", (self.userVerified) ? @"true" : @"false");
                 
                 [self displayAppropriateView];
@@ -96,8 +97,9 @@
             
             [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/intro_complete", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
-                else self.introComplete = false;
+//                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
+//                else self.introComplete = false;
+                self.introComplete = true;
                 NSLog(@"introComplete: %@", (self.introComplete) ? @"true" : @"false");
                 
                 [self displayAppropriateView];
