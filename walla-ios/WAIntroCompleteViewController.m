@@ -7,7 +7,7 @@
 //
 
 #import "WAIntroCompleteViewController.h"
-
+#import "AppDelegate.h"
 #import "WAServer.h"
 
 @interface WAIntroCompleteViewController ()
@@ -30,11 +30,16 @@
 }
 
 - (IBAction)complete:(id)sender {
+  // Think it makes no sense
+  //  [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"openEditProfile"];
+  //  [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"openEditProfile"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [WAServer userIntroComplete:nil];
+    [WAServer userIntroComplete:^(BOOL success) {
+        if (success) {
+            AppDelegate *delegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
+            [delegate openMainFlow];
+        }
+    }];
 }
 
 /*
