@@ -67,6 +67,7 @@
         else {
             self.userSignedIn = false;
             self.firstLogin = true;
+            self.introComplete = false;
         }
         
         [self displayAppropriateView];
@@ -97,9 +98,8 @@
             
             [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/intro_complete", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-//                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
-//                else self.introComplete = false;
-                self.introComplete = true;
+                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
+                else self.introComplete = false;
                 NSLog(@"introComplete: %@", (self.introComplete) ? @"true" : @"false");
                 
                 [self displayAppropriateView];
@@ -161,7 +161,7 @@
 - (void)signupComplete {
     
     NSLog(@"signupComplete");
-    
+    self.introComplete = false;
     [self displayAppropriateView];
 }
 
@@ -257,6 +257,8 @@
         NSLog(@"Display intro");
         
         if (self.currentView != kViewingUserIntroNotComplete) {
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
             UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroNavigationController"];
             NSLog(@"delegate navigationController: %@", navigationController);
             [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
@@ -265,23 +267,12 @@
             
             self.currentView = kViewingUserIntroNotComplete;
         }
-        
     }
-    else {                                          // Display app
+    else if (self.introComplete) {                                          // Display app
         
         NSLog(@"Display app");
         
-        if (self.currentView != kViewingApp) {
-            
-            UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            NSLog(@"delegate tabbarController: %@", tabBarController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
-            
-            self.window.rootViewController = tabBarController;
-            
-            self.currentView = kViewingApp;
-        }
-        
+        [self openMainFlow];
     }
     
 }
@@ -339,5 +330,20 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Navigation
+
+- (void)openMainFlow {
+    if (self.currentView != kViewingApp) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+        UITabBarController *tabBarController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+        NSLog(@"delegate tabbarController: %@", tabBarController);
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
+        
+        self.window.rootViewController = tabBarController;
+        
+        self.currentView = kViewingApp;
+    }
+}
 
 @end

@@ -37,5 +37,7 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
     kViewingApp = 6,
 };
 
+- (void)openMainFlow;
+
 @end
 
