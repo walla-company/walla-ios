@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "WAServer.h"
+#import "WAValues.h"
 
 @import GoogleMaps;
 @import GooglePlaces;
@@ -98,8 +99,13 @@
             
             [[ref child:[NSString stringWithFormat:@"schools/%@/users/%@/intro_complete", [WAServer schoolIdentifier], [FIRAuth auth].currentUser.uid]] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
                 
-                if ([snapshot value] != [NSNull null]) self.introComplete = [[snapshot value] boolValue];
-                else self.introComplete = false;
+                if ([snapshot value] != [NSNull null]) {
+                    self.introComplete = [[snapshot value] boolValue];
+                }
+                else {
+#warning ST - Add this later
+                    //self.introComplete = false;
+                }
                 NSLog(@"introComplete: %@", (self.introComplete) ? @"true" : @"false");
                 
                 [self displayAppropriateView];
@@ -130,7 +136,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
     [self setupNotifications];
-    
+    [self setUpAppearence];
     return YES;
 }
 
@@ -155,7 +161,14 @@
     if (token != nil && ![token isEqualToString:@""]) {
         [WAServer addNotificationToken:token completion:nil];
     }
-    
+}
+
+- (void)setUpAppearence {
+    [[UINavigationBar appearance] setBackgroundImage: [UIImage new]
+                                       forBarMetrics: UIBarMetricsDefault];
+    [UINavigationBar appearance].barTintColor = [WAValues wallaOrangeColor];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [UINavigationBar appearance].shadowImage = [UIImage new];
 }
 
 - (void)signupComplete {

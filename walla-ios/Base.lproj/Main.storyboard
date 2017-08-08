@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +55,7 @@
                     <connections>
                         <segue destination="yV4-aP-dxA" kind="relationship" relationship="viewControllers" id="YKQ-Ao-m9F"/>
                         <segue destination="Gd1-JI-yaw" kind="relationship" relationship="viewControllers" id="qI5-eV-XhE"/>
-                        <segue destination="TdQ-EN-hEy" kind="relationship" relationship="viewControllers" id="4gg-OT-dic"/>
+                        <segue destination="dAp-yd-uEQ" kind="relationship" relationship="viewControllers" id="UI7-hh-Lfr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -743,7 +743,7 @@
         <scene sceneID="HUl-eI-FvJ">
             <objects>
                 <navigationController storyboardIdentifier="IntroNavigationController" navigationBarHidden="YES" id="Iyq-DJ-yyL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kpu-bG-Liz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kpu-bG-Liz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -755,29 +755,15 @@
             </objects>
             <point key="canvasLocation" x="-1662" y="2502"/>
         </scene>
-        <!--My Profile-->
-        <scene sceneID="X4m-qa-BtU">
+        <!--ProfileFlow-->
+        <scene sceneID="iHb-Ll-YAd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdQ-EN-hEy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Profile" image="TabbarIcon5" id="J9U-f5-Ee8"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kr4-DY-Dct">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NEI-92-C42" kind="relationship" relationship="rootViewController" id="aJJ-Zy-6VS"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CT3-RB-JAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="ProfileFlow" id="dAp-yd-uEQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="hG7-Gc-wGI"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upH-ef-2nI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1337" y="735"/>
+            <point key="canvasLocation" x="0.0" y="555"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="a1s-d9-ub8">
@@ -905,11 +891,10 @@
         <image name="Intro4-Text1" width="200" height="60"/>
         <image name="TabbarIcon1" width="25" height="25"/>
         <image name="TabbarIcon4" width="25" height="25"/>
-        <image name="TabbarIcon5" width="25" height="25"/>
         <image name="Walla-Head" width="130" height="130"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mOU-VR-Nuh"/>
-        <segue reference="7BD-Kn-vwa"/>
+        <segue reference="bW0-lF-GSs"/>
     </inferredMetricsTieBreakers>
 </document>

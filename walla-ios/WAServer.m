@@ -2047,7 +2047,6 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
             
             NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
             NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                
                 if (error) {
                     NSLog(@"Error updating user intro complete (%@): %@", url, error);
                     

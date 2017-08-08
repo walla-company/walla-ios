@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		753E51481F3A48A40031ECF2 /* ProfileFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753E51471F3A48A40031ECF2 /* ProfileFlow.storyboard */; };
+		753E514C1F3A491A0031ECF2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 753E514B1F3A491A0031ECF2 /* ProfileViewController.m */; };
+		753E514F1F3A560A0031ECF2 /* ProfileImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 753E514E1F3A560A0031ECF2 /* ProfileImageTableViewCell.m */; };
 		E0D43A5A712F6EC8AA8F25D7 /* libPods-walla-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */; };
 		EB02386F1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB02386D1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m */; };
 		EB0238701E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB02386E1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib */; };
@@ -155,6 +158,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		753E51471F3A48A40031ECF2 /* ProfileFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileFlow.storyboard; sourceTree = "<group>"; };
+		753E514A1F3A491A0031ECF2 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = "walla-ios/ProfileViewController.h"; sourceTree = SOURCE_ROOT; };
+		753E514B1F3A491A0031ECF2 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = "walla-ios/ProfileViewController.m"; sourceTree = SOURCE_ROOT; };
+		753E514D1F3A560A0031ECF2 /* ProfileImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileImageTableViewCell.h; sourceTree = "<group>"; };
+		753E514E1F3A560A0031ECF2 /* ProfileImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileImageTableViewCell.m; sourceTree = "<group>"; };
 		9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.release.xcconfig"; sourceTree = "<group>"; };
 		DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		EB02386C1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityReplyTableViewCell.h; sourceTree = "<group>"; };
@@ -407,6 +415,26 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		753E51461F3A484B0031ECF2 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
+				753E51471F3A48A40031ECF2 /* ProfileFlow.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		753E51491F3A49020031ECF2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				753E514A1F3A491A0031ECF2 /* ProfileViewController.h */,
+				753E514B1F3A491A0031ECF2 /* ProfileViewController.m */,
+				753E514D1F3A560A0031ECF2 /* ProfileImageTableViewCell.h */,
+				753E514E1F3A560A0031ECF2 /* ProfileImageTableViewCell.m */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		EB02386B1E79E9980037844D /* WAViewActivityReplyTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +544,8 @@
 		EB0E8BB51E008B0A00BC293C /* walla-ios */ = {
 			isa = PBXGroup;
 			children = (
+				753E51491F3A49020031ECF2 /* Profile */,
+				753E51461F3A484B0031ECF2 /* Storyboards */,
 				EBC9D6F21E309A6B00F83DF6 /* walla-ios.entitlements */,
 				EB0E8BB91E008B0A00BC293C /* AppDelegate.h */,
 				EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */,
@@ -530,7 +560,6 @@
 				EBCB564C1E1085D9000530F6 /* Custom Objects */,
 				EBBF5AC81E05ACFD0066F7E1 /* Custom Views */,
 				EBCB56F51E133B9D000530F6 /* Walla API */,
-				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
 				EBA976DA1E7C824600B4A996 /* Authentication */,
 				EBA976D51E7C6A4B00B4A996 /* Intro */,
 				EB2ECEFA1E6CAC0D0022C87A /* Restriciton Views */,
@@ -1438,6 +1467,7 @@
 				EB033A181E0D924800621C35 /* WACreateActivityLocationTableViewCell.xib in Resources */,
 				EBDA5C511E05B91C00B61AED /* WAMyProfileTextTableViewCell.xib in Resources */,
 				EB2A20CD1E17724100BE93CD /* GoogleService-Info.plist in Resources */,
+				753E51481F3A48A40031ECF2 /* ProfileFlow.storyboard in Resources */,
 				EBA976C41E7BA43300B4A996 /* WAProfileEditAddGroupTableViewCell.xib in Resources */,
 				EBCB565D1E108D12000530F6 /* WAUserTableViewCell.xib in Resources */,
 				EBCB57141E14468D000530F6 /* WAProfileEditProfilePictureTableViewCell.xib in Resources */,
@@ -1560,6 +1590,7 @@
 				EBDA5C641E05DE5A00B61AED /* WAActivityTab.m in Sources */,
 				EBA976E61E7C833B00B4A996 /* WAAuthCheckEmailTableViewController.m in Sources */,
 				EBA977041E7C9AA900B4A996 /* WAAuthSignupTableViewCell.m in Sources */,
+				753E514F1F3A560A0031ECF2 /* ProfileImageTableViewCell.m in Sources */,
 				EBDA5C611E05DB9000B61AED /* WAActivityTabsHeaderView.m in Sources */,
 				EBCB57381E14741F000530F6 /* WAInterestPickerViewController.m in Sources */,
 				EBCB56F81E133BB7000530F6 /* WAValues.m in Sources */,
@@ -1611,6 +1642,7 @@
 				EB9915701E7649440036D897 /* WAViewActivityTextTableViewCell.m in Sources */,
 				EB9915761E7649570036D897 /* WAViewActivityMapTableViewCell.m in Sources */,
 				EB033A171E0D924800621C35 /* WACreateActivityLocationTableViewCell.m in Sources */,
+				753E514C1F3A491A0031ECF2 /* ProfileViewController.m in Sources */,
 				EBCB573B1E147432000530F6 /* WAInterestPickerView.m in Sources */,
 				EBA9770E1E7CC97F00B4A996 /* WAAuthConfirmEmailTableViewCell.m in Sources */,
 				EB4EA79E1E036CD2000F4834 /* WAActivitiesViewController.m in Sources */,
@@ -1666,6 +1698,7 @@
 				EB0E8BC31E008B0A00BC293C /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		EB0E8BC71E008B0A00BC293C /* LaunchScreen.storyboard */ = {
