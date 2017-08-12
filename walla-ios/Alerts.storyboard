@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Successfull Post View Controller-->
+        <scene sceneID="Rpl-co-kpl">
+            <objects>
+                <viewController storyboardIdentifier="SuccessfullPostViewController" id="Muu-ba-EMa" customClass="SuccessfullPostViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dfG-vO-r3t"/>
+                        <viewControllerLayoutGuide type="bottom" id="Etq-8Y-bRw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q8i-hJ-Ehv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEK-JV-y1E">
+                                <rect key="frame" x="37.5" y="218.5" width="300" height="130"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkMarkInCircle" translatesAutoresizingMaskIntoConstraints="NO" id="MGl-W8-NHc">
+                                        <rect key="frame" x="115" y="12" width="69" height="69"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="69" id="0b9-Bj-FuN"/>
+                                            <constraint firstAttribute="width" constant="69" id="izh-Ch-vns"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your activity has been posted!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyZ-6b-hzf">
+                                        <rect key="frame" x="15" y="93" width="270" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="wyZ-6b-hzf" firstAttribute="top" secondItem="MGl-W8-NHc" secondAttribute="bottom" constant="12" id="0rU-yG-wHV"/>
+                                    <constraint firstAttribute="trailing" secondItem="wyZ-6b-hzf" secondAttribute="trailing" constant="15" id="Jow-hz-eWd"/>
+                                    <constraint firstItem="wyZ-6b-hzf" firstAttribute="leading" secondItem="aEK-JV-y1E" secondAttribute="leading" constant="15" id="PGz-Tt-eml"/>
+                                    <constraint firstItem="MGl-W8-NHc" firstAttribute="centerX" secondItem="aEK-JV-y1E" secondAttribute="centerX" id="avr-0K-NEA"/>
+                                    <constraint firstAttribute="height" constant="130" id="n3r-AG-L49"/>
+                                    <constraint firstItem="MGl-W8-NHc" firstAttribute="top" secondItem="aEK-JV-y1E" secondAttribute="top" constant="12" id="uyT-z7-WPG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aEK-JV-y1E" secondAttribute="trailing" constant="37.5" id="5zU-Z4-ocZ"/>
+                            <constraint firstItem="aEK-JV-y1E" firstAttribute="leading" secondItem="q8i-hJ-Ehv" secondAttribute="leading" constant="37.5" id="AUR-h6-CFc"/>
+                            <constraint firstItem="aEK-JV-y1E" firstAttribute="centerY" secondItem="q8i-hJ-Ehv" secondAttribute="centerY" constant="-50" id="rpn-0e-i2q"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jcP-zX-agW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="23"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="checkMarkInCircle" width="69" height="69"/>
+    </resources>
+</document>

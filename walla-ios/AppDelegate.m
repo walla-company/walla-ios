@@ -252,23 +252,24 @@
         }
         
     }
-    else if (!self.introComplete && !inSignup) {    // Display intro
-        
-        NSLog(@"Display intro");
-        
-        if (self.currentView != kViewingUserIntroNotComplete) {
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            
-            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroNavigationController"];
-            NSLog(@"delegate navigationController: %@", navigationController);
-            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
-            
-            self.window.rootViewController = navigationController;
-            
-            self.currentView = kViewingUserIntroNotComplete;
-        }
-    }
-    else if (self.introComplete) {                                          // Display app
+// Old intro maybe needs to be returned later
+//    else if (!self.introComplete && !inSignup) {    // Display intro
+//        
+//        NSLog(@"Display intro");
+//        
+//        if (self.currentView != kViewingUserIntroNotComplete) {
+//            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            
+//            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroNavigationController"];
+//            NSLog(@"delegate navigationController: %@", navigationController);
+//            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+//            
+//            self.window.rootViewController = navigationController;
+//            
+//            self.currentView = kViewingUserIntroNotComplete;
+//        }
+//    }
+    else {//if (self.introComplete) {                                          // Display app
         
         NSLog(@"Display app");
         

@@ -12,6 +12,8 @@
 
 #import "WAServer.h"
 
+#import "SuccessfullPostViewController.h"
+
 @import Firebase;
 
 @interface WACreateActivityTableViewController ()
@@ -389,7 +391,7 @@
         
         [self presentViewController:alert animated:true completion:nil];
     }
-    else if (self.userVerified) {
+    else {//if (self.userVerified) {
         
         self.tableView.userInteractionEnabled = false;
         
@@ -415,21 +417,14 @@
             activityAddress = self.activityLocation.formattedAddress;
         }
         
+        __weak typeof(self) weakSelf = self;
+
         [WAServer createActivity:self.activityTitle startTime:self.activityStartTime endTime:self.activityStartTime locationName:self.meetingPlace locationAddress:activityAddress location:activityLocation interests:interests hostGroupID:hostGroupID hostGroupName:hostGroupName hostGroupShortName:hostGroupShortaName completion:^(BOOL success) {
             
             self.tableView.userInteractionEnabled = true;
             
             if (success) {
-                
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Activity Posted" message:@"Your activity was successfully posted." preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                    [self dismissViewControllerAnimated:true completion:nil];
-                }];
-                
-                [alert addAction:cancelAction];
-                
-                [self presentViewController:alert animated:true completion:nil];
+                [SuccessfullPostViewController presentFromViewController:weakSelf];
             }
             else {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was a problem posting the activity." preferredStyle:UIAlertControllerStyleAlert];

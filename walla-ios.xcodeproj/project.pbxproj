@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75B79A2B1F3F01B700D27142 /* SuccessfullPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */; };
+		75B79A2D1F3F01CB00D27142 /* Alerts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */; };
 		E0D43A5A712F6EC8AA8F25D7 /* libPods-walla-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */; };
 		EB02386F1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB02386D1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m */; };
 		EB0238701E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB02386E1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib */; };
@@ -155,6 +157,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75B79A291F3F01B700D27142 /* SuccessfullPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessfullPostViewController.h; sourceTree = "<group>"; };
+		75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessfullPostViewController.m; sourceTree = "<group>"; };
+		75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Alerts.storyboard; sourceTree = "<group>"; };
 		9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.release.xcconfig"; sourceTree = "<group>"; };
 		DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		EB02386C1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityReplyTableViewCell.h; sourceTree = "<group>"; };
@@ -407,6 +412,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		75B79A281F3F019800D27142 /* Custom Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				75B79A291F3F01B700D27142 /* SuccessfullPostViewController.h */,
+				75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */,
+			);
+			path = "Custom Alerts";
+			sourceTree = "<group>";
+		};
 		EB02386B1E79E9980037844D /* WAViewActivityReplyTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +530,7 @@
 		EB0E8BB51E008B0A00BC293C /* walla-ios */ = {
 			isa = PBXGroup;
 			children = (
+				75B79A281F3F019800D27142 /* Custom Alerts */,
 				EBC9D6F21E309A6B00F83DF6 /* walla-ios.entitlements */,
 				EB0E8BB91E008B0A00BC293C /* AppDelegate.h */,
 				EB0E8BBA1E008B0A00BC293C /* AppDelegate.m */,
@@ -531,6 +546,7 @@
 				EBBF5AC81E05ACFD0066F7E1 /* Custom Views */,
 				EBCB56F51E133B9D000530F6 /* Walla API */,
 				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
+				75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */,
 				EBA976DA1E7C824600B4A996 /* Authentication */,
 				EBA976D51E7C6A4B00B4A996 /* Intro */,
 				EB2ECEFA1E6CAC0D0022C87A /* Restriciton Views */,
@@ -1430,6 +1446,7 @@
 				EB9915771E7649570036D897 /* WAViewActivityMapTableViewCell.xib in Resources */,
 				EBCB57231E1446E2000530F6 /* WAProfileEditProfileMajorTableViewCell.xib in Resources */,
 				EBCB574A1E16138E000530F6 /* WANotificationsTextTableViewCell.xib in Resources */,
+				75B79A2D1F3F01CB00D27142 /* Alerts.storyboard in Resources */,
 				EB9958971E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.xib in Resources */,
 				EBA976ED1E7C837300B4A996 /* WAAuthClearTableViewCell.xib in Resources */,
 				EBA976E31E7C832000B4A996 /* WAAuthCheckEmailTableViewCell.xib in Resources */,
@@ -1549,6 +1566,7 @@
 			files = (
 				EBCB564A1E0F434B000530F6 /* WACreateActivityPostTableViewCell.m in Sources */,
 				EBA976F61E7C8D2E00B4A996 /* WAAuthSignupTableViewController.m in Sources */,
+				75B79A2B1F3F01B700D27142 /* SuccessfullPostViewController.m in Sources */,
 				EBCB57061E1349D6000530F6 /* WAUserShadowTableViewCell.m in Sources */,
 				EB9958961E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m in Sources */,
 				EB033A331E0E340E00621C35 /* WAGroupPickerView.m in Sources */,
