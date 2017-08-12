@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,28 +14,27 @@
             <rect key="frame" x="0.0" y="0.0" width="337" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xmI-Ks-DP9" id="7BV-t9-afm">
-                <rect key="frame" x="0.0" y="0.0" width="337" height="63"/>
+                <rect key="frame" x="0.0" y="0.0" width="337" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wc-ng-IM6">
-                        <rect key="frame" x="20" y="8" width="297" height="17"/>
+                        <rect key="frame" x="32" y="8" width="273" height="17"/>
                         <string key="text">Is there free food?
 </string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q66-9e-SF2" customClass="WARoundedView">
-                        <rect key="frame" x="20" y="33" width="297" height="30"/>
+                        <rect key="frame" x="32" y="33" width="273" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="um8-vP-X1L">
-                                <rect key="frame" x="10" y="0.0" width="277" height="30"/>
+                                <rect key="frame" x="10" y="0.0" width="253" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-iY-QhK">
-                                <rect key="frame" x="10" y="0.0" width="277" height="30"/>
+                                <rect key="frame" x="10" y="0.0" width="253" height="30"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,12 +52,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="6wc-ng-IM6" secondAttribute="trailing" constant="20" id="DSG-YV-Pca"/>
+                    <constraint firstAttribute="trailing" secondItem="6wc-ng-IM6" secondAttribute="trailing" constant="32" id="DSG-YV-Pca"/>
                     <constraint firstItem="6wc-ng-IM6" firstAttribute="top" secondItem="7BV-t9-afm" secondAttribute="top" constant="8" id="Noh-bT-bWr"/>
                     <constraint firstItem="Q66-9e-SF2" firstAttribute="top" secondItem="6wc-ng-IM6" secondAttribute="bottom" constant="8" id="TIQ-y9-UA7"/>
-                    <constraint firstItem="Q66-9e-SF2" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="20" id="Vd5-6Z-jYw"/>
-                    <constraint firstItem="6wc-ng-IM6" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="20" id="hdk-Pv-KMf"/>
-                    <constraint firstAttribute="trailing" secondItem="Q66-9e-SF2" secondAttribute="trailing" constant="20" id="mdb-Oa-A1T"/>
+                    <constraint firstItem="Q66-9e-SF2" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="32" id="Vd5-6Z-jYw"/>
+                    <constraint firstItem="6wc-ng-IM6" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="32" id="hdk-Pv-KMf"/>
+                    <constraint firstAttribute="trailing" secondItem="Q66-9e-SF2" secondAttribute="trailing" constant="32" id="mdb-Oa-A1T"/>
                     <constraint firstAttribute="bottom" secondItem="Q66-9e-SF2" secondAttribute="bottom" id="wid-rN-i3R"/>
                 </constraints>
             </tableViewCellContentView>

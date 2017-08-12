@@ -64,7 +64,7 @@ double const WAMaximumDescriptionLength = 200;
     
     self.firstUserLocationUpdate = true;
     
-    self.mapViews = [[NSMutableArray alloc] init];
+//    self.mapViews = [[NSMutableArray alloc] init];
     
     self.activityTitle = @"";
     self.activityStartTime = nil;
@@ -93,16 +93,16 @@ double const WAMaximumDescriptionLength = 200;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
-    for (GMSMapView *mapView in self.mapViews) {
-        
-        @try {
-            [mapView removeObserver:self forKeyPath:@"myLocation"];
-        } @catch (NSException *exception) {
-            NSLog(@"Removing observer exception");
-        }
-        
-    }
+//    
+//    for (GMSMapView *mapView in self.mapViews) {
+//        
+//        @try {
+//            [mapView removeObserver:self forKeyPath:@"myLocation"];
+//        } @catch (NSException *exception) {
+//            NSLog(@"Removing observer exception");
+//        }
+//        
+//    }
     
     [super viewWillDisappear:animated];
 }
@@ -127,13 +127,11 @@ double const WAMaximumDescriptionLength = 200;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 7;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -202,7 +200,7 @@ double const WAMaximumDescriptionLength = 200;
         
         [cell.locationMap addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context:nil];
         
-        [self.mapViews addObject:cell.locationMap];
+ //       [self.mapViews addObject:cell.locationMap];
         
         [cell.locationButton addTarget:self action:@selector(searchLocationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -218,7 +216,7 @@ double const WAMaximumDescriptionLength = 200;
             [cell.locationMap setCamera:camera];
         }
         else {
-            cell.locationLabel.text = @"Enter Location";
+            cell.locationLabel.text = @"Enter address";
             cell.locationLabel.textColor = [WAValues notSelectedTextColor];
             
             if (self.userLocation) {
@@ -299,7 +297,6 @@ double const WAMaximumDescriptionLength = 200;
 }
 
 - (void)searchLocationButtonPressed:(UIButton *)button {
-    
     GMSAutocompleteViewController *autocompleteView = [[GMSAutocompleteViewController alloc] init];
     autocompleteView.delegate = self;
     [self presentViewController:autocompleteView animated:YES completion:nil];
