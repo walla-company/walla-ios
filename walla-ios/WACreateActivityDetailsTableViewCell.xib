@@ -11,20 +11,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WACreateActivityDetailsTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="323" height="154"/>
+            <rect key="frame" x="0.0" y="0.0" width="323" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="323" height="153.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="159.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your activity?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfj-EZ-uwp">
-                        <rect key="frame" x="32" y="23" width="134.5" height="2"/>
+                        <rect key="frame" x="32" y="23" width="134.5" height="2.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFs-wC-PuI" customClass="WARoundedView">
-                        <rect key="frame" x="32" y="33" width="259" height="120"/>
+                        <rect key="frame" x="32" y="39.5" width="259" height="120"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-L5-jqC">
                                 <rect key="frame" x="7" y="7" width="245" height="106"/>
@@ -44,7 +44,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200 chars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-TG-zHe">
-                        <rect key="frame" x="217" y="19" width="59" height="12"/>
+                        <rect key="frame" x="217" y="25.5" width="59" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.64313725490196072" green="0.63921568627450975" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                     <constraint firstAttribute="trailing" secondItem="DWV-TG-zHe" secondAttribute="trailing" constant="47" id="JyK-br-uMK"/>
                     <constraint firstItem="lfj-EZ-uwp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="Xki-4i-7Ya"/>
                     <constraint firstItem="NFs-wC-PuI" firstAttribute="top" secondItem="DWV-TG-zHe" secondAttribute="bottom" constant="2" id="eSl-5d-t3J"/>
-                    <constraint firstItem="NFs-wC-PuI" firstAttribute="top" secondItem="lfj-EZ-uwp" secondAttribute="bottom" constant="8" id="kZv-R4-0Uu"/>
+                    <constraint firstItem="NFs-wC-PuI" firstAttribute="top" secondItem="lfj-EZ-uwp" secondAttribute="bottom" constant="14" id="kZv-R4-0Uu"/>
                     <constraint firstItem="NFs-wC-PuI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="v7e-JJ-gFV"/>
                     <constraint firstItem="lfj-EZ-uwp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="x7X-7t-1gr"/>
                 </constraints>

@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7F-4N-dTF">
-                        <rect key="frame" x="32" y="8" width="256" height="17"/>
+                        <rect key="frame" x="32" y="21" width="256" height="2"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,11 +45,11 @@
                 <constraints>
                     <constraint firstItem="v7F-4N-dTF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="0pS-Yr-FhU"/>
                     <constraint firstAttribute="trailing" secondItem="v7F-4N-dTF" secondAttribute="trailing" constant="32" id="6RZ-4E-pW5"/>
-                    <constraint firstItem="v7F-4N-dTF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Sd2-JW-fvZ"/>
+                    <constraint firstItem="v7F-4N-dTF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="Sd2-JW-fvZ"/>
                     <constraint firstAttribute="trailing" secondItem="CO5-jU-oqt" secondAttribute="trailing" constant="32" id="fmX-pg-A6u"/>
                     <constraint firstAttribute="bottom" secondItem="CO5-jU-oqt" secondAttribute="bottom" id="koo-CJ-MwD"/>
                     <constraint firstItem="CO5-jU-oqt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="sLA-cf-NAh"/>
-                    <constraint firstItem="CO5-jU-oqt" firstAttribute="top" secondItem="v7F-4N-dTF" secondAttribute="bottom" constant="8" id="zNv-G0-Y2k"/>
+                    <constraint firstItem="CO5-jU-oqt" firstAttribute="top" secondItem="v7F-4N-dTF" secondAttribute="bottom" constant="10" id="zNv-G0-Y2k"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

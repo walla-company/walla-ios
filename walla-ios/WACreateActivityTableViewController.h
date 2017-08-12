@@ -40,7 +40,6 @@
 @property NSDate *activityStartTime;
 @property NSString *meetingPlace;
 @property GMSPlace *activityLocation;
-@property NSArray *activityHostGroup;
 @property BOOL freeFood;
 
 @property UIColor *notSelectedColor;

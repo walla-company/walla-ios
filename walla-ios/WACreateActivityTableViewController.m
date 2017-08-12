@@ -43,7 +43,6 @@ double const WAMaximumDescriptionLength = 200;
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityTimeTableViewCell" bundle:nil] forCellReuseIdentifier:@"timeCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityMeetingPlaceTableViewCell" bundle:nil] forCellReuseIdentifier:@"meetingPlaceCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityHostTableViewCell" bundle:nil] forCellReuseIdentifier:@"hostCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityFoodTableViewCell" bundle:nil] forCellReuseIdentifier:@"foodCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WACreateActivityPostTableViewCell" bundle:nil] forCellReuseIdentifier:@"postCell"];
     
@@ -71,7 +70,6 @@ double const WAMaximumDescriptionLength = 200;
     self.activityStartTime = nil;
     self.meetingPlace = @"";
     self.activityLocation = nil;
-    self.activityHostGroup = [[NSArray alloc] init];
     self.freeFood = false;
     
     self.userGroupIDs = [[NSArray alloc] init];
@@ -237,21 +235,6 @@ double const WAMaximumDescriptionLength = 200;
     }
     
     if (indexPath.row == 4) {
-        WACreateActivityHostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hostCell" forIndexPath:indexPath];
-        
-        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-        
-        cell.chooseHostGroupButton.tag = 1;
-        
-        [cell.chooseHostGroupButton addTarget:self action:@selector(chooseGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self setGroupsLabelTitle:self.activityHostGroup label:cell.hostGroupLabel onlyOne:true];
-        
-        return cell;
-    }
-    
-    if (indexPath.row == 5) {
         WACreateActivityFoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"foodCell" forIndexPath:indexPath];
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
@@ -322,19 +305,6 @@ double const WAMaximumDescriptionLength = 200;
     [self presentViewController:autocompleteView animated:YES completion:nil];
 }
 
-- (void)chooseGroupButtonPressed:(UIButton *) button {
-    
-    WAGroupPickerViewController *groupPicker = [[WAGroupPickerViewController alloc] initWithTitle: @"Choose Host Group" selectedGroups:self.activityHostGroup userGroupIDs:self.userGroupIDs canSelectMultipleGourps:false];
-    
-    groupPicker.delegate = self;
-    
-    self.definesPresentationContext = true;
-    groupPicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
-    groupPicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    
-    [self presentViewController:groupPicker animated:false completion:nil];
-}
-
 - (void)freeFoodButtonPressed:(UIButton *)button {
     
     UIAlertController *levelMenu = [UIAlertController alertControllerWithTitle:@"Is there free food?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -369,7 +339,6 @@ double const WAMaximumDescriptionLength = 200;
     NSLog(@"Start time: %@", self.activityStartTime);
     NSLog(@"Meeting place: %@", self.meetingPlace);
     NSLog(@"Location: %@", self.activityLocation);
-    NSLog(@"Host group: %@", self.activityHostGroup);
     NSLog(@"Free food: %@", (self.freeFood) ? @"Yes" : @"No");
     
     if ([self.activityTitle isEqualToString:@""]) {
@@ -415,14 +384,6 @@ double const WAMaximumDescriptionLength = 200;
         NSString *hostGroupID = @"";
         NSString *hostGroupName = @"";
         NSString *hostGroupShortaName = @"";
-        
-        if ([self.activityHostGroup count] == 1) {
-            NSDictionary *group = [self.activityHostGroup objectAtIndex:0];
-            
-            hostGroupID = group[@"group_id"];
-            hostGroupName = group[@"name"];
-            hostGroupShortaName = group[@"short_name"];
-        }
         
         NSArray *interests = (self.freeFood) ? @[@"Free Food"] : @[];
         
@@ -489,50 +450,6 @@ didFailAutocompleteWithError:(NSError *)error {
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Group picker delegate
-
-- (void)groupPickerViewGroupSelected:(NSArray *)groups tag:(NSInteger)tag {
-    
-    self.activityHostGroup = groups;
-    
-    WACreateActivityHostTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kHostCellRow inSection:0]];
-    [self setGroupsLabelTitle:self.activityHostGroup label:cell.hostGroupLabel onlyOne:true];
-}
-
-- (void)setGroupsLabelTitle:(NSArray *)groups label:(UILabel *)label onlyOne:(BOOL)onlyOne {
-    
-    NSString *groupsString = @"";
-    
-    if ([groups count] > 0) {
-        
-        int count = 0;
-        for (NSDictionary *group in groups) {
-            
-            groupsString = [groupsString stringByAppendingString:group[@"name"]];
-            
-            if (count != [groups count]-1) {
-                groupsString = [groupsString stringByAppendingString:@", "];
-            }
-            
-            count++;
-        }
-        
-        label.textColor = self.selectedColor;
-    }
-    else {
-        if (onlyOne) {
-            groupsString = @"Group";
-        }
-        else {
-            groupsString = @"Group(s)";
-        }
-        
-        label.textColor = self.notSelectedColor;
-    }
-    
-    label.text = groupsString;
 }
 
 #pragma mark - Text field delegate
