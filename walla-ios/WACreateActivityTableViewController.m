@@ -14,6 +14,8 @@
 
 #import "SuccessfullPostViewController.h"
 
+#import "VDDatePicker.h"
+
 double const WAMaximumDescriptionLength = 200;
 
 @import Firebase;
@@ -277,27 +279,40 @@ double const WAMaximumDescriptionLength = 200;
 #pragma mark - Button targets
 
 - (void)selectTimeButtonPressed:(UIButton *)button {
+    __weak typeof(self) weakSelf = self;
     
-    WADatePickerViewController *datePicker;
-    
-    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kTimeCellRow inSection:0]];
-    
-    if (self.activityStartTime == nil) {
-        self.activityStartTime = [NSDate new];
+    [VDDatePicker showInView:UIApplication.sharedApplication.keyWindow withSelectionBlock:^(NSDate *date) {
+        weakSelf.activityStartTime = date;
+        
+        WACreateActivityTimeTableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kTimeCellRow inSection:0]];
+        [weakSelf setTimeTitle:weakSelf.activityStartTime label:cell.startTimeLabel];
+        
+    } cancelBlock:^{
+        
+    }];
+}
+
+- (void)setTimeTitle:(NSDate *)date label:(UILabel *)label {
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        
+        label.text = [dateFormatter stringFromDate:date];
+        
+        NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+        [formatter1 setDateFormat:@"h:mm aa"];
+        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+        [formatter2 setDateFormat:@"M/d"];
+        
+        NSString *startTimeString = [formatter1 stringFromDate:date];
+        NSString *dateString = [formatter2 stringFromDate:date];
+        
+        label.text = [NSString stringWithFormat:@"%@ (%@) %@", [WAValues dayOfWeekFromDate:date], dateString, startTimeString];
+        
+        
+        label.textColor = self.selectedColor;
     }
-    
-    datePicker = [[WADatePickerViewController alloc] initWithTitle:@"Choose Time" date:self.activityStartTime];
-    
-    [self setTimeTitle:self.activityStartTime label:cell.startTimeLabel];
-    
-    datePicker.delegate = self;
-    datePicker.view.tag = button.tag;
-    
-    self.definesPresentationContext = true;
-    datePicker.view.backgroundColor = [[UIColor alloc] initWithWhite:0.5 alpha:0.2];
-    datePicker.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    
-    [self presentViewController:datePicker animated:false completion:nil];
 }
 
 - (void)searchLocationButtonPressed:(UIButton *)button {
@@ -442,30 +457,6 @@ double const WAMaximumDescriptionLength = 200;
             }
             
         }];
-    }
-}
-
-#pragma mark - Date picker delegate
-
-- (void)datePickerViewDateChanged:(NSDate *)date tag:(NSInteger)tag {
-    
-    self.activityStartTime = date;
-    
-    WACreateActivityTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kTimeCellRow inSection:0]];
-    [self setTimeTitle:self.activityStartTime label:cell.startTimeLabel];
-    
-}
-
-- (void)setTimeTitle:(NSDate *)date label:(UILabel *)label {
-    
-    if (date != nil) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateFormatterShortStyle;
-        
-        label.text = [dateFormatter stringFromDate:date];
-        
-        label.textColor = self.selectedColor;
     }
 }
 
