@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="71" id="KGk-i7-Jjw" customClass="WACreateActivityDetailsTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WACreateActivityDetailsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="153.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are you doing?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfj-EZ-uwp">
-                        <rect key="frame" x="20" y="8" width="280" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your activity?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfj-EZ-uwp">
+                        <rect key="frame" x="32" y="23" width="134.5" height="2"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFs-wC-PuI" customClass="WARoundedView">
-                        <rect key="frame" x="20" y="33" width="280" height="60.5"/>
+                        <rect key="frame" x="32" y="33" width="259" height="120"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Hello World" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-L5-jqC">
-                                <rect key="frame" x="5" y="0.0" width="270" height="60.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-L5-jqC">
+                                <rect key="frame" x="7" y="7" width="245" height="106"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="IzB-7X-UVw"/>
-                                </constraints>
+                                <string key="text">Pick up basketball? Biochemistry seminar? Club event? Study buddy? Art buddy? Create an activity to find a friend or two to tag along!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="C8X-L5-jqC" firstAttribute="leading" secondItem="NFs-wC-PuI" secondAttribute="leading" constant="5" id="19C-z9-iHl"/>
-                            <constraint firstAttribute="bottom" secondItem="C8X-L5-jqC" secondAttribute="bottom" id="I8v-fF-1aK"/>
-                            <constraint firstItem="C8X-L5-jqC" firstAttribute="top" secondItem="NFs-wC-PuI" secondAttribute="top" id="Mco-8Q-Xdv"/>
-                            <constraint firstAttribute="trailing" secondItem="C8X-L5-jqC" secondAttribute="trailing" constant="5" id="vsB-WW-7JE"/>
+                            <constraint firstAttribute="bottom" secondItem="C8X-L5-jqC" secondAttribute="bottom" constant="7" id="I8v-fF-1aK"/>
+                            <constraint firstItem="C8X-L5-jqC" firstAttribute="top" secondItem="NFs-wC-PuI" secondAttribute="top" constant="7" id="m7W-xT-1CM"/>
+                            <constraint firstItem="C8X-L5-jqC" firstAttribute="leading" secondItem="NFs-wC-PuI" secondAttribute="leading" constant="7" id="vAQ-6Y-PCI"/>
+                            <constraint firstAttribute="height" constant="120" id="xlU-JZ-Mnt"/>
+                            <constraint firstAttribute="trailing" secondItem="C8X-L5-jqC" secondAttribute="trailing" constant="7" id="ysg-Ld-E1c"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200 chars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-TG-zHe">
+                        <rect key="frame" x="217" y="19" width="59" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.64313725490196072" green="0.63921568627450975" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="NFs-wC-PuI" secondAttribute="bottom" id="3b6-DJ-8Cd"/>
-                    <constraint firstAttribute="trailing" secondItem="NFs-wC-PuI" secondAttribute="trailing" constant="20" id="Dbi-hI-1bU"/>
-                    <constraint firstItem="lfj-EZ-uwp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Xki-4i-7Ya"/>
+                    <constraint firstAttribute="trailing" secondItem="NFs-wC-PuI" secondAttribute="trailing" constant="32" id="Dbi-hI-1bU"/>
+                    <constraint firstAttribute="trailing" secondItem="DWV-TG-zHe" secondAttribute="trailing" constant="47" id="JyK-br-uMK"/>
+                    <constraint firstItem="lfj-EZ-uwp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="Xki-4i-7Ya"/>
+                    <constraint firstItem="NFs-wC-PuI" firstAttribute="top" secondItem="DWV-TG-zHe" secondAttribute="bottom" constant="2" id="eSl-5d-t3J"/>
                     <constraint firstItem="NFs-wC-PuI" firstAttribute="top" secondItem="lfj-EZ-uwp" secondAttribute="bottom" constant="8" id="kZv-R4-0Uu"/>
-                    <constraint firstAttribute="trailing" secondItem="lfj-EZ-uwp" secondAttribute="trailing" constant="20" id="tLA-J8-57S"/>
-                    <constraint firstItem="NFs-wC-PuI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="v7e-JJ-gFV"/>
-                    <constraint firstItem="lfj-EZ-uwp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="x7X-7t-1gr"/>
+                    <constraint firstItem="NFs-wC-PuI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="v7e-JJ-gFV"/>
+                    <constraint firstItem="lfj-EZ-uwp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="x7X-7t-1gr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="maximumCharactersLabel" destination="DWV-TG-zHe" id="39L-ag-CAI"/>
                 <outlet property="titleTextView" destination="C8X-L5-jqC" id="U26-3j-Bg4"/>
             </connections>
-            <point key="canvasLocation" x="34" y="67"/>
+            <point key="canvasLocation" x="35.5" y="97"/>
         </tableViewCell>
     </objects>
 </document>

@@ -14,6 +14,8 @@
 
 #import "SuccessfullPostViewController.h"
 
+double const WAMaximumDescriptionLength = 200;
+
 @import Firebase;
 
 @interface WACreateActivityTableViewController ()
@@ -56,8 +58,8 @@
     
     // Initialize default values
     
-    self.notSelectedColor = [[UIColor alloc] initWithRed:189.0/255.0 green:189.0/255.0 blue:195.0/255.0 alpha:1.0];
-    self.selectedColor = [[UIColor alloc] initWithRed:143.0/255.0 green:142.0/255.0 blue:148.0/255.0 alpha:1.0];
+    self.notSelectedColor = [[UIColor alloc] initWithRed:164.0/255.0 green:163.0/255.0 blue:168.0/255.0 alpha:1.0];
+    self.selectedColor = [UIColor blackColor];
     
     self.firstUserLocationUpdate = true;
     
@@ -80,7 +82,7 @@
         self.userGroupIDs = groups;
     }];
     
-    self.titlePlaceHolder = @"Anyone want to ball this afternoon? We can play a 3 on 3 if we have two more people join";
+    self.titlePlaceHolder = @"Pick up basketball? Biochemistry seminar? Club event? Study buddy? Art buddy? Create an activity to find a friend or two to tag along!";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -170,7 +172,7 @@
             cell.startTimeLabel.textColor = self.selectedColor;
         }
         else {
-            cell.startTimeLabel.text = @"Choose time";
+            cell.startTimeLabel.text = @"Pick date and time";
             cell.startTimeLabel.textColor = self.notSelectedColor;
         }
         
@@ -591,6 +593,17 @@ didFailAutocompleteWithError:(NSError *)error {
     
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
+    
+    WACreateActivityDetailsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kDetailsCellRow]];
+    [cell setMaximumCharactersLabelCurrent:textView.text.length];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSString *resultingString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (resultingString.length > WAMaximumDescriptionLength) {
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Location manager delegate

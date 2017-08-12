@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "walla-ios/WACreateActivityTableViewController.m"
-            timestampString = "524224306.902414"
+            timestampString = "524233196.007114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
             landmarkName = "-postButtonPressed:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "walla-ios/WACreateActivityTableViewController.m"
-            timestampString = "524223757.408441"
+            timestampString = "524233196.007114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
             landmarkName = "-postButtonPressed:"
             landmarkType = "7">
          </BreakpointContent>

@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *titleTextView;
 
+- (void)setMaximumCharactersLabelCurrent:(NSInteger)current;
+
 @end

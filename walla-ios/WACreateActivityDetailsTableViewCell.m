@@ -8,6 +8,14 @@
 
 #import "WACreateActivityDetailsTableViewCell.h"
 
+NSString * const WAMaximumCharactersText = @"%ld/200 chars";
+
+@interface WACreateActivityDetailsTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *maximumCharactersLabel;
+
+@end
+
 @implementation WACreateActivityDetailsTableViewCell
 
 - (void)awakeFromNib {
@@ -17,8 +25,13 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
+
+- (void)setMaximumCharactersLabelCurrent:(NSInteger)current {
+    self.maximumCharactersLabel.text = [NSString stringWithFormat:WAMaximumCharactersText, (long)current];
+}
+
 
 @end
