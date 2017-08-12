@@ -424,7 +424,10 @@
             self.tableView.userInteractionEnabled = true;
             
             if (success) {
-                [SuccessfullPostViewController presentFromViewController:weakSelf];
+                UIViewController *presentingController = weakSelf.presentingViewController;
+                [weakSelf dismissViewControllerAnimated:YES completion:^{
+                    [SuccessfullPostViewController presentFromViewController:presentingController];
+                }];
             }
             else {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was a problem posting the activity." preferredStyle:UIAlertControllerStyleAlert];
