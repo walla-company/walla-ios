@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Food-Icon.png",
+      "filename" : "Pizza icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Food-Icon@2x.png",
+      "filename" : "Pizza icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Food-Icon@3x.png",
+      "filename" : "Pizza icon@3x.png",
       "scale" : "3x"
     }
   ],

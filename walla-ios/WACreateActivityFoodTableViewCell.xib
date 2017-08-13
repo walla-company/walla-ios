@@ -10,62 +10,64 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="72" id="xmI-Ks-DP9" customClass="WACreateActivityFoodTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="337" height="64"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="xmI-Ks-DP9" customClass="WACreateActivityFoodTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xmI-Ks-DP9" id="7BV-t9-afm">
-                <rect key="frame" x="0.0" y="0.0" width="337" height="63.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="345" height="139.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wc-ng-IM6">
-                        <rect key="frame" x="32" y="8" width="273" height="17"/>
+                        <rect key="frame" x="33" y="44.5" width="218.5" height="17"/>
                         <string key="text">Is there free food?
 </string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q66-9e-SF2" customClass="WARoundedView">
-                        <rect key="frame" x="32" y="33" width="273" height="30"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="um8-vP-X1L">
-                                <rect key="frame" x="10" y="0.0" width="253" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.5607843137254902" green="0.55686274509803924" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-iY-QhK">
-                                <rect key="frame" x="10" y="0.0" width="253" height="30"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JOg-6f-nkH">
+                        <rect key="frame" x="261.5" y="27" width="51" height="31"/>
+                        <color key="onTintColor" red="1" green="0.63529411759999999" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="foodSwitchChanged:" destination="xmI-Ks-DP9" eventType="valueChanged" id="ESR-Da-Z4f"/>
+                        </connections>
+                    </switch>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Food-Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Gbn-vQ-EVZ">
+                        <rect key="frame" x="36" y="73" width="20" height="18"/>
                         <constraints>
-                            <constraint firstItem="um8-vP-X1L" firstAttribute="leading" secondItem="Q66-9e-SF2" secondAttribute="leading" constant="10" id="4gb-AA-UTe"/>
-                            <constraint firstItem="um8-vP-X1L" firstAttribute="top" secondItem="Q66-9e-SF2" secondAttribute="top" id="G2l-Sn-9bT"/>
-                            <constraint firstItem="3kA-iY-QhK" firstAttribute="leading" secondItem="Q66-9e-SF2" secondAttribute="leading" constant="10" id="OP5-He-pI8"/>
-                            <constraint firstAttribute="trailing" secondItem="3kA-iY-QhK" secondAttribute="trailing" constant="10" id="QJF-wQ-lhz"/>
-                            <constraint firstAttribute="bottom" secondItem="um8-vP-X1L" secondAttribute="bottom" id="Wqk-AG-j7X"/>
-                            <constraint firstAttribute="bottom" secondItem="3kA-iY-QhK" secondAttribute="bottom" id="X40-H9-eVS"/>
-                            <constraint firstItem="3kA-iY-QhK" firstAttribute="top" secondItem="Q66-9e-SF2" secondAttribute="top" id="cSf-WX-jy5"/>
-                            <constraint firstAttribute="trailing" secondItem="um8-vP-X1L" secondAttribute="trailing" constant="10" id="rC7-w5-ieo"/>
-                            <constraint firstAttribute="height" constant="30" id="tsQ-1O-Cni"/>
+                            <constraint firstAttribute="height" constant="18" id="1hB-Px-VZH"/>
+                            <constraint firstAttribute="width" constant="20" id="pVy-py-EbN"/>
                         </constraints>
-                    </view>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A pizza icon will show up on your post to inicate that your activity will have free food." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybd-F4-wZy">
+                        <rect key="frame" x="66" y="68" width="186" height="71.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="6wc-ng-IM6" secondAttribute="trailing" constant="32" id="DSG-YV-Pca"/>
-                    <constraint firstItem="6wc-ng-IM6" firstAttribute="top" secondItem="7BV-t9-afm" secondAttribute="top" constant="8" id="Noh-bT-bWr"/>
-                    <constraint firstItem="Q66-9e-SF2" firstAttribute="top" secondItem="6wc-ng-IM6" secondAttribute="bottom" constant="8" id="TIQ-y9-UA7"/>
-                    <constraint firstItem="Q66-9e-SF2" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="32" id="Vd5-6Z-jYw"/>
-                    <constraint firstItem="6wc-ng-IM6" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="32" id="hdk-Pv-KMf"/>
-                    <constraint firstAttribute="trailing" secondItem="Q66-9e-SF2" secondAttribute="trailing" constant="32" id="mdb-Oa-A1T"/>
-                    <constraint firstAttribute="bottom" secondItem="Q66-9e-SF2" secondAttribute="bottom" id="wid-rN-i3R"/>
+                    <constraint firstItem="Gbn-vQ-EVZ" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="36" id="8qc-XM-fL7"/>
+                    <constraint firstItem="Gbn-vQ-EVZ" firstAttribute="top" secondItem="6wc-ng-IM6" secondAttribute="bottom" constant="12" id="Hyl-72-SYP"/>
+                    <constraint firstItem="JOg-6f-nkH" firstAttribute="top" secondItem="7BV-t9-afm" secondAttribute="top" constant="27" id="PqN-r4-BCm"/>
+                    <constraint firstItem="ybd-F4-wZy" firstAttribute="leading" secondItem="Gbn-vQ-EVZ" secondAttribute="trailing" constant="10" id="YtQ-hY-Jtl"/>
+                    <constraint firstItem="ybd-F4-wZy" firstAttribute="top" secondItem="JOg-6f-nkH" secondAttribute="bottom" constant="10" id="bQ6-Sd-lfd"/>
+                    <constraint firstItem="JOg-6f-nkH" firstAttribute="leading" secondItem="6wc-ng-IM6" secondAttribute="trailing" constant="10" id="e1u-de-udT"/>
+                    <constraint firstItem="JOg-6f-nkH" firstAttribute="leading" secondItem="ybd-F4-wZy" secondAttribute="trailing" constant="10" id="fdL-hO-H4O"/>
+                    <constraint firstItem="6wc-ng-IM6" firstAttribute="leading" secondItem="7BV-t9-afm" secondAttribute="leading" constant="33" id="hdk-Pv-KMf"/>
+                    <constraint firstItem="6wc-ng-IM6" firstAttribute="baseline" secondItem="JOg-6f-nkH" secondAttribute="baseline" id="jWG-Ue-ZZP"/>
+                    <constraint firstAttribute="trailing" secondItem="JOg-6f-nkH" secondAttribute="trailing" constant="34.5" id="k3N-vT-9hO"/>
+                    <constraint firstAttribute="bottom" secondItem="ybd-F4-wZy" secondAttribute="bottom" id="oFI-In-M3x"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="freeFoodButton" destination="3kA-iY-QhK" id="BUC-oj-uDX"/>
-                <outlet property="freeFoodLabel" destination="um8-vP-X1L" id="z0I-Pv-an4"/>
+                <outlet property="foodSwitch" destination="JOg-6f-nkH" id="EDM-93-ZlQ"/>
+                <outlet property="pizzaIcon" destination="Gbn-vQ-EVZ" id="ARK-Z6-Q9F"/>
+                <outlet property="pizzaLabel" destination="ybd-F4-wZy" id="aIn-2A-lcq"/>
             </connections>
-            <point key="canvasLocation" x="43" y="-63"/>
+            <point key="canvasLocation" x="42.5" y="-50"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Food-Icon" width="20" height="18"/>
+    </resources>
 </document>

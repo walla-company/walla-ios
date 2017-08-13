@@ -50,9 +50,8 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
     kTimeCellRow = 1,
     kMeetingPlaceCellRow = 2,
     kLocationCellRow = 3,
-    kHostCellRow = 4,
-    kFoodCellRow = 5,
-    kPostCellRow = 6,
+    kFoodCellRow = 4,
+    kPostCellRow = 5,
 };
 
 @property NSArray *userGroupIDs;

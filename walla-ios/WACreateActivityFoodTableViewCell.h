@@ -10,8 +10,6 @@
 
 @interface WACreateActivityFoodTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *freeFoodButton;
-
-@property (weak, nonatomic) IBOutlet UILabel *freeFoodLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *foodSwitch;
 
 @end

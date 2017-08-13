@@ -33,8 +33,6 @@ double const WAMaximumDescriptionLength = 200;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     
-    self.navigationItem.rightBarButtonItem.enabled = false;
-    
     // Set up table view
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -182,7 +180,8 @@ double const WAMaximumDescriptionLength = 200;
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
-        
+        cell.meetingPlaceTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:cell.meetingPlaceTextField.placeholder attributes:@{NSForegroundColorAttributeName: self.notSelectedColor}];
+
         cell.meetingPlaceTextField.delegate = self;
         
         return cell;
@@ -206,7 +205,7 @@ double const WAMaximumDescriptionLength = 200;
         
         if (self.activityLocation) {
             cell.locationLabel.text = self.activityLocation.name;
-            cell.locationLabel.textColor = [WAValues selectedTextColor];
+            cell.locationLabel.textColor = [self selectedColor];
             
             GMSMarker *marker = [GMSMarker markerWithPosition:self.activityLocation.coordinate];
             marker.title = self.activityLocation.name;
@@ -217,7 +216,7 @@ double const WAMaximumDescriptionLength = 200;
         }
         else {
             cell.locationLabel.text = @"Enter address";
-            cell.locationLabel.textColor = [WAValues notSelectedTextColor];
+            cell.locationLabel.textColor = [self notSelectedColor];
             
             if (self.userLocation) {
                 GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.userLocation.coordinate zoom:16];
@@ -237,10 +236,6 @@ double const WAMaximumDescriptionLength = 200;
         
         cell.selectionStyle = UITableViewCellSeparatorStyleNone;
         cell.backgroundColor = [UIColor clearColor];
-        
-        [cell.freeFoodButton addTarget:self action:@selector(freeFoodButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
-        cell.freeFoodLabel.text = (self.freeFood) ? @"Yes" : @"No";
         
         return cell;
     }
@@ -302,35 +297,12 @@ double const WAMaximumDescriptionLength = 200;
     [self presentViewController:autocompleteView animated:YES completion:nil];
 }
 
-- (void)freeFoodButtonPressed:(UIButton *)button {
-    
-    UIAlertController *levelMenu = [UIAlertController alertControllerWithTitle:@"Is there free food?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *option1 = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
-        
-        self.freeFood = true;
-        
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-    UIAlertAction *option2 = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler: ^(UIAlertAction *action){
-        
-        self.freeFood = false;
-        
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    
-    [levelMenu addAction:option1];
-    [levelMenu addAction:option2];
-    
-    [levelMenu addAction:cancelAction];
-    
-    [self presentViewController:levelMenu animated:true completion:nil];
-    
+- (IBAction)postBarButtonPressed:(id)sender {
+    [self postButtonPressed:nil];
 }
 
 - (void)postButtonPressed:(UIButton *)button {
+    self.freeFood = ((WACreateActivityFoodTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kFoodCellRow inSection:0]]).foodSwitch.isOn;
     
     NSLog(@"Title: %@", self.activityTitle);
     NSLog(@"Start time: %@", self.activityStartTime);
