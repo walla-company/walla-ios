@@ -38,7 +38,7 @@
     NSLog(@"delegate tabbarController: %@", tabBarController);
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Introduction" bundle:nil] instantiateInitialViewController];
     [self.window makeKeyAndVisible];
     
     // Setup default values
@@ -70,7 +70,7 @@
             self.introComplete = false;
         }
         
-        [self displayAppropriateView];
+        //[self displayAppropriateView];
         
         if (user && self.firstLogin) {
             self.firstLogin = false;
@@ -159,7 +159,6 @@
 }
 
 - (void)signupComplete {
-    
     NSLog(@"signupComplete");
     self.introComplete = false;
     [self displayAppropriateView];
