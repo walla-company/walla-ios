@@ -17,7 +17,6 @@
 #import "WAProfileEditProfileDetailsTableViewCell.h"
 #import "WAProfileEditGroupHeaderTableViewCell.h"
 #import "WAProfileEditGroupTableViewCell.h"
-#import "WAProfileEditAddGroupTableViewCell.h"
 
 #import "WAValues.h"
 #import "WAServer.h"
@@ -48,7 +47,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditProfileDetailsTableViewCell" bundle:nil] forCellReuseIdentifier:@"detailsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditGroupHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupHeaderCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"groupCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"WAProfileEditAddGroupTableViewCell" bundle:nil] forCellReuseIdentifier:@"addGroupCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -128,7 +126,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.user) return 9 + [self.user.groups count];
+    int mandatoryRows = [self.user.groups count] > 0 ? 8 : 7;
+    if (self.user) return mandatoryRows + [self.user.groups count];
     
     return 0;
 }
@@ -267,7 +266,7 @@
         return cell;
     }
     
-    if ([self.user.groups count] > 0 && indexPath.row >= 8 && indexPath.row <= [self.user.groups count] + 7) {
+//    if ([self.user.groups count] > 0 && indexPath.row >= 8 && indexPath.row <= [self.user.groups count] + 7) {
         
         WAProfileEditGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell" forIndexPath:indexPath];
         
@@ -296,15 +295,8 @@
         [cell.deleteButton addTarget:self action:@selector(leaveGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
-    }
+//    }
     
-    WAProfileEditAddGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addGroupCell" forIndexPath:indexPath];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    [cell.addGroupButton addTarget:self action:@selector(addGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
 }
 
 #pragma mark - Button targets

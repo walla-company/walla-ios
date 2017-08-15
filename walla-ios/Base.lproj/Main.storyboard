@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under maintenance. We'll be back soon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFl-ta-wQL">
-                                <rect key="frame" x="20" y="332.33333333333326" width="374" height="71.666666666666686"/>
+                                <rect key="frame" x="20" y="332" width="374" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -267,6 +267,7 @@
                     <connections>
                         <segue destination="yge-hd-rZi" kind="show" identifier="openShowMap" id="zp7-Y6-GrX"/>
                         <segue destination="7y8-Se-XhZ" kind="presentation" identifier="openCreateActivity" id="7BD-Kn-vwa"/>
+                        <segue destination="NEI-92-C42" kind="show" identifier="showUserProfile" id="cBo-g0-hhV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVc-nt-f7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -295,7 +296,7 @@
         <scene sceneID="Vme-qv-Wdv">
             <objects>
                 <navigationController id="TYE-UK-KRC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5oH-dU-xUJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5oH-dU-xUJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -339,7 +340,7 @@
         <scene sceneID="Uc0-Nt-q4W">
             <objects>
                 <navigationController id="7y8-Se-XhZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GbL-Eo-hgW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GbL-Eo-hgW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -362,7 +363,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yV4-aP-dxA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="TabbarIcon1" id="bJK-S7-tQq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vm9-uJ-i4N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vm9-uJ-i4N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -514,7 +515,7 @@
         <scene sceneID="jsV-Zo-Qpv">
             <objects>
                 <navigationController storyboardIdentifier="LoginSignUpNavigationController" navigationBarHidden="YES" id="mXM-bi-Rlb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="076-ZJ-Ht3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="076-ZJ-Ht3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -768,7 +769,7 @@
         <scene sceneID="HUl-eI-FvJ">
             <objects>
                 <navigationController storyboardIdentifier="IntroNavigationController" navigationBarHidden="YES" id="Iyq-DJ-yyL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kpu-bG-Liz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kpu-bG-Liz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -786,7 +787,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdQ-EN-hEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Profile" image="TabbarIcon5" id="J9U-f5-Ee8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kr4-DY-Dct">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kr4-DY-Dct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -810,7 +811,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gd1-JI-yaw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="TabbarIcon4" id="YR8-b0-Oen"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ptP-od-nTd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ptP-od-nTd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -841,7 +842,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version not supported. Update Walla from the App Store." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-Vn-Pdd">
-                                <rect key="frame" x="20" y="314.33333333333326" width="374" height="107.66666666666669"/>
+                                <rect key="frame" x="20" y="314" width="374" height="108"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1041,6 +1042,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mOU-VR-Nuh"/>
+        <segue reference="cBo-g0-hhV"/>
         <segue reference="7BD-Kn-vwa"/>
     </inferredMetricsTieBreakers>
 </document>

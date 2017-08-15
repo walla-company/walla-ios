@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C6A7EA71F435A9400BBAE6C /* WATapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6A7EA61F435A9400BBAE6C /* WATapGestureRecognizer.m */; };
 		5CB10B6E1F422CC7000E258C /* WAAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */; };
 		5CB10B741F422E26000E258C /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B721F422E25000E258C /* PlaceTableViewCell.m */; };
 		5CB10B751F422E26000E258C /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */; };
@@ -162,6 +163,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C6A7EA51F435A9400BBAE6C /* WATapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATapGestureRecognizer.h; sourceTree = "<group>"; };
+		5C6A7EA61F435A9400BBAE6C /* WATapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATapGestureRecognizer.m; sourceTree = "<group>"; };
 		5CB10B6C1F422CC7000E258C /* WAAddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAddLocationViewController.h; sourceTree = "<group>"; };
 		5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAddLocationViewController.m; sourceTree = "<group>"; };
 		5CB10B711F422E25000E258C /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
@@ -423,6 +426,15 @@
 				9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5C6A7EA41F435A5E00BBAE6C /* WATapGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				5C6A7EA51F435A9400BBAE6C /* WATapGestureRecognizer.h */,
+				5C6A7EA61F435A9400BBAE6C /* WATapGestureRecognizer.m */,
+			);
+			name = WATapGestureRecognizer;
 			sourceTree = "<group>";
 		};
 		5CB10B6B1F422B83000E258C /* WAAddLocationViewController */ = {
@@ -946,6 +958,7 @@
 		EBBF5AC81E05ACFD0066F7E1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				5C6A7EA41F435A5E00BBAE6C /* WATapGestureRecognizer */,
 				75BBFA701F3F2F4D00C5A580 /* VDDatePicker */,
 				EB80C1DF1E76220800CF01D1 /* WAShadowHeader */,
 				EB033A291E0E338D00621C35 /* WAShadowView */,
@@ -1631,6 +1644,7 @@
 				EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */,
 				EBFEF8341E516FB100FBA24F /* AccountSuspendedViewController.m in Sources */,
 				EBA976BE1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m in Sources */,
+				5C6A7EA71F435A9400BBAE6C /* WATapGestureRecognizer.m in Sources */,
 				EBDA5C641E05DE5A00B61AED /* WAActivityTab.m in Sources */,
 				EBA976E61E7C833B00B4A996 /* WAAuthCheckEmailTableViewController.m in Sources */,
 				EBA977041E7C9AA900B4A996 /* WAAuthSignupTableViewCell.m in Sources */,

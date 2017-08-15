@@ -21,6 +21,8 @@ double const WAMaximumDescriptionLength = 200;
 @import Firebase;
 
 @interface WACreateActivityTableViewController ()
+@property (nonatomic, strong) UITextView *editingTextView;
+@property (nonatomic, strong) UITextField *editingTextField;
 
 @end
 
@@ -161,7 +163,7 @@ double const WAMaximumDescriptionLength = 200;
             cell.titleTextView.textColor = self.selectedColor;
             cell.titleTextView.text = self.activityTitle;
         }
-        
+        self.editingTextView = cell.titleTextView;
         return cell;
     }
     
@@ -193,7 +195,7 @@ double const WAMaximumDescriptionLength = 200;
         cell.meetingPlaceTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:cell.meetingPlaceTextField.placeholder attributes:@{NSForegroundColorAttributeName: self.notSelectedColor}];
 
         cell.meetingPlaceTextField.delegate = self;
-        
+        self.editingTextField = cell.meetingPlaceTextField;
         return cell;
     }
     
@@ -265,6 +267,8 @@ double const WAMaximumDescriptionLength = 200;
 #pragma mark - Button targets
 
 - (void)selectTimeButtonPressed:(UIButton *)button {
+    [self.editingTextView resignFirstResponder];
+    [self.editingTextField resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     
     [VDDatePicker showInView:UIApplication.sharedApplication.keyWindow withSelectionBlock:^(NSDate *date) {

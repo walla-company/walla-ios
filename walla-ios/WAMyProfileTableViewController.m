@@ -56,14 +56,16 @@
     
     self.profileImage = [UIImage imageNamed:@"BlankCircle"];
     
-    self.groupsDictionary = [[NSMutableDictionary alloc] init];;
+    self.groupsDictionary = [[NSMutableDictionary alloc] init];
+    
+    self.title = self.userId != nil ? @"Profile" : @"My Profile";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
-    [WAServer getUserWithID:[FIRAuth auth].currentUser.uid  completion:^(WAUser *user) {
+    [WAServer getUserWithID: self.userId != nil ? self.userId : [FIRAuth auth].currentUser.uid  completion:^(WAUser *user) {
         
         self.user = user;
         
@@ -115,8 +117,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 8 + [self.user.groups count];
+    NSInteger mandatoryRows = self.userId != nil ? 3 : 8;
+    return [self.user.groups count] + mandatoryRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

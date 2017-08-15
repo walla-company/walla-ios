@@ -20,4 +20,6 @@
 
 @property NSMutableDictionary *groupsDictionary;
 
+@property NSString *userId;
+
 @end

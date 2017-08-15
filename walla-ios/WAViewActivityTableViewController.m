@@ -8,7 +8,11 @@
 
 #import "WAViewActivityTableViewController.h"
 
+#import "WATapGestureRecognizer.h"
+
 #import "WAShowMapViewController.h"
+
+#import "WAMyProfileTableViewController.h"
 
 #import "WAServer.h"
 
@@ -225,6 +229,10 @@
         cell.profileImageView.clipsToBounds = true;
         cell.profileImageView.layer.cornerRadius = 20;
         
+        WATapGestureRecognizer *tapGestureRecognizer = [[WATapGestureRecognizer alloc]initWithTarget:self action:@selector(profileTapGestureRecognizerHandler:)];
+        tapGestureRecognizer.data = self.viewingActivity.host;
+        [cell.profileImageView addGestureRecognizer:tapGestureRecognizer];
+        
         NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
         [formatter1 setDateFormat:@"h:mm aa"];
         NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
@@ -275,6 +283,10 @@
         cell.profileImageView.clipsToBounds = true;
         cell.profileImageView.layer.cornerRadius = 20;
         
+        WATapGestureRecognizer *tapGestureRecognizer = [[WATapGestureRecognizer alloc]initWithTarget:self action:@selector(profileTapGestureRecognizerHandler:)];
+        tapGestureRecognizer.data = self.viewingActivity.host;
+        [cell.profileImageView addGestureRecognizer:tapGestureRecognizer];
+
         NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
         [formatter1 setDateFormat:@"h:mm aa"];
         NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
@@ -382,7 +394,10 @@
         cell.profileImageView.image = profileImage;
         cell.profileImageView.clipsToBounds = true;
         cell.profileImageView.layer.cornerRadius = 20;
-        
+        WATapGestureRecognizer *tapGestureRecognizer = [[WATapGestureRecognizer alloc]initWithTarget:self action:@selector(profileTapGestureRecognizerHandler:)];
+        tapGestureRecognizer.data = self.viewingActivity.host;
+        [cell.profileImageView addGestureRecognizer:tapGestureRecognizer];
+
         NSString *freeFoodString = (self.viewingActivity.freeFood) ? @"\nFree Food!" : @"";
         
         NSString *hostedByString = @"";
@@ -443,6 +458,10 @@
         cell.profileImageView.image = profileImage;
         cell.profileImageView.clipsToBounds = true;
         cell.profileImageView.layer.cornerRadius = 20;
+        WATapGestureRecognizer *tapGestureRecognizer = [[WATapGestureRecognizer alloc]initWithTarget:self action:@selector(profileTapGestureRecognizerHandler:)];
+        tapGestureRecognizer.data = discussionUID;
+        [cell.profileImageView addGestureRecognizer:tapGestureRecognizer];
+
     }
     
     return cell;
@@ -584,6 +603,10 @@
     }
     
 }
+- (void)profileTapGestureRecognizerHandler:(WATapGestureRecognizer *)sender {
+
+    [self performSegueWithIdentifier:@"showUserProfile" sender: sender.data];
+}
 
 #pragma mark - Text view delegate
 
@@ -684,7 +707,15 @@
         destinationController.location = self.viewingActivity.location;
         destinationController.locationName = self.viewingActivity.locationName;
         destinationController.locationAddress = self.viewingActivity.locationAddress;
+    
+    } else if ([segue.identifier isEqualToString:@"showUserProfile"]) {
+        
+        NSString *userId = (NSString *)sender;
+        WAMyProfileTableViewController *destinationController = (WAMyProfileTableViewController *) [segue destinationViewController];
+        destinationController.userId = userId;
     }
+    
+    
 }
 
 @end
