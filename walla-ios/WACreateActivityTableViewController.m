@@ -116,6 +116,16 @@ double const WAMaximumDescriptionLength = 200;
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showAddLocation"]) {
+        UINavigationController *destinationController = (UINavigationController *) [segue destinationViewController];
+        
+        WAAddLocationViewController *viewController = (WAAddLocationViewController *) [destinationController viewControllers].firstObject;
+        viewController.delegate = self;
+    }
+}
+
 #pragma mark - Post Activity
 
 - (void)postActivity {
@@ -292,8 +302,12 @@ double const WAMaximumDescriptionLength = 200;
 }
 
 - (void)searchLocationButtonPressed:(UIButton *)button {
-    GMSAutocompleteViewController *autocompleteView = [[GMSAutocompleteViewController alloc] init];
-    autocompleteView.delegate = self;
+    [self performSegueWithIdentifier:@"showAddLocation" sender:self];
+
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *autocompleteView = [mainStoryboard instantiateViewControllerWithIdentifier:@"WAAddLocationViewController"];
+
+    
     [self presentViewController:autocompleteView animated:YES completion:nil];
 }
 
@@ -391,9 +405,7 @@ double const WAMaximumDescriptionLength = 200;
 }
 
 #pragma mark - Places autocomplete view delegate
-
-- (void)viewController:(GMSAutocompleteViewController *)viewController
-didAutocompleteWithPlace:(GMSPlace *)place {
+- (void)addLocationViewController:(WAAddLocationViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place {
     
     self.activityLocation = place;
     
@@ -406,13 +418,10 @@ didAutocompleteWithPlace:(GMSPlace *)place {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewController:(GMSAutocompleteViewController *)viewController
-didFailAutocompleteWithError:(NSError *)error {
-    
+- (void)addLocationViewController:(WAAddLocationViewController *)viewController didFailAutocompleteWithError:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+- (void)addLocationViewControllerWasCancelled:(WAAddLocationViewController *)viewController {
     
     self.activityLocation = nil;
     

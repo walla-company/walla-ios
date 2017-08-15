@@ -23,11 +23,12 @@
 
 #import "WADatePickerViewController.h"
 #import "WAGroupPickerViewController.h"
+#import "WAAddLocationViewController.h"
 
 #import "WAGroup.h"
 #import "WAUser.h"
 
-@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
+@interface WACreateActivityTableViewController : UITableViewController <WADatePickerViewControllerDelegate, WAGroupPickerViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, WAAddLocationViewControllerDelegate>
 
 @property BOOL userVerified;
 
@@ -44,7 +45,6 @@
 
 @property UIColor *notSelectedColor;
 @property UIColor *selectedColor;
-
 typedef NS_ENUM(NSUInteger, ShapeType) {
     kDetailsCellRow = 0,
     kTimeCellRow = 1,

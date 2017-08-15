@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CB10B6E1F422CC7000E258C /* WAAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */; };
+		5CB10B741F422E26000E258C /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B721F422E25000E258C /* PlaceTableViewCell.m */; };
+		5CB10B751F422E26000E258C /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */; };
 		75B79A2B1F3F01B700D27142 /* SuccessfullPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */; };
 		75B79A2D1F3F01CB00D27142 /* Alerts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */; };
 		75BBFA741F3F2F7600C5A580 /* VDDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BBFA711F3F2F7600C5A580 /* VDDatePicker.xib */; };
@@ -159,6 +162,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5CB10B6C1F422CC7000E258C /* WAAddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAddLocationViewController.h; sourceTree = "<group>"; };
+		5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAddLocationViewController.m; sourceTree = "<group>"; };
+		5CB10B711F422E25000E258C /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
+		5CB10B721F422E25000E258C /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
+		5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
 		75B79A291F3F01B700D27142 /* SuccessfullPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessfullPostViewController.h; sourceTree = "<group>"; };
 		75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessfullPostViewController.m; sourceTree = "<group>"; };
 		75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Alerts.storyboard; sourceTree = "<group>"; };
@@ -415,6 +423,34 @@
 				9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5CB10B6B1F422B83000E258C /* WAAddLocationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5CB10B6F1F422DE0000E258C /* Cells */,
+				5CB10B6C1F422CC7000E258C /* WAAddLocationViewController.h */,
+				5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */,
+			);
+			name = WAAddLocationViewController;
+			sourceTree = "<group>";
+		};
+		5CB10B6F1F422DE0000E258C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5CB10B701F422DF4000E258C /* WAPlaceTableViewCell */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		5CB10B701F422DF4000E258C /* WAPlaceTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5CB10B711F422E25000E258C /* PlaceTableViewCell.h */,
+				5CB10B721F422E25000E258C /* PlaceTableViewCell.m */,
+				5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */,
+			);
+			name = WAPlaceTableViewCell;
 			sourceTree = "<group>";
 		};
 		75B79A281F3F019800D27142 /* Custom Alerts */ = {
@@ -1266,6 +1302,7 @@
 		EBDA5C331E05B2F400B61AED /* WACreateActivityTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5CB10B6B1F422B83000E258C /* WAAddLocationViewController */,
 				EBDA5C341E05B31200B61AED /* WACreateActivityTableViewController.h */,
 				EBDA5C351E05B31200B61AED /* WACreateActivityTableViewController.m */,
 				EBDA5C371E05B6B800B61AED /* Cells */,
@@ -1448,6 +1485,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB10B751F422E26000E258C /* PlaceTableViewCell.xib in Resources */,
 				EBCB57011E134671000530F6 /* WAGroupShadowTableViewCell.xib in Resources */,
 				EBA976FF1E7C918100B4A996 /* WAAuthLoginTableViewCell.xib in Resources */,
 				EBA976BF1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib in Resources */,
@@ -1588,6 +1626,7 @@
 				EB9958961E46DA0200601E2D /* WAViewActivityPostDiscussionTableViewCell.m in Sources */,
 				EB033A331E0E340E00621C35 /* WAGroupPickerView.m in Sources */,
 				EBDA5C361E05B31200B61AED /* WACreateActivityTableViewController.m in Sources */,
+				5CB10B6E1F422CC7000E258C /* WAAddLocationViewController.m in Sources */,
 				EBA976F31E7C8D2100B4A996 /* WAAuthLoginTableViewController.m in Sources */,
 				EBDA5C2F1E05B16D00B61AED /* WANotificationsTableViewController.m in Sources */,
 				EBFEF8341E516FB100FBA24F /* AccountSuspendedViewController.m in Sources */,
@@ -1611,6 +1650,7 @@
 				EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */,
 				EBCB568B1E11B0AB000530F6 /* WAActivity.m in Sources */,
 				EB033A301E0E33F400621C35 /* WAGroupPickerViewController.m in Sources */,
+				5CB10B741F422E26000E258C /* PlaceTableViewCell.m in Sources */,
 				EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */,
 				EB80C1E21E76223500CF01D1 /* WAShadowHeader.m in Sources */,
 				EB9915631E7646080036D897 /* WAMyProfileClearTableViewCell.m in Sources */,
