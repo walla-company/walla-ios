@@ -21,6 +21,8 @@
 #import "WAValues.h"
 #import "WAServer.h"
 
+NSString * const WADetailsPlaceholderText = @"Tell everyone about yourself!\nDescribe your hobbies and fun facts.\nYou can also answer the following questions:\n1. Why this school?\n2. What kind of people do you want to meet in college?\n3. What are your 3 goals for the semester?";
+
 @import Firebase;
 
 @interface WAProfileEditProfileTableViewController ()
@@ -245,7 +247,7 @@
         
         if ([self.user.details isEqual: @""]) {
             cell.detailsTextView.textColor = [WAValues notSelectedTextColor];
-            cell.detailsTextView.text = @"Details";
+            cell.detailsTextView.text = WADetailsPlaceholderText;
         }
         else {
             cell.detailsTextView.textColor = [WAValues selectedTextColor];
@@ -619,7 +621,7 @@
     
     if ([self.user.details isEqualToString:@""]) {
         textView.textColor = [WAValues notSelectedTextColor];
-        textView.text = @"Details";
+        textView.text = WADetailsPlaceholderText;
     }
     
     [WAServer updateUserDescription:self.user.details completion:nil];
