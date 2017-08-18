@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C3191341F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3191331F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.m */; };
 		5C6A7EA71F435A9400BBAE6C /* WATapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6A7EA61F435A9400BBAE6C /* WATapGestureRecognizer.m */; };
 		5CB10B6E1F422CC7000E258C /* WAAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B6D1F422CC7000E258C /* WAAddLocationViewController.m */; };
 		5CB10B741F422E26000E258C /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB10B721F422E25000E258C /* PlaceTableViewCell.m */; };
 		5CB10B751F422E26000E258C /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */; };
+		5CCECE491F449716007C4D07 /* WATutorialItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCECE481F449716007C4D07 /* WATutorialItemViewController.m */; };
+		5CCECE4C1F449F34007C4D07 /* WATutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCECE4B1F449F34007C4D07 /* WATutorialViewController.m */; };
+		5CCECE4F1F44BE79007C4D07 /* WAItemPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCECE4E1F44BE79007C4D07 /* WAItemPageViewController.m */; };
 		75B79A2B1F3F01B700D27142 /* SuccessfullPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */; };
 		75B79A2D1F3F01CB00D27142 /* Alerts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */; };
 		75BBFA741F3F2F7600C5A580 /* VDDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BBFA711F3F2F7600C5A580 /* VDDatePicker.xib */; };
 		75BBFA751F3F2F7600C5A580 /* VDDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBFA731F3F2F7600C5A580 /* VDDatePicker.m */; };
+		75BBFA771F405BAD00C5A580 /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BBFA761F405BAD00C5A580 /* Introduction.storyboard */; };
+		75BBFA7B1F40612000C5A580 /* LogInIndroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBFA7A1F40612000C5A580 /* LogInIndroductionViewController.m */; };
 		E0D43A5A712F6EC8AA8F25D7 /* libPods-walla-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB8BC03942D5C0D5D88AAE0 /* libPods-walla-ios.a */; };
 		EB02386F1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB02386D1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.m */; };
 		EB0238701E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB02386E1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.xib */; };
@@ -163,6 +169,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C3191321F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAPushNotificationsPermissionsRequestAlert.h; sourceTree = "<group>"; };
+		5C3191331F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAPushNotificationsPermissionsRequestAlert.m; sourceTree = "<group>"; };
 		5C6A7EA51F435A9400BBAE6C /* WATapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATapGestureRecognizer.h; sourceTree = "<group>"; };
 		5C6A7EA61F435A9400BBAE6C /* WATapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATapGestureRecognizer.m; sourceTree = "<group>"; };
 		5CB10B6C1F422CC7000E258C /* WAAddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAddLocationViewController.h; sourceTree = "<group>"; };
@@ -170,12 +178,21 @@
 		5CB10B711F422E25000E258C /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
 		5CB10B721F422E25000E258C /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
 		5CB10B731F422E25000E258C /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		5CCECE471F449716007C4D07 /* WATutorialItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATutorialItemViewController.h; sourceTree = "<group>"; };
+		5CCECE481F449716007C4D07 /* WATutorialItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATutorialItemViewController.m; sourceTree = "<group>"; };
+		5CCECE4A1F449F34007C4D07 /* WATutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATutorialViewController.h; sourceTree = "<group>"; };
+		5CCECE4B1F449F34007C4D07 /* WATutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATutorialViewController.m; sourceTree = "<group>"; };
+		5CCECE4D1F44BE79007C4D07 /* WAItemPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAItemPageViewController.h; sourceTree = "<group>"; };
+		5CCECE4E1F44BE79007C4D07 /* WAItemPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAItemPageViewController.m; sourceTree = "<group>"; };
 		75B79A291F3F01B700D27142 /* SuccessfullPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessfullPostViewController.h; sourceTree = "<group>"; };
 		75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessfullPostViewController.m; sourceTree = "<group>"; };
 		75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Alerts.storyboard; sourceTree = "<group>"; };
 		75BBFA711F3F2F7600C5A580 /* VDDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VDDatePicker.xib; sourceTree = "<group>"; };
 		75BBFA721F3F2F7600C5A580 /* VDDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDDatePicker.h; sourceTree = "<group>"; };
 		75BBFA731F3F2F7600C5A580 /* VDDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDDatePicker.m; sourceTree = "<group>"; };
+		75BBFA761F405BAD00C5A580 /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
+		75BBFA791F40612000C5A580 /* LogInIndroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInIndroductionViewController.h; sourceTree = "<group>"; };
+		75BBFA7A1F40612000C5A580 /* LogInIndroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInIndroductionViewController.m; sourceTree = "<group>"; };
 		9BB783E4F550F64DF13D9E83 /* Pods-walla-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.release.xcconfig"; sourceTree = "<group>"; };
 		DDF97E67C912CB0C6F0FD992 /* Pods-walla-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walla-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walla-ios/Pods-walla-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		EB02386C1E79E9EC0037844D /* WAViewActivityReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewActivityReplyTableViewCell.h; sourceTree = "<group>"; };
@@ -470,6 +487,8 @@
 			children = (
 				75B79A291F3F01B700D27142 /* SuccessfullPostViewController.h */,
 				75B79A2A1F3F01B700D27142 /* SuccessfullPostViewController.m */,
+				5C3191321F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.h */,
+				5C3191331F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.m */,
 			);
 			path = "Custom Alerts";
 			sourceTree = "<group>";
@@ -482,6 +501,21 @@
 				75BBFA731F3F2F7600C5A580 /* VDDatePicker.m */,
 			);
 			name = VDDatePicker;
+			sourceTree = "<group>";
+		};
+		75BBFA781F4060EE00C5A580 /* Introduction Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5CCECE4D1F44BE79007C4D07 /* WAItemPageViewController.h */,
+				5CCECE4E1F44BE79007C4D07 /* WAItemPageViewController.m */,
+				5CCECE4A1F449F34007C4D07 /* WATutorialViewController.h */,
+				5CCECE4B1F449F34007C4D07 /* WATutorialViewController.m */,
+				5CCECE471F449716007C4D07 /* WATutorialItemViewController.h */,
+				5CCECE481F449716007C4D07 /* WATutorialItemViewController.m */,
+				75BBFA791F40612000C5A580 /* LogInIndroductionViewController.h */,
+				75BBFA7A1F40612000C5A580 /* LogInIndroductionViewController.m */,
+			);
+			name = "Introduction Screens";
 			sourceTree = "<group>";
 		};
 		EB02386B1E79E9980037844D /* WAViewActivityReplyTableViewCell */ = {
@@ -593,6 +627,7 @@
 		EB0E8BB51E008B0A00BC293C /* walla-ios */ = {
 			isa = PBXGroup;
 			children = (
+				75BBFA781F4060EE00C5A580 /* Introduction Screens */,
 				75B79A281F3F019800D27142 /* Custom Alerts */,
 				EBC9D6F21E309A6B00F83DF6 /* walla-ios.entitlements */,
 				EB0E8BB91E008B0A00BC293C /* AppDelegate.h */,
@@ -610,6 +645,7 @@
 				EBCB56F51E133B9D000530F6 /* Walla API */,
 				EB0E8BC21E008B0A00BC293C /* Main.storyboard */,
 				75B79A2C1F3F01CB00D27142 /* Alerts.storyboard */,
+				75BBFA761F405BAD00C5A580 /* Introduction.storyboard */,
 				EBA976DA1E7C824600B4A996 /* Authentication */,
 				EBA976D51E7C6A4B00B4A996 /* Intro */,
 				EB2ECEFA1E6CAC0D0022C87A /* Restriciton Views */,
@@ -1502,6 +1538,7 @@
 				EBCB57011E134671000530F6 /* WAGroupShadowTableViewCell.xib in Resources */,
 				EBA976FF1E7C918100B4A996 /* WAAuthLoginTableViewCell.xib in Resources */,
 				EBA976BF1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.xib in Resources */,
+				75BBFA771F405BAD00C5A580 /* Introduction.storyboard in Resources */,
 				EBDA5C4C1E05B90A00B61AED /* WAMyProfileMainTableViewCell.xib in Resources */,
 				EB4EA7991E0344A5000F4834 /* WAActivityTableViewCell.xib in Resources */,
 				EBA976AD1E7B94E100B4A996 /* WAMyProfileDetailsTableViewCell.xib in Resources */,
@@ -1645,6 +1682,7 @@
 				EBFEF8341E516FB100FBA24F /* AccountSuspendedViewController.m in Sources */,
 				EBA976BE1E7BA42400B4A996 /* WAProfileEditGroupTableViewCell.m in Sources */,
 				5C6A7EA71F435A9400BBAE6C /* WATapGestureRecognizer.m in Sources */,
+				5CCECE491F449716007C4D07 /* WATutorialItemViewController.m in Sources */,
 				EBDA5C641E05DE5A00B61AED /* WAActivityTab.m in Sources */,
 				EBA976E61E7C833B00B4A996 /* WAAuthCheckEmailTableViewController.m in Sources */,
 				EBA977041E7C9AA900B4A996 /* WAAuthSignupTableViewCell.m in Sources */,
@@ -1663,14 +1701,17 @@
 				EBA976C81E7BB32B00B4A996 /* WAAddGroupTableViewController.m in Sources */,
 				EBCB56581E108784000530F6 /* WAUserPickerView.m in Sources */,
 				EBCB568B1E11B0AB000530F6 /* WAActivity.m in Sources */,
+				5CCECE4C1F449F34007C4D07 /* WATutorialViewController.m in Sources */,
 				EB033A301E0E33F400621C35 /* WAGroupPickerViewController.m in Sources */,
 				5CB10B741F422E26000E258C /* PlaceTableViewCell.m in Sources */,
+				75BBFA7B1F40612000C5A580 /* LogInIndroductionViewController.m in Sources */,
 				EBCB565C1E108D12000530F6 /* WAUserTableViewCell.m in Sources */,
 				EB80C1E21E76223500CF01D1 /* WAShadowHeader.m in Sources */,
 				EB9915631E7646080036D897 /* WAMyProfileClearTableViewCell.m in Sources */,
 				EBF9D4921E6CA9B5002A7CE3 /* WAMyProfileInfoTableViewCell.m in Sources */,
 				EBCB570E1E136E57000530F6 /* WAProfileEditProfileTableViewController.m in Sources */,
 				EBA977091E7CC80400B4A996 /* WAAuthEmailConfirmationTableViewController.m in Sources */,
+				5CCECE4F1F44BE79007C4D07 /* WAItemPageViewController.m in Sources */,
 				EB2A20D11E1976FE00BE93CD /* WAShowMapViewController.m in Sources */,
 				EB4EA7981E0344A5000F4834 /* WAActivityTableViewCell.m in Sources */,
 				EB033A211E0D927300621C35 /* WACreateActivityHostTableViewCell.m in Sources */,
@@ -1698,6 +1739,7 @@
 				EBCB572C1E144711000530F6 /* WAProfileEditProfileDetailsTableViewCell.m in Sources */,
 				EBCB562C1E0F0C92000530F6 /* WADatePickerViewController.m in Sources */,
 				EBA976CD1E7BB38300B4A996 /* WAAddGroupTableViewCell.m in Sources */,
+				5C3191341F4568CA00ABC5E3 /* WAPushNotificationsPermissionsRequestAlert.m in Sources */,
 				EB9915701E7649440036D897 /* WAViewActivityTextTableViewCell.m in Sources */,
 				EB9915761E7649570036D897 /* WAViewActivityMapTableViewCell.m in Sources */,
 				EB033A171E0D924800621C35 /* WACreateActivityLocationTableViewCell.m in Sources */,

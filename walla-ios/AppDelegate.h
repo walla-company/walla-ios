@@ -38,6 +38,6 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
 };
 
 - (void)openMainFlow;
-
+- (void)setupNotifications;
 @end
 

@@ -10,6 +10,8 @@
 
 #import "WAServer.h"
 
+#import "WAPushNotificationsPermissionsRequestAlert.h"
+
 @import GoogleMaps;
 @import GooglePlaces;
 
@@ -38,7 +40,7 @@
     NSLog(@"delegate tabbarController: %@", tabBarController);
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController;
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = tabBarController;//[[UIStoryboard storyboardWithName:@"Introduction" bundle:nil] instantiateInitialViewController];
     [self.window makeKeyAndVisible];
     
     // Setup default values
@@ -129,8 +131,15 @@
      
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signupComplete) name:@"SignupComplete" object:nil];
     
-    [self setupNotifications];
-    
+    BOOL isPermissionsAsked = [[NSUserDefaults standardUserDefaults] boolForKey:@"APNSPermissionsAsked"];
+    if (isPermissionsAsked) {
+        [self setupNotifications];
+    }
+//    else {
+//        UIViewController *controller = self.window.rootViewController;
+//        [WAPushNotificationsPermissionsRequestAlert presentFromViewController: controller];
+//    }
+
     return YES;
 }
 
@@ -159,7 +168,6 @@
 }
 
 - (void)signupComplete {
-    
     NSLog(@"signupComplete");
     self.introComplete = false;
     [self displayAppropriateView];
@@ -211,9 +219,13 @@
         
         if (self.currentView != kViewingLoginSignup) {
             
-            UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+            //UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginSignUpNavigationController"];
+            UINavigationController *navigationController = [[UIStoryboard storyboardWithName:@"Introduction" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialNavigationController"];
+            
             NSLog(@"delegate navigationController: %@", navigationController);
+            
             [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+            
             
             self.window.rootViewController = navigationController;
             
@@ -323,7 +335,6 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 
@@ -344,6 +355,12 @@
         self.window.rootViewController = tabBarController;
         
         self.currentView = kViewingApp;
+
+        BOOL isPermissionsAsked = [[NSUserDefaults standardUserDefaults] boolForKey:@"APNSPermissionsAsked"];
+        if (!isPermissionsAsked) {
+            UIViewController *controller = self.window.rootViewController;
+            [WAPushNotificationsPermissionsRequestAlert presentFromViewController: controller];
+        }
     }
 }
 

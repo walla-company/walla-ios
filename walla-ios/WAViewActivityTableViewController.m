@@ -327,7 +327,7 @@
         
         if ([self.discussionPostText isEqualToString:@""]) {
             cell.postTextView.textColor = [WAValues notSelectedTextColor];
-            cell.postTextView.text = @"Type a message";
+            cell.postTextView.text = @"Let everyone know you're attending";
         }
         else {
             cell.postTextView.textColor = [WAValues selectedTextColor];
@@ -412,7 +412,7 @@
         
         cell.discussionView.backgroundColor = [UIColor whiteColor];
         
-        cell.nameLabel.text = @"Judy";
+        cell.nameLabel.text = @"Wallabear";
         cell.discussionTextLabel.text = @"What time is it?";
         
         cell.profileImageView.image = [UIImage imageNamed:@"judy_image"];
@@ -624,7 +624,7 @@
     
     if ([self.discussionPostText isEqualToString:@""]) {
         textView.textColor = [WAValues notSelectedTextColor];
-        textView.text = @"Type a message";
+        textView.text = @"Let everyone know you're attending";
     }
 }
 

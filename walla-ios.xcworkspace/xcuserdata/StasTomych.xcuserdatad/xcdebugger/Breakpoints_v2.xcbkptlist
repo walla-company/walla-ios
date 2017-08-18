@@ -49,6 +49,38 @@
             endingLineNumber = "366"
             landmarkName = "-postButtonPressed:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WACreateActivityTableViewController postButtonPressed:]"
+                  moduleName = "walla-ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/StasTomych/Projects/DMD/Walla/walla-ios/WACreateActivityTableViewController.m"
+                  timestampString = "524766772.458664"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "366"
+                  endingLineNumber = "366"
+                  offsetFromSymbolStart = "2017">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WACreateActivityTableViewController postButtonPressed:]"
+                  moduleName = "walla-ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/StasTomych/Projects/DMD/Walla/walla-ios/WACreateActivityTableViewController.m"
+                  timestampString = "524766772.460956"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "366"
+                  endingLineNumber = "366"
+                  offsetFromSymbolStart = "2041">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
