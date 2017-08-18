@@ -137,7 +137,8 @@
 }
 
 - (void)loginButtonPressed:(UIButton *)button {
-    
+    [self.view endEditing:YES];
+
     [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"inSignup"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

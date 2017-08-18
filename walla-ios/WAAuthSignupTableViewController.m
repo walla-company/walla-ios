@@ -151,7 +151,7 @@
 }
 
 - (void)signupButtonPressed:(UIButton *)button {
-    
+    [self.view endEditing:YES];
     WAAuthSignupTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     
     self.firstName = cell.firstNametextField.text;

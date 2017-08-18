@@ -135,11 +135,6 @@
     if (isPermissionsAsked) {
         [self setupNotifications];
     }
-//    else {
-//        UIViewController *controller = self.window.rootViewController;
-//        [WAPushNotificationsPermissionsRequestAlert presentFromViewController: controller];
-//    }
-
     return YES;
 }
 
