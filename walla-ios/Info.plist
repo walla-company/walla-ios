@@ -19,13 +19,15 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.1.4</string>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>158</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<true/>
 	<key>ITSEncryptionExportComplianceCode</key>
 	<string>cf29bb80-ce98-45aa-91e2-3847e19aa69f</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Walla uses your location to provide relevant search results for activity locations.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -21,7 +21,7 @@
 
 @property NSString *graduationYear;
 @property NSString *major;
-
+@property NSString *points;
 //@property UIImage *profileImage;
 @property NSString *profileImageURL;
 
@@ -34,6 +34,17 @@
 @property NSMutableArray *activities;
 
 @property NSArray *calendar;
+
+@property NSString *reasonSchool;
+@property NSString *wannaMeet;
+@property NSString *goal1;
+@property NSString *goal2;
+@property NSString *goal3;
+@property NSString *signatureEmoji;
+
+
+
+
 
 @property NSDictionary *pendingFriendRequests;
 

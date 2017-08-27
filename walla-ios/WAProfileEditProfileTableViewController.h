@@ -10,12 +10,12 @@
 
 #import "WAUser.h"
 
-@interface WAProfileEditProfileTableViewController : UITableViewController <UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface WAProfileEditProfileTableViewController : UITableViewController <UITextViewDelegate, UITextFieldDelegate>
 
 @property WAUser *user;
 
-@property UIImage *profileImage;
-@property BOOL loadProfilePhoto;
+//@property UIImage *profileImage;
+//@property BOOL loadProfilePhoto;
 
 @property NSMutableDictionary *groupsDictionary;
 

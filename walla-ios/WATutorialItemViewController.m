@@ -2,7 +2,7 @@
 //  WATutorialItemViewController.m
 //  walla-ios
 //
-//  Created by Sergiy Kostrykin on 8/16/17.
+//  Created by Stas Tomych on 8/16/17.
 //  Copyright © 2017 GenieUS, Inc. All rights reserved.
 //
 

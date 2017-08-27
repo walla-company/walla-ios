@@ -38,6 +38,7 @@
 + (void)deleteActivityWithID:(NSString *)auid completion:(void (^) (BOOL success))completionBlock;
 
 // User
++ (void)updateUser:(WAUser *)user completion:(void (^) (BOOL success))completionBlock;
 
 + (void)addUser:(NSString *)uid firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email completion:(void (^) (BOOL success))completionBlock;
 

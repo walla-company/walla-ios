@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="KGk-i7-Jjw" customClass="WAEmojiProfileTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MwR-cj-V7t">
+                        <rect key="frame" x="30" y="5" width="286" height="33.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgO-nc-fNy">
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="33.5"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vg5-DO-mYs">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="JrL-eK-uug"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Vg5-DO-mYs" secondAttribute="bottom" id="8PM-wn-1Fk"/>
+                                    <constraint firstAttribute="width" constant="45" id="Btr-0d-y7B"/>
+                                    <constraint firstItem="Vg5-DO-mYs" firstAttribute="top" secondItem="CgO-nc-fNy" secondAttribute="top" id="D9b-S1-7Kg"/>
+                                    <constraint firstItem="Vg5-DO-mYs" firstAttribute="leading" secondItem="CgO-nc-fNy" secondAttribute="leading" id="SVK-3i-N32"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vg5-DO-mYs" secondAttribute="trailing" id="qkL-Fs-fPc"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="CgO-nc-fNy" secondAttribute="bottom" id="Ldt-6t-jWq"/>
+                            <constraint firstItem="CgO-nc-fNy" firstAttribute="leading" secondItem="MwR-cj-V7t" secondAttribute="leading" id="bSy-Uf-9uE"/>
+                            <constraint firstItem="CgO-nc-fNy" firstAttribute="top" secondItem="MwR-cj-V7t" secondAttribute="top" id="tym-GB-ybV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MwR-cj-V7t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="1bs-uM-oFU"/>
+                    <constraint firstAttribute="bottom" secondItem="MwR-cj-V7t" secondAttribute="bottom" constant="5" id="X4H-3f-obU"/>
+                    <constraint firstAttribute="trailing" secondItem="MwR-cj-V7t" secondAttribute="trailing" constant="30" id="ktm-sO-h8G"/>
+                    <constraint firstItem="MwR-cj-V7t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="wfL-s0-5OY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="textView" destination="Vg5-DO-mYs" id="29I-TZ-zkB"/>
+            </connections>
+            <point key="canvasLocation" x="-46" y="103"/>
+        </tableViewCell>
+    </objects>
+</document>

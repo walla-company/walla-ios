@@ -1028,6 +1028,95 @@ static NSString *API_KEY = @"3eaf7dFmNF447d";
     });
     
 }
++ (void)updateUser:(WAUser *)user completion:(void (^) (BOOL success))completionBlock {
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        if ([self userAuthenticated]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setHTTPMethod:@"POST"];
+            NSString *url = [NSString stringWithFormat:@"https://walla-server.herokuapp.com/api/update_user_profile?token=%@", API_KEY];
+            NSLog(@"url: %@", url);
+            
+            
+            NSDictionary *requestDictionary = @{
+                                                @"uid": [FIRAuth auth].currentUser.uid,
+                                                @"school_identifier": [self schoolIdentifier],
+                                                @"first_name": user.firstName.length > 0 ? user.firstName : @"",
+                                                @"last_name": user.lastName.length > 0 ? user.lastName : @"",
+                                                @"description": user.details.length > 0 ? user.details : @"",
+                                                @"major": user.major.length > 0 ? user.major : @"",
+                                                @"academic_level": user.academicLevel.length > 0 ? user.academicLevel : @"",
+                                                @"graduation_year": user.graduationYear.length > 0 ? user.graduationYear : @"",
+                                                @"hometown": user.hometown.length > 0 ? user.hometown : @"",
+                                                @"reason_school": user.reasonSchool.length > 0 ? user.reasonSchool : @"",
+                                                @"signature_emoji": user.signatureEmoji.length > 0 ? user.signatureEmoji : @"",
+                                                @"wanna_meet": user.wannaMeet.length > 0 ? user.wannaMeet : @"",
+                                                @"goal1": user.goal1.length > 0 ? user.goal1 : @"",
+                                                @"goal2": user.goal2.length > 0 ? user.goal2 : @"",
+                                                @"goal3": user.goal3.length > 0 ? user.goal3 : @""
+                                                };
+            
+            NSError *jsonError;
+            NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingPrettyPrinted error:&jsonError];
+            
+            if (jsonError) {
+                
+                NSLog(@"jsonError: %@", jsonError);
+                
+                if (completionBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        completionBlock(false);
+                    });
+                }
+                
+                return;
+            }
+            
+            [request setURL:[NSURL URLWithString:url]];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:requestData];
+            
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error updating first name (%@): %@", url, error);
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(false);
+                        });
+                    }
+                }
+                else {
+                    
+                    NSLog(@"Success updating first name");
+                    
+                    if (completionBlock) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            completionBlock(true);
+                        });
+                    }
+                }
+                
+            }];
+            
+            [dataTask resume];
+        }
+        else {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    completionBlock(false);
+                });
+            }
+        }
+        
+    });
+    
+}
+
+
 
 + (void)updateUserFirstName:(NSString *)firstName completion:(void (^) (BOOL success))completionBlock {
     

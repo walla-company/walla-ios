@@ -59,6 +59,17 @@
         self.pendingFriendRequests = [dictionary objectForKey:@"pending_friend_requests"];
         if (self.pendingFriendRequests == nil) self.pendingFriendRequests = [[NSDictionary alloc] init];
         
+        self.goal1 = [dictionary objectForKey:@"goal1"];
+        self.goal2 = [dictionary objectForKey:@"goal2"];
+        self.goal3 = [dictionary objectForKey:@"goal3"];
+        self.wannaMeet = [dictionary objectForKey:@"wanna_meet"];
+        self.signatureEmoji = [dictionary objectForKey:@"signature_emoji"];
+        self.reasonSchool = [dictionary objectForKey:@"reason_school"];
+        
+        self.points = [NSString stringWithFormat:@"%ld", (long)[[dictionary objectForKey:@"points"] integerValue]];
+        
+        
+        
     }
     
     return self;

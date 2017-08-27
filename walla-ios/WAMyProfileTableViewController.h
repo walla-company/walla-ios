@@ -10,7 +10,7 @@
 
 #import "WAUser.h"
 
-@interface WAMyProfileTableViewController : UITableViewController
+@interface WAMyProfileTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property NSArray *titleArray;
 
