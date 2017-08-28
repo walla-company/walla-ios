@@ -28,7 +28,8 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettings)];
+   // UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettings)];
+    UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(showLogoutAlert)];
 
     self.navigationItem.rightBarButtonItem = self.userId != nil ? nil : rightBarButtonItem;
     // Set up table view
@@ -205,7 +206,6 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
 }
 
 - (void)logout {
-    
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     
     NSString *token = [[FIRInstanceID instanceID] token];
@@ -220,6 +220,22 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
             }
         }];
     }
+}
+
+- (void)showLogoutAlert {
+    __weak typeof(self) weakSelf = self;
+
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Hey" message:@"Are you sure that you want to log out?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf logout];
+    }];
+    [alertVC addAction:okAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    [alertVC addAction:cancelAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - Navigation
