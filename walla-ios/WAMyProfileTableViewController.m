@@ -10,7 +10,7 @@
 
 #import "WAProfileHeaderTableViewCell.h"
 #import "WAProfileTextTableViewCell.h"
-
+#import "WASettingsTableViewController.h"
 #import "WAServer.h"
 #import "WAValues.h"
 
@@ -28,9 +28,9 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   // UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettings)];
-    UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(showLogoutAlert)];
-
+    UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettings)];
+//    UIBarButtonItem *rightBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(showLogoutAlert)];
+//
     self.navigationItem.rightBarButtonItem = self.userId != nil ? nil : rightBarButtonItem;
     // Set up table view
     
@@ -274,6 +274,16 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
     
     [self presentViewController:photoMenu animated:true completion:nil];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"openSettings"]) {
+        
+        WASettingsTableViewController *destinationController = (WASettingsTableViewController *) [segue destinationViewController];
+        destinationController.user = self.user;
+    }
+}
+
 
 #pragma mark - Choose photo
 

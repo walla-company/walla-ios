@@ -7,6 +7,13 @@
 //
 
 #import "WASettingsTableViewController.h"
+#import "WASettingsTableViewCell.h"
+#import "WAServer.h"
+#import "WAWebViewController.h"
+
+@import Firebase;
+
+static NSString *settingsCellIdentifier = @"WASettingsTableViewCell";
 
 @interface WASettingsTableViewController ()
 
@@ -17,82 +24,152 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView registerNib:[UINib nibWithNibName:@"WASettingsTableViewCell" bundle:nil] forCellReuseIdentifier:settingsCellIdentifier];
+    self.tableView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)showLogoutAlert {
+    __weak typeof(self) weakSelf = self;
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Hey" message:@"Are you sure that you want to log out?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf logout];
+    }];
+    [alertVC addAction:okAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    [alertVC addAction:cancelAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)logout {
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    
+    NSString *token = [[FIRInstanceID instanceID] token];
+    NSLog(@"Messaging instanceID token: %@", token);
+    
+    if (token != nil && ![token isEqualToString:@""]) {
+        [WAServer removeNotificationToken:token completion:^(BOOL success) {
+            NSError *signOutError;
+            BOOL status = [[FIRAuth auth] signOut:&signOutError];
+            if (!status) {
+                NSLog(@"Error signing out: %@", signOutError);
+            }
+        }];
+    }
+}
+
+- (void)openUrl:(NSString *)urlString {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: urlString] options:@{} completionHandler:nil];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showTerms"]) {
+        WAWebViewController *controller = (WAWebViewController *)segue.destinationViewController;
+        controller.file = @"terms";
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    if (section == 0) {
+        return 3;
+    } else if (section == 1) {
+        return 1; //return 2 rows, when change password functionality will be implemented
+    } else if (section == 2) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    WASettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:settingsCellIdentifier forIndexPath:indexPath];
+    cell.cellSubtitleLabel.text = @"";
+    cell.cellTitleLabel.textColor = [UIColor blackColor];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.cellTitleLabel.text = @"About Walla";
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        cell.cellTitleLabel.text = @"Terms of Use";
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+        cell.cellTitleLabel.text = @"How can we improve Walla?";
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        cell.cellTitleLabel.text = @"Account email";
+        cell.cellSubtitleLabel.text = self.user.email;
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+        cell.cellTitleLabel.text = @"Change my password";
+    } else if (indexPath.section == 2 && indexPath.row == 0) {
+        cell.cellTitleLabel.text = @"Log out";
+        cell.cellTitleLabel.textColor = [UIColor colorWithRed:255/255.0 green:162./255.0 blue:71./255.0 alpha:1.0];
+    }
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 45)];
+    headerView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 0, self.tableView.frame.size.width-30, 45)];
+    label.textColor = [UIColor colorWithRed:165/255.0 green:165./255.0 blue:165/255.0 alpha:1.0];
+    label.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightMedium];
+    [headerView addSubview:label];
+    label.text = section == 0 ? @"ABOUT" : @"ACCOUNT";
+    return section == 2 ? nil : headerView;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 2) {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 45)];
+        headerView.backgroundColor = [[UIColor alloc] initWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 0, self.tableView.frame.size.width-30, 45)];
+        label.textColor = [UIColor blackColor];
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        label.text = [NSString stringWithFormat:@"Walla Version %@\n© 2017 GenieUs, Inc. All rights reserved.", version];
+        label.numberOfLines = 2;
+        label.font = [UIFont systemFontOfSize:12.0];
+        [headerView addSubview:label];
+        return headerView;
+    } else {
+        return nil;
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 45;
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return section == 2 ? 70 : 0;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+    // @"About Walla";
+        [self openUrl: @"https://www.wallasquad.com/"];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        [self performSegueWithIdentifier:@"showTerms" sender:self];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+    //@"How can we improve Walla?";
+        [self openUrl: @"mailto:judy@wallasquad.com"];
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        //@"Account email";
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+    //@"Change my password";
+    } else if (indexPath.section == 2 && indexPath.row == 0) {
+    //@"Log out";
+        [self showLogoutAlert];
+    }
+}
+
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WAUser.h"
 
 @interface WASettingsTableViewController : UITableViewController
+
+@property WAUser *user;
 
 @end

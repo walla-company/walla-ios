@@ -13,6 +13,7 @@
 @interface WAUser : NSObject
 
 @property NSString *userID;
+@property NSString *email;
 
 @property NSString *firstName;
 @property NSString *lastName;

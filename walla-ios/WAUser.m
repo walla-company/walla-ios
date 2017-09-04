@@ -25,6 +25,7 @@
     if (self) {
         
         self.userID = [dictionary objectForKey:@"user_id"];
+        self.email = [dictionary objectForKey:@"email"];
         
         self.firstName = [dictionary objectForKey:@"first_name"];
         self.lastName = [dictionary objectForKey:@"last_name"];

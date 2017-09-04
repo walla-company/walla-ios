@@ -1027,23 +1027,35 @@
             </objects>
             <point key="canvasLocation" x="7436" y="-743"/>
         </scene>
-        <!--Settings Table View Controller-->
+        <!--Settings-->
         <scene sceneID="PWp-29-8bt">
             <objects>
-                <tableViewController storyboardIdentifier="WASettingsTableViewController" id="dYE-n5-ZQE" customClass="WASettingsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iVL-55-wuq">
+                <tableViewController storyboardIdentifier="WASettingsTableViewController" title="Settings" id="dYE-n5-ZQE" customClass="WASettingsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iVL-55-wuq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <connections>
                             <outlet property="dataSource" destination="dYE-n5-ZQE" id="Awt-kd-RsS"/>
                             <outlet property="delegate" destination="dYE-n5-ZQE" id="X6D-1S-jBY"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="0iT-M4-GlC" kind="presentation" identifier="showTerms" id="4Qu-8C-MMO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wjE-t4-SbA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3190" y="1415"/>
+        </scene>
+        <!--WAWebViewController-->
+        <scene sceneID="a12-pP-YKb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Introduction" referencedIdentifier="WAWebViewController" id="0iT-M4-GlC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EL4-AJ-JXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3715" y="1222"/>
         </scene>
     </scenes>
     <resources>
@@ -1060,8 +1072,8 @@
         <image name="Walla-Head" width="130" height="130"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mOU-VR-Nuh"/>
-        <segue reference="cBo-g0-hhV"/>
         <segue reference="lpc-gH-RLT"/>
+        <segue reference="aJJ-Zy-6VS"/>
+        <segue reference="mOU-VR-Nuh"/>
     </inferredMetricsTieBreakers>
 </document>
