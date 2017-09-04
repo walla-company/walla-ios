@@ -1636,8 +1636,8 @@
 				TargetAttributes = {
 					EB0E8BB21E008B0A00BC293C = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = TDS652X49M;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = TYWMER5399;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2075,14 +2075,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "walla-ios/walla-ios.entitlements";
-				DEVELOPMENT_TEAM = TDS652X49M;
+				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "931a2cbb-1878-442c-bdb3-dce73f88f147";
-				PROVISIONING_PROFILE_SPECIFIER = DMD_Dev;
 			};
 			name = Debug;
 		};
@@ -2092,13 +2090,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "walla-ios/walla-ios.entitlements";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TYWMER5399;
 				INFOPLIST_FILE = "walla-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallasquad.wallaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
