@@ -161,7 +161,7 @@ static NSString *textCellIdentifier = @"WAProfileTextTableViewCell";
         return cell;
     } else if (indexPath.row == 2) {
         WAProfileTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:textCellIdentifier forIndexPath:indexPath];
-        cell.cellTitleLabel.text = @"Why Duke?";
+        cell.cellTitleLabel.text = @"Why did you pick this school?";
         NSString *content = [self stringFromString:self.user.reasonSchool placeholder:@"Everyone has their reasons. Tell everyone why you chose your university!\n"];
         [attrString appendAttributedString: [[NSAttributedString alloc] initWithString:content attributes:self.user.reasonSchool.length > 0 ? blackAttributes : grayAttributes]];
         cell.cellContentLabel.attributedText = attrString;
