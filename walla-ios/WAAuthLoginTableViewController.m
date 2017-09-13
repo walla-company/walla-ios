@@ -10,6 +10,7 @@
 
 #import "WAAuthLoginTableViewCell.h"
 #import "WAAuthClearTableViewCell.h"
+#import "UITableView+Walla.h"
 
 #import "WAValues.h"
 
@@ -36,9 +37,9 @@
     
     self.tableView.bounces = true;
     
-    self.tableView.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
-    
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    [self.tableView setUpFadedBackgroundView];
     
     self.password = @"";
 }
@@ -75,7 +76,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
+       // cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
         
         [cell.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -92,7 +93,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
+   // cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
     
     cell.forgotPasswordButton.hidden = !(indexPath.row == 2);
     

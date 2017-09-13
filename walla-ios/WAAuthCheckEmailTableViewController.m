@@ -14,6 +14,8 @@
 #import "WAAuthCheckEmailTableViewCell.h"
 #import "WAAuthClearTableViewCell.h"
 
+#import "UITableView+Walla.h"
+
 #import "WAServer.h"
 #import "WAValues.h"
 
@@ -39,10 +41,10 @@
     self.tableView.showsVerticalScrollIndicator = false;
     
     self.tableView.bounces = true;
-
-    self.tableView.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    [self.tableView setUpFadedBackgroundView];
     
     self.emailAddress = @"";
 }
@@ -79,8 +81,6 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
-        
         cell.emailAddressTextField.delegate = self;
         
         [cell.continueButton addTarget:self action:@selector(continueButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -91,9 +91,7 @@
     WAAuthClearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"clearCell" forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.backgroundColor = [WAValues colorFromHexString:@"#FFA44A"];
-    
+        
     cell.forgotPasswordButton.hidden = true;
     
     return cell;
